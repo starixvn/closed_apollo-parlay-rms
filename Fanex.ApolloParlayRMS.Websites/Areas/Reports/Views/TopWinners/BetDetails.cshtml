@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = ViewBag.HeaderText = Lang.TicketDetails;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html" charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Themes/Styles")
+    @Styles.Render("~/Themes/Layout")
+    @Scripts.Render("~/Scripts/jQuery")
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div class="grid-wrp pnl-wrp">
+        <div class="pnl-header">
+            <div class="pnl-header-content">
+                &nbsp;</div>
+            <div class="pnl-header-toggle">
+            </div>
+        </div>
+        <div class="pnl-body">
+            @Html.Raw(ViewBag.HtmlContent)
+        </div>
+    </div>
+</body>
+</html>

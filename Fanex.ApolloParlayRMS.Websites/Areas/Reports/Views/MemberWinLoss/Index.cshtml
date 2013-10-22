@@ -1,0 +1,105 @@
+﻿@using Fanex.ApolloParlayRMS.Core.Constants
+@using Fanex.ApolloParlayRMS.Core.Extensions
+@using Fanex.ApolloParlayRMS.Core.Models
+@using Fanex.ApolloParlayRMS.Core.Web
+@{
+	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Headline {
+	<h1>
+		<span class="title">
+			<span class="first">@Lang.Reports /</span>
+			@ViewBag.Title
+		</span>
+	</h1>
+}
+<section id="filter-bar">
+	<div class="filter-form">
+		<div class="filter-row">	
+            <div class="filter-cell">
+				<div class="lbl-field width-100">
+					@Html.Label("txtUserName", Lang.UserName)
+				</div>
+				<div class="edit-field">
+					@Html.TextBox("txtUserName", string.Empty, new { @class = "multiselect-width" })
+				</div>
+			</div>		
+			<div class="filter-cell">
+				<div class="lbl-field width-80">
+					@Html.Label("ddlBetType", Lang.BetType)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlBetType", (IEnumerable<SelectListItem>)ViewBag.BetTypes, new { @class = "multiselect-width" })
+				</div>
+			</div>	
+			<div class="filter-cell">
+				<div class="lbl-field width-80">
+					@Html.Label("ddlSportTypes", Lang.SportTypes)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlSportTypes", (IEnumerable<SelectListItem>)ViewBag.SportTypes, new { @class = "multiselect-width" })
+				</div>
+			</div>	
+		</div>
+        <div class="filter-row">
+            <div class="filter-cell">
+				<div class="lbl-field width-100">
+					@Html.Label("ddlCombo", Lang.Combo)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlCombo", (IEnumerable<SelectListItem>)ViewBag.Combos, new { @class = "multiselect-width" })
+				</div>
+			</div>
+			<div class="filter-cell relative">
+				<div class="lbl-field width-80">
+					@Html.Label("dpkDateFrom", Lang.From)
+				</div>
+				<div class="edit-field">
+					@Html.TextBox("dpkDateFrom", string.Empty, new { @class = "multiselect-width" })
+				</div>
+			</div>
+			<div class="filter-cell relative">
+				<div class="lbl-field width-80">
+					@Html.Label("dpkDateTo", Lang.To)
+				</div>
+				<div class="edit-field">
+					@Html.TextBox("dpkDateTo", string.Empty, new { @class = "multiselect-width" })
+				</div>
+			</div>
+			<div class="filter-cell">
+				<div class="submit">
+					<input type="button" class="btn-submit float-right" id="btnSearch" value="@Lang.Submit" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div>
+	<div id="divResult" class="freegrid display-none"></div>
+</div>
+@Html.Hidden("imagePath", Url.Content("~/Content/themes/layout/img/calendar.gif"))
+@section Foot {
+	<script type="text/javascript">
+		var labels = {
+			NetWinLoss: '@Lang.NetWinLoss',
+			OurPT: '@Lang.OurPT',
+			WinLoss: '@Lang.WinLoss',
+			StakeAfterPT: '@Lang.StakeAfterPT',
+			Ticket: '@Lang.Ticket',
+			Date: '@Lang.Date',
+			Lose: '@Lang.Lose',
+			Won: '@Lang.Won',
+			SixUp: '@Lang.SixUp',
+			Total: '@Lang.Total',
+			From: '@Lang.From',
+			To: '@Lang.To',
+			Combo: '@Lang.Combo',
+			Total: '@Lang.Total',
+			Subtotal: '@Lang.Subtotal'
+		};
+		var maxDate = '@DateTime.Now';
+		var minDate = '@ViewBag.MinDate';
+	</script>
+	@Scripts.Render("~/Scripts/Reports/WinLoss")
+}
