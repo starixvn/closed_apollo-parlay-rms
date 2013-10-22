@@ -184,6 +184,7 @@
   <ItemGroup>
     <Content Include="App_Data\ApolloParlayRMSSPNames.xml" />
     <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\LevelUpdater.js" />
@@ -448,7 +449,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Reports\Views\MemberWinLoss\Scripts\" />
     <Folder Include="Areas\UserControl\Models\" />
     <Folder Include="Areas\UserControl\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />

@@ -295,6 +295,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Net Win Loss.
         /// </summary>
         public static string NetWinLoss {

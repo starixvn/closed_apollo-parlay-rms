@@ -19,6 +19,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.MemberWinLoss;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.ApolloParlayRMS.Core.Constants;
 
     /// <summary>
     /// Member win loss controller.
@@ -45,7 +46,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MemberWinLossReport, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            ViewBag.MinDate = GetWinLossCriteria.GetMinDate();
+            ViewBag.MinDate = GetMemberWinLossCriteria.GetMinDate();
             ViewBag.BetTypes = FilterForm.BetTypes;
             ViewBag.SportTypes = FilterForm.SportTypes;
             ViewBag.Combos = FilterForm.Combos;
@@ -67,6 +68,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
 
             return Json(new
             {
+                IsMember = (criteria.RoleId == (int)CommonEnums.RoleId.Member),
                 Data = data,
                 Title = title
             });

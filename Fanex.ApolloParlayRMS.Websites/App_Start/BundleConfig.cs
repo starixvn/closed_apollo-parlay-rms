@@ -92,7 +92,7 @@ namespace Fanex.ApolloParlayRMS.Websites
             bundles.Add(new ScriptBundle("~/Scripts/Reports/WinLoss").Include(
                 "~/Areas/Reports/Views/WinLoss/Scripts/WinLossReport.js"));
             bundles.Add(new ScriptBundle("~/Scripts/Reports/MemberWinLoss").Include(
-                "~/Areas/Reports/Views/WinLoss/Scripts/MemberWinLossReport.js"));
+                "~/Areas/Reports/Views/MemberWinLoss/Scripts/MemberWinLossReport.js"));
         }
     }
 
