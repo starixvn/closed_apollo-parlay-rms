@@ -296,7 +296,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                       { HeaderText: labels.Stake, Width: 120, Name: 'ColBaseStake', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
                       { HeaderText: labels.WinningAmount, Width: 120, Name: 'ColBaseWinningAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
                       { HeaderText: labels.CompanyLoseAmount, Width: 120, Name: 'ColBaseCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.TotalBets, Width: 70, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.TotalBets, Width: 73, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.AverageWinOdds, Width: 80, Name: 'ColAverageWinOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
             showTitle: true,
             showFooter: true,

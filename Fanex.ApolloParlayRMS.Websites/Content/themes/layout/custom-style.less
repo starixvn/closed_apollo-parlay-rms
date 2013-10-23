@@ -12,7 +12,9 @@
 }
 
 .grid-title {
+	background: #CBDDF3;
 	background: #CBDDF3 -moz-linear-gradient(center top , #DAE7F6, #CDDEF3 45%, #ABC7EC 46%, #ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
+	background: #CBDDF3 -webkit-linear-gradient(center top , #DAE7F6, #CDDEF3 45%, #ABC7EC 46%, #ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
 	color: #04408C;
 	font-weight: bold;
 	min-height: 15px;
@@ -32,10 +34,11 @@
 
 	.free-top-left table thead th, .col_header table thead th {
 		font-weight: normal;
-		background: #C5C5C5 -moz-linear-gradient(center top , #F9F9F9, #E3E4E6);
+		//background: #C5C5C5 -moz-linear-gradient(center top , #F9F9F9, #E3E4E6);
 		border-bottom: 1px solid #D0D0D0;
 		text-align: center;
 		color: #333;
+		#gradient .vertical (#E3E4E6, #F9F9F9);
 	}
 
 	td, .grid-fixed-table td {		
@@ -142,16 +145,19 @@
 	.border-radius(0);
 
 	a {
-		font-size: 11px;
+		font-size: 10px;
 		line-height: 18px;
 	}
 }
-
+.ui-multiselect-checkboxes {
+	background: #ebe9ea;
+}
 .ui-multiselect-checkboxes li {
 	padding-right: 0;
-	border-bottom: 1px solid #ebe9ea;
+	margin-bottom: 1px;
 	float: left;
 	min-width: 100%;
+	background: #fff;
 	
 	label {
 		padding: 0 2px;
@@ -166,12 +172,34 @@
 	}
 }
 
+.ui-multiselect-checkboxes label input {
+	top: -3px;
+	margin-right: 3px;
+}
+
 .ui-multiselect-single .ui-multiselect-checkboxes label { 
 	padding: 0 0 0 4px !important;
 	border-width: 1px 0 0;
-	border-top-color: #ebe9ea;
+	border-top: 0;
 }
 
 .multiselect-width {
 	width: 135px !important;
+}
+
+.freegrid .ui-state-disabled {
+	opacity: 0.6;
+}
+
+/* Tooltip */
+
+.tipsy {
+	opacity: 1 !important;
+	.tipsy-arrow-n {
+		border-bottom-color: #FF9999;
+	}
+
+	.tipsy-inner {
+		background: #FF9999;
+	}
 }

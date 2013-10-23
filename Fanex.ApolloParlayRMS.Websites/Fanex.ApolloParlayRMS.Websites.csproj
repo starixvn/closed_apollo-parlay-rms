@@ -187,6 +187,8 @@
     <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
     <Content Include="Areas\Tools\Views\MixParlayMonitor\Scripts\MixParlayMonitor.js" />
+    <Content Include="Areas\UserLogin\themes\img\Parlay_RMS.png" />
+    <Content Include="Scripts\lib\head.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\LevelUpdater.js" />
     <Content Include="Areas\MemberManagement\Views\MemberManagement\Scripts\MemberManagement.js" />
