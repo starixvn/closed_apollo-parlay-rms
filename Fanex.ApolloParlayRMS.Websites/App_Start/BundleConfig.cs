@@ -1,4 +1,10 @@
-﻿
+﻿// --------------------------------------------------------------------------
+// <copyright file="BundleConfig.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+// </history>
 
 namespace Fanex.ApolloParlayRMS.Websites
 {
@@ -22,7 +28,7 @@ namespace Fanex.ApolloParlayRMS.Websites
 			RegisterCommonBundles(bundles);
 			RegisterMemberManagementBundles(bundles);
 			RegisterReportBundles(bundles);
-            RegisterToolsBundles(bundles);
+			RegisterToolsBundles(bundles);
 		}
 
 		/// <summary>
@@ -46,24 +52,24 @@ namespace Fanex.ApolloParlayRMS.Websites
 				"~/Content/themes/layout/layout.less");
 
 			bundles.Add(new ScriptBundle("~/Scripts/jQuery").Include(
-                "~/Scripts/lib/jQuery/jquery-1.8.2.js"));
+				"~/Scripts/lib/jQuery/jquery-1.8.2.js"));
 
 			bundles.Add(new ScriptBundle("~/Scripts/headjs").Include(
-                "~/Scripts/lib/html5-libs/head.js"));
+				"~/Scripts/lib/html5-libs/head.js"));
 
 			bundles.Add(new ScriptBundle("~/Scripts/CommonJS").Include(
 				"~/Scripts/lib/jQuery/jquery.easing.1.3.js",
-                "~/Scripts/lib/jQuery/jquery-ui-1.8.24.js",
-                "~/Scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
-                "~/Scripts/lib/jQuery/jquery.validate*",
-                "~/Scripts/lib/jQuery/jquery.cookie.js",
+				"~/Scripts/lib/jQuery/jquery-ui-1.8.24.js",
+				"~/Scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
+				"~/Scripts/lib/jQuery/jquery.validate*",
+				"~/Scripts/lib/jQuery/jquery.cookie.js",
 				"~/Scripts/lib/tipsy/tipsy-1.0.0.js",
 				"~/Scripts/lib/msgbox/msgbox-0.0.1.js",
 				"~/Scripts/lib/Namespace.js",
 				"~/Scripts/ParlayRMS.js",
 				"~/Scripts/_Layout.js",
 				"~/Scripts/Validator.js",
-                "~/Scripts/lib/Fanex.Grid/moment.js",
+				"~/Scripts/lib/Fanex.Grid/moment.js",
 				"~/Scripts/lib/Fanex.Grid/numeral.js",
 				"~/Scripts/lib/Fanex.Grid/Fanex.Grid.js",
 				"~/Scripts/lib/Fanex.Grid/Fanex.Pagination.js",
@@ -97,17 +103,17 @@ namespace Fanex.ApolloParlayRMS.Websites
 				"~/Areas/Reports/Views/WinLoss/Scripts/WinLossReport.js"));
 			bundles.Add(new ScriptBundle("~/Scripts/Reports/MemberWinLoss").Include(
 				"~/Areas/Reports/Views/MemberWinLoss/Scripts/MemberWinLossReport.js"));
-        }
+		}
 
 
-        /// <summary>
-        /// Registers the bundles for tools menu.
-        /// </summary>
-        /// <param name="bundles">The bundle collection.</param>
-        private static void RegisterToolsBundles(BundleCollection bundles)
-        {
-            bundles.Add(new ScriptBundle("~/Scripts/Tools/MixParlayMonitor").Include(
-                "~/Areas/Tools/Views/MixParlayMonitor/Scripts/MixParlayMonitor.js"));
+		/// <summary>
+		/// Registers the bundles for tools menu.
+		/// </summary>
+		/// <param name="bundles">The bundle collection.</param>
+		private static void RegisterToolsBundles(BundleCollection bundles)
+		{
+			bundles.Add(new ScriptBundle("~/Scripts/Tools/MixParlayMonitor").Include(
+				"~/Areas/Tools/Views/MixParlayMonitor/Scripts/MixParlayMonitor.js"));
 		}
 	}
 
