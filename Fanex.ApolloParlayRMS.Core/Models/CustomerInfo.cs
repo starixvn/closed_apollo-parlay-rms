@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2013.10.09">Created</change>
 // </history>
 
-namespace Fanex.ApolloParlayRMS.Reports.Models.MemberWinLoss
+namespace Fanex.ApolloParlayRMS.Core.Models
 {
     /// <summary>
     /// Contains customer's role and Id.

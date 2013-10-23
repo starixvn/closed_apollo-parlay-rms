@@ -79,6 +79,7 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
         dropDown.val($.data(dropDown, 'current'));
         ParlayRMS.headlineMsgBox.confirm(msg, function () {
             var data = {
+                CustId: id,
                 UserName: userName,
                 Level: level
             };

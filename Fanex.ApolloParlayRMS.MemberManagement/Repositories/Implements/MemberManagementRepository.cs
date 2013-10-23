@@ -75,8 +75,8 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                var output = db.ExecuteScalar(criteria.GetSpParams());
-                return Convert.ToBoolean(output);
+                db.ExecuteNonQuery(criteria.GetSpParams());
+                return Convert.ToBoolean(db.GetParameterValue("isexists"));
             }
         }
     }

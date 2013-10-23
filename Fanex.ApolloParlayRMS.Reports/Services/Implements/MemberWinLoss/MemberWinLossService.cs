@@ -13,6 +13,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.Constants;
+    using Fanex.ApolloParlayRMS.Core.Criteria;
     using Fanex.ApolloParlayRMS.Core.ExcelUtility;
     using Fanex.ApolloParlayRMS.Core.Extensions;
     using Fanex.ApolloParlayRMS.Core.Resources;
@@ -61,7 +62,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
                 if (result == null)
                 {
                     var balanceUp = BalanceUpService.GetBalanceUp();
-                    var user = this._memberWinLossRepository.GetCustomerInfo(new GetCustomerByUserNameCriteria
+                    var user = CustomerService.GetCustomerInfo(new GetCustomerByUserNameCriteria
                     {
                         UserName = criteria.UserName
                     });

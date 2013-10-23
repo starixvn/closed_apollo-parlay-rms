@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2013.10.17">Created</change>
 // </history>
 
-namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
+namespace Fanex.ApolloParlayRMS.Core.Criteria
 {
     using Fanex.NAP.Framework.Data;
 

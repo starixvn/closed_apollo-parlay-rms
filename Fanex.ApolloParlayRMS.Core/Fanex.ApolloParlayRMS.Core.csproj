@@ -81,6 +81,7 @@
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\CommonEnums.cs" />
     <Compile Include="Criteria\BalanceUpCriteria.cs" />
+    <Compile Include="Criteria\GetCustomerByUserNameCriteria.cs" />
     <Compile Include="ExcelUtility\ExcelTemplateWriter.cs" />
     <Compile Include="ExcelUtility\NPOIExtensions\HSSFCellExtensions.cs" />
     <Compile Include="ExcelUtility\NPOIExtensions\HSSFCellRangeAddressExtensions.cs" />
@@ -92,9 +93,11 @@
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\BalanceUp.cs" />
+    <Compile Include="Models\CustomerInfo.cs" />
     <Compile Include="Models\FilterForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BasedRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Resources\Lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +110,7 @@
     </Compile>
     <Compile Include="Services\Implements\BalanceUpService.cs" />
     <Compile Include="Services\Implements\CacheRef.cs" />
+    <Compile Include="Services\Implements\CustomerService.cs" />
     <Compile Include="Services\Implements\LoggingHandler.cs" />
     <Compile Include="Services\Implements\BasedService.cs" />
     <Compile Include="Services\Implements\MenuService.cs" />
