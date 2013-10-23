@@ -25,7 +25,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
     using Fanex.ApolloParlayRMS.Reports.Repositories.Interfaces.MemberWinLoss;
     using Fanex.ApolloParlayRMS.Reports.Resources;
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.MemberWinLoss;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Member win loss service.
@@ -33,17 +32,15 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
     public class MemberWinLossService : BasedService, IMemberWinLossService
     {
         private readonly IMemberWinLossRepository _memberWinLossRepository;
-        private readonly IDynamicRepository _userRepository;
 
         public MemberWinLossService() :
-            this(null, null)
+            this(null)
         {
         }
 
-        public MemberWinLossService(IMemberWinLossRepository memberWinLossRepository, IDynamicRepository userRepository)
+        public MemberWinLossService(IMemberWinLossRepository memberWinLossRepository)
         {
             this._memberWinLossRepository = memberWinLossRepository ?? new MemberWinLossRepository();
-            this._userRepository = userRepository ?? new DynamicRepository();
         }
 
         /// <summary>
@@ -56,12 +53,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
             MemberWinLossItem result = null;
             try
             {
-                var user = this._userRepository.Get<CustomerInfo>(new GetCustomerByUserNameCriteria
-                {
-                    UserName = criteria.UserName
-                });
-                criteria.RoleId = user.RoleId;
-
                 if (!criteria.IsLoadNew)
                 {
                     result = SessionManager.Get<MemberWinLossItem>(ReportConstants.WinLossSessionKey);
@@ -69,10 +60,21 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
 
                 if (result == null)
                 {
+                    var balanceUp = BalanceUpService.GetBalanceUp();
+                    var user = this._memberWinLossRepository.GetCustomerInfo(new GetCustomerByUserNameCriteria
+                    {
+                        UserName = criteria.UserName
+                    });
+
+                    criteria.IsMember = user.RoleId == (int)CommonEnums.RoleId.Member;
+                    criteria.CustId = user.CustId;
+                    criteria.BalanceUpDay = balanceUp.BalanceUpDay;
+                    criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+
                     List<MemberWinLossItem> rawData = this._memberWinLossRepository.GetMemberWinLossData(criteria).ToList();
                     if ((rawData != null) && (rawData.Count > 0))
                     {
-                        if (criteria.RoleId == (int)CommonEnums.RoleId.Member)
+                        if (criteria.IsMember)
                         {
                             result = new MemberWinLossItem();
                             rawData.ToList().ForEach(obj =>
@@ -111,14 +113,13 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
             try
             {
                 MemberWinLossItem winLoss = GetMemberWinLossData(criteria);
-                bool isMember = criteria.RoleId == (int)CommonEnums.RoleId.Member;
                 string fileName = string.Format(
                                              ReportsLang.MemberWinLossFileName,
                                              criteria.UserName,
                                              criteria.FromDate.ToMonthDayYearFormat().Replace("-", string.Empty),
                                              criteria.ToDate.ToMonthDayYearFormat().Replace("-", string.Empty));
                 string reportTitle = criteria.ToString();
-                string templatePath = isMember ? memberTemplatePath : agentTemplatePath;
+                string templatePath = criteria.IsMember ? memberTemplatePath : agentTemplatePath;
                 var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.MemberWinLossSheetName);
 
                 // Copy title.
@@ -128,7 +129,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
 
                 if ((winLoss != null) && (winLoss.ChildItems.Count > 0))
                 {
-                    if (isMember)
+                    if (criteria.IsMember)
                     {
                         RenderMemberWinLossExcel(winLoss, writer);
                     }
@@ -158,7 +159,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
             {
                 if (item.IsSutotalRow)
                 {
-                    writer.WriteCellRange(writer.RowId - item.NumOfSubrows, item.NumOfSubrows, 1, 1, item.Month);
+                    writer.WriteCellRange(writer.RowId - item.NumOfSubrows, item.NumOfSubrows, 0, 1, item.Month);
 
                     // For WinLossDate summary
                     var subtotal = new object[]
@@ -225,30 +226,25 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
         private void RenderMemberWinLossExcel(MemberWinLossItem data, ExcelTemplateWriter writer)
         {
             // Write content
-            foreach (var item in data.ChildItems)
+            var records = data.ChildItems.Select(item => new
             {
-                var row = new object[]
-                {
-                    item.Month,
-                    item.UserName,
-                    item.TicketWon,
-                    item.TicketLose,
-                    item.StakeWon,
-                    item.StakeLose,
-                    item.MemberWon,
-                    item.MemberLose,
-                    item.OurPTWon,
-                    item.OurPTLose,
-                    item.OurPTNetWinLoss
-                };
-                writer.WriteRows(5, row);
-            }
+                Month = item.Month,
+                TicketWon = item.TicketWon,
+                TicketLose = item.TicketLose,
+                StakeWon = item.StakeWon,
+                StakeLose = item.StakeLose,
+                MemberWon = item.MemberWon,
+                MemberLose = item.MemberLose,
+                OurPTWon = item.OurPTWon,
+                OurPTLose = item.OurPTLose,
+                OurPTNetWinLoss = item.OurPTNetWinLoss
+            });
+            writer.WriteRows(5, records);
 
             // Total row
             var total = new object[]
             {
                 Lang.Total,
-                string.Empty,
                 data.TicketWon,
                 data.TicketLose,
                 data.StakeWon,

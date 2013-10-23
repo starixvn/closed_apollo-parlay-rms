@@ -25,6 +25,5 @@ namespace Fanex.ApolloParlayRMS.Reports.Models.MemberWinLoss
         public List<MemberWinLossItem> Records { get; set; }
 
         public MemberWinLossItem Total { get; set; }
-
     }
 }

@@ -13,7 +13,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Get a top winner's detail criteria.
+    /// Get a top winner's detail.
     /// </summary>
     public class GetTopWinnerDetailsCriteria : CriteriaBase
     {

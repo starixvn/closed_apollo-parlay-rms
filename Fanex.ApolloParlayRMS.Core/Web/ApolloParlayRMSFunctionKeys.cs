@@ -19,5 +19,10 @@ namespace Fanex.ApolloParlayRMS.Core.Web
         public const string TopWinnersReport = "TopWinnersReport";
         public const string WinLossReport = "WinLossReport";
         public const string MemberWinLossReport = "MemberWinLossReport";
+        public const string MixParlayMonitor = "MixParlayMonitor";
+        public const string SimilarBets = "SimilarBets";
+        public const string TotalOutstanding = "TotalOutstanding";
+        public const string TopSelections = "TopSelections";
+        public const string FavoriteChoices = "FavoriteChoices";
     }
 }

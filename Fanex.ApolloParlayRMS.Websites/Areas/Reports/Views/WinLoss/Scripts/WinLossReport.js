@@ -137,7 +137,6 @@ Fanex.ApolloParlayRMS.Reports.WinLossReport = function () {
 
             $.each(records, function (i, dateData) {
                 $.each(dateData.ChildItems, function (j, info) {
-                    console.log(info);
                     row =
                     {
                         Columns: [{ Name: 'ColCombo', Value: info.Combo == '6' ? labels.SixUp : info.Combo },
@@ -225,6 +224,7 @@ Fanex.ApolloParlayRMS.Reports.WinLossReport = function () {
                 showExcelButton: true,
                 exportExcelFunction: $this.ExportReport
             },
+            showDistinctRow: false,
             bodyRows: bodyData,
             footerRows: footerData
         };

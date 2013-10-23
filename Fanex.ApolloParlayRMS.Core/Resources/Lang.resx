@@ -312,4 +312,19 @@
   <data name="Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  <data name="MaxPayoutAfterPT" xml:space="preserve">
+    <value>Max Payout after PT</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="RefreshNow" xml:space="preserve">
+    <value>Refresh now</value>
+  </data>
+  <data name="RefreshTime" xml:space="preserve">
+    <value>Refresh every</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Seconds</value>
+  </data>
 </root>

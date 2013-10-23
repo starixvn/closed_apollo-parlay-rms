@@ -186,6 +186,7 @@
     <Content Include="App_Data\NAPFrameworkSpNames.xml" />
     <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
+    <Content Include="Areas\Tools\Views\MixParlayMonitor\Scripts\MixParlayMonitor.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\LevelUpdater.js" />
     <Content Include="Areas\MemberManagement\Views\MemberManagement\Scripts\MemberManagement.js" />
@@ -477,6 +478,8 @@
     <None Include="Areas\Reports\ExcelTemplates\TopWinners.xls" />
     <None Include="Areas\Reports\ExcelTemplates\WinLoss.xls" />
     <Content Include="Areas\Reports\Views\MemberWinLoss\Index.cshtml" />
+    <Content Include="Areas\Tools\Web.config" />
+    <Content Include="Areas\Tools\Views\MixParlayMonitor\Index.cshtml" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
     <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
@@ -526,6 +529,10 @@
     <ProjectReference Include="..\Fanex.ApolloParlayRMS.Reports\Fanex.ApolloParlayRMS.Reports.csproj">
       <Project>{6CDCA14D-15B5-4711-BED1-AD00B01454F7}</Project>
       <Name>Fanex.ApolloParlayRMS.Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.ApolloParlayRMS.Tools\Fanex.ApolloParlayRMS.Tools.csproj">
+      <Project>{9BC8FA07-958B-4D1D-BD23-EF114E952425}</Project>
+      <Name>Fanex.ApolloParlayRMS.Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

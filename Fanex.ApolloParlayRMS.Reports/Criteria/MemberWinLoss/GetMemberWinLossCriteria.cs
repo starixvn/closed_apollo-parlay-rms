@@ -20,7 +20,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Get member win loss data criteria.
+    /// Get member win loss data.
     /// </summary>
     public class GetMemberWinLossCriteria : CriteriaBase
     {
@@ -44,7 +44,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
         public string UserName { get; set; }
 
         [SpParam(Ignored = true)]
-        public int RoleId { get; set; }
+        public bool IsMember { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsLoadNew { get; set; }
@@ -79,10 +79,10 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
 
             string title = string.Format(
                                       ReportsLang.MemberWinLossTitle,
-                                      this.UserName,
+                                      this.UserName.ToUpperInvariant(),
                                       this.FromDate.ToMonthDayYearFormat(),
                                       this.ToDate.ToMonthDayYearFormat(),
-                                      this.BetType,
+                                      FilterForm.GetBetType(this.BetType),
                                       combosTitle,
                                       FilterForm.GetSportType(this.SportType));
             return title;
@@ -94,7 +94,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
         /// <returns>Setting key of the criteria.</returns>
         public override string GetSettingKey()
         {
-            return (this.RoleId == (int)CommonEnums.RoleId.Member) ? "RMS_Rpt_Parlay_MemberWinLoss" : "RMS_Rpt_Parlay_AgentWinLoss";
+            return this.IsMember ? "RMS_Rpt_Parlay_MemberWinLoss" : "RMS_Rpt_Parlay_AgentWinLoss";
         }
 
         /// <summary>

@@ -21,5 +21,12 @@ namespace Fanex.ApolloParlayRMS.Reports.Repositories.Interfaces.MemberWinLoss
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of WinLossItem objects.</returns>
         IEnumerable<MemberWinLossItem> GetMemberWinLossData(GetMemberWinLossCriteria criteria);
+
+        /// <summary>
+        /// Gets the customer information.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>Customer information.</returns>
+        CustomerInfo GetCustomerInfo(GetCustomerByUserNameCriteria criteria);
     }
 }

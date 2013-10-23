@@ -277,6 +277,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Payout after PT.
+        /// </summary>
+        public static string MaxPayoutAfterPT {
+            get {
+                return ResourceManager.GetString("MaxPayoutAfterPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member Management.
         /// </summary>
         public static string MemberManagement {
@@ -367,6 +376,33 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        public static string Pause {
+            get {
+                return ResourceManager.GetString("Pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh now.
+        /// </summary>
+        public static string RefreshNow {
+            get {
+                return ResourceManager.GetString("RefreshNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh every.
+        /// </summary>
+        public static string RefreshTime {
+            get {
+                return ResourceManager.GetString("RefreshTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reports.
         /// </summary>
         public static string Reports {
@@ -390,6 +426,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds.
+        /// </summary>
+        public static string Seconds {
+            get {
+                return ResourceManager.GetString("Seconds", resourceCulture);
             }
         }
         

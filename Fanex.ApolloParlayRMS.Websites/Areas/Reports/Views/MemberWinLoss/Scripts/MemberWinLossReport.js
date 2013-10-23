@@ -153,45 +153,29 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
             var row = null;
             var info = null;
 
-            $.each(records, function (i, dateData) {
-                $.each(dateData.ChildItems, function (j, info) {
-                    console.log(info);
-                    row =
-                    {
-                        Columns: [{ Name: 'ColUserName', Value: info.UserName },
-                                  { Name: 'ColTicketWon', Value: info.TicketWon },
-                                  { Name: 'ColTicketLose', Value: info.TicketLose },
-                                  { Name: 'ColStakeWon', Value: info.StakeWon },
-                                  { Name: 'ColStakeLose', Value: info.StakeLose },
-                                  { Name: 'ColWinLossWon', Value: info.MemberWon },
-                                  { Name: 'ColWinLossLose', Value: info.MemberLose },
-                                  { Name: 'ColOurPTWon', Value: info.OurPTWon },
-                                  { Name: 'ColOurPTLose', Value: info.OurPTLose },
-                                  { Name: 'ColOurPTNetWinLoss', Value: info.OurPTNetWinLoss}]
-                    };
-
-                    if (j == 0) {
-                        row.Columns.unshift({ Name: 'ColMonth', Value: info.Month, MergeRowNumber: dateData.ChildItems.length });
-                    }
-
-                    bodyData.push(row);
-                });
-
-                // Subtotal row
+            $.each(records, function (i, info) {
                 row =
                 {
-                    Columns: [{ Name: 'ColMonth', Value: labels.Subtotal, MergeColNumber: 2, CellAlign: 'right' },
-                              { Name: 'ColTicketWon', Value: dateData.TicketWon },
-                              { Name: 'ColTicketLose', Value: dateData.TicketLose },
-                              { Name: 'ColStakeWon', Value: dateData.StakeWon },
-                              { Name: 'ColStakeLose', Value: dateData.StakeLose },
-                              { Name: 'ColWinLossWon', Value: dateData.MemberWon },
-                              { Name: 'ColWinLossLose', Value: dateData.MemberLose },
-                              { Name: 'ColOurPTWon', Value: dateData.OurPTWon },
-                              { Name: 'ColOurPTLose', Value: dateData.OurPTLose },
-                              { Name: 'ColOurPTNetWinLoss', Value: dateData.OurPTNetWinLoss}],
-                    CssClass: "subTotal"
+                    Columns: [{ Name: 'ColTicketWon', Value: info.TicketWon },
+                              { Name: 'ColTicketLose', Value: info.TicketLose },
+                              { Name: 'ColStakeWon', Value: info.StakeWon },
+                              { Name: 'ColStakeLose', Value: info.StakeLose },
+                              { Name: 'ColWinLossWon', Value: info.MemberWon },
+                              { Name: 'ColWinLossLose', Value: info.MemberLose },
+                              { Name: 'ColOurPTWon', Value: info.OurPTWon },
+                              { Name: 'ColOurPTLose', Value: info.OurPTLose },
+                              { Name: 'ColOurPTNetWinLoss', Value: info.OurPTNetWinLoss}]
                 };
+
+                if (info.IsSutotalRow) {
+                    row.Columns.unshift({ Name: 'ColMonth', Value: labels.Subtotal, MergeColNumber: 2, CellAlign: 'right' });
+                    row.CssClass = "subTotal";
+                } else {
+                    row.Columns.unshift({ Name: 'ColUserName', Value: info.UserName });
+                    if (info.NumOfSubrows > 0) {
+                        row.Columns.unshift({ Name: 'ColMonth', Value: info.Month, MergeRowNumber: info.NumOfSubrows });
+                    }
+                }
 
                 bodyData.push(row);
             });
@@ -199,7 +183,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
             // Total row
             row =
             {
-                Columns: [{ Name: 'ColMonth', Value: labels.Total, CellAlign: 'right', MergeColNumber: 2 },
+                Columns: [{ Name: 'ColMonth', Value: labels.Total, MergeColNumber: 2, CellAlign: 'right' },
                           { Name: 'ColTicketWon', Value: result.Data.TicketWon },
                           { Name: 'ColTicketLose', Value: result.Data.TicketLose },
                           { Name: 'ColStakeWon', Value: result.Data.StakeWon },
@@ -224,8 +208,8 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                           { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
                           { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
             }],
-            columns: [{ HeaderText: labels.Month, Width: 120, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
-                      { HeaderText: labels.UserName, Width: 80, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'center' },
+            columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
+                      { HeaderText: labels.UserName, Width: 150, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
@@ -234,7 +218,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                       { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
                       { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
                       { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.NetWinLoss, Width: 100, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
+                      { HeaderText: labels.NetWinLoss, Width: 110, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
             showTitle: true,
             showFooter: true,
             gridExpandHeight: 220,
@@ -243,6 +227,15 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                 showExcelButton: true,
                 exportExcelFunction: $this.ExportReport
             },
+            showPager: true,
+            pagerOption: {
+                itemsPerPage: 20,
+                maxItemsPerPage: 100,
+                currentPage: 0,
+                startPerPage: 10,
+                pageStep: 10
+            },
+            showDistinctRow: false,
             bodyRows: bodyData,
             footerRows: footerData
         };
@@ -250,6 +243,85 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
         $this.DOMInstance.divResult.removeClass('display-none').fanexGrid(gridOptions);
     };
     var renderMemberReport = function (result) {
+        var bodyData = [];
+        var footerData = [];
+
+        $this.DOMInstance.divResult.addClass('display-none');
+
+        if (result && result.Data) {
+            var records = result.Data.ChildItems;
+            var row = null;
+            var info = null;
+
+            $.each(records, function (i, info) {
+                row =
+                {
+                    Columns: [{ Name: 'ColMonth', Value: info.Month },
+                              { Name: 'ColTicketWon', Value: info.TicketWon },
+                              { Name: 'ColTicketLose', Value: info.TicketLose },
+                              { Name: 'ColStakeWon', Value: info.StakeWon },
+                              { Name: 'ColStakeLose', Value: info.StakeLose },
+                              { Name: 'ColWinLossWon', Value: info.MemberWon },
+                              { Name: 'ColWinLossLose', Value: info.MemberLose },
+                              { Name: 'ColOurPTWon', Value: info.OurPTWon },
+                              { Name: 'ColOurPTLose', Value: info.OurPTLose },
+                              { Name: 'ColOurPTNetWinLoss', Value: info.OurPTNetWinLoss}]
+                };
+
+                bodyData.push(row);
+            });
+
+            // Total row
+            row =
+            {
+                Columns: [{ Name: 'ColMonth', Value: labels.Total, CellAlign: 'right' },
+                          { Name: 'ColTicketWon', Value: result.Data.TicketWon },
+                          { Name: 'ColTicketLose', Value: result.Data.TicketLose },
+                          { Name: 'ColStakeWon', Value: result.Data.StakeWon },
+                          { Name: 'ColStakeLose', Value: result.Data.StakeLose },
+                          { Name: 'ColWinLossWon', Value: result.Data.MemberWon },
+                          { Name: 'ColWinLossLose', Value: result.Data.MemberLose },
+                          { Name: 'ColOurPTWon', Value: result.Data.OurPTWon },
+                          { Name: 'ColOurPTLose', Value: result.Data.OurPTLose },
+                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.OurPTNetWinLoss}]
+            };
+            footerData.push(row);
+        }
+
+        var gridOptions =
+        {
+            customizeHeader: true,
+            groupHeaderRows: [{
+                Columns: [{ HeaderText: labels.Month, Name: "ColMonth", MergeRowNumber: 2 },
+                          { HeaderText: labels.Ticket, Name: "ColTicketWon", MergeColNumber: 2 },
+                          { HeaderText: labels.StakeAfterPT, Name: "ColStakeWon", MergeColNumber: 2 },
+                          { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
+                          { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
+            }],
+            columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
+                      { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.NetWinLoss, Width: 110, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
+            showTitle: true,
+            showFooter: true,
+            gridExpandHeight: 220,
+            titleInfo: {
+                text: result.Title,
+                showExcelButton: true,
+                exportExcelFunction: $this.ExportReport
+            },
+            showDistinctRow: false,
+            bodyRows: bodyData,
+            footerRows: footerData
+        };
+
+        $this.DOMInstance.divResult.removeClass('display-none').fanexGrid(gridOptions);
     };
 
     // Public methods
@@ -298,6 +370,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
             },
             success: function (result) {
                 if (result && result.IsMember) {
+                    params.IsMember = result.IsMember;
                     renderMemberReport(result);
                 } else {
                     renderAgentReport(result);

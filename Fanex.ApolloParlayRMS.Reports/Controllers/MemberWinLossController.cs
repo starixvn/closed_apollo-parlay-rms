@@ -14,12 +14,10 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
     using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss;
-    using Fanex.ApolloParlayRMS.Reports.Criteria.WinLoss;
     using Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss;
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.MemberWinLoss;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.ApolloParlayRMS.Core.Constants;
 
     /// <summary>
     /// Member win loss controller.
@@ -68,7 +66,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
 
             return Json(new
             {
-                IsMember = (criteria.RoleId == (int)CommonEnums.RoleId.Member),
+                IsMember = criteria.IsMember,
                 Data = data,
                 Title = title
             });

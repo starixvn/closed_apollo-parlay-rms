@@ -12,7 +12,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Get customer by user name criteria.
+    /// Get customer by user name.
     /// </summary>
     public class GetCustomerByUserNameCriteria : CriteriaBase
     {

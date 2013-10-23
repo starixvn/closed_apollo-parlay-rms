@@ -15,6 +15,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Models.MemberWinLoss
     /// <summary>
     /// Win Loss model.
     /// </summary>
+    [Serializable]
     public class MemberWinLossItem
     {
         public MemberWinLossItem()

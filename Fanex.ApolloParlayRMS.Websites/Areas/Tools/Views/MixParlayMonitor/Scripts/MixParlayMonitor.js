@@ -1,0 +1,269 @@
+﻿$(document).ready(function () {
+    var mixParlayMonitor = new Fanex.ApolloParlayRMS.Tools.MixParlayMonitor();
+
+    mixParlayMonitor.InitPage(labels);
+});
+
+Namespace.Register("Fanex.ApolloParlayRMS.Tools.MixParlayMonitor");
+Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
+    var $this = this;
+    var labels = {};
+    var urls = {
+        GetWinLoss: ParlayRMS.resolveRootUrl('Reports/WinLoss/GetWinLoss'),
+        ExportWinLoss: ParlayRMS.resolveRootUrl('Reports/WinLoss/ExportWinLoss')
+    };
+    var params = {};
+    var cacheDOM = function () {
+        $this.DOMInstance.divFilterForm = $('#filter-bar');
+        $this.DOMInstance.ddlSelectTop = $('#ddlSelectTop');
+        $this.DOMInstance.ddlSportTypes = $('#ddlSportTypes');
+        $this.DOMInstance.ddlCombo = $('#ddlCombo');
+        $this.DOMInstance.txtMaxPayout = $('#txtMaxPayout');
+        $this.DOMInstance.ddlLevel = $('#ddlLevel');
+        $this.DOMInstance.ddlRefreshTime = $('#ddlRefreshTime');
+        $this.DOMInstance.divRefreshNow = $('#divRefreshNow');
+        $this.DOMInstance.divTimer = $('#divTimer');
+        $this.DOMInstance.btnSearch = $('#btnSearch');
+        $this.DOMInstance.divResult = $('#divResult');
+    };
+    var initSingleDropDownList = function (obj, height, width) {
+        obj.multiselect({
+            multiple: false,
+            header: false,
+            selectedList: 1,
+            minWidth: width,
+            height: height
+        });
+    };
+    var initMultiDropDownList = function (obj, height, width) {
+        obj.multiselect({
+            multiple: true,
+            minWidth: width,
+            height: height,
+            create: function () {
+                obj.multiselect("checkAll");
+            },
+            selectedText: function (numChecked, numTotal, checkedItems) {
+                if (numChecked == 0) {
+                    return "Select options";
+                }
+                else if (numChecked == 1) {
+                    return $(checkedItems).next().text();
+                }
+                else if (numChecked == numTotal) {
+                    return "All";
+                }
+                else {
+                    return numChecked + ' options';
+                }
+            }
+        });
+    };
+    var initFields = function () {
+        initSingleDropDownList($this.DOMInstance.ddlSelectTop, 90, 132);
+        initMultiDropDownList($this.DOMInstance.ddlCombo, 106, 132);
+        initMultiDropDownList($this.DOMInstance.ddlSportTypes, 106, 132);
+        initMultiDropDownList($this.DOMInstance.ddlLevel, 106, 132);
+        initSingleDropDownList($this.DOMInstance.ddlRefreshTime, 70, 60);
+
+        $this.DOMInstance.ddlRefreshTime.multiselect('option', 'classes', 'width-80');
+        $this.DOMInstance.txtMaxPayout.bind('keyup', function (event) {
+            var formatedValue = $.trim($(this).val());
+            var value = parseInt(formatedValue.replace(/,/g, ''));
+
+            if (value > 1000000000000) {
+                value = 1000000000000;
+            }
+
+            if (formatedValue.indexOf('.') < 0) {
+                formatedValue = numeral(value).format(ParlayRMS.commonConstants.NumberFormat);
+            }
+
+            $(this).val(formatedValue);
+
+            if (event.keyCode == 13) {
+                $this.DOMInstance.btnSearch.click();
+            }
+        });
+
+        //$this.DOMInstance.divRefreshNow.button();
+
+        $this.DOMInstance.btnSearch.live('click', function () {
+            Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
+            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
+                && Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
+                var betType = $this.DOMInstance.ddlBetType.val();
+                var sportTypes = $('input[name=rbgSportTypes]:checked', '#sportTypes').val();
+                var dateFrom = $this.DOMInstance.dpkDateFrom.val();
+                var dateTo = $this.DOMInstance.dpkDateTo.val();
+                var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
+                    return this.value;
+                }).get().join(',');
+
+                $this.GetData(betType, sportTypes, combos, dateFrom, dateTo);
+            }
+        });
+    };
+    var renderReportData = function (result) {
+        var bodyData = [];
+        var footerData = [];
+
+        $this.DOMInstance.divResult.addClass('display-none');
+
+        if (result && result.Data) {
+            var records = result.Data.ChildItems;
+            var row = null;
+            var info = null;
+
+            $.each(records, function (i, dateData) {
+                $.each(dateData.ChildItems, function (j, info) {
+                    row =
+                    {
+                        Columns: [{ Name: 'ColCombo', Value: info.Combo == '6' ? labels.SixUp : info.Combo },
+                                  { Name: 'ColTicketWon', Value: info.TicketWon },
+                                  { Name: 'ColTicketLose', Value: info.TicketLose },
+                                  { Name: 'ColStakeWon', Value: info.StakeWon },
+                                  { Name: 'ColStakeLose', Value: info.StakeLose },
+                                  { Name: 'ColWinLossWon', Value: info.MemberWon },
+                                  { Name: 'ColWinLossLose', Value: info.MemberLose },
+                                  { Name: 'ColOurPTWon', Value: info.OurPTWon },
+                                  { Name: 'ColOurPTLose', Value: info.OurPTLose },
+                                  { Name: 'ColOurPTNetWinLoss', Value: info.OurPTNetWinLoss}]
+                    };
+
+                    if (j == 0) {
+                        row.Columns.unshift({ Name: 'ColDate', Value: info.WinLossDate, MergeRowNumber: dateData.ChildItems.length });
+                    }
+
+                    bodyData.push(row);
+                });
+
+                // Subtotal row
+                row =
+                {
+                    Columns: [{ Name: 'ColDate', Value: labels.Subtotal, MergeColNumber: 2, CellAlign: 'right' },
+                              { Name: 'ColTicketWon', Value: dateData.TicketWon },
+                              { Name: 'ColTicketLose', Value: dateData.TicketLose },
+                              { Name: 'ColStakeWon', Value: dateData.StakeWon },
+                              { Name: 'ColStakeLose', Value: dateData.StakeLose },
+                              { Name: 'ColWinLossWon', Value: dateData.MemberWon },
+                              { Name: 'ColWinLossLose', Value: dateData.MemberLose },
+                              { Name: 'ColOurPTWon', Value: dateData.OurPTWon },
+                              { Name: 'ColOurPTLose', Value: dateData.OurPTLose },
+                              { Name: 'ColOurPTNetWinLoss', Value: dateData.OurPTNetWinLoss}],
+                    CssClass: "subTotal"
+                };
+
+                bodyData.push(row);
+            });
+
+            // Total row
+            row =
+            {
+                Columns: [{ Name: 'ColDate', Value: labels.Total, CellAlign: 'right', MergeColNumber: 2 },
+                          { Name: 'ColTicketWon', Value: result.Data.TicketWon },
+                          { Name: 'ColTicketLose', Value: result.Data.TicketLose },
+                          { Name: 'ColStakeWon', Value: result.Data.StakeWon },
+                          { Name: 'ColStakeLose', Value: result.Data.StakeLose },
+                          { Name: 'ColWinLossWon', Value: result.Data.MemberWon },
+                          { Name: 'ColWinLossLose', Value: result.Data.MemberLose },
+                          { Name: 'ColOurPTWon', Value: result.Data.OurPTWon },
+                          { Name: 'ColOurPTLose', Value: result.Data.OurPTLose },
+                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.OurPTNetWinLoss}]
+            };
+            footerData.push(row);
+        }
+
+        var gridOptions =
+        {
+            customizeHeader: true,
+            groupHeaderRows: [{
+                Columns: [{ HeaderText: labels.Date, Name: "ColDate", MergeRowNumber: 2 },
+                          { HeaderText: labels.Combo, Name: "ColCombo", MergeRowNumber: 2 },
+                          { HeaderText: labels.Ticket, Name: "ColTicketWon", MergeColNumber: 2 },
+                          { HeaderText: labels.StakeAfterPT, Name: "ColStakeWon", MergeColNumber: 2 },
+                          { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
+                          { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
+            }],
+            columns: [{ HeaderText: labels.Date, Width: 120, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
+                      { HeaderText: labels.Combo, Width: 80, Name: 'ColCombo', HeaderAlign: 'center', CellAlign: 'center' },
+                      { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
+                      { HeaderText: labels.NetWinLoss, Width: 100, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
+            showTitle: true,
+            showFooter: true,
+            gridExpandHeight: 220,
+            titleInfo: {
+                text: result.Title,
+                showExcelButton: true,
+                exportExcelFunction: $this.ExportReport
+            },
+            showDistinctRow: false,
+            bodyRows: bodyData,
+            footerRows: footerData
+        };
+
+        $this.DOMInstance.divResult.removeClass('display-none').fanexGrid(gridOptions);
+    };
+
+    $this.DOMInstance = {
+        divFilterForm: null,
+        ddlSelectTop: null,
+        ddlCombo: null,
+        ddlSportTypes: null,
+        txtMaxPayout: null,
+        ddlLevel: null,
+        ddlRefreshTime: null,
+        divRefreshNow: null,
+        divTimer: null,
+        btnSearch: null,
+        divResult: null
+    };
+    $this.SetLang = function (labelValues) {
+        if (labelValues) {
+            labels = labelValues;
+        }
+    };
+    $this.InitPage = function (labels) {
+        cacheDOM();
+        initFields();
+
+        $this.SetLang(labels);
+    };
+    $this.GetData = function (betType, sportTypes, combos, dateFrom, dateTo) {
+        var data = {
+            BetType: betType,
+            SportType: sportTypes,
+            Selection: combos,
+            FromDate: dateFrom,
+            ToDate: dateTo,
+            IsLoadNew: true
+        };
+        params = data;
+        $.ajax({
+            type: "POST",
+            url: urls.GetWinLoss,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(data),
+            beforeSend: function () {
+                ParlayRMS.loadingBox.show();
+            },
+            success: function (records) {
+                renderReportData(records);
+            },
+            error: function (xhr, status, err) {
+                ParlayRMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                ParlayRMS.loadingBox.close();
+            }
+        });
+    };
+}

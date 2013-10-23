@@ -22,6 +22,7 @@ namespace Fanex.ApolloParlayRMS.Websites
             RegisterCommonBundles(bundles);
             RegisterMemberManagementBundles(bundles);
             RegisterReportBundles(bundles);
+            RegisterToolsBundles(bundles);
         }
 
         /// <summary>
@@ -93,6 +94,17 @@ namespace Fanex.ApolloParlayRMS.Websites
                 "~/Areas/Reports/Views/WinLoss/Scripts/WinLossReport.js"));
             bundles.Add(new ScriptBundle("~/Scripts/Reports/MemberWinLoss").Include(
                 "~/Areas/Reports/Views/MemberWinLoss/Scripts/MemberWinLossReport.js"));
+        }
+
+
+        /// <summary>
+        /// Registers the bundles for tools menu.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        private static void RegisterToolsBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/Scripts/Tools/MixParlayMonitor").Include(
+                "~/Areas/Tools/Views/MixParlayMonitor/Scripts/MixParlayMonitor.js"));
         }
     }
 

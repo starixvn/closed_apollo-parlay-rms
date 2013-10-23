@@ -26,6 +26,7 @@ namespace Fanex.ApolloParlayRMS.Core.Models
         private static List<SelectListItem> _dateRanges;
         private static List<SelectListItem> _combos;
         private static List<SelectListItem> _levels;
+        private static List<SelectListItem> _refreshTimes;
 
         public static List<SelectListItem> Combos
         {
@@ -130,7 +131,7 @@ namespace Fanex.ApolloParlayRMS.Core.Models
             }
         }
 
-        public static dynamic Levels
+        public static List<SelectListItem> LevelList
         {
             get
             {
@@ -147,6 +148,14 @@ namespace Fanex.ApolloParlayRMS.Core.Models
                     }
                 }
 
+                return _levels;
+            }
+        }
+
+        public static dynamic Levels
+        {
+            get
+            {
                 var allLevel = new SelectListItem
                 {
                     Text = Lang.AllLevels,
@@ -160,10 +169,28 @@ namespace Fanex.ApolloParlayRMS.Core.Models
 
                 return new
                 {
-                    Levels = _levels,
+                    Levels = LevelList,
                     AllLevel = allLevel,
                     None = none
                 };
+            }
+        }
+
+        public static List<SelectListItem> RefreshTimes
+        {
+            get
+            {
+                if (_refreshTimes == null)
+                {
+                    var values = new List<int> { 0, 30, 60, 120 };
+                    _refreshTimes = new List<SelectListItem>();
+                    foreach (var value in values)
+                    {
+                        _refreshTimes.Add(new SelectListItem { Text = value.ToString(), Value = (value * 1000).ToString(), Selected = value == 60 });
+                    }
+                }
+
+                return _refreshTimes;
             }
         }
 

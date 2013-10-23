@@ -121,7 +121,7 @@
     <value>Member_Agent_Win_Loss_Report_Of_{0}_From_{1}_To_{2}</value>
   </data>
   <data name="MemberWinLossSheetName" xml:space="preserve">
-    <value>Member/Agent Win Loss Report</value>
+    <value>Member Agent Win Loss Report</value>
   </data>
   <data name="MemberWinLossTitle" xml:space="preserve">
     <value>Member/Agent Win Loss of {0} - from {1} to {2} - Bet type [{3}] Combo [{4}] - Sport types [{5}]</value>

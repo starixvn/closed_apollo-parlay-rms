@@ -70,7 +70,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Member/Agent Win Loss Report.
+        ///   Looks up a localized string similar to Member Agent Win Loss Report.
         /// </summary>
         internal static string MemberWinLossSheetName {
             get {

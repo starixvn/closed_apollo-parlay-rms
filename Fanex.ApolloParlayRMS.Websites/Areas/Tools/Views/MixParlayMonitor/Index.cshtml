@@ -1,0 +1,127 @@
+﻿@using Fanex.ApolloParlayRMS.Core.Constants
+@using Fanex.ApolloParlayRMS.Core.Extensions
+@using Fanex.ApolloParlayRMS.Core.Models
+@using Fanex.ApolloParlayRMS.Core.Web
+@{
+	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Headline {
+	<h1>
+		<span class="title">
+			<span class="first">@Lang.Reports /</span>
+			@ViewBag.Title
+		</span>
+	</h1>
+}
+<section id="filter-bar">
+	<div class="filter-form">
+		<div class="filter-row">	
+			<div class="filter-cell">
+				<div class="lbl-field width-100">
+					@Html.Label("ddlSelectTop", Lang.SelectTop)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlSelectTop", (IEnumerable<SelectListItem>)ViewBag.SelectTop, new { @class = "multiselect-width" })
+				</div>
+			</div>
+			<div class="filter-cell">
+				<div class="lbl-field width-100">
+					@Html.Label("ddlCombo", Lang.Combo)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlCombo", (IEnumerable<SelectListItem>)ViewBag.Combos, new { @class = "multiselect-width" })
+				</div>
+			</div>
+			<div class="filter-cell">
+				<div class="lbl-field width-80">
+					@Html.Label("ddlSportTypes", Lang.SportTypes)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlSportTypes", (IEnumerable<SelectListItem>)ViewBag.SportTypes, new { @class = "multiselect-width" })
+				</div>
+			</div>	
+			<div class="filter-cell">
+				<div class="lbl-field width-140">
+					@Html.Label("txtMaxPayout", Lang.MaxPayoutAfterPT)
+				</div>
+				<div class="edit-field">
+					@Html.TextBox("txtMaxPayout", string.Empty, new { @class = "multiselect-width" })
+				</div>
+			</div>
+			
+		</div>
+		<div class="filter-row">					
+			<div class="filter-cell">
+				<div class="lbl-field width-100">
+					@Html.Label("ddlLevel", Lang.Level)
+				</div>
+				<div class="edit-field">
+					@Html.DropDownList("ddlLevel", (IEnumerable<SelectListItem>)ViewBag.Levels, new { @class = "multiselect-width" })
+				</div>
+			</div>	
+			<div class="filter-cell">
+				<div class="lbl-field width-100">
+					@Html.Label("ddlRefreshTime", Lang.RefreshTime)
+				</div>
+				<div class="edit-field width-auto">
+					@Html.DropDownList("ddlRefreshTime", (IEnumerable<SelectListItem>)ViewBag.RefreshTimes, new { @class = "multiselect-width" })
+					<span class=".relative">@Lang.Seconds</span>
+				</div>
+			</div>
+			<div class="filter-cell">
+				<div class="lbl-field width-100"></div>
+				<div class="edit-field width-auto">
+					@*<div id="divRefreshNow" class="width-auto">
+						@Lang.RefreshNow
+						<span id="divTimer" class="float-right">[60]</span>
+					</div>*@
+					<div class="submit">
+						<input type="button" class="btn-submit float-right" id="divRefreshNow" value="@Lang.RefreshNow [60]" />
+					</div>
+				</div>
+			</div>	
+			<div class="filter-cell">
+				<div class="edit-field width-auto">
+					@Html.CheckBox("chkPause", false)
+				</div>                
+				<div class="lbl-field width-140">
+					@Html.Label("chkPause", Lang.Pause, new { @class = "bold float-left" })
+				</div>
+			</div>	
+			<div class="filter-cell">
+				<div class="submit">
+					<input type="button" class="btn-submit float-right" id="btnSearch" value="@Lang.Submit" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div>
+	<div id="divResult" class="freegrid display-none"></div>
+</div>
+@Html.Hidden("imagePath", Url.Content("~/Content/themes/layout/img/calendar.gif"))
+@section Foot {
+	<script type="text/javascript">
+		var labels = {
+			NetWinLoss: '@Lang.NetWinLoss',
+			OurPT: '@Lang.OurPT',
+			WinLoss: '@Lang.WinLoss',
+			StakeAfterPT: '@Lang.StakeAfterPT',
+			Ticket: '@Lang.Ticket',
+			Month: '@Lang.Month',
+			Lose: '@Lang.Lose',
+			Won: '@Lang.Won',
+			SixUp: '@Lang.SixUp',
+			Total: '@Lang.Total',
+			From: '@Lang.From',
+			To: '@Lang.To',
+			UserName: '@Lang.UserName',
+			Total: '@Lang.Total',
+			Subtotal: '@Lang.Subtotal'
+		};
+		var maxDate = '@DateTime.Now';
+		var minDate = '@ViewBag.MinDate';
+	</script>
+	@Scripts.Render("~/Scripts/Tools/MixParlayMonitor")
+}
