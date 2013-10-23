@@ -43,6 +43,8 @@
 
 	tr.subTotal td {
 		background-color: #E1E7EF;
+		border-bottom: 1px solid #ccc;
+		font-weight: bold;
 	}
 
 	.row_footer table thead th, .col_footer table thead th {
@@ -204,10 +206,58 @@
 .tipsy {
 	opacity: 1 !important;
 	.tipsy-arrow-n {
-		border-bottom-color: #FF9999;
+		border-bottom-color: #AA0000;
 	}
 
 	.tipsy-inner {
-		background: #FF9999;
+		background: #FFAAAA;
+		border: 1px solid #AA0000;
+		color: #333;
+	}
+}
+
+/* Calendar*/
+
+.ui-datepicker {
+	font-size: 12px;
+
+	* {
+		vertical-align: middle;
+	}
+
+	.ui-datepicker-prev span, .ui-datepicker-next span {
+		margin-top: -5px;
+	}
+	
+	.ui-datepicker-prev-hover, .ui-datepicker-next-hover {
+		top: 2px;
+		opacity: 0.8;
+
+		&.ui-state-disabled {
+			opacity: 0.35;
+		}
+	}
+
+	.ui-datepicker-prev-hover {
+		left: 2px;		
+	}
+
+	.ui-datepicker-next-hover {
+		right: 2px;
+	}
+
+	.ui-datepicker-calendar {
+		.ui-state-default, .ui-widget-content .ui-state-default,
+		.ui-widget-header .ui-state-default {
+			border: 1px solid #d3d3d3;
+		}
+
+		.ui-state-hover, .ui-widget-content .ui-state-hover,
+		.ui-widget-header .ui-state-hover, .ui-state-focus,
+		.ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-active {
+			background: #99BCE8;
+			color: #fff;
+			border-color: #6EA3E5;
+		}
 	}
 }
