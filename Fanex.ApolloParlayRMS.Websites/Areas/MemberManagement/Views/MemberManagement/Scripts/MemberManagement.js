@@ -120,6 +120,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
                 pageStep: 10,
                 afterPagedFunction: initLevelUpdaterFields
             },
+            bodyRowHeight: 24,
             bodyRows: bodyData
         };
 

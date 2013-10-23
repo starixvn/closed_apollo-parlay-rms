@@ -13,11 +13,10 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.ApolloParlayRMS.Core.Web.Controllers;
+    using Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor;
+    using Fanex.ApolloParlayRMS.Tools.Services.Interfaces.MixParlayMonitor;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.ApolloParlayRMS.Tools.Services.Interfaces.MixParlayMonitor;
-    using Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Mix parlay monitor controller.

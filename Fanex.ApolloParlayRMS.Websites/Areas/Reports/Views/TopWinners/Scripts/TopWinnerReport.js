@@ -379,8 +379,9 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
             showFooter: true,
             showNumberColumn: true,
             bodyRows: bodyData,
-            footerRows: footerData,
-            gridExpandHeight: 80
+            footerRows: footerData,        
+            fullHeight: false,
+            gridHeight: 600,
         };
 
         $('#dialog-popup .freegrid').fanexGrid(gridOptions);

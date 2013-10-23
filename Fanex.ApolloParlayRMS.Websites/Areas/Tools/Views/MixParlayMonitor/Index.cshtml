@@ -70,7 +70,7 @@
 				</div>
 			</div>
 			<div class="filter-cell">
-				<div class="lbl-field width-100"></div>
+				<div class="lbl-field" style="width: 115px;"></div>
 				<div class="edit-field width-auto">
 					@*<div id="divRefreshNow" class="width-auto">
 						@Lang.RefreshNow
@@ -82,11 +82,11 @@
 				</div>
 			</div>	
 			<div class="filter-cell">
-				<div class="edit-field width-auto">
-					@Html.CheckBox("chkPause", false)
+				<div class="edit-field" style="width: 42px;">
+					@Html.CheckBox("chkPause", false, new { @class = "float-right" })
 				</div>                
-				<div class="lbl-field width-140">
-					@Html.Label("chkPause", Lang.Pause, new { @class = "bold float-left" })
+				<div class="width-140">
+					@Html.Label("chkPause", Lang.Pause, new { @class = "float-left" })
 				</div>
 			</div>	
 			<div class="filter-cell">

@@ -46,24 +46,24 @@ namespace Fanex.ApolloParlayRMS.Websites
 				"~/Content/themes/layout/layout.less");
 
 			bundles.Add(new ScriptBundle("~/Scripts/jQuery").Include(
-				"~/Scripts/lib/jquery-1.8.2.js"));
+                "~/Scripts/lib/jQuery/jquery-1.8.2.js"));
 
 			bundles.Add(new ScriptBundle("~/Scripts/headjs").Include(
-				"~/Scripts/lib/head.js"));
+                "~/Scripts/lib/html5-libs/head.js"));
 
 			bundles.Add(new ScriptBundle("~/Scripts/CommonJS").Include(
-				"~/Scripts/lib/jquery.easing.1.3.js",
-				"~/Scripts/lib/jquery-ui-1.8.24.js",
-				"~/Scripts/lib/jquery.unobtrusive-ajax.js",
-				"~/Scripts/lib/jquery.validate*",
+				"~/Scripts/lib/jQuery/jquery.easing.1.3.js",
+                "~/Scripts/lib/jQuery/jquery-ui-1.8.24.js",
+                "~/Scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
+                "~/Scripts/lib/jQuery/jquery.validate*",
+                "~/Scripts/lib/jQuery/jquery.cookie.js",
 				"~/Scripts/lib/tipsy/tipsy-1.0.0.js",
 				"~/Scripts/lib/msgbox/msgbox-0.0.1.js",
-				"~/Scripts/lib/jquery.cookie.js",
 				"~/Scripts/lib/Namespace.js",
-				"~/Scripts/lib/moment.min.js",
 				"~/Scripts/ParlayRMS.js",
 				"~/Scripts/_Layout.js",
 				"~/Scripts/Validator.js",
+                "~/Scripts/lib/Fanex.Grid/moment.js",
 				"~/Scripts/lib/Fanex.Grid/numeral.js",
 				"~/Scripts/lib/Fanex.Grid/Fanex.Grid.js",
 				"~/Scripts/lib/Fanex.Grid/Fanex.Pagination.js",
