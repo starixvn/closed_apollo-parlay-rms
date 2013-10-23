@@ -8,8 +8,7 @@
 }
 @section Headline {
 	<h1>
-		<span class="title">
-			<span class="first">@Lang.Reports /</span>
+		<span class="title"><span class="first">@Lang.Reports /</span>
 			@ViewBag.Title
 		</span>
 	</h1>
@@ -51,7 +50,7 @@
 			</div>
 			
 		</div>
-		<div class="filter-row">					
+		<div class="filter-row">
 			<div class="filter-cell">
 				<div class="lbl-field width-100">
 					@Html.Label("ddlLevel", Lang.Level)
@@ -69,28 +68,15 @@
 					<span class=".relative">@Lang.Seconds</span>
 				</div>
 			</div>
+			<div class="filter-cell cell-refresh">
+				<input type="button" class="btn-refresh" id="divRefreshNow" value="@Lang.RefreshNow [60]" />
+				<label class="lbl-pause">
+					@Html.CheckBox("chkPause", false)
+					@Lang.Pause
+				</label>
+			</div>
 			<div class="filter-cell">
-				<div class="lbl-field" style="width: 115px;"></div>
-				<div class="edit-field width-auto">
-					@*<div id="divRefreshNow" class="width-auto">
-						@Lang.RefreshNow
-						<span id="divTimer" class="float-right">[60]</span>
-					</div>*@
-					<div class="submit">
-						<input type="button" class="btn-submit float-right" id="divRefreshNow" value="@Lang.RefreshNow [60]" />
-					</div>
-				</div>
-			</div>	
-			<div class="filter-cell">
-				<div class="edit-field" style="width: 42px;">
-					@Html.CheckBox("chkPause", false, new { @class = "float-right" })
-				</div>                
-				<div class="width-140">
-					@Html.Label("chkPause", Lang.Pause, new { @class = "float-left" })
-				</div>
-			</div>	
-			<div class="filter-cell">
-				<div class="submit">
+				<div class="submit btn-mixParlay">
 					<input type="button" class="btn-submit float-right" id="btnSearch" value="@Lang.Submit" />
 				</div>
 			</div>
@@ -98,7 +84,8 @@
 	</div>
 </section>
 <div>
-	<div id="divResult" class="freegrid display-none"></div>
+	<div id="divResult" class="freegrid display-none">
+	</div>
 </div>
 @Html.Hidden("imagePath", Url.Content("~/Content/themes/layout/img/calendar.gif"))
 @section Foot {

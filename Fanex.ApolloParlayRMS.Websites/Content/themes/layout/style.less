@@ -262,6 +262,42 @@ div.link {
 
 	&.w120 { .form-row .lbl-field { width: 120px } }
 	&.w140 { .form-row .lbl-field { width: 140px } }
+
+	&.form-popup {
+		background: none;
+		border: none;
+		margin: 0;
+
+		.form-row {
+			.lbl-field {
+				text-align: left;
+				width: 75px;
+			}
+
+			.edit-field {
+				
+				/* Dropdown Check List */
+				.ui-multiselect {
+					height: 23px;
+					position: relative;
+					color: #333335;
+					background: #fff url(img/text-bg.gif) repeat-x top center;
+					padding: 0 0 2px 4px;
+					font-size: 11px;
+					.border-radius(0);
+				}
+
+				.ui-state-active, .ui-widget-content .ui-state-active,
+				.ui-widget-header .ui-state-active, .ui-state-hover {
+					border: 1px solid #ccc;
+				}
+
+				input[type="text"], input[type="password"], select {
+					border-color: #D3D3D3;
+				}
+			}
+		}
+	}
 }
 
 /********************************************************/
@@ -847,6 +883,28 @@ div.link {
 		display: inline;
 		float: left;
 		margin-bottom: 3px;
+
+		&.cell-refresh {
+			.btn-refresh {
+				float: left;
+				margin-left: 87px;
+				width: 137px;
+				.button();
+			}
+
+			.lbl-pause {
+				float: left;
+				margin: 3px 0 0 29px;
+
+				input[type='checkbox'] {
+					margin-bottom: 1px;
+				}
+			}
+		}
+
+		.btn-mixParlay {
+			margin-left: 58px;
+		}
 	}
 
 	.lbl-field *, .edit-field *, .submit * { vertical-align: middle }
