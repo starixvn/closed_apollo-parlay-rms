@@ -78,7 +78,6 @@ namespace Fanex.ApolloParlayRMS.Websites
             bundles.AddAndInclude(
                 "~/Themes/BetList",
                 "~/Content/themes/layout/bet-list.less");
-
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="MvcApplication.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Global.asax.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,7 +16,7 @@ namespace Fanex.ApolloParlayRMS.Websites
     using Fanex.Data.Configuration;
 
     /// <summary>
-    /// Mvc application.
+    /// MVC application.
     /// </summary>
     public class MvcApplication : System.Web.HttpApplication
     {
