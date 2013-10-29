@@ -15,7 +15,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Interfaces.MixParlayMonitor
 
     public interface IMixParlayMonitorService
     {
-        // <summary>
+        /// <summary>
         /// Gets list of bets of the unsettled parlay tickets.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>

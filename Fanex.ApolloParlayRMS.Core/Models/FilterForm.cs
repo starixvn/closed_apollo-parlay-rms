@@ -123,7 +123,7 @@ namespace Fanex.ApolloParlayRMS.Core.Models
                 {
                     _betTypes = new List<SelectListItem>()
                     {
-                        new SelectListItem { Text = Lang.MixParLay, Value = ((int)CommonEnums.BetType.MixParlay).ToString(), Selected = true }
+                        new SelectListItem { Text = Lang.MixParlay, Value = ((int)CommonEnums.BetType.MixParlay).ToString(), Selected = true }
                     };
                 }
 
@@ -229,7 +229,7 @@ namespace Fanex.ApolloParlayRMS.Core.Models
             switch (betType)
             {
                 case (int)CommonEnums.BetType.MixParlay:
-                    return Lang.MixParLay;
+                    return Lang.MixParlay;
 
                 case (int)CommonEnums.BetType.SystemParlay:
                     return Lang.SystemParlay;

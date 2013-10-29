@@ -12,6 +12,9 @@ namespace Fanex.ApolloParlayRMS.Tools.Criteria.MixParlayMonitor
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// The criteria that are used to query bet list.
+    /// </summary>
     public class GetMonitorParlayBetListCriteria : CriteriaBase
     {
         public string Selection { get; set; }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetTotalOutstandingOfMemCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetTotalOutstandingOfAgentCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------

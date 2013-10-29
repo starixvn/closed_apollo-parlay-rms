@@ -1,28 +1,36 @@
 ﻿@{
-    Layout = null;
-    ViewBag.Title = ViewBag.HeaderText = Lang.TicketDetails;
+	Layout = null;
+	ViewBag.Title = ViewBag.HeaderText = Lang.TicketDetails;
 }
 <!DOCTYPE html>
+<!--[if (IE 7)]><html lang="en" class="ie7 oldie"><![endif]-->
+<!--[if (IE 8)]><html lang="en" class="ie8 oldie"><![endif]-->
+<!--[if (IE 9)]><html lang="en" class="ie9"><![endif]-->
+<!--[if (gt IE 9)]><!-->
 <html lang="en">
+<!--<![endif]-->
 <head>
-    <meta content="text/html" charset="utf-8" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Themes/Styles")
-    @Styles.Render("~/Themes/Layout")
-    @Scripts.Render("~/Scripts/jQuery")
-    <meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title &mdash; @Lang.ParlayRMS</title>
+	<link rel="shortcut icon" href="~/favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!--[if lt IE 9]><script src="~/Scripts/lib/html5-libs/html5shiv.min.js" type="text/javascript"></script><![endif]-->
+	@Scripts.Render("~/Scripts/headjs")
+	@Styles.Render("~/Themes/Styles")
+	@Styles.Render("~/Themes/Layout")
+	@Styles.Render("~/Themes/BetList")
+	@Scripts.Render("~/Scripts/jQuery")
 </head>
 <body>
-    <div class="grid-wrp pnl-wrp">
-        <div class="pnl-header">
-            <div class="pnl-header-content">
-                &nbsp;</div>
-            <div class="pnl-header-toggle">
+	<div class="grid-wrp pnl-wrp betListPage">
+		<div class="pnl-header">
+			<div class="pnl-header-content">
+			    @Lang.TicketDetails - @ViewBag.Username - @ViewBag.BetId	
             </div>
-        </div>
-        <div class="pnl-body">
-            @Html.Raw(ViewBag.HtmlContent)
-        </div>
-    </div>
+		</div>
+		<div class="pnl-body betDetails betDetailPage">
+			@Html.Raw(ViewBag.HtmlContent)
+		</div>
+	</div>
 </body>
 </html>

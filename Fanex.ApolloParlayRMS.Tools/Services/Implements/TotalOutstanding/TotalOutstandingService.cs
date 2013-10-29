@@ -14,7 +14,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
     using Fanex.ApolloParlayRMS.Tools.Services.Interfaces.TotalOutstanding;
 
     /// <summary>
-    /// Total outstanding service
+    /// Total outstanding service.
     /// </summary>
     public class TotalOutstandingService : ITotalOutstandingService
     {
@@ -29,7 +29,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
         {
             this._totalOutstandingRepository = totalOutstandingRepository ?? new TotalOutstandingRepository();
         }
-
 
         //private dynamic GetAgentTotalOutstanding(
     }

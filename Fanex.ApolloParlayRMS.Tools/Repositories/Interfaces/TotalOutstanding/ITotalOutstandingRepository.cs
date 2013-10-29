@@ -16,14 +16,14 @@ namespace Fanex.ApolloParlayRMS.Tools.Repositories.Interfaces.TotalOutstanding
     public interface ITotalOutstandingRepository
     {
         /// <summary>
-        /// Gets total oustanding of agent.
+        /// Gets total outstanding of agent.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of AgentTotalOutstanding objects.</returns>
         IEnumerable<AgentTotalOutstanding> GetTotalOutstandingOfAgent(GetTotalOutstandingOfAgentCriteria criteria);
 
         /// <summary>
-        /// Gets total oustanding of member.
+        /// Gets total outstanding of member.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of MemberTotalOutstanding objects.</returns>

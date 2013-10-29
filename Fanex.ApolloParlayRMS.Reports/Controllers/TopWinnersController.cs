@@ -136,7 +136,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
                         ticketHelper,
                         null,
                         string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId),
-                        string.Format("</div><div class='ticketStatus'><div class='divstatus'>[{0}]</div></div></div>", ticket.Status),
+                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>", ticket.Status),
                         false);
                 }
                 else
@@ -146,7 +146,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
                         ticketHelper,
                         null,
                         string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId),
-                        string.Format("</div><div class='ticketStatus'><div class='divstatus'>[{0}]</div></div></div><div class='line'></div>", ticket.Status),
+                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div><div class='line'></div>", ticket.Status),
                         false);
                 }
             }

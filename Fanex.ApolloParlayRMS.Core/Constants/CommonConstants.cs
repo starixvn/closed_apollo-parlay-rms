@@ -34,5 +34,7 @@ namespace Fanex.ApolloParlayRMS.Core.Constants
         public const string TwoDecimalDigitPercentFormat = ".00%";
         public const string SpParamsSeperator = ",";
         public const string ViewIPVN = "ViewIPVN";
+
+        public const int SixUp = 6;
     }
 }

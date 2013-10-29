@@ -295,11 +295,11 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mix ParLay.
+        ///   Looks up a localized string similar to Mix Parlay.
         /// </summary>
-        public static string MixParLay {
+        public static string MixParlay {
             get {
-                return ResourceManager.GetString("MixParLay", resourceCulture);
+                return ResourceManager.GetString("MixParlay", resourceCulture);
             }
         }
         

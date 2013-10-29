@@ -112,7 +112,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
                     var combos = dateData.ChildItems.Select(obj => new
                     {
                         Date = obj.WinLossDate,
-                        Combo = (obj.Combo == (int)CommonEnums.BetType.MixParlay) ? Lang.SixUp : obj.Combo.ToString(),
+                        Combo = (obj.Combo == (int)CommonConstants.SixUp) ? Lang.SixUp : obj.Combo.ToString(),
                         TicketWon = obj.TicketWon,
                         TicketLose = obj.TicketLose,
                         StakeWon = obj.StakeWon,

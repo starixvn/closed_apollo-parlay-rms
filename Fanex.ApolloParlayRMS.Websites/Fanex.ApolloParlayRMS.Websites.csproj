@@ -50,7 +50,7 @@
     <Reference Include="Fanex.Common">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging">
@@ -59,8 +59,7 @@
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -188,6 +187,10 @@
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
     <Content Include="Areas\Tools\Views\MixParlayMonitor\Scripts\MixParlayMonitor.js" />
     <Content Include="Areas\UserLogin\themes\img\Parlay_RMS.png" />
+    <None Include="Content\themes\layout\bet-list.less" />
+    <Content Include="Content\themes\layout\img\firstGoal.gif" />
+    <Content Include="Content\themes\layout\img\lastGoal.gif" />
+    <Content Include="Content\themes\layout\img\number-sign-icon.png" />
     <Content Include="Scripts\lib\html5-libs\head.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\LevelUpdater.js" />
@@ -439,7 +442,9 @@
     <Content Include="Scripts\lib\tipsy\tipsy-1.0.0.min.js" />
     <Content Include="Scripts\ParlayRMS.js" />
     <Content Include="Scripts\_Layout.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

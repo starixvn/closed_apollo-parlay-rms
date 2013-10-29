@@ -21,7 +21,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Repositories.Implements.TotalOutstanding
     public class TotalOutstandingRepository : ITotalOutstandingRepository
     {
         /// <summary>
-        /// Gets total oustanding of agent.
+        /// Gets total outstanding of agent.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of AgentTotalOutstanding objects.</returns>
@@ -35,7 +35,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Repositories.Implements.TotalOutstanding
         }
 
         /// <summary>
-        /// Gets total oustanding of member.
+        /// Gets total outstanding of member.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of MemberTotalOutstanding objects.</returns>
