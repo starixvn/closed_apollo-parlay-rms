@@ -39,13 +39,6 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Interfaces
         ICommandResult UpdateCustomerLevel(UpdateCustomerCriteria criteria);
 
         /// <summary>
-        /// Updates the status of an existing customer.
-        /// </summary>
-        /// <param name="criteria">The criteria that contain the status and ID of customer.</param>
-        /// <returns>CommandResult indicates whether the status of customer is updated successfully or not.</returns>
-        ICommandResult UpdateCustomerStatus(UpdateCustomerStatusCriteria criteria);
-
-        /// <summary>
         /// Checks the customer exists or not.
         /// </summary>
         /// <param name="criteria">The criteria contain the information using for querying data purpose.</param>

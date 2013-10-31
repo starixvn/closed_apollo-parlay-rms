@@ -17,6 +17,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
     /// </summary>
     public class InsertCustomerCriteria : CriteriaBase
     {
+        [SpParam(Ignored = true)]
         public int CustId { get; set; }
 
         [Required]
@@ -24,6 +25,10 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
 
         [Required]
         public int Level { get; set; }
+
+        public int CurrentUserId { get; set; }
+
+        public string Ip { get; set; }
 
         /// <summary>
         /// Get Setting Key.

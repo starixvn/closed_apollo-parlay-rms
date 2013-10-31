@@ -1,25 +1,22 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="UpdateCustomerStatusCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetSimilarBetListCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Jason.Ly" date="2013.10.9">Created</change>
+//   <change who="Jason.Ly" date="2013.10.22">Created</change>
 // </history>
 
-namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
+namespace Fanex.ApolloParlayRMS.Tools.Criteria.SimilarBets
 {
-    using System;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Update Customer Criteria.
+    /// The criteria that are used to get the similar bet list of a specific bet.
     /// </summary>
-    public class UpdateCustomerStatusCriteria : CriteriaBase
+    public class GetSimilarBetListCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
-
-        public bool Monitored { get; set; }
+        public long TransId { get; set; }
 
         /// <summary>
         /// Get Setting Key.
@@ -27,7 +24,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
         /// <returns>Setting key of the criteria.</returns>
         public override string GetSettingKey()
         {
-            return "RMS_CustomerUpdStatus";
+            return "RMS_Similar_Parlay_Betlist";
         }
 
         /// <summary>

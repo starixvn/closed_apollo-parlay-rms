@@ -38,6 +38,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fanex.BetList.Core">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.BetList.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.BetList.Core.TicketHelper">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.BetList.Core.TicketHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Common">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
     </Reference>
@@ -52,6 +58,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
@@ -64,20 +71,33 @@
     <Compile Include="Controllers\MixParlayMonitorController.cs" />
     <Compile Include="Controllers\SimilarBetsController.cs" />
     <Compile Include="Controllers\TotalOutstandingController.cs" />
+    <Compile Include="Criteria\BetList\GetTransDetailsCriteria.cs" />
     <Compile Include="Criteria\MixParlayMonitor\GetMonitorParlayBetListCriteria.cs" />
+    <Compile Include="Criteria\SimilarBets\GetSimilarBetListCriteria.cs" />
     <Compile Include="Criteria\TotalOutstanding\GetTotalOutstandingOfAgentCriteria.cs" />
     <Compile Include="Criteria\TotalOutstanding\GetTotalOutstandingOfMemCriteria.cs" />
+    <Compile Include="Models\BetList\BetItem.cs" />
     <Compile Include="Models\MixParlayMonitor\BetItem.cs" />
+    <Compile Include="Models\SimilarBets\SimilarBetItem.cs" />
+    <Compile Include="Models\SimilarBets\SimilarBetList.cs" />
     <Compile Include="Models\TotalOutstanding\AgentTotalOutstanding.cs" />
+    <Compile Include="Models\TotalOutstanding\AgentTotalOutstandingList.cs" />
     <Compile Include="Models\TotalOutstanding\MemberTotalOutstanding.cs" />
+    <Compile Include="Models\TotalOutstanding\MemberTotalOutstandingList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implements\MixParlayMonitor\MixParlayMonitorRepository.cs" />
+    <Compile Include="Repositories\Implements\SimilarBets\SimilarBetsRepository.cs" />
     <Compile Include="Repositories\Implements\TotalOutstanding\TotalOutstandingRepository.cs" />
     <Compile Include="Repositories\Interfaces\MixParlayMonitor\IMixParlayMonitorRepository.cs" />
+    <Compile Include="Repositories\Interfaces\SimilarBets\ISimilarBetsRepository.cs" />
     <Compile Include="Repositories\Interfaces\TotalOutstanding\ITotalOutstandingRepository.cs" />
+    <Compile Include="Services\Implements\BetList\BetListService.cs" />
     <Compile Include="Services\Implements\MixParlayMonitor\MixParlayMonitorService.cs" />
+    <Compile Include="Services\Implements\SimilarBets\SimilarBetsService.cs" />
     <Compile Include="Services\Implements\TotalOutstanding\TotalOutstandingService.cs" />
+    <Compile Include="Services\Interfaces\BetList\IBetListService.cs" />
     <Compile Include="Services\Interfaces\MixParlayMonitor\IMixParlayMonitorService.cs" />
+    <Compile Include="Services\Interfaces\SimilarBets\ISimilarBetsService.cs" />
     <Compile Include="Services\Interfaces\TotalOutstanding\ITotalOutstandingService.cs" />
     <Compile Include="ToolsAreaRegistration.cs" />
   </ItemGroup>

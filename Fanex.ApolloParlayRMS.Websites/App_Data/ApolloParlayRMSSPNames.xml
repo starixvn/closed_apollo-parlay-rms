@@ -77,5 +77,7 @@
 	</Function>
 	<Function Name="BetList">
 		<Setting Key="RMS_Rpt_Parlay_TopWinners_Bet_Details" SpName="RMS_Rpt_Parlay_TopWinners_Bet_Details" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_Parlay_TransDetails" SpName="RMS_Parlay_TransDetails" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
+    <Setting Key="RMS_Similar_Parlay_Betlist" SpName="RMS_Similar_Parlay_Betlist" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
 	</Function>
 </Functions>

@@ -20,6 +20,10 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
 
         public int Level { get; set; }
 
+        public int CurrentUserId { get; set; }
+
+        public string Ip { get; set; }
+
         /// <summary>
         /// Get Setting Key.
         /// </summary>

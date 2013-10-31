@@ -19,17 +19,15 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Interfaces
         /// Insert a new customer to the database.
         /// </summary>
         /// <param name="criteria">The criteria contains data of new customer.</param>
-        /// <param name="logCriteria">The log criteria.</param>
         /// <returns>CommandResult object indicates whether the insert process is successful or not.</returns>
-        ICommandResult Insert(InsertCustomerCriteria criteria, ICriteria logCriteria);
+        ICommandResult Insert(InsertCustomerCriteria criteria);
 
         /// <summary>
         /// Update the information of a customer.
         /// </summary>
         /// <param name="criteria">The criteria contains data of the customer.</param>
-        /// <param name="logCriteria">The log criteria.</param>
         /// <returns>CommandResult object indicates whether the update process is successful or not.</returns>
-        ICommandResult Update(ICriteria criteria, ICriteria logCriteria);
+        ICommandResult Update(ICriteria criteria);
 
         /// <summary>
         /// Checks whether a customer is existing or not.

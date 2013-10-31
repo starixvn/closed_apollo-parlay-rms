@@ -13,6 +13,7 @@ namespace Fanex.ApolloParlayRMS.Core.Repositories
     using Fanex.ApolloParlayRMS.Core.Criteria;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.Data;
+    using Fanex.Data.DNAide;
 
     /// <summary>
     /// Customer information repository.
@@ -27,14 +28,11 @@ namespace Fanex.ApolloParlayRMS.Core.Repositories
         public CustomerInfo GetCustomerInfo(GetCustomerByUserNameCriteria criteria)
         {
             CustomerInfo custInfo = new CustomerInfo();
+            DbResult result = DbHelper.ExecuteDbResult(criteria.GetSettingKey(), criteria.GetSpParams());
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(criteria.GetSpParams());
-                custInfo.UserName = criteria.UserName;
-                custInfo.CustId = Convert.ToInt64(db.GetParameterValue("custid"));
-                custInfo.RoleId = Convert.ToInt32(db.GetParameterValue("roleid"));
-            }
+            custInfo.UserName = criteria.UserName;
+            custInfo.CustId = Convert.ToInt64(result.Outputs["custid"]);
+            custInfo.RoleId = Convert.ToInt32(result.Outputs["roleid"]);
 
             return custInfo;
         }

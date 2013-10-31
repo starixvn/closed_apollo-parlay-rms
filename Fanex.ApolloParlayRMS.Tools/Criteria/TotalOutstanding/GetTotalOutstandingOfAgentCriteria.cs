@@ -20,7 +20,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Criteria.TotalOutstanding
 
         public string Selection { get; set; }
 
-        public string Sporttype { get; set; }
+        public string SportType { get; set; }
 
         /// <summary>
         /// Get Setting Key.

@@ -16,10 +16,11 @@ var ParlayRMS = function ($) {
 		agentIsMobile: null,
 
 		commonConstants: {
-		    DateFormat: 'mm-dd-yy',
-            MomentDateFormat: 'MM-DD-YYYY',
-            DecimalForamt: '0,0.00',
-            NumberFormat: '0,0'
+			DateFormat: 'mm-dd-yy',
+			MomentDateFormat: 'MM-DD-YYYY',
+			MomentDateTimeFormat: 'MM-DD-YYYY hh:mm:ss A',
+			DecimalFormat: '0,0.00',
+			NumberFormat: '0,0'
 		},
 
 		initCoreValues: function () {
@@ -141,21 +142,24 @@ var ParlayRMS = function ($) {
 		},
 		navigateToRoot: function (url) {
 			window.location.replace(ParlayRMS.resolveRootUrl(url));
-        },
-        openWindow: function (url) {
-            var popH = $(window).height(), popW = $(window).width();
-            var formatter = new Array(
-                "resizable=no",
-                "scrollbars=yes",
-                "toolbar=no",
-                "menubar=no",
-                "location=no",
-                "addressbar=no",
-                "directories=no",
-                "status=yes"
-            ).join(',');
+		},
+		openWindow: function (url) {
+			var popH = $(window).height(), popW = $(window).width();
+			var formatter = new Array(
+				"resizable=no",
+				"scrollbars=yes",
+				"toolbar=no",
+				"menubar=no",
+				"location=no",
+				"addressbar=no",
+				"directories=no",
+				"status=yes"
+			).join(',');
 
-            window.open(url, '_blank', '' + ',' + formatter);
+			window.open(url, '_blank', '' + ',' + formatter);
+        },
+        openNewTab: function (url) {
+            window.open(url, '_blank');
         },
 		htmlEncode: function (value) {
 			return $('<div/>').text(value).html();
@@ -285,9 +289,9 @@ Array.prototype.removeAll = function (criteria) {
 		$form.removeData('unobtrusiveValidation');
 		$.validator.unobtrusive.parse($form);
 
-		$form.data('validator').settings.errorPlacement = function(error, element) {
-			$(element).next().hide();
-		};
+//		$form.data('validator').settings.errorPlacement = function(error, element) {
+//			//$(element).next().hide();
+//		};
  
 		return $form;
 	};

@@ -89,7 +89,6 @@
     <Compile Include="Criteria\GetCustomersCriteria.cs" />
     <Compile Include="Criteria\InsertCustomerCriteria.cs" />
     <Compile Include="Criteria\UpdateCustomerCriteria.cs" />
-    <Compile Include="Criteria\UpdateCustomerStatusCriteria.cs" />
     <Compile Include="MemberManagementAreaRegistration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

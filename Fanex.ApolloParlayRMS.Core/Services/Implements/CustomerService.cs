@@ -34,5 +34,20 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
         {
             return CustomerRepositoryInst.GetCustomerInfo(criteria);
         }
+
+        /// <summary>
+        /// Gets the customer information.
+        /// </summary>
+        /// <param name="userName">The user name of the member.</param>
+        /// <returns>The information of the customer.</returns>
+        public static CustomerInfo GetCustomerInfo(string userName)
+        {
+            var criteria = new GetCustomerByUserNameCriteria
+            {
+                UserName = userName
+            };
+
+            return CustomerRepositoryInst.GetCustomerInfo(criteria);
+        }
     }
 }

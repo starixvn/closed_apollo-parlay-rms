@@ -115,6 +115,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet Details.
+        /// </summary>
+        public static string BetDetails {
+            get {
+                return ResourceManager.GetString("BetDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Id.
         /// </summary>
         public static string BetId {
@@ -340,6 +349,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Odds.
+        /// </summary>
+        public static string Odds {
+            get {
+                return ResourceManager.GetString("Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Original Currency.
         /// </summary>
         public static string OriginalCurrency {
@@ -462,6 +480,33 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         public static string ShowAll {
             get {
                 return ResourceManager.GetString("ShowAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Similar bet list.
+        /// </summary>
+        public static string SimilarBetList {
+            get {
+                return ResourceManager.GetString("SimilarBetList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Similar Bets.
+        /// </summary>
+        public static string SimilarBets {
+            get {
+                return ResourceManager.GetString("SimilarBets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Similar Combo Found.
+        /// </summary>
+        public static string SimilarComboFound {
+            get {
+                return ResourceManager.GetString("SimilarComboFound", resourceCulture);
             }
         }
         
@@ -601,6 +646,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string Total {
@@ -628,6 +682,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trans. Time.
+        /// </summary>
+        public static string TransTime {
+            get {
+                return ResourceManager.GetString("TransTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unkown.
         /// </summary>
         public static string Unknow {
@@ -642,6 +705,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
         

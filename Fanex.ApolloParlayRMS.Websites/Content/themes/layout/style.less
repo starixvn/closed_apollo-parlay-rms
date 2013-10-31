@@ -275,7 +275,10 @@ div.link {
 			}
 
 			.edit-field {
-				
+				label.error {
+					display: none !important;
+				}
+
 				/* Dropdown Check List */
 				.ui-multiselect {
 					height: 23px;
@@ -294,6 +297,10 @@ div.link {
 
 				input[type="text"], input[type="password"], select {
 					border-color: #D3D3D3;
+				}
+
+				input[type="text"].input-validation-error, input[type="password"].input-validation-error, select.input-validation-error {
+					border: solid 1px #c30;
 				}
 			}
 		}

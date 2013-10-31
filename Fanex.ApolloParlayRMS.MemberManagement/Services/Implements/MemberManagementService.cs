@@ -82,11 +82,12 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
             Check.Argument.IsNotNull(criteria, "criteria");
             try
             {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+                criteria.CurrentUserId = this.ServiceContext.UserId;
+                criteria.Ip = this.ServiceContext.Ip;
 
-                if (criteria.IsValid() && logCriteria.IsValid())
+                if (criteria.IsValid())
                 {
-                    return this._memberManagementRepository.Insert(criteria, logCriteria);
+                    return this._memberManagementRepository.Insert(criteria);
                 }
             }
             catch (Exception ex)
@@ -107,36 +108,12 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
             Check.Argument.IsNotNull(criteria, "criteria");
             try
             {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+                criteria.CurrentUserId = this.ServiceContext.UserId;
+                criteria.Ip = this.ServiceContext.Ip;
 
-                if (criteria.IsValid() && logCriteria.IsValid())
+                if (criteria.IsValid())
                 {
-                    return this._memberManagementRepository.Update(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return this.InternalError;
-        }
-
-        /// <summary>
-        /// Updates the status of an existing customer.
-        /// </summary>
-        /// <param name="criteria">The criteria that contain the status and ID of customer.</param>
-        /// <returns>CommandResult indicates whether the status of customer is updated successfully or not.</returns>
-        public ICommandResult UpdateCustomerStatus(UpdateCustomerStatusCriteria criteria)
-        {
-            Check.Argument.IsNotNull(criteria, "criteria");
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
-
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return this._memberManagementRepository.Update(criteria, logCriteria);
+                    return this._memberManagementRepository.Update(criteria);
                 }
             }
             catch (Exception ex)

@@ -65,7 +65,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
         var currentDate = $.datepicker.formatDate(ParlayRMS.commonConstants.DateFormat, maxDateObj);
 
         $this.DOMInstance.txtUserName.bind('blur', function () {
-            var userName = $this.DOMInstance.txtUserName.val().trim();
+            var userName = $.trim($this.DOMInstance.txtUserName.val());
             $this.DOMInstance.txtUserName.val(userName);
         });
 
@@ -212,13 +212,13 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                       { HeaderText: labels.UserName, Width: 150, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.NetWinLoss, Width: 107, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.NetWinLoss, Width: 107, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
             showTitle: true,
             showFooter: true,
             gridExpandHeight: 220,
@@ -301,13 +301,13 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
             columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
                       { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt },
-                      { HeaderText: labels.NetWinLoss, Width: 110, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalForamt}],
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.NetWinLoss, Width: 110, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
             showTitle: true,
             showFooter: true,
             gridExpandHeight: 220,

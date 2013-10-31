@@ -195,7 +195,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
             UserName: userName,
             Level: level
         };
-
+        
         $this.DOMInstance.divAddMemberFormMembers.Form.resetValidation();
         $.ajax({
             type: "POST",

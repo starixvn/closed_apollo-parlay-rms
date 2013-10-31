@@ -327,4 +327,28 @@
   <data name="Seconds" xml:space="preserve">
     <value>Seconds</value>
   </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="BetDetails" xml:space="preserve">
+    <value>Bet Details</value>
+  </data>
+  <data name="Odds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="TransTime" xml:space="preserve">
+    <value>Trans. Time</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="SimilarBets" xml:space="preserve">
+    <value>Similar Bets</value>
+  </data>
+  <data name="SimilarBetList" xml:space="preserve">
+    <value>Similar bet list</value>
+  </data>
+  <data name="SimilarComboFound" xml:space="preserve">
+    <value>Similar Combo Found</value>
+  </data>
 </root>

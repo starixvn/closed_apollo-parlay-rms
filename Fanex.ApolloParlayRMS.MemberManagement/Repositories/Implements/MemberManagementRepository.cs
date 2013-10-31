@@ -16,6 +16,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
     using Fanex.ApolloParlayRMS.MemberManagement.Models;
     using Fanex.ApolloParlayRMS.MemberManagement.Repositories.Interfaces;
     using Fanex.Data;
+    using Fanex.Data.DNAide;
     using Fanex.NAP.Core.Criteria.Misc;
     using Fanex.NAP.Framework.Data;
 
@@ -28,13 +29,10 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
         /// Insert a new customer to the database.
         /// </summary>
         /// <param name="criteria">The criteria contains data of new customer.</param>
-        /// <param name="logCriteria">The log criteria.</param>
         /// <returns>CommandResult object indicates whether the insert process is successful or not.</returns>
-        public ICommandResult Insert(InsertCustomerCriteria criteria, ICriteria logCriteria)
+        public ICommandResult Insert(InsertCustomerCriteria criteria)
         {
             Hashtable hash = criteria.GetSpParams();
-
-            hash = logCriteria.AddSpParams(hash);
             hash = (new ResultCriteria()).AddSpParams(hash);
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
@@ -50,12 +48,10 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
         /// Update the information of a customer.
         /// </summary>
         /// <param name="criteria">The criteria contains data of the customer.</param>
-        /// <param name="logCriteria">The log criteria.</param>
         /// <returns>CommandResult object indicates whether the update process is successful or not.</returns>
-        public ICommandResult Update(ICriteria criteria, ICriteria logCriteria)
+        public ICommandResult Update(ICriteria criteria)
         {
             Hashtable hash = criteria.GetSpParams();
-            hash = logCriteria.AddSpParams(hash);
             hash = (new ResultCriteria()).AddSpParams(hash);
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
@@ -73,11 +69,9 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
         /// <returns>Whether a customer is existing or not.</returns>
         public bool CheckCustomer(ICriteria criteria)
         {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(criteria.GetSpParams());
-                return Convert.ToBoolean(db.GetParameterValue("isexists"));
-            }
+            DbResult result = DbHelper.ExecuteDbResult(criteria.GetSettingKey(), criteria.GetSpParams());
+
+            return Convert.ToBoolean(result.Outputs["isexists"]);
         }
     }
 }

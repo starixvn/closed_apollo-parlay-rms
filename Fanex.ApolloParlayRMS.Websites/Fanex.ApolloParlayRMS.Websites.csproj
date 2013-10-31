@@ -186,7 +186,11 @@
     <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
     <Content Include="Areas\Tools\Views\MixParlayMonitor\Scripts\MixParlayMonitor.js" />
+    <Content Include="Areas\Tools\Views\SimilarBets\Scripts\SimilarBets.js" />
+    <Content Include="Areas\Tools\Views\TotalOutstanding\Scripts\TotalOutstanding.js" />
     <Content Include="Areas\UserLogin\themes\img\Parlay_RMS.png" />
+    <Content Include="Areas\Tools\Views\TotalOutstanding\Index.cshtml" />
+    <Content Include="Areas\Tools\Views\SimilarBets\Index.cshtml" />
     <None Include="Content\themes\layout\bet-list.less" />
     <Content Include="Content\themes\layout\img\firstGoal.gif" />
     <Content Include="Content\themes\layout\img\lastGoal.gif" />
