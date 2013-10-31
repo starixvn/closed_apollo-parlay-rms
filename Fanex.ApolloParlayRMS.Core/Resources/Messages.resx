@@ -141,6 +141,9 @@
   <data name="InvalidDateFieldError" xml:space="preserve">
     <value>Invalid date value</value>
   </data>
+  <data name="InvalidNumberFieldError" xml:space="preserve">
+    <value>Invalid number value.</value>
+  </data>
   <data name="ListOfInvalidFields" xml:space="preserve">
     <value>List of invalid fields:</value>
   </data>

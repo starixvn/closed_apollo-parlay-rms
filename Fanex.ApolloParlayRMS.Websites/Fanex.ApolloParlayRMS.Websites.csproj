@@ -195,6 +195,8 @@
     <Content Include="Content\themes\layout\img\firstGoal.gif" />
     <Content Include="Content\themes\layout\img\lastGoal.gif" />
     <Content Include="Content\themes\layout\img\number-sign-icon.png" />
+    <Content Include="Content\themes\layout\img\sort-icon-new3.png" />
+    <Content Include="Scripts\TableSorter.js" />
     <Content Include="Scripts\lib\html5-libs\head.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\LevelUpdater.js" />

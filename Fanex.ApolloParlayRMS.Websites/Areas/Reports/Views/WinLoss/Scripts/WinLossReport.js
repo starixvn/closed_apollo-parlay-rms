@@ -218,7 +218,7 @@ Fanex.ApolloParlayRMS.Reports.WinLossReport = function () {
                       { HeaderText: labels.NetWinLoss, Width: 100, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
             showTitle: true,
             showFooter: true,
-            gridExpandHeight: 220,
+            gridExpandHeight: 260,
             titleInfo: {
                 text: result.Title,
                 showExcelButton: true,

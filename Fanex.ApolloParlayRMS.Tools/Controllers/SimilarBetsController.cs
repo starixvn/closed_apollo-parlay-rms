@@ -10,7 +10,6 @@
 namespace Fanex.ApolloParlayRMS.Tools.Controllers
 {
     using System.Linq;
-    using System.Text;
     using System.Web.Mvc;
     using Fanex.ApolloParlayRMS.Core.Resources;
     using Fanex.ApolloParlayRMS.Core.Web;
@@ -67,11 +66,11 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <returns>JSON object contains bet list of the transaction of passed reference number.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.SimilarBets, Policy = Constant.Policy.Read)]
-        public JsonResult GetSimilarBets(long refNo)
+        public JsonResult GetSimilarBets(long transId)
         {
             var data = this._similarBetsService.GetSimilarBetList(new GetSimilarBetListCriteria
             {
-                TransId = refNo
+                TransId = transId
             });
 
             return Json(data);
@@ -87,67 +86,65 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <returns>JSON object represents the bet list of the passed reference number.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
-        public JsonResult GetBetDetails(long betId, long refNo, long originalRefNo, string userName)
+        public JsonResult GetBetDetails(long transId, long refNo, long originalRefNo, string userName)
         {
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
             ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
-            StringBuilder ticketsCompare = new StringBuilder();
-            string ticketCompareStr = string.Empty;
+
+            string openTags = "<div id='{0}'><div class='ticketDetail{1}'>";
+            string closeTags = "</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>{1}";
+            string diffentCssClass = string.Empty;
+            string borderTag = string.Empty;
+            bool isDifferent;
+
             var tickets = this._betListService.CreateChoices(refNo);
             var originalTickets = this._betListService.CreateChoices(originalRefNo);
 
             foreach (var ticket in tickets)
             {
-                bool flag = false;
+                isDifferent = true;
                 foreach (var originalTicket in originalTickets)
                 {
-                    if ((originalTicket.LeagueId == ticket.LeagueId)
-                        && (originalTicket.SportTypeId == ticket.SportTypeId)
-                        && (originalTicket.HomeId == ticket.HomeId)
-                        && (originalTicket.AwayId == ticket.AwayId)
-                        && (originalTicket.BetTypeId == ticket.BetTypeId)
-                        && (originalTicket.BetTeam == ticket.BetTeam))
+                    if (CompareTickets(originalTicket, ticket))
                     {
-                        flag = true;
+                        isDifferent = false;
+                        break;
                     }
                 }
 
-                if (!flag)
-                {
-                    ticketsCompare.Append(ticket.BetId);
-                    ticketsCompare.Append("-");
-                }
-
-                if (tickets.Last() == ticket)
-                {
-                    builder.AddChoice(
-                        ticket, 
-                        ticketHelper, 
-                        null, 
-                        string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId), 
-                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>", ticket.Status),
-                        false);
-                }
-                else
-                {
-                    builder.AddChoice(
-                        ticket, 
-                        ticketHelper, 
-                        null,
-                        string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId),  
-                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div><div class='line'></div>", ticket.Status),
-                        false);
-                }
+                diffentCssClass = isDifferent ? " different-bet" : string.Empty;
+                borderTag = (tickets.Last() == ticket) ? string.Empty : "<div class='line'></div>";
+                builder.AddChoice(
+                            ticket,
+                            ticketHelper,
+                            null,
+                            string.Format(openTags, ticket.BetId, diffentCssClass),
+                            string.Format(closeTags, ticket.Status, borderTag),
+                            false);
             }
 
-            ticketCompareStr = ticketsCompare.ToString();
             return Json(new
             {
                 TicketDetail = builder.GetBetList(),
-                TicketCompare = string.IsNullOrEmpty(ticketCompareStr) ? "null" : ticketCompareStr,
-                Title = string.Format("{0} {1} - {2} - {3}", Lang.TicketDetails, userName, betId, refNo)
+                Title = string.Format("{0} - {1} - {2}", Lang.TicketDetails, userName, transId)
             });
+        }
+
+        /// <summary>
+        /// Compares two tickets and indentifies whether these two tickets are the same or not.
+        /// </summary>
+        /// <param name="originalTicket">The original ticket.</param>
+        /// <param name="ticket">The ticket that needs to compare with the original one.</param>
+        /// <returns>Whether these two tickets are the same or not.</returns>
+        private bool CompareTickets(ITicket originalTicket, ITicket ticket)
+        {
+            return (originalTicket.LeagueId == ticket.LeagueId)
+                   && (originalTicket.SportTypeId == ticket.SportTypeId)
+                   && (originalTicket.HomeId == ticket.HomeId)
+                   && (originalTicket.AwayId == ticket.AwayId)
+                   && (originalTicket.BetTypeId == ticket.BetTypeId)
+                   && (originalTicket.BetTeam == ticket.BetTeam);
         }
     }
 }

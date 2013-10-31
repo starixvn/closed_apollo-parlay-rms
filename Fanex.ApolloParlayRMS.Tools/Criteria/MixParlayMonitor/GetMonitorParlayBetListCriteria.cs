@@ -19,7 +19,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Criteria.MixParlayMonitor
     {
         public string Selection { get; set; }
 
-        public string Sporttype { get; set; }
+        public string SportType { get; set; }
 
         public string Level { get; set; }
 

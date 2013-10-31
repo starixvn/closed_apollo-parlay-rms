@@ -13,6 +13,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
         GetSimilarBets: ParlayRMS.resolveRootUrl('Tools/SimilarBets/GetSimilarBets'),
         GetBetDetails: ParlayRMS.resolveRootUrl('Tools/SimilarBets/GetBetDetails')
     };
+    var originalRefNo = null;
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#filter-bar');
         $this.DOMInstance.txtBetId = $('#txtBetId');
@@ -63,15 +64,14 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             });
         });
     };
-
     var handleDetailsGridEvents = function () {
-        $('.bet-details', $this.DOMInstance.divResult).each(function () {
+        $('.bet-details', $this.DOMInstance.divDetails).each(function () {
             $(this).bind('click', function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
                 var userName = $(this).attr('data-user-name');
 
-                $this.GetBetList(userName, transId, refNo);
+                $this.GetBetList(userName, transId, refNo, originalRefNo);
             });
         });
     };
@@ -85,13 +85,13 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             {
                 Columns: [{ Name: 'ColTransTime', Value: result.TransDate },
                           { Name: 'ColBetId', Value: result.TransId },
-                          { Name: 'ColUserName', Value: result.UserName },
+                          { Name: 'ColUserName', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(result.Level, result.UserName) },
                           { Name: 'ColOdds', Value: result.Odds },
                           { Name: 'ColStakeAfterPT', Value: result.Stake },
                           { Name: 'ColMaxPayoutAfterPT', Value: result.MaxPayout },
                           { Name: 'ColTotalCombo', Value: result.Combo },
-                          { Name: 'ColBetDetails', Value: "<div class='grid-link-cell link view-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(result.UserName, result.TransId, result.RefNo, labels.View) },
-                          { Name: 'ColSimilarBets', Value: result.NumOfBets > 0 ? "<div class='grid-link-cell link bet-list'>{0}</div>".format(result.NumOfBets) : result.NumOfBets}]
+                          { Name: 'ColBetDetails', Value: "<div class='link view-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(result.UserName, result.TransId, result.RefNo, labels.View) },
+                          { Name: 'ColSimilarBets', Value: result.NumOfBets > 0 ? "<div class='link bet-list'>{0}</div>".format(result.NumOfBets) : result.NumOfBets}]
             };
             bodyData.push(row);
         }
@@ -129,10 +129,10 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
                               { Name: 'ColBetId', Value: info.TransId },
-                              { Name: 'ColUserName', Value: info.UserName },
+                              { Name: 'ColUserName', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(info.Level, info.UserName) },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
                               { Name: 'ColSimilarComboFound', Value: info.SimilarCombo },
-                              { Name: 'ColBetDetails', Value: "<div class='grid-link-cell link bet-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(info.UserName, info.TransId, info.RefNo, labels.View)}]
+                              { Name: 'ColBetDetails', Value: "<div class='link bet-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(info.UserName, info.TransId, info.RefNo, labels.View)}]
                 };
                 bodyData.push(row);
             });
@@ -159,6 +159,9 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
         $this.DOMInstance.divDetailContainer.addClass('display-none');
         handleDetailsGridEvents();
     };
+    var customizeBetList = function () {
+        $('#dialog-popup div[class=different-bet] > div > div[class=match]').prepend('<div class="markDiv"></div>');
+    };
 
     $this.DOMInstance = {
         divFilterForm: null,
@@ -179,9 +182,9 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
 
         $this.SetLang(labels);
     };
-    $this.GetData = function (betId) {
+    $this.GetData = function (transId) {
         var data = {
-            refNo: betId
+            transId: transId
         };
 
         $.ajax({
@@ -195,7 +198,10 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             },
             success: function (result) {
                 renderSimilarBets(result);
-                renderSimilarBetDetails(result.Details);
+                if (result) {
+                    renderSimilarBetDetails(result.Details);
+                    originalRefNo = result.RefNo;
+                }
             },
             error: function (xhr, status, err) {
                 ParlayRMS.handleAjaxError(xhr, status, err);
@@ -207,7 +213,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
     };
     $this.GetBetList = function (userName, transId, refNo, originalRefNo) {
         var data = {
-            betId: transId,
+            transId: transId,
             refNo: refNo,
             originalRefNo: originalRefNo,
             userName: userName
@@ -224,6 +230,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             },
             success: function (result) {
                 ParlayRMS.popup(result.Title, result.TicketDetail);
+                customizeBetList();
             },
             error: function (xhr, status, err) {
                 ParlayRMS.handleAjaxError(xhr, status, err);

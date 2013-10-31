@@ -1,18 +1,26 @@
 ﻿$(document).ready(function () {
     var mixParlayMonitor = new Fanex.ApolloParlayRMS.Tools.MixParlayMonitor();
 
-    mixParlayMonitor.InitPage(labels);
+    mixParlayMonitor.InitPage();
 });
 
 Namespace.Register("Fanex.ApolloParlayRMS.Tools.MixParlayMonitor");
 Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
     var $this = this;
-    var labels = {};
     var urls = {
-        GetWinLoss: ParlayRMS.resolveRootUrl('Reports/WinLoss/GetWinLoss'),
-        ExportWinLoss: ParlayRMS.resolveRootUrl('Reports/WinLoss/ExportWinLoss')
+        GetMixParlayData: ParlayRMS.resolveRootUrl('Tools/MixParlayMonitor/GetMixParlayData'),
+        SimilarBets: ParlayRMS.resolveRootUrl('Tools/SimilarBets'),
+        TotalOutstanding: ParlayRMS.resolveRootUrl('Tools/TotalOutstanding'),
+        GetBetDetails: ParlayRMS.resolveRootUrl('Tools/TotalOutstanding/GetBetDetails')
     };
-    var params = {};
+    var params = {
+        Selection: null,
+        SportType: null,
+        Level: null,
+        MaxPayout: null,
+        Max_TransId: null,
+        LimitRowCount: null
+    };
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#filter-bar');
         $this.DOMInstance.ddlSelectTop = $('#ddlSelectTop');
@@ -23,8 +31,12 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
         $this.DOMInstance.ddlRefreshTime = $('#ddlRefreshTime');
         $this.DOMInstance.divRefreshNow = $('#divRefreshNow');
         $this.DOMInstance.divTimer = $('#divTimer');
+        $this.DOMInstance.chkPause = $('#chkPause');
         $this.DOMInstance.btnSearch = $('#btnSearch');
         $this.DOMInstance.divResult = $('#divResult');
+        $this.DOMInstance.tblHeader = $('#tblHeader');
+        $this.DOMInstance.tblResult = $('#tblResult');
+        $this.DOMInstance.tblContent = $('#tblResult tbody');
     };
     var initSingleDropDownList = function (obj, height, width) {
         obj.multiselect({
@@ -65,18 +77,26 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
         initMultiDropDownList($this.DOMInstance.ddlSportTypes, 106, 132);
         initMultiDropDownList($this.DOMInstance.ddlLevel, 106, 132);
         initSingleDropDownList($this.DOMInstance.ddlRefreshTime, 70, 60);
-
         $this.DOMInstance.ddlRefreshTime.multiselect('option', 'classes', 'width-80');
+    };
+    var bindEvenHandlers = function () {
         $this.DOMInstance.txtMaxPayout.bind('keyup', function (event) {
             var formatedValue = $.trim($(this).val());
-            var value = parseInt(formatedValue.replace(/,/g, ''));
+            var rawValue = formatedValue.replace(/,/g, '');
 
-            if (value > 1000000000000) {
-                value = 1000000000000;
-            }
+            rawValue = $.isNumeric(rawValue) ? rawValue : '';
 
-            if (formatedValue.indexOf('.') < 0) {
-                formatedValue = numeral(value).format(ParlayRMS.commonConstants.NumberFormat);
+            if (rawValue != '') {
+                var value = parseFloat(rawValue);
+
+                if (value > 1000000000000) {
+                    value = 1000000000000;
+                    formatedValue = '1,000,000,000,000';
+                } else if (formatedValue.indexOf('.') < 0) {
+                    formatedValue = numeral(value).format(ParlayRMS.commonConstants.NumberFormat);
+                }
+            } else {
+                formatedValue = rawValue;
             }
 
             $(this).val(formatedValue);
@@ -86,131 +106,209 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
             }
         });
 
-        //$this.DOMInstance.divRefreshNow.button();
+        $this.DOMInstance.divRefreshNow.bind('click', function () {
+            timer.start();
+        });
+
+        $this.DOMInstance.ddlRefreshTime.bind('change', function () {
+            var ticker = $(this).val();
+            timer.setRefreshTime(ticker / 1000);
+            $this.DOMInstance.divRefreshNow.val('{0} [{1}]'.format(labels.RefreshNow, ticker / 1000));
+        });
+        $this.DOMInstance.ddlRefreshTime.change();
+
+        $this.DOMInstance.chkPause.bind('change', function () {
+            if ($(this).is(':checked')) {
+                timer.pause();
+            } else {
+                timer.resume();
+            }
+        });
 
         $this.DOMInstance.btnSearch.live('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
-                && Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
-                var betType = $this.DOMInstance.ddlBetType.val();
-                var sportTypes = $('input[name=rbgSportTypes]:checked', '#sportTypes').val();
-                var dateFrom = $this.DOMInstance.dpkDateFrom.val();
-                var dateTo = $this.DOMInstance.dpkDateTo.val();
-                var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
+                && Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes)
+                && Validator.validateMultiselectRequired($this.DOMInstance.ddlLevel)
+                && Validator.validatePositiveInt($this.DOMInstance.txtMaxPayout)) {
+
+                var maxPayout = $this.DOMInstance.txtMaxPayout.val().replace(/,/g, '');
+                var limitRowCount = $this.DOMInstance.ddlSelectTop.val();
+                var combo = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
+                    return this.value;
+                }).get().join(',');
+                var sportType = $this.DOMInstance.ddlSportTypes.multiselect("getChecked").map(function () {
+                    return this.value;
+                }).get().join(',');
+                var level = $this.DOMInstance.ddlLevel.multiselect("getChecked").map(function () {
                     return this.value;
                 }).get().join(',');
 
-                $this.GetData(betType, sportTypes, combos, dateFrom, dateTo);
+                maxPayout = (maxPayout == '') ? '0' : maxPayout;
+                params.Max_TransId = 0;
+
+                params.Selection = combo;
+                params.SportType = sportType;
+                params.Level = level;
+                params.MaxPayout = parseInt(maxPayout);
+                params.LimitRowCount = limitRowCount;
+
+                $this.DOMInstance.tblContent.html('');
+                $this.DOMInstance.divRefreshNow.removeAttr('disabled');
+                tableSorter.currentOrderCol = null;
+                timer.start();
             }
         });
+
+        tableSorter.bind($this.DOMInstance.tblHeader, $this.DOMInstance.tblResult, function () {
+            $this.DOMInstance.tblContent.children('tr').each(function (i, obj) {
+                $(obj).children('td:first').text(i + 1);
+            });
+        });
     };
-    var renderReportData = function (result) {
-        var bodyData = [];
-        var footerData = [];
+    var createRow = function (order, item) {
+        var cells = [];
 
-        $this.DOMInstance.divResult.addClass('display-none');
+        cells.push('<tr>');
+        cells.push('<td class="align-center">{0}</td>'.format(order));
+        cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
+        cells.push('<td class="align-right"><div class="link similar-bets">{0}</div></td>'.format(item.TransId));
+        cells.push('<td class="align-left"><div class="link pallet-levels total-outstanding"><span class="level{0}"></span>{1}</div></td>'.format(item.Level, item.UserName));
+        cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Odds).format(ParlayRMS.commonConstants.DecimalFormat)))
+        cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Stake).format(ParlayRMS.commonConstants.DecimalFormat)))
+        cells.push('<td class="align-right">{0}</td>'.format(numeral(item.MaxPayout).format(ParlayRMS.commonConstants.DecimalFormat)))
+        cells.push('<td class="align-center">{0}</td>'.format(numeral(item.Combo).format(ParlayRMS.commonConstants.NumberFormat)))
+        cells.push('<td class="align-center"><div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div></td>'.format(item.UserName, item.TransId, item.RefNo, labels.View));
+        cells.push('</tr>')
 
-        if (result && result.Data) {
-            var records = result.Data.ChildItems;
-            var row = null;
-            var info = null;
+        return cells.join('');
+    };
+    var expandTable = function (records) {        
+        if (records && records.length > 0) {
+            var rows = $this.DOMInstance.tblContent.children('tr');
 
-            $.each(records, function (i, dateData) {
-                $.each(dateData.ChildItems, function (j, info) {
-                    row =
-                    {
-                        Columns: [{ Name: 'ColCombo', Value: info.Combo == '6' ? labels.SixUp : info.Combo },
-                                  { Name: 'ColTicketWon', Value: info.TicketWon },
-                                  { Name: 'ColTicketLose', Value: info.TicketLose },
-                                  { Name: 'ColStakeWon', Value: info.StakeWon },
-                                  { Name: 'ColStakeLose', Value: info.StakeLose },
-                                  { Name: 'ColWinLossWon', Value: info.MemberWon },
-                                  { Name: 'ColWinLossLose', Value: info.MemberLose },
-                                  { Name: 'ColOurPTWon', Value: info.OurPTWon },
-                                  { Name: 'ColOurPTLose', Value: info.OurPTLose },
-                                  { Name: 'ColOurPTNetWinLoss', Value: info.OurPTNetWinLoss}]
-                    };
+            // @@TODO: Alert sound here.
+            if (rows.length > 0) {
+                var currentRow;
 
-                    if (j == 0) {
-                        row.Columns.unshift({ Name: 'ColDate', Value: info.WinLossDate, MergeRowNumber: dateData.ChildItems.length });
+                $this.DOMInstance.tblContent.children('tr.noInfo').remove();
+                $this.DOMInstance.tblContent.children('tr.highlight').removeClass('highlight');
+                tableSorter.sortColumn($this.DOMInstance.tblResult, 1, "asc", 'date');
+
+                $.each(records, function (i, item) {
+                    currentRow = $(createRow(i + 1, item)).addClass('highlight'); // Highlight row
+                    rows = $this.DOMInstance.tblContent.children('tr');
+
+                    if (params.LimitRowCount == rows.length) {
+                        rows.last().remove();
                     }
 
-                    bodyData.push(row);
+                    $this.DOMInstance.tblContent.prepend(currentRow);
+
+                    // Re-order by current ordered column.
+                    var orderCol = tableSorter.currentOrderCol;
+                    if (orderCol) {
+                        var type = $(orderCol).attr("data-col-type");
+                        tableSorter.sortColumn($this.DOMInstance.tblResult, $(orderCol).index(), orderCol.sortDirection, type);
+                    }
                 });
+            } else {
+                var body = [];
+                $.each(records, function (i, item) {
+                    body.push(createRow(i + 1, item));
+                });
+                $this.DOMInstance.tblContent.html(body.join(''));
+            }
 
-                // Subtotal row
-                row =
-                {
-                    Columns: [{ Name: 'ColDate', Value: labels.Subtotal, MergeColNumber: 2, CellAlign: 'right' },
-                              { Name: 'ColTicketWon', Value: dateData.TicketWon },
-                              { Name: 'ColTicketLose', Value: dateData.TicketLose },
-                              { Name: 'ColStakeWon', Value: dateData.StakeWon },
-                              { Name: 'ColStakeLose', Value: dateData.StakeLose },
-                              { Name: 'ColWinLossWon', Value: dateData.MemberWon },
-                              { Name: 'ColWinLossLose', Value: dateData.MemberLose },
-                              { Name: 'ColOurPTWon', Value: dateData.OurPTWon },
-                              { Name: 'ColOurPTLose', Value: dateData.OurPTLose },
-                              { Name: 'ColOurPTNetWinLoss', Value: dateData.OurPTNetWinLoss}],
-                    CssClass: "subTotal"
-                };
-
-                bodyData.push(row);
-            });
-
-            // Total row
-            row =
-            {
-                Columns: [{ Name: 'ColDate', Value: labels.Total, CellAlign: 'right', MergeColNumber: 2 },
-                          { Name: 'ColTicketWon', Value: result.Data.TicketWon },
-                          { Name: 'ColTicketLose', Value: result.Data.TicketLose },
-                          { Name: 'ColStakeWon', Value: result.Data.StakeWon },
-                          { Name: 'ColStakeLose', Value: result.Data.StakeLose },
-                          { Name: 'ColWinLossWon', Value: result.Data.MemberWon },
-                          { Name: 'ColWinLossLose', Value: result.Data.MemberLose },
-                          { Name: 'ColOurPTWon', Value: result.Data.OurPTWon },
-                          { Name: 'ColOurPTLose', Value: result.Data.OurPTLose },
-                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.OurPTNetWinLoss}]
-            };
-            footerData.push(row);
+            handleGridEvents();
+        } else if ((params.Max_TransId == 0) && ($('tr.noInfo:first-child', $this.DOMInstance.tblContent).length == 0)) {
+            $this.DOMInstance.tblContent.append('<tr class="noInfo"><td colspan="8">{0}</td></tr>'.format(labels.NoData));
         }
 
-        var gridOptions =
-        {
-            customizeHeader: true,
-            groupHeaderRows: [{
-                Columns: [{ HeaderText: labels.Date, Name: "ColDate", MergeRowNumber: 2 },
-                          { HeaderText: labels.Combo, Name: "ColCombo", MergeRowNumber: 2 },
-                          { HeaderText: labels.Ticket, Name: "ColTicketWon", MergeColNumber: 2 },
-                          { HeaderText: labels.StakeAfterPT, Name: "ColStakeWon", MergeColNumber: 2 },
-                          { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
-                          { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
-            }],
-            columns: [{ HeaderText: labels.Date, Width: 120, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
-                      { HeaderText: labels.Combo, Width: 80, Name: 'ColCombo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.NetWinLoss, Width: 100, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
-            showTitle: true,
-            showFooter: true,
-            gridExpandHeight: 220,
-            titleInfo: {
-                text: result.Title,
-                showExcelButton: true,
-                exportExcelFunction: $this.ExportReport
-            },
-            showDistinctRow: false,
-            bodyRows: bodyData,
-            footerRows: footerData
+        $this.DOMInstance.divResult.removeClass('display-none');
+    };
+    var handleGridEvents = function () {
+        $('.view-details', $this.DOMInstance.tblContent).each(function () {
+            $(this).bind('click', function () {
+                var transId = $(this).attr('data-trans-id');
+                var refNo = $(this).attr('data-ref-no');
+                var userName = $(this).attr('data-user-name');
+                
+                $this.GetBetList(userName, transId, refNo);
+            });
+        });
+
+        $('.similar-bets', $this.DOMInstance.divResult).each(function () {
+            $(this).bind('click', function () {
+                var transId = $(this).text();
+                var url = urls.SimilarBets + '?betId={0}'.format(transId);
+
+                ParlayRMS.openNewTab(url);
+            });
+        });
+
+        $('.total-outstanding', $this.DOMInstance.divResult).each(function () {
+            $(this).bind('click', function () {
+                var userName = $(this).text();
+                var url = urls.TotalOutstanding + '?userName={0}'.format(userName);
+
+                ParlayRMS.openNewTab(url);
+            });
+        });
+    };
+
+    var timer = function () {
+        var ticker = null;
+        var refreshTime = null;
+        var timeout = null;
+
+        var clearTimeout = function () {
+            if (timeout) {
+                window.clearTimeout(timeout);
+                timeout = null;
+            }
+        };
+        var runTimer = function () {
+            if (ticker > 0) {
+                timeout = setTimeout(function () {
+                    ticker--;
+                    $this.DOMInstance.divRefreshNow.val('{0} [{1}]'.format(labels.RefreshNow, ticker));
+
+                    if (ticker == 0) {
+                        $this.GetData();
+                        ticker = refreshTime;
+                    }
+
+                    runTimer();
+                }, 1000);
+            }
         };
 
-        $this.DOMInstance.divResult.removeClass('display-none').fanexGrid(gridOptions);
-    };
+        return {
+            setRefreshTime: function (time) {
+                refreshTime = time;
+                ticker = refreshTime;
+            },
+            start: function () {
+                clearTimeout();
+                $this.GetData();
+
+                if (!$this.DOMInstance.chkPause.is(':checked')) {
+                    ticker = refreshTime;
+                    runTimer();
+                }
+            },
+            pause: function () {
+                clearTimeout();
+            },
+            resume: function () {
+                clearTimeout();
+                if (!$this.DOMInstance.chkPause.is(':checked')) {
+                    runTimer();
+                }
+            }
+        };
+    } ();
 
     $this.DOMInstance = {
         divFilterForm: null,
@@ -222,41 +320,58 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
         ddlRefreshTime: null,
         divRefreshNow: null,
         divTimer: null,
+        chkPause: null,
         btnSearch: null,
-        divResult: null
+        divResult: null,
+        tblHeader: null,
+        tblResult: null,
+        tblContent: null
     };
-    $this.SetLang = function (labelValues) {
-        if (labelValues) {
-            labels = labelValues;
-        }
-    };
-    $this.InitPage = function (labels) {
+    $this.InitPage = function () {
         cacheDOM();
         initFields();
-
-        $this.SetLang(labels);
+        bindEvenHandlers();
     };
-    $this.GetData = function (betType, sportTypes, combos, dateFrom, dateTo) {
-        var data = {
-            BetType: betType,
-            SportType: sportTypes,
-            Selection: combos,
-            FromDate: dateFrom,
-            ToDate: dateTo,
-            IsLoadNew: true
-        };
-        params = data;
+    $this.GetData = function () {
         $.ajax({
             type: "POST",
-            url: urls.GetWinLoss,
+            url: urls.GetMixParlayData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(params),
+            beforeSend: function () {
+                ParlayRMS.loadingBox.show();
+            },
+            success: function (result) {
+                expandTable(result.Records);
+                params.Max_TransId = result.MaxTransId;
+            },
+            error: function (xhr, status, err) {
+                ParlayRMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                ParlayRMS.loadingBox.close();
+            }
+        });
+    };
+    $this.GetBetList = function (userName, transId, refNo) {
+        var data = {
+            betId: transId,
+            refNo: refNo,
+            userName: userName
+        };
+
+        $.ajax({
+            type: "POST",
+            url: urls.GetBetDetails,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(data),
             beforeSend: function () {
                 ParlayRMS.loadingBox.show();
             },
-            success: function (records) {
-                renderReportData(records);
+            success: function (result) {
+                ParlayRMS.popup(result.Title, result.BetList);
             },
             error: function (xhr, status, err) {
                 ParlayRMS.handleAjaxError(xhr, status, err);

@@ -351,4 +351,7 @@
   <data name="SimilarComboFound" xml:space="preserve">
     <value>Similar Combo Found</value>
   </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There is no data.</value>
+  </data>
 </root>

@@ -8,6 +8,7 @@
 }
 @section Head {
     @Styles.Render("~/Themes/BetList")
+    @Styles.Render("~/Themes/MemberManagement")
 }
 @section Headline {
 	<h1>
@@ -24,7 +25,7 @@
 					@Html.Label("txtBetId", Lang.BetId)
 				</div>
 				<div class="edit-field">
-					@Html.TextBox("txtBetId", (string)ViewBag.BetId, new { @class = "multiselect-width" })
+					@Html.TextBox("txtBetId", (long)ViewBag.BetId, new { @class = "multiselect-width" })
 				</div>
 			</div>
 			<div class="filter-cell">
@@ -59,7 +60,7 @@
             SimilarBets: '@Lang.SimilarBets',
             SimilarComboFound: '@Lang.SimilarComboFound',
             SimilarBetList: '@Lang.SimilarBetList'
-	    };
+        };
 	</script>
 	@Scripts.Render("~/Scripts/Tools/SimilarBets")
 }

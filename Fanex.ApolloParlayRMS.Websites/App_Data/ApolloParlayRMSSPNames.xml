@@ -72,6 +72,7 @@
 		</Setting>
 	</Function>
 	<Function Name="Tools">
+    <Setting Key="RMS_Monitor_Parlay_Betlist" SpName="RMS_Monitor_Parlay_Betlist" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
 		<Setting Key="RMS_Rpt_Parlay_Outstanding_Mem" SpName="RMS_Rpt_Parlay_Outstanding_Mem" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
 		<Setting Key="RMS_Rpt_Parlay_Outstanding_Ag" SpName="RMS_Rpt_Parlay_Outstanding_Ag" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
 	</Function>

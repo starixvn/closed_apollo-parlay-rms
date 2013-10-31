@@ -80,6 +80,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
                 sportTypeList.ForEach(obj => obj.Selected = true);
             }
 
+            ViewBag.HasViewSimilarBetRight = this.HasRight(ApolloParlayRMSFunctionKeys.SimilarBets, Constant.Policy.Read);
             ViewBag.UserName = userName ?? string.Empty;
             ViewBag.Combos = comboList;
             ViewBag.SportTypes = sportTypeList;
@@ -150,29 +151,22 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
             ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
+            
+            string openTags = "<div id='{0}'><div class='ticketDetail'>";
+            string closeTags = "</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>{1}";
+            string borderTag = string.Empty;
+            
             var tickets = this._betListService.CreateChoices(refNo);
             foreach (var ticket in tickets)
             {
-                if (tickets.Last() == ticket)
-                {
-                    builder.AddChoice(
-                        ticket, 
-                        ticketHelper, 
-                        null,
-                        string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId),
-                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>", ticket.Status),
-                        false);
-                }
-                else
-                {
-                    builder.AddChoice(
-                        ticket, 
-                        ticketHelper, 
-                        null,
-                        string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId), 
-                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div><div class='line'></div>", ticket.Status),
-                        false);
-                }
+                borderTag = (tickets.Last() == ticket) ? string.Empty : "<div class='line'></div>";
+                builder.AddChoice(
+                            ticket,
+                            ticketHelper,
+                            null,
+                            string.Format(openTags, ticket.BetId),
+                            string.Format(closeTags, ticket.Status, borderTag),
+                            false);
             }
 
             return Json(new 

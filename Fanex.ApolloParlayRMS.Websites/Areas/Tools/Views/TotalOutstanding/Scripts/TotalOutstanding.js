@@ -133,12 +133,12 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
                               { Name: 'ColTransTime', Value: info.TransDate },
-                              { Name: 'ColBetId', Value: "<div class='grid-link-cell link similar-bets'>{0}</div>".format(info.TransId) },
+                              { Name: 'ColBetId', Value: hasViewSimilarBetRight ? "<div class='link similar-bets'>{0}</div>".format(info.TransId) : info.TransId },
                               { Name: 'ColOdds', Value: info.Odds },
                               { Name: 'ColStakeAfterPT', Value: info.StakePT },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
                               { Name: 'ColTotalCombo', Value: info.Combo },
-                              { Name: 'ColBetDetails', Value: "<div class='grid-link-cell link view-details' data-trans-id='{0}' data-ref-no='{1}'>{2}</div>".format(info.TransId, info.RefNo, labels.View)}]
+                              { Name: 'ColBetDetails', Value: "<div class='link view-details' data-trans-id='{0}' data-ref-no='{1}'>{2}</div>".format(info.TransId, info.RefNo, labels.View)}]
                 };
                 bodyData.push(row);
             });
@@ -188,7 +188,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
-                              { Name: 'ColUserName', Value: "<div class='grid-link-cell link user-name'>{0}</div>".format(info.UserName) },
+                              { Name: 'ColUserName', Value: "<div class='link user-name'>{0}</div>".format(info.UserName) },
                               { Name: 'ColStakeAfterPT', Value: info.StakePT },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
                               { Name: 'ColTotalBets', Value: info.BetCount}]

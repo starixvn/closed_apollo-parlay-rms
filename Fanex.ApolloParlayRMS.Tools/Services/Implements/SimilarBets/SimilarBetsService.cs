@@ -44,7 +44,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.SimilarBets
         /// </returns>
         public SimilarBetList GetSimilarBetList(GetSimilarBetListCriteria criteria)
         {
-            SimilarBetList data = null;
+            SimilarBetList data = new SimilarBetList();
             try
             {
                 data = this._similarBetsRepository.GetSimilarBetList(criteria);

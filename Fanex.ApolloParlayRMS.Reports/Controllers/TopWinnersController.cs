@@ -127,28 +127,20 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
             var data = this._topWinnersService.GetTopWinnerBetDetails(criteria);
             var tickets = Map(criteria.RefNo, data);
 
+            string openTags = "<div id='{0}'><div class='ticketDetail'>";
+            string closeTags = "</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>{1}";
+            string borderTag = string.Empty;
+            
             foreach (var ticket in tickets)
             {
-                if (tickets.Last() == ticket)
-                {
-                    builder.AddChoice(
-                        ticket,
-                        ticketHelper,
-                        null,
-                        string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId),
-                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>", ticket.Status),
-                        false);
-                }
-                else
-                {
-                    builder.AddChoice(
-                        ticket,
-                        ticketHelper,
-                        null,
-                        string.Format("<div id='{0}'><div class='ticketDetail'>", ticket.BetId),
-                        string.Format("</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div><div class='line'></div>", ticket.Status),
-                        false);
-                }
+                borderTag = (tickets.Last() == ticket) ? string.Empty : "<div class='line'></div>";
+                builder.AddChoice(
+                            ticket,
+                            ticketHelper,
+                            null,
+                            string.Format(openTags, ticket.BetId),
+                            string.Format(closeTags, ticket.Status, borderTag),
+                            false);
             }
 
             ViewBag.HtmlContent = builder.GetBetList();

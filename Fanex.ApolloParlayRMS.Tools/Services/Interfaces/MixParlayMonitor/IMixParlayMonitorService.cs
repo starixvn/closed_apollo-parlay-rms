@@ -20,6 +20,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Interfaces.MixParlayMonitor
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of BetItem objects represent the bet list of tickets satisfied the passed query conditions.</returns>
-        IEnumerable<BetItem> GetMemberWinLossData(GetMonitorParlayBetListCriteria criteria);
+        IEnumerable<ParlayBetItem> GeMixParlayData(GetMonitorParlayBetListCriteria criteria);
     }
 }

@@ -77,7 +77,7 @@
     <Compile Include="Criteria\TotalOutstanding\GetTotalOutstandingOfAgentCriteria.cs" />
     <Compile Include="Criteria\TotalOutstanding\GetTotalOutstandingOfMemCriteria.cs" />
     <Compile Include="Models\BetList\BetItem.cs" />
-    <Compile Include="Models\MixParlayMonitor\BetItem.cs" />
+    <Compile Include="Models\MixParlayMonitor\ParlayBetItem.cs" />
     <Compile Include="Models\SimilarBets\SimilarBetItem.cs" />
     <Compile Include="Models\SimilarBets\SimilarBetList.cs" />
     <Compile Include="Models\TotalOutstanding\AgentTotalOutstanding.cs" />

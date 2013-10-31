@@ -64,10 +64,20 @@
                 return true;
             }
         },
-        validatePositiveInt: function (element) {
-            var value = $.trim($(element).val());
+        validateNumber: function (element) {
+            var value = $.trim($(element).val().replace(/,/g, ''));
 
-            if (!isNumeric(value) || parseInt(value) < 0) {
+            if ((value != '') && (!$.isNumeric(value))) {
+                showTooltip(element, errorMessages.InvalidNumberField);
+                return false;
+            } else {
+                return true;
+            }
+        },
+        validatePositiveInt: function (element) {
+            var value = $.trim($(element).val().replace(/,/g, ''));
+
+            if ((value != '') && (!$.isNumeric(value) || parseInt(value) < 0)) {
                 //$(element).addClass('field-validation-error');
                 showTooltip(element, errorMessages.PositiveField);
                 return false;

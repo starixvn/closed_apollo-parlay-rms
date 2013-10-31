@@ -41,9 +41,9 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of BetItem objects represent the bet list of tickets satisfied the passed query conditions.</returns>
-        public IEnumerable<BetItem> GetMemberWinLossData(GetMonitorParlayBetListCriteria criteria)
+        public IEnumerable<ParlayBetItem> GeMixParlayData(GetMonitorParlayBetListCriteria criteria)
         {
-            IEnumerable<BetItem> betList = null;
+            IEnumerable<ParlayBetItem> betList = null;
             try
             {
                 betList = this._mixParlayMonitorRepository.GetMonitorParlayBetListData(criteria);
@@ -64,11 +64,11 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
         /// </summary>
         /// <param name="criteria">Criteria that are used to query data.</param>
         /// <returns>List of BetItem objects.</returns>
-        private IEnumerable<BetItem> CreateTestData(GetMonitorParlayBetListCriteria criteria)
+        private IEnumerable<ParlayBetItem> CreateTestData(GetMonitorParlayBetListCriteria criteria)
         {
             Random rnd = new Random();
             var count = rnd.Next(0, 5);
-            var list = new List<BetItem>();
+            var list = new List<ParlayBetItem>();
             for (int i = count; i > 0; i--)
             {
                 var combo = rnd.Next(2, 6);
@@ -81,7 +81,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
                     && criteria.Level.Contains(level.ToString())
                     && (stake * odds > criteria.MaxPayout))
                 {
-                    list.Add(new BetItem
+                    list.Add(new ParlayBetItem
                     {
                         Combo = combo,
                         Level = level,

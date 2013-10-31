@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BetItem.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ParlayBetItem.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -14,7 +14,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Models.MixParlayMonitor
     /// <summary>
     /// Bet item model.
     /// </summary>
-    public class BetItem
+    public class ParlayBetItem
     {
         public DateTime TransDate { get; set; }
 

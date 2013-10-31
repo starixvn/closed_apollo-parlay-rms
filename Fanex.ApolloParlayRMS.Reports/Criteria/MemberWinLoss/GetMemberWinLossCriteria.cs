@@ -34,6 +34,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
 
         public byte? SportType { get; set; }
 
+        [SpParam(Ignored = true)]
         public int BetType { get; set; }
 
         public string Selection { get; set; }

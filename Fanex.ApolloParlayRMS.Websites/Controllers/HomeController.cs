@@ -58,6 +58,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Controllers
             dynamic errorMessages = new
             {
                 RequiredField = Messages.RequiredFieldError,
+                InvalidNumberField = Messages.InvalidNumberFieldError,
                 PositiveField = Messages.PositiveFieldError,
                 InvalidDateField = Messages.InvalidDateFieldError,
                 DateRangeField = Messages.DateRangeFieldError
