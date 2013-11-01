@@ -33,38 +33,40 @@ var tableSorter = function () {
     return {
         currentOrderCol: null,
         bind: function (src, desc, callbackFunc) {
-            src.find('th.sortable').each(function () {
+            src.find('span.sortable').each(function () {
                 $(this).attr('title', 'Click to sort');
                 $(this).bind('click', function () {
                     var currentObj = this;
+                    var currentCol = $(currentObj).closest('th');
 
                     // Change css class of current sortable header.
                     if (currentObj.sortDirection == 'asc') {
                         currentObj.sortDirection = "desc";
-                        $(currentObj).removeClass("headerSortDown").addClass("headerSortUp");
+                        $(currentObj).removeClass("sortDown").addClass("sortUp");
                     } else {
                         currentObj.sortDirection = "asc";
-                        $(currentObj).removeClass("headerSortUp").addClass("headerSortDown");
+                        $(currentObj).removeClass("sortUp").addClass("sortDown");
                     }
 
                     // Reset other sortable headers
                     src.find('.sortable').each(function () {
-                        if ($(currentObj).index() != $(this).index()) {
-                            $(this).removeClass('headerSortDown').removeClass('headerSortUp');
+                        var col = $(this).closest('th');
+                        if ($(currentCol).index() != $(col).index()) {
+                            $(this).removeClass('sortDown').removeClass('sortUp');
                             this.sortDirection = '';
                         }
                     });
 
                     // Get type of sorting column.
-                    var type = $(currentObj).attr('data-col-type');
+                    var type = $(currentCol).attr('data-col-type');
                     type = type ? type : 'text';
-
-                    tableSorter.currentOrderCol = currentObj;
-                    tableSorter.sortColumn(desc, $(currentObj).index(), currentObj.sortDirection, type);
+                    
+                    tableSorter.currentOrderCol = currentCol;
+                    tableSorter.sortColumn(desc, $(currentCol).index(), currentObj.sortDirection, type);
 
                     // Call callback function when sorting is finished
                     if (callbackFunc) {
-                        callbackFunc(currentObj);
+                        callbackFunc(currentCol);
                     }
                 });
             });
@@ -82,7 +84,7 @@ var tableSorter = function () {
                 } else if (type == 'int') {
                     fValue = parseInt(fValue.replace(/,/g, ''));
                     sValue = parseInt(sValue.replace(/,/g, ''));
-                } else if (type == 'date') {                    
+                } else if (type == 'date') {
                     fValue = (new Date(moment(fValue, ParlayRMS.commonConstants.MomentDateTimeFormat))).getTime();
                     sValue = (new Date(moment(sValue, ParlayRMS.commonConstants.MomentDateTimeFormat))).getTime();
                 } else if (type == 'ignoreCase') {

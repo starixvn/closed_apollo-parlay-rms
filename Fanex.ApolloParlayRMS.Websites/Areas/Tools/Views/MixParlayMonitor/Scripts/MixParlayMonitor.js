@@ -155,7 +155,7 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
 
                 $this.DOMInstance.tblContent.html('');
                 $this.DOMInstance.divRefreshNow.removeAttr('disabled');
-                tableSorter.currentOrderCol = null;
+                resetSorting();
                 timer.start();
             }
         });
@@ -168,6 +168,13 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
 
         setupSoundManager();
     };
+    var resetSorting = function () {
+        $this.DOMInstance.tblHeader.find('.sortable').each(function () {
+            $(this).removeClass('sortUp').removeClass('sortDown');
+            this.sortDirection = null;
+        });
+    };
+
     var createRow = function (order, item) {
         var cells = [];
         var betIdStyle = '';
@@ -218,11 +225,13 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
 
                     $this.DOMInstance.tblContent.prepend(currentRow);
 
-                    // Re-order by current ordered column.
+                    // Re-order by current ordered column.                    
                     var orderCol = tableSorter.currentOrderCol;
                     if (orderCol) {
                         var type = $(orderCol).attr("data-col-type");
-                        tableSorter.sortColumn($this.DOMInstance.tblResult, $(orderCol).index(), orderCol.sortDirection, type);
+                        var sortDirection = $(orderCol).find('span:first').get(0).sortDirection;
+
+                        tableSorter.sortColumn($this.DOMInstance.tblResult, $(orderCol).index(), sortDirection, type);
                     }
 
                     $this.DOMInstance.tblContent.children('tr').each(function (i, obj) {
@@ -242,7 +251,7 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
             $this.DOMInstance.tblContent.append('<tr class="noInfo"><td colspan="8">{0}</td></tr>'.format(labels.NoData));
         }
 
-        $this.DOMInstance.divResult.removeClass('display-none').addClass('grid-container');
+        $this.DOMInstance.divResult.removeClass('display-none');
     };
     var handleGridEvents = function () {
         $('.view-details', $this.DOMInstance.tblContent).each(function () {
