@@ -17,7 +17,7 @@
 		</span>
 	</h1>
 }
-<section id="filter-bar">
+<section id="filter-bar" class="filter-mixParlay">
 	<div class="filter-form">
 		<div class="filter-row">	
 			<div class="filter-cell">
@@ -88,7 +88,7 @@
 	</div>
 </section>
 <div id="divResult" class="display-none">
-	<div style="width: 1227px">
+	<div style="width: 1258px">
 		<table class="grid" id="tblHeader">
 			<colgroup>
 				<col width='100px' />
@@ -107,14 +107,20 @@
 					<th>
 						@Lang.No
 					</th>
-					<th class="sortable" data-col-type="date" id="colTransTime">
-						@Lang.TransTime
+					<th data-col-type="date" id="colTransTime">
+						<div class="container-th">
+							@Lang.TransTime
+							<span class="sortable"></span>
+						</div>
 					</th>
 					<th>
 						@Lang.BetId
 					</th>
-					<th class="sortable" data-col-type="ignorecase">
-						@Lang.UserName
+					<th data-col-type="ignorecase" class="userName">
+						<div class="container-th">
+							@Lang.UserName
+							<span class="sortable"></span>
+						</div>
 					</th>
 					<th>
 						@Lang.Odds
@@ -122,8 +128,11 @@
 					<th>
 						@Lang.StakeAfterPT
 					</th>
-					<th class="sortable" data-col-type="float">
-						@Lang.MaxPayoutAfterPT
+					<th data-col-type="float">
+						<div class="container-th">
+							@Lang.MaxPayoutAfterPT
+							<span class="sortable"></span>
+						</div>
 					</th>
 					<th>
 						@Lang.TotalCombo
@@ -136,8 +145,8 @@
 			</thead>
 		</table>
 	</div>
-	<div class="scrollGridContent" style="max-height: 600px; width: 1227px; overflow-y: scroll;">
-		<table class="grid" id="tblResult" style="width: 1210px;">
+	<div class="scrollGridContent" style="max-height: 600px; width: 1258px; overflow-y: scroll;">
+		<table class="grid" id="tblResult" style="width: 1240px;">
 			<colgroup>
 				<col width='100px' />
 				<col width='150px' />

@@ -185,7 +185,7 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
         cells.push('<td class="align-center">{0}</td>'.format(order));
         cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
         cells.push('<td class="align-right"><div class="{0}">{1}</div></td>'.format(betIdStyle, item.TransId));
-        cells.push('<td class="align-left"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(userNameStyle, item.Level, item.UserName));
+        cells.push('<td class="align-left userName"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(userNameStyle, item.Level, item.UserName));
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Odds).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Stake).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.MaxPayout).format(ParlayRMS.commonConstants.DecimalFormat)))
@@ -242,7 +242,7 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
             $this.DOMInstance.tblContent.append('<tr class="noInfo"><td colspan="8">{0}</td></tr>'.format(labels.NoData));
         }
 
-        $this.DOMInstance.divResult.removeClass('display-none');
+        $this.DOMInstance.divResult.removeClass('display-none').addClass('grid-container');
     };
     var handleGridEvents = function () {
         $('.view-details', $this.DOMInstance.tblContent).each(function () {

@@ -23,10 +23,8 @@
 </head>
 <body>
 	<div class="grid-wrp pnl-wrp betListPage">
-		<div class="pnl-header">
-			<div class="pnl-header-content">
-				@Lang.TicketDetails - @ViewBag.Username - @ViewBag.BetId	
-			</div>
+		<div class="pnl-header no-icon">
+			@Lang.TicketDetails - @ViewBag.Username - @ViewBag.BetId
 		</div>
 		<div class="pnl-body betDetails betDetailPage">
 			@Html.Raw(ViewBag.HtmlContent)
