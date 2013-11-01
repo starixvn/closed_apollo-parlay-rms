@@ -117,7 +117,8 @@ namespace Fanex.ApolloParlayRMS.Websites
         {
             bundles.Add(new ScriptBundle("~/Scripts/Tools/MixParlayMonitor").Include(
                 "~/Areas/Tools/Views/MixParlayMonitor/Scripts/MixParlayMonitor.js",
-                "~/Scripts/TableSorter.js"));
+                "~/Scripts/TableSorter.js",
+                "~/Scripts/lib/SoundManager2/soundmanager2-nodebug.js"));
             bundles.Add(new ScriptBundle("~/Scripts/Tools/TotalOutstanding").Include(
                 "~/Areas/Tools/Views/TotalOutstanding/Scripts/TotalOutstanding.js"));
             bundles.Add(new ScriptBundle("~/Scripts/Tools/SimilarBets").Include(

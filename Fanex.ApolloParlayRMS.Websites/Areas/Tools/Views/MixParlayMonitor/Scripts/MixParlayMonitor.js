@@ -165,6 +165,8 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
                 $(obj).children('td:first').text(i + 1);
             });
         });
+
+        setupSoundManager();
     };
     var createRow = function (order, item) {
         var cells = [];
@@ -194,15 +196,16 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
         return cells.join('');
     };
     var expandTable = function (records) {
+        $this.DOMInstance.tblContent.children('tr.highlight').removeClass('highlight');
+
         if (records && records.length > 0) {
             var rows = $this.DOMInstance.tblContent.children('tr');
 
-            // @@TODO: Alert sound here.
+            raiseAlert();
             if (rows.length > 0) {
                 var currentRow;
 
                 $this.DOMInstance.tblContent.children('tr.noInfo').remove();
-                $this.DOMInstance.tblContent.children('tr.highlight').removeClass('highlight');
                 tableSorter.sortColumn($this.DOMInstance.tblResult, 1, "asc", 'date');
 
                 $.each(records, function (i, item) {
@@ -269,6 +272,29 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
                 ParlayRMS.openNewTab(url);
             });
         });
+    };
+
+    var setupSoundManager = function () {
+        soundManager.setup({
+            url: ParlayRMS.resolveRootUrl('Scripts/lib/SoundManager2/swf/'),
+            flashVersion: 9,
+            debugMode: false,
+            onready: function () {
+                soundManager.createSound({
+                    id: 'alertSound',
+                    url: ParlayRMS.resolveRootUrl("Sounds/alert.mp3")
+                });
+            },
+            ontimeout: function () {
+                alert('sound is disabled');
+            }
+        });
+    };
+    var raiseAlert = function () {
+        if (params.MaxPayout > 0) {
+            console.log(ParlayRMS.resolveRootUrl("Sounds/alert.mp3"));
+            soundManager.play('alertSound');
+        }
     };
 
     var timer = function () {
