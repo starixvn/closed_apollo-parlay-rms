@@ -191,7 +191,7 @@
     <Content Include="Areas\UserLogin\themes\img\Parlay_RMS.png" />
     <Content Include="Areas\Tools\Views\TotalOutstanding\Index.cshtml" />
     <Content Include="Areas\Tools\Views\SimilarBets\Index.cshtml" />
-    <None Include="Content\themes\layout\bet-list.less" />
+    <Content Include="Content\themes\layout\bet-list.less" />
     <Content Include="Content\themes\layout\img\firstGoal.gif" />
     <Content Include="Content\themes\layout\img\lastGoal.gif" />
     <Content Include="Content\themes\layout\img\number-sign-icon.png" />
@@ -526,8 +526,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\lib\Fanex.Grid\Fanex.Grid.less" />
-    <None Include="Content\themes\level-updater\layout.less" />
-    <None Include="Content\themes\level-updater\levels.less" />
+    <Content Include="Content\themes\level-updater\layout.less" />
+    <Content Include="Content\themes\level-updater\levels.less" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.ApolloParlayRMS.Core\Fanex.ApolloParlayRMS.Core.csproj">
