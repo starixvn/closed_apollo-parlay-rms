@@ -211,6 +211,10 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
                         var type = $(orderCol).attr("data-col-type");
                         tableSorter.sortColumn($this.DOMInstance.tblResult, $(orderCol).index(), orderCol.sortDirection, type);
                     }
+
+                    $this.DOMInstance.tblContent.children('tr').each(function (i, obj) {
+                        $(obj).children('td:first').text(i + 1);
+                    });
                 });
             } else {
                 var body = [];
