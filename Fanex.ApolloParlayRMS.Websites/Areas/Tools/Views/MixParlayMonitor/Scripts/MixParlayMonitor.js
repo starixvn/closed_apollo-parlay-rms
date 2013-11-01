@@ -168,12 +168,22 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
     };
     var createRow = function (order, item) {
         var cells = [];
+        var betIdStyle = '';
+        var userNameStyle = '';
+
+        if (hasSimilarBetRight) {
+            betIdStyle = 'link similar-bets';
+        }
+
+        if (hasTotalOutstandingRight) {
+            userNameStyle = 'link total-outstanding';
+        }
 
         cells.push('<tr>');
         cells.push('<td class="align-center">{0}</td>'.format(order));
         cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
-        cells.push('<td class="align-right"><div class="link similar-bets">{0}</div></td>'.format(item.TransId));
-        cells.push('<td class="align-left"><div class="link pallet-levels total-outstanding"><span class="level{0}"></span>{1}</div></td>'.format(item.Level, item.UserName));
+        cells.push('<td class="align-right"><div class="{0}">{1}</div></td>'.format(betIdStyle, item.TransId));
+        cells.push('<td class="align-left"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(userNameStyle, item.Level, item.UserName));
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Odds).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Stake).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.MaxPayout).format(ParlayRMS.commonConstants.DecimalFormat)))
@@ -183,7 +193,7 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
 
         return cells.join('');
     };
-    var expandTable = function (records) {        
+    var expandTable = function (records) {
         if (records && records.length > 0) {
             var rows = $this.DOMInstance.tblContent.children('tr');
 
@@ -237,7 +247,7 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
                 var userName = $(this).attr('data-user-name');
-                
+
                 $this.GetBetList(userName, transId, refNo);
             });
         });

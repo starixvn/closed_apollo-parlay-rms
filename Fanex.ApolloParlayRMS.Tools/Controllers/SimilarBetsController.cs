@@ -85,7 +85,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <param name="userName">The user name of a member.</param>
         /// <returns>JSON object represents the bet list of the passed reference number.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.SimilarBets, Policy = Constant.Policy.Read)]
         public JsonResult GetBetDetails(long transId, long refNo, long originalRefNo, string userName)
         {
             BetListHTMLFactory factory = new BetListHTMLFactory();

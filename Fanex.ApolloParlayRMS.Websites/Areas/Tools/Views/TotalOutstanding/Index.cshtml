@@ -7,7 +7,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    @Styles.Render("~/Themes/BetList")
+	@Styles.Render("~/Themes/BetList")
 }
 @section Headline {
 	<h1>
@@ -57,21 +57,21 @@
 </div>
 @section Foot {
 	<script type="text/javascript">
-	    var labels = {
-	        No: '@Lang.No',
-            TransTime: '@Lang.TransTime',
-            BetId: '@Lang.BetId',
-            Odds: '@Lang.Odds',
-            StakeAfterPT: '@Lang.StakeAfterPT',
-            MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
-            TotalCombo: '@Lang.TotalCombo',
-            TotalBets: '@Lang.TotalBets',
-            BetDetails: '@Lang.BetDetails',
-            UserName: '@Lang.UserName',
-	        Total: '@Lang.Total',
-            View: '@Lang.View'
-	    };
-        var hasViewSimilarBetRight = '@ViewBag.HasViewSimilarBetRight' == 'True';
+		var labels = {
+			No: '@Lang.No',
+			TransTime: '@Lang.TransTime',
+			BetId: '@Lang.BetId',
+			Odds: '@Lang.Odds',
+			StakeAfterPT: '@Lang.StakeAfterPT',
+			MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
+			TotalCombo: '@Lang.TotalCombo',
+			TotalBets: '@Lang.TotalBets',
+			BetDetails: '@Lang.BetDetails',
+			UserName: '@Lang.UserName',
+			Total: '@Lang.Total',
+			View: '@Lang.View'
+		};
+		var hasSimilarBetRight = '@ViewBag.HasSimilarBetRight' == 'True';
 	</script>
 	@Scripts.Render("~/Scripts/Tools/TotalOutstanding")
 }

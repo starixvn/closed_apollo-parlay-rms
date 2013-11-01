@@ -133,7 +133,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
                               { Name: 'ColTransTime', Value: info.TransDate },
-                              { Name: 'ColBetId', Value: hasViewSimilarBetRight ? "<div class='link similar-bets'>{0}</div>".format(info.TransId) : info.TransId },
+                              { Name: 'ColBetId', Value: hasSimilarBetRight ? "<div class='link similar-bets'>{0}</div>".format(info.TransId) : info.TransId },
                               { Name: 'ColOdds', Value: info.Odds },
                               { Name: 'ColStakeAfterPT', Value: info.StakePT },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },

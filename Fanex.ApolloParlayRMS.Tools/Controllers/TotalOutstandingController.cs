@@ -80,7 +80,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
                 sportTypeList.ForEach(obj => obj.Selected = true);
             }
 
-            ViewBag.HasViewSimilarBetRight = this.HasRight(ApolloParlayRMSFunctionKeys.SimilarBets, Constant.Policy.Read);
+            ViewBag.HasSimilarBetRight = this.HasRight(ApolloParlayRMSFunctionKeys.SimilarBets, Constant.Policy.Read);
             ViewBag.UserName = userName ?? string.Empty;
             ViewBag.Combos = comboList;
             ViewBag.SportTypes = sportTypeList;

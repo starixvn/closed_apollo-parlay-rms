@@ -7,8 +7,8 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    @Styles.Render("~/Themes/BetList")
-    @Styles.Render("~/Themes/MemberManagement")
+	@Styles.Render("~/Themes/BetList")
+	@Styles.Render("~/Themes/MemberManagement")
 }
 @section Headline {
 	<h1>
@@ -46,21 +46,21 @@
 </div>
 @section Foot {
 	<script type="text/javascript">
-	    var labels = {
-	        No: '@Lang.No',
-	        TransTime: '@Lang.TransTime',
-	        BetId: '@Lang.BetId',
-	        Odds: '@Lang.Odds',
-	        StakeAfterPT: '@Lang.StakeAfterPT',
-	        MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
-	        TotalCombo: '@Lang.TotalCombo',
-	        BetDetails: '@Lang.BetDetails',
-	        UserName: '@Lang.UserName',
-	        View: '@Lang.View',
-            SimilarBets: '@Lang.SimilarBets',
-            SimilarComboFound: '@Lang.SimilarComboFound',
-            SimilarBetList: '@Lang.SimilarBetList'
-        };
+		var labels = {
+			No: '@Lang.No',
+			TransTime: '@Lang.TransTime',
+			BetId: '@Lang.BetId',
+			Odds: '@Lang.Odds',
+			StakeAfterPT: '@Lang.StakeAfterPT',
+			MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
+			TotalCombo: '@Lang.TotalCombo',
+			BetDetails: '@Lang.BetDetails',
+			UserName: '@Lang.UserName',
+			View: '@Lang.View',
+			SimilarBets: '@Lang.SimilarBets',
+			SimilarComboFound: '@Lang.SimilarComboFound',
+			SimilarBetList: '@Lang.SimilarBetList'
+		};
 	</script>
 	@Scripts.Render("~/Scripts/Tools/SimilarBets")
 }

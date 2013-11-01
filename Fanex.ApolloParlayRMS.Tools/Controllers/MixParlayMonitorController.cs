@@ -61,6 +61,10 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
             ViewBag.SelectTop = FilterForm.SelectTops;
             ViewBag.RefreshTimes = FilterForm.RefreshTimes.GetRange(1, 3);
 
+            // Check permissions of current user for Similar Bets and Total Outstanding functions.
+            ViewBag.HasSimilarBetRight = this.HasRight(ApolloParlayRMSFunctionKeys.SimilarBets, Constant.Policy.Read);
+            ViewBag.HasTotalOutstandingRight = this.HasRight(ApolloParlayRMSFunctionKeys.TotalOutstanding, Constant.Policy.Read);
+
             return this.View();
         }
 
@@ -69,6 +73,8 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>JSON object contains the maximum queried transaction ID and the bet list.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MixParlayMonitor, Policy = Constant.Policy.Read)]
         public JsonResult GetMixParlayData(GetMonitorParlayBetListCriteria criteria)
         {
             var records = this._mixParlayMonitorService.GeMixParlayData(criteria);
@@ -94,7 +100,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <param name="userName">The user name of a member.</param>
         /// <returns>JSON object represents the bet list of the passed reference number.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MixParlayMonitor, Policy = Constant.Policy.Read)]
         public JsonResult GetBetDetails(long betId, long refNo, string userName)
         {
             BetListHTMLFactory factory = new BetListHTMLFactory();
