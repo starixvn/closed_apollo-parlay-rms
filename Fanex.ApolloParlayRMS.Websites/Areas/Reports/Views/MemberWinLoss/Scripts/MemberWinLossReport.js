@@ -135,7 +135,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                 var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
                     return this.value;
                 }).get().join(',');
-                console.log(sportTypes);
+                
                 $this.GetData(userName, betType, sportTypes, combos, dateFrom, dateTo);
             }
         });

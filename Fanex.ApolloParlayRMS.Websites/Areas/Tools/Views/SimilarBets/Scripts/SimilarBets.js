@@ -95,7 +95,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             };
             bodyData.push(row);
         }
-        console.log(result);
+        
         var gridOptions =
         {
             columns: [{ HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat },

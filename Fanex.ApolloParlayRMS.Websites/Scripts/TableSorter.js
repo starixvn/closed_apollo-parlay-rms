@@ -82,8 +82,7 @@ var tableSorter = function () {
                 } else if (type == 'int') {
                     fValue = parseInt(fValue.replace(/,/g, ''));
                     sValue = parseInt(sValue.replace(/,/g, ''));
-                } else if (type == 'date') {
-                    console.log(new Date(moment(fValue, ParlayRMS.commonConstants.MomentDateTimeFormat)));
+                } else if (type == 'date') {                    
                     fValue = (new Date(moment(fValue, ParlayRMS.commonConstants.MomentDateTimeFormat))).getTime();
                     sValue = (new Date(moment(sValue, ParlayRMS.commonConstants.MomentDateTimeFormat))).getTime();
                 } else if (type == 'ignoreCase') {

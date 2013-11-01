@@ -157,10 +157,10 @@ var ParlayRMS = function ($) {
 			).join(',');
 
 			window.open(url, '_blank', '' + ',' + formatter);
-        },
-        openNewTab: function (url) {
-            window.open(url, '_blank');
-        },
+		},
+		openNewTab: function (url) {
+			window.open(url, '_blank');
+		},
 		htmlEncode: function (value) {
 			return $('<div/>').text(value).html();
 		},
