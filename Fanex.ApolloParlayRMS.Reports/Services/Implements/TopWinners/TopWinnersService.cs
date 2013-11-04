@@ -12,6 +12,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.ExcelUtility;
     using Fanex.ApolloParlayRMS.Core.Extensions;
@@ -88,6 +89,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>TopWinnerDetails object represents the detailed data of a top winner.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public TopWinnerDetails GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria)
         {
             BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
@@ -174,6 +176,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <param name="templatePath">The template's path.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public void ExportTopWinners(GetTopWinnersCriteria criteria, string templatePath)
         {
             try

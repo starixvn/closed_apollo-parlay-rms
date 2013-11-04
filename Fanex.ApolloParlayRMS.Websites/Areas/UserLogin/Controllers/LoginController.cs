@@ -11,6 +11,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
@@ -69,58 +70,6 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
 
         #endregion
 
-        #region helpers
-
-        /// <summary>
-        /// Create user menu.
-        /// </summary>
-        /// <param name="user">Logged in user.</param>
-        private void CreateUserMenu(User user)
-        {
-            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
-                                                                                    user.Id,
-                                                                                    SiteId,
-                                                                                    Environment,
-                                                                                    true);
-
-            AppSession.CurrentUserMenu = _currentSession.Menu;
-        }
-
-        /// <summary>
-        /// Create authentication info.
-        /// </summary>
-        /// <param name="user">Logged in user.</param>
-        private void CreateAuthInfo(User user)
-        {
-            var currentDomain = CurrentContext.GetCurrentDomain();
-
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
-            var authTicket = new FormsAuthenticationTicket(
-                 1,
-                user.Username,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(20000),
-                false,
-                authInfo.ToXml(),
-                currentDomain.Path);
-
-            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
-            {
-                HttpOnly = true,
-                Path = currentDomain.Path,
-                Name = FormsAuthentication.FormsCookieName
-            };
-
-            Response.Cookies.Add(authCookie);
-        }
-
-        #endregion
-
         #region sign in
 
         /// <summary>
@@ -152,6 +101,8 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
         /// <param name="username">Entered user name.</param>
         /// <param name="password">Entered password.</param>
         /// <returns>Action result.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reused with NAP framework.")]
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements", Justification = "Reused with NAP framework.")]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Index(string username, string password)
@@ -292,7 +243,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
                 catch (Exception ex)
                 {
                     LogService.Error(ex.Message, ex);
-                    throw ex;
+                    ////throw ex;
                 }
             }
             else
@@ -301,6 +252,42 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
             }
 
             return View();
+        }
+
+        #endregion
+
+        #region re check in
+
+        /// <summary>
+        /// Recheck whether the user logged in or not.
+        /// </summary>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult ReCheckLogin()
+        {
+            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
+
+            if (maintenanceInfo.IsDowntime)
+            {
+                return Json("-1");
+            }
+
+            // check if not nap hub
+            if (this.SiteId != 0)
+            {
+                var siteStatus = _siteService.GetStatusById(this.SiteId);
+
+                if (!siteStatus)
+                {
+                    return Json("1");
+                }
+            }
+
+            UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
+            criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
+            _userService.ReUserCheckIn(ref criteria);
+
+            return Json(criteria.IsKickedOut ? "1" : "0");
         }
 
         #endregion
@@ -340,38 +327,54 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
 
         #endregion
 
-        #region re check in
+        #region helpers
 
         /// <summary>
-        /// Recheck whether the user logged in or not.
+        /// Create user menu.
         /// </summary>
-        /// <returns>Action result.</returns>
-        [HttpPost]
-        public ActionResult ReCheckLogin()
+        /// <param name="user">Logged in user.</param>
+        private void CreateUserMenu(User user)
         {
-            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
+            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
+                                                                                    user.Id,
+                                                                                    SiteId,
+                                                                                    Environment,
+                                                                                    true);
 
-            if (maintenanceInfo.IsDowntime)
+            AppSession.CurrentUserMenu = _currentSession.Menu;
+        }
+
+        /// <summary>
+        /// Create authentication info.
+        /// </summary>
+        /// <param name="user">Logged in user.</param>
+        private void CreateAuthInfo(User user)
+        {
+            var currentDomain = CurrentContext.GetCurrentDomain();
+
+            var authInfo = new AuthInfo();
+
+            authInfo.UserId = user.Id;
+            authInfo.OnUserId = this._currentSession.OnUserId;
+
+            var authTicket = new FormsAuthenticationTicket(
+                 1,
+                user.Username,
+                DateTime.Now,
+                DateTime.Now.AddMinutes(20000),
+                false,
+                authInfo.ToXml(),
+                currentDomain.Path);
+
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
-                return Json("-1");
-            }
+                HttpOnly = true,
+                Path = currentDomain.Path,
+                Name = FormsAuthentication.FormsCookieName
+            };
 
-            // check if not nap hub
-            if (this.SiteId != 0)
-            {
-                var siteStatus = _siteService.GetStatusById(this.SiteId);
-
-                if (!siteStatus)
-                {
-                    return Json("1");
-                }
-            }
-
-            UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-            criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
-            _userService.ReUserCheckIn(ref criteria);
-
-            return Json(criteria.IsKickedOut ? "1" : "0");
+            Response.Cookies.Add(authCookie);
         }
 
         #endregion

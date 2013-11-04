@@ -91,7 +91,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserControl.Controllers
             catch (Exception ex)
             {
                 LogService.Error(ex.Message, ex);
-                throw ex;
+                ////throw ex;
             }
 
             return View(criteria);
@@ -123,7 +123,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserControl.Controllers
             catch (Exception ex)
             {
                 LogService.Error(ex.Message, ex);
-                throw ex;
+                ////throw ex;
             }
 
             return View(criteria);
@@ -162,7 +162,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserControl.Controllers
             catch (Exception ex)
             {
                 LogService.Error(ex.Message, ex);
-                throw ex;
+                ////throw ex;
             }
 
             return View(criteria);

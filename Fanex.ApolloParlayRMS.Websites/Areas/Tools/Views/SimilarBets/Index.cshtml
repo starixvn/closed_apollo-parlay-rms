@@ -25,7 +25,7 @@
 					@Html.Label("txtBetId", Lang.BetId)
 				</div>
 				<div class="edit-field">
-					@Html.TextBox("txtBetId", (long)ViewBag.BetId, new { @class = "multiselect-width" })
+					@Html.TextBox("txtBetId", (long?)ViewBag.BetId, new { @class = "multiselect-width" })
 				</div>
 			</div>
 			<div class="filter-cell">

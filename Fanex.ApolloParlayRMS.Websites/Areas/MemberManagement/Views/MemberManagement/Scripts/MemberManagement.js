@@ -43,6 +43,12 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
             });
         });
 
+        $this.DOMInstance.txtUserName.bind('keyup', function (event) {
+            if (event.keyCode == 13) {
+                $this.DOMInstance.btnSearch.click();
+            }
+        });
+
         $this.DOMInstance.btnSearch.live('click', function () {
             var userName = $this.DOMInstance.txtUserName.val();
             var level = $this.DOMInstance.ddlLevel.val();

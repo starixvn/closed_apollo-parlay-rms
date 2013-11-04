@@ -11,6 +11,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.Constants;
     using Fanex.ApolloParlayRMS.Core.ExcelUtility;
@@ -87,6 +88,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <param name="templatePath">The template's path.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public void ExportWinLoss(GetWinLossCriteria criteria, string templatePath)
         {
             try

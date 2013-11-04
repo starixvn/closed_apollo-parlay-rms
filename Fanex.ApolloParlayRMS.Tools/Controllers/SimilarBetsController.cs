@@ -62,7 +62,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <summary>
         /// Gets the similar bets.
         /// </summary>
-        /// <param name="refNo">The reference number of the ticket which needs to get bet details.</param>
+        /// <param name="transId">The reference number of the ticket which needs to get bet details.</param>
         /// <returns>JSON object contains bet list of the transaction of passed reference number.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.SimilarBets, Policy = Constant.Policy.Read)]
@@ -79,7 +79,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <summary>
         /// Gets the bet details of a transaction.
         /// </summary>
-        /// <param name="betId">The bet identifier.</param>
+        /// <param name="transId">The bet identifier.</param>
         /// <param name="refNo">The reference number.</param>
         /// <param name="originalRefNo">The original reference number.</param>
         /// <param name="userName">The user name of a member.</param>
@@ -132,7 +132,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         }
 
         /// <summary>
-        /// Compares two tickets and indentifies whether these two tickets are the same or not.
+        /// Compares two tickets and identifies whether these two tickets are the same or not.
         /// </summary>
         /// <param name="originalTicket">The original ticket.</param>
         /// <param name="ticket">The ticket that needs to compare with the original one.</param>

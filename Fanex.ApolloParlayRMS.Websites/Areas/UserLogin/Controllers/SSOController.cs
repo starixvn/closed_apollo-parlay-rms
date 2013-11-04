@@ -11,6 +11,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -63,6 +64,8 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
         /// <param name="onuserId">Passed on user id.</param>
         /// <param name="time">Passed time.</param>
         /// <returns>Action result.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reused with NAP framework.")]
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements", Justification = "Reused with NAP framework.")]
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)

@@ -11,6 +11,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.Constants;
     using Fanex.ApolloParlayRMS.Core.Criteria;
@@ -49,6 +50,8 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Queried and grouped member win loss data.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", 
+            Justification = "Cannot seperate the method into more details.")]
         public MemberWinLossItem GetMemberWinLossData(GetMemberWinLossCriteria criteria)
         {
             MemberWinLossItem result = null;
@@ -153,6 +156,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// </summary>
         /// <param name="data">The raw data of agent win loss report.</param>
         /// <param name="writer">The writer that is used to write Excel content.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         private void RenderAgentWinLossExcel(MemberWinLossItem data, ExcelTemplateWriter writer)
         {
             // Write content
