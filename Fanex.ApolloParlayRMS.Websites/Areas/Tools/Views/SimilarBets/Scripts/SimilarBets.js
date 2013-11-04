@@ -80,7 +80,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
 
         $this.DOMInstance.divResult.addClass('display-none');
 
-        if (result) {
+        if (result && result.UserName) {
             var row =
             {
                 Columns: [{ Name: 'ColTransTime', Value: result.TransDate },

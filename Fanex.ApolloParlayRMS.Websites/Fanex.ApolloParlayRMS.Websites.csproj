@@ -185,12 +185,12 @@
     <Content Include="App_Data\NAPFrameworkSpNames.xml" />
     <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
+    <Content Include="Areas\UserLogin\themes\img\ParlayRMS.png" />
     <Content Include="Scripts\lib\SoundManager2\soundmanager2-nodebug.js" />
     <Content Include="Sounds\alert.mp3" />
     <Content Include="Areas\Tools\Views\MixParlayMonitor\Scripts\MixParlayMonitor.js" />
     <Content Include="Areas\Tools\Views\SimilarBets\Scripts\SimilarBets.js" />
     <Content Include="Areas\Tools\Views\TotalOutstanding\Scripts\TotalOutstanding.js" />
-    <Content Include="Areas\UserLogin\themes\img\Parlay_RMS.png" />
     <Content Include="Areas\Tools\Views\TotalOutstanding\Index.cshtml" />
     <Content Include="Areas\Tools\Views\SimilarBets\Index.cshtml" />
     <Content Include="Content\themes\layout\bet-list.less" />
@@ -224,7 +224,6 @@
     <Content Include="Areas\UserLogin\themes\img\password.png" />
     <Content Include="Areas\UserLogin\themes\img\pattern.png" />
     <Content Include="Areas\UserLogin\themes\img\pattern6.png" />
-    <Content Include="Areas\UserLogin\themes\img\reports.png" />
     <Content Include="Areas\UserLogin\themes\img\title-bg.jpg" />
     <Content Include="Areas\UserLogin\themes\img\tool-sprites.gif" />
     <Content Include="Areas\UserLogin\themes\img\username.png" />

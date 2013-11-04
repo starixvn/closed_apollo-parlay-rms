@@ -1,23 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
 	<Function Name="User">
-		<Setting Key="RMS_CustomerSelInfoByUsername" SpName="RMS_CustomerSelInfoByUsername" DbName="DBACC.bodb02.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_CustomerSelInfoByUsername" SpName="RMS_CustomerSelInfoByUsername" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
 	</Function>
 	<Function Name="BalanceUp">
-		<Setting Key="RMS_SelBalanceUpDay" SpName="RMS_SelBalanceUpDay" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_SelBalanceUpDay" SpName="RMS_SelBalanceUpDay" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
 	</Function>
 	<Function Name="Charts">
 	</Function>
 	<Function Name="MemberManagement">
-		<Setting Key="RMS_CustomerIns" SpName="RMS_CustomerIns" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_CustomerUpd" SpName="RMS_CustomerUpd" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_CustomerUpdStatus" SpName="RMS_CustomerUpdStatus" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_CustomerSel" SpName="RMS_CustomerSel" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_CustomerCheckExisting" SpName="RMS_CustomerCheckExisting" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		
+		<Setting Key="RMS_CustomerIns" SpName="RMS_CustomerIns" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_CustomerUpd" SpName="RMS_CustomerUpd" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_CustomerSel" SpName="RMS_CustomerSel" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_CustomerCheckExisting" SpName="RMS_CustomerCheckExisting" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />		
 	</Function>
 	<Function Name="Reports">
-		<Setting Key="RMS_Rpt_Parlay_TopWinners" SpName="RMS_Rpt_Parlay_TopWinners" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_TopWinners" SpName="RMS_Rpt_Parlay_TopWinners" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0">
 			<Mapping DataField="winlost" ObjectProperty="WinLoss" />
 			<Mapping DataField="company_winlost" ObjectProperty="CompanyWinLoss" />
 			<Mapping DataField="stake_baseRM" ObjectProperty="StakeBaseRM" />
@@ -25,21 +23,21 @@
 			<Mapping DataField="company_winlost_baseRM" ObjectProperty="CompanyWinLossBaseRM" />
 			<Mapping DataField="avg_odds" ObjectProperty="AvgOdds" />
 		</Setting>
-		<Setting Key="RMS_Rpt_Parlay_TopWinners_Details" SpName="RMS_Rpt_Parlay_TopWinners_Details" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_TopWinners_Details" SpName="RMS_Rpt_Parlay_TopWinners_Details" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0">
 			<Mapping DataField="winlost" ObjectProperty="WinLoss" />
 			<Mapping DataField="company_winlost" ObjectProperty="CompanyWinLoss" />
 			<Mapping DataField="stake_baseRM" ObjectProperty="StakeBaseRM" />
 			<Mapping DataField="winlost_baseRM" ObjectProperty="WinLossBaseRM" />
 			<Mapping DataField="company_winlost_baseRM" ObjectProperty="CompanyWinLossBaseRM" />
 		</Setting>
-		<Setting Key="RMS_Rpt_Parlay_TopWinners_Details_old" SpName="RMS_Rpt_Parlay_TopWinners_Details_old" DbName="DBARC.bodb_Archive.bodbRMSNet" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_TopWinners_Details_old" SpName="RMS_Rpt_Parlay_TopWinners_Details_old" DbName="SVRARC.ArchiveDB.aplweb" Plain="0">
 			<Mapping DataField="winlost" ObjectProperty="WinLoss" />
 			<Mapping DataField="company_winlost" ObjectProperty="CompanyWinLoss" />
 			<Mapping DataField="stake_baseRM" ObjectProperty="StakeBaseRM" />
 			<Mapping DataField="winlost_baseRM" ObjectProperty="WinLossBaseRM" />
 			<Mapping DataField="company_winlost_baseRM" ObjectProperty="CompanyWinLossBaseRM" />
 		</Setting>
-		<Setting Key="RMS_Rpt_Parlay_Winloss" SpName="RMS_Rpt_Parlay_Winloss" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_Winloss" SpName="RMS_Rpt_Parlay_Winloss" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0">
 			<Mapping DataField="winlostdate" ObjectProperty="WinLossDate"/>
 			<Mapping DataField="tickets_won" ObjectProperty="TicketWon"/>
 			<Mapping DataField="tickets_lose" ObjectProperty="TicketLose"/>
@@ -50,7 +48,7 @@
 			<Mapping DataField="ourPT_won" ObjectProperty="OurPTWon"/>
 			<Mapping DataField="ourPT_lose" ObjectProperty="OurPTLose"/>
 		</Setting>
-		<Setting Key="RMS_Rpt_Parlay_MemberWinLoss" SpName="RMS_Rpt_Parlay_Winloss_Mem" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_MemberWinLoss" SpName="RMS_Rpt_Parlay_Winloss_Mem" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0">
 			<Mapping DataField="tickets_won" ObjectProperty="TicketWon"/>
 			<Mapping DataField="tickets_lose" ObjectProperty="TicketLose"/>
 			<Mapping DataField="stake_won" ObjectProperty="StakeWon"/>
@@ -60,7 +58,7 @@
 			<Mapping DataField="ourPT_won" ObjectProperty="OurPTWon"/>
 			<Mapping DataField="ourPT_lose" ObjectProperty="OurPTLose"/>
 		</Setting>
-		<Setting Key="RMS_Rpt_Parlay_AgentWinLoss" SpName="RMS_Rpt_Parlay_Winloss_Ag" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_AgentWinLoss" SpName="RMS_Rpt_Parlay_Winloss_Ag" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0">
 			<Mapping DataField="tickets_won" ObjectProperty="TicketWon"/>
 			<Mapping DataField="tickets_lose" ObjectProperty="TicketLose"/>
 			<Mapping DataField="stake_won" ObjectProperty="StakeWon"/>
@@ -72,13 +70,13 @@
 		</Setting>
 	</Function>
 	<Function Name="Tools">
-    <Setting Key="RMS_Monitor_Parlay_Betlist" SpName="RMS_Monitor_Parlay_Betlist" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_Rpt_Parlay_Outstanding_Mem" SpName="RMS_Rpt_Parlay_Outstanding_Mem" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_Rpt_Parlay_Outstanding_Ag" SpName="RMS_Rpt_Parlay_Outstanding_Ag" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
+				<Setting Key="RMS_Monitor_Parlay_Betlist" SpName="RMS_Monitor_Parlay_Betlist" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_Rpt_Parlay_Outstanding_Mem" SpName="RMS_Rpt_Parlay_Outstanding_Mem" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_Rpt_Parlay_Outstanding_Ag" SpName="RMS_Rpt_Parlay_Outstanding_Ag" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
 	</Function>
 	<Function Name="BetList">
-		<Setting Key="RMS_Rpt_Parlay_TopWinners_Bet_Details" SpName="RMS_Rpt_Parlay_TopWinners_Bet_Details" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-		<Setting Key="RMS_Parlay_TransDetails" SpName="RMS_Parlay_TransDetails" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
-    <Setting Key="RMS_Similar_Parlay_Betlist" SpName="RMS_Similar_Parlay_Betlist" DbName="DBTXN.bodb02.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_Rpt_Parlay_TopWinners_Bet_Details" SpName="RMS_Rpt_Parlay_TopWinners_Bet_Details" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+		<Setting Key="RMS_Parlay_TransDetails" SpName="RMS_Parlay_TransDetails" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
+				<Setting Key="RMS_Similar_Parlay_Betlist" SpName="RMS_Similar_Parlay_Betlist" DbName="SVRCSD.bodb_RMS.bodbRMSNet" Plain="0" />
 	</Function>
 </Functions>
