@@ -117,7 +117,7 @@
     <Compile Include="Web\ApolloParlayRMSFunctionKeys.cs" />
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\CacheManager.cs" />
-    <Compile Include="Controllers\BasedController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Web\SessionManager.cs" />
     <EmbeddedResource Include="Resources\Lang.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
