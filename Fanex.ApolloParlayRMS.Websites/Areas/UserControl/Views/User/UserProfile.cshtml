@@ -74,7 +74,7 @@
      $(function () { 
         if(success == true)
         {
-            AccReport.popUp.show('@Labels.ChangedProfile', null, 1);
+            AccReport.popUp.show('@Messages.ChangedProfile', null, 1);
         }
         else if(message != '')
         {
@@ -86,7 +86,7 @@
             if(email != "" 
             && !re.test(email))
             {
-                AccReport.popUp.show('@Labels.InvalidEmail', "Email");
+                AccReport.popUp.show('@Messages.InvalidEmail', "Email");
                 return false;
             }
         });

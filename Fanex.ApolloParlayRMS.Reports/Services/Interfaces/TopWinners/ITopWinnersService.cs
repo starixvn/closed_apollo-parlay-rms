@@ -10,11 +10,10 @@
 namespace Fanex.ApolloParlayRMS.Reports.Services.Interfaces.TopWinners
 {
     using System.Collections.Generic;
-    using Fanex.ApolloParlayRMS.Core.Services.Interfaces;
     using Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners;
     using Fanex.ApolloParlayRMS.Reports.Models.TopWinners;
 
-    public interface ITopWinnersService : IBasedService
+    public interface ITopWinnersService
     {
         /// <summary>
         /// Gets the top winner list.

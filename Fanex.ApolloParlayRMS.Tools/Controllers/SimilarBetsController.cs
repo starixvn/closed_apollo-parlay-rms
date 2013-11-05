@@ -11,9 +11,9 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Resources;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.Tools.Criteria.SimilarBets;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.SimilarBets;
@@ -29,7 +29,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     /// <summary>
     /// Similar bet controller.
     /// </summary>
-    public class SimilarBetsController : BasedController
+    public class SimilarBetsController : BaseController
     {
         private readonly ISimilarBetsService _similarBetsService;
         private readonly IBetListService _betListService;

@@ -12,11 +12,11 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.ApolloParlayRMS.Core.Constants;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Resources;
     using Fanex.ApolloParlayRMS.Core.Services.Implements;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.Tools.Criteria.TotalOutstanding;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding;
@@ -32,7 +32,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     /// <summary>
     /// Total outstanding controller.
     /// </summary>
-    public class TotalOutstandingController : BasedController
+    public class TotalOutstandingController : BaseController
     {
         private readonly ITotalOutstandingService _totalOutstandingService;
         private readonly IBetListService _betListService;

@@ -12,9 +12,9 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners;
     using Fanex.ApolloParlayRMS.Reports.Models.TopWinners;
     using Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners;
@@ -29,7 +29,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
     /// <summary>
     /// Top Winners controller.
     /// </summary>
-    public class TopWinnersController : BasedController
+    public class TopWinnersController : BaseController
     {
         private readonly ITopWinnersService _topWinnersService;
 

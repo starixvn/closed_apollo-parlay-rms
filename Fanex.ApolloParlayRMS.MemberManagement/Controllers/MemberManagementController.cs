@@ -11,9 +11,9 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.MemberManagement.Criteria;
     using Fanex.ApolloParlayRMS.MemberManagement.Services.Implements;
     using Fanex.ApolloParlayRMS.MemberManagement.Services.Interfaces;
@@ -23,7 +23,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Controllers
     /// <summary>
     /// Member Management Controller.
     /// </summary>
-    public class MemberManagementController : BasedController
+    public class MemberManagementController : BaseController
     {
         private readonly IMemberManagementService _memberManagementService;
 

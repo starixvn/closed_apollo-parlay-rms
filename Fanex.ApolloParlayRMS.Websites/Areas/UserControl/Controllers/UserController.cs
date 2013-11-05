@@ -10,8 +10,8 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserControl.Controllers
 {
     using System;
     using System.Web.Mvc;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.Common;
     using Fanex.Logging;
     using Fanex.NAP.Core.Criteria.User;
@@ -22,7 +22,7 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserControl.Controllers
     /// <summary>
     /// User controller.
     /// </summary>
-    public class UserController : BasedController
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
 

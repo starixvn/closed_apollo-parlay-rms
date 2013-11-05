@@ -114,11 +114,10 @@
     <Compile Include="Services\Implements\LoggingHandler.cs" />
     <Compile Include="Services\Implements\BasedService.cs" />
     <Compile Include="Services\Implements\MenuService.cs" />
-    <Compile Include="Services\Interfaces\IBasedService.cs" />
     <Compile Include="Web\ApolloParlayRMSFunctionKeys.cs" />
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\CacheManager.cs" />
-    <Compile Include="Web\Controllers\BasedController.cs" />
+    <Compile Include="Controllers\BasedController.cs" />
     <Compile Include="Web\SessionManager.cs" />
     <EmbeddedResource Include="Resources\Lang.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

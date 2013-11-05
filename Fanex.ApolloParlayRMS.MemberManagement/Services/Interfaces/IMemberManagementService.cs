@@ -10,12 +10,11 @@
 namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Interfaces
 {
     using System.Collections.Generic;
-    using Fanex.ApolloParlayRMS.Core.Services.Interfaces;
     using Fanex.ApolloParlayRMS.MemberManagement.Criteria;
     using Fanex.ApolloParlayRMS.MemberManagement.Models;
     using Fanex.NAP.Framework.Data;
 
-    public interface IMemberManagementService : IBasedService
+    public interface IMemberManagementService
     {
         /// <summary>
         /// Gets the list of customers.

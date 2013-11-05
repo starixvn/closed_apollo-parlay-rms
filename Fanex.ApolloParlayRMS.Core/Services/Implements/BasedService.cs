@@ -11,7 +11,6 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
 {
     using System;
     using Fanex.ApolloParlayRMS.Core.Resources;
-    using Fanex.ApolloParlayRMS.Core.Services.Interfaces;
     using Fanex.Common.Helper;
     using Fanex.NAP.Core.Criteria.Misc;
     using Fanex.NAP.Core.Service.Interface;
@@ -20,7 +19,7 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
     /// <summary>
     /// Service Base.
     /// </summary>
-    public class BasedService : IBasedService
+    public class BasedService
     {
         public IServiceContext ServiceContext { get; set; }
 

@@ -10,9 +10,9 @@
 namespace Fanex.ApolloParlayRMS.Reports.Controllers
 {
     using System.Web.Mvc;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.Reports.Criteria.WinLoss;
     using Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss;
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.WinLoss;
@@ -22,7 +22,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
     /// <summary>
     /// Win loss controller.
     /// </summary>
-    public class WinLossController : BasedController
+    public class WinLossController : BaseController
     {
         private readonly IWinLossService _winLossService;
 

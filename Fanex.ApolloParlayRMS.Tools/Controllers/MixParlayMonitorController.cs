@@ -12,10 +12,10 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Resources;
     using Fanex.ApolloParlayRMS.Core.Web;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.ApolloParlayRMS.Tools.Criteria.MixParlayMonitor;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor;
@@ -31,7 +31,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     /// <summary>
     /// Mix parlay monitor controller.
     /// </summary>
-    public class MixParlayMonitorController : BasedController
+    public class MixParlayMonitorController : BaseController
     {
         private readonly IMixParlayMonitorService _mixParlayMonitorService;
         private readonly IBetListService _betListService;

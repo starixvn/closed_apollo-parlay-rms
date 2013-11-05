@@ -12,16 +12,15 @@ namespace Fanex.ApolloParlayRMS.Websites.Controllers
     using System;
     using System.Web;
     using System.Web.Mvc;
-    using Fanex.ApolloParlayRMS.Core.Models;
+    using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Resources;
-    using Fanex.ApolloParlayRMS.Core.Web.Controllers;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Home controller.
     /// </summary>
     [NapSuperAuth]
-    public class HomeController : BasedController
+    public class HomeController : BaseController
     {
         public HomeController()
         {

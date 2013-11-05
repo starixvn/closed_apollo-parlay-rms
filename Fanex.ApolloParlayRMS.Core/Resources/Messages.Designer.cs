@@ -70,6 +70,24 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Password has been changed successfully !.
+        /// </summary>
+        public static string ChangedPassword {
+            get {
+                return ResourceManager.GetString("ChangedPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Profile has been changed successfully !.
+        /// </summary>
+        public static string ChangedProfile {
+            get {
+                return ResourceManager.GetString("ChangedProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to change the level of {0} to {1}.
         /// </summary>
         public static string ChangeLevelConfirmationMessage {
@@ -93,6 +111,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         public static string CheckboxExpressionError {
             get {
                 return ResourceManager.GetString("CheckboxExpressionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password cannot be empty.
+        /// </summary>
+        public static string ConfirmPasswordCannotEmpty {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordCannotEmpty", resourceCulture);
             }
         }
         
@@ -133,6 +160,15 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Email!.
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid number value..
         /// </summary>
         public static string InvalidNumberFieldError {
@@ -151,11 +187,47 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Password cannot be empty !.
+        /// </summary>
+        public static string NewPasswordCannotEmpty {
+            get {
+                return ResourceManager.GetString("NewPasswordCannotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No information available..
         /// </summary>
         public static string NoInformationAvailable {
             get {
                 return ResourceManager.GetString("NoInformationAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old password cannot be empty..
+        /// </summary>
+        public static string OldPasswordCannotEmpty {
+            get {
+                return ResourceManager.GetString("OldPasswordCannotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password and New Password do not match..
+        /// </summary>
+        public static string PasswordDoesNotMatch {
+            get {
+                return ResourceManager.GetString("PasswordDoesNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NewPass must have at least 6 characters..
+        /// </summary>
+        public static string PasswordMinLengthError {
+            get {
+                return ResourceManager.GetString("PasswordMinLengthError", resourceCulture);
             }
         }
         

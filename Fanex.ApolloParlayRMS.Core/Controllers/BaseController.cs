@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BasedController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,13 +7,13 @@
 //   <change who="Jason.Ly" date="2013.10.09">Created</change>
 // </history>
 
-namespace Fanex.ApolloParlayRMS.Core.Web.Controllers
+namespace Fanex.ApolloParlayRMS.Core.Controllers
 {
     using System;
     using System.Text;
     using System.Web.Mvc;
-    using Fanex.ApolloParlayRMS.Core.Resources;
     using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Service.Impl;
@@ -23,9 +23,9 @@ namespace Fanex.ApolloParlayRMS.Core.Web.Controllers
     using Fanex.NAP.Core.Web.Session;
 
     /// <summary>
-    /// Based controller.
+    /// Base controller.
     /// </summary>
-    public class BasedController : Controller
+    public class BaseController : Controller
     {
         protected readonly ICurrentContext CurrentContext;
 
@@ -45,7 +45,7 @@ namespace Fanex.ApolloParlayRMS.Core.Web.Controllers
 
         private IUserService _userService;
 
-        public BasedController()
+        public BaseController()
         {
             this.CurrentContext = new CurrentContext();
             ViewBag.Session = this.CurrentSession = new CurrentSession();

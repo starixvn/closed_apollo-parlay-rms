@@ -120,6 +120,12 @@
   <data name="AddNewCustomerSuccessfullyMessage" xml:space="preserve">
     <value>Add new customer successfully!</value>
   </data>
+  <data name="ChangedPassword" xml:space="preserve">
+    <value>Your Password has been changed successfully !</value>
+  </data>
+  <data name="ChangedProfile" xml:space="preserve">
+    <value>Your Profile has been changed successfully !</value>
+  </data>
   <data name="ChangeLevelConfirmationMessage" xml:space="preserve">
     <value>Do you want to change the level of {0} to {1}</value>
   </data>
@@ -128,6 +134,9 @@
   </data>
   <data name="CheckboxExpressionError" xml:space="preserve">
     <value>Expression cannot be null</value>
+  </data>
+  <data name="ConfirmPasswordCannotEmpty" xml:space="preserve">
+    <value>Confirm Password cannot be empty</value>
   </data>
   <data name="DateRangeFieldError" xml:space="preserve">
     <value>'ToDate' must be greater than or equal to 'FromDate'</value>
@@ -141,14 +150,29 @@
   <data name="InvalidDateFieldError" xml:space="preserve">
     <value>Invalid date value</value>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid Email!</value>
+  </data>
   <data name="InvalidNumberFieldError" xml:space="preserve">
     <value>Invalid number value.</value>
   </data>
   <data name="ListOfInvalidFields" xml:space="preserve">
     <value>List of invalid fields:</value>
   </data>
+  <data name="NewPasswordCannotEmpty" xml:space="preserve">
+    <value>New Password cannot be empty !</value>
+  </data>
   <data name="NoInformationAvailable" xml:space="preserve">
     <value>No information available.</value>
+  </data>
+  <data name="OldPasswordCannotEmpty" xml:space="preserve">
+    <value>Old password cannot be empty.</value>
+  </data>
+  <data name="PasswordDoesNotMatch" xml:space="preserve">
+    <value>Confirm Password and New Password do not match.</value>
+  </data>
+  <data name="PasswordMinLengthError" xml:space="preserve">
+    <value>NewPass must have at least 6 characters.</value>
   </data>
   <data name="PositiveFieldError" xml:space="preserve">
     <value>The value must be greater than or equal to 0</value>
