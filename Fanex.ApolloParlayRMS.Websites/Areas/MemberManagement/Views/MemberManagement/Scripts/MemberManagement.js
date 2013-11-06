@@ -39,6 +39,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
 
             $this.DOMInstance.divAddMemberFormMembers.Form.live('submit', function (event) {
                 $this.AddMember();
+                $this.DOMInstance.btnSearch.click();
                 event.preventDefault();
             });
         });
@@ -201,7 +202,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
             UserName: userName,
             Level: level
         };
-        
+
         $this.DOMInstance.divAddMemberFormMembers.Form.resetValidation();
         $.ajax({
             type: "POST",

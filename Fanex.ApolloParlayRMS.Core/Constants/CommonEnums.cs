@@ -114,16 +114,6 @@ namespace Fanex.ApolloParlayRMS.Core.Constants
         public enum RoleId : int
         {
             /// <summary>
-            /// Super user.
-            /// </summary>
-            Super = 4,
-
-            /// <summary>
-            /// Master user.
-            /// </summary>
-            Master = 3,
-
-            /// <summary>
             /// Agent user.
             /// </summary>
             Agent = 2,
