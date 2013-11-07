@@ -186,6 +186,7 @@
     <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
     <Content Include="Areas\UserLogin\themes\img\ParlayRMS.png" />
+    <Content Include="Content\themes\layout\img\accessDenied.gif" />
     <Content Include="Scripts\lib\SoundManager2\soundmanager2-nodebug.js" />
     <Content Include="Sounds\alert.mp3" />
     <Content Include="Areas\Tools\Views\MixParlayMonitor\Scripts\MixParlayMonitor.js" />
@@ -232,9 +233,6 @@
     <Content Include="Areas\UserLogin\themes\img\welcome.png" />
     <Content Include="Areas\UserLogin\themes\img\welcome2.png" />
     <Content Include="Areas\UserLogin\themes\login.css" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\Images\UnderMaintenance.gif" />
     <Content Include="Areas\UserLogin\Views\UserSite\favicon.ico" />
     <Content Include="Content\themes\fonts\YanoneKaffeesatz.svg" />
     <Content Include="Content\themes\img\glyphicons-halflings-white.png" />
@@ -466,11 +464,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\UserControl\Models\" />
-    <Folder Include="Areas\UserControl\Views\Shared\" />
-    <Folder Include="Areas\UserLogin\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -33,9 +33,9 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
         }
 
         /// <summary>
-        /// Redirect to offline view.
+        /// Redirect to offline page.
         /// </summary>
-        /// <returns>Action result.</returns>
+        /// <returns>Offline view.</returns>
         public ActionResult Offline()
         {
             var downTime = _maintenanceService.GetDowntimeInfo();
@@ -47,6 +47,15 @@ namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
             ViewBag.UmtFrom = downTime.From;
             ViewBag.UmtTo = downTime.To;
 
+            return View();
+        }
+
+        /// <summary>
+        /// Redirect to access denied page.
+        /// </summary>
+        /// <returns>Access Denied view.</returns>
+        public ActionResult AccessDenied()
+        {
             return View();
         }
     }
