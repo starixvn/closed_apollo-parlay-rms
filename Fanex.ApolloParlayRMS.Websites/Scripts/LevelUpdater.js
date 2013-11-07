@@ -60,13 +60,12 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
         var objId = obj.attr('id');
         obj.html(createLevelUpdater(objId, false, false, '10', true).html());
     };
-    $this.CreateUpdateField = function (id, defaultValue, isEnable, userName, cssClass) {
+    $this.CreateUpdateField = function (id, defaultValue, isEnable, userName) {
         updateField = createLevelUpdater(id, false, true, defaultValue, isEnable);
         updateField.attr('onchange', "levelUpdater.ChangeLevel('{0}')".format(id));
         updateField.attr('data-type', 'levelUpdater');
         updateField.attr('data-username', userName);
-        updateField.attr('class', cssClass);
-        $.data(updateField, 'current', defaultValue);
+        updateField.attr('data-current-value', defaultValue);
 
         return $('<div>').append(updateField).html();
     };
@@ -76,7 +75,8 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
         var level = dropDown.val();
         var msg = messages.ChangeLevelConfirmation.format(userName, level);
 
-        dropDown.val($.data(dropDown, 'current'));
+        dropDown.val(dropDown.attr('data-current-value'));
+        dropDown.multiselect('refresh'); // Refresh multiselect control
         ParlayRMS.headlineMsgBox.confirm(msg, function () {
             var data = {
                 CustId: id,
@@ -98,6 +98,8 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
                         ParlayRMS.headlineMsgBox.showErr(result.Message, { sticky: true });
                     } else {
                         dropDown.val(level);
+                        dropDown.multiselect('refresh'); // Refresh multiselect control
+                        dropDown.attr('data-current-value', dropDown.val());
                         ParlayRMS.showInfoMessage(messages.ChangeLevelSuccessfully);
                     }
                 },
@@ -109,7 +111,6 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
                 }
             });
         });
-        $.data(dropDown, 'current', dropDown.val());
     };
 };
 var levelUpdater = new Fanex.ApolloParlayRMS.LevelUpdater();

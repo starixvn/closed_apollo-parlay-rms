@@ -89,6 +89,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         var bodyData = [];
 
         $this.DOMInstance.divResult.addClass('display-none');
+        $this.DOMInstance.divResult.html('');
 
         if (data && data.length > 0) {
             var row = null;

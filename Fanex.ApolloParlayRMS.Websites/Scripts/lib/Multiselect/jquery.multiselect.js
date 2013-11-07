@@ -43,7 +43,7 @@
 	  position: {},
 	  appendTo: "body",
 	  format: null,
-      onSelectFormat: null
+	  onSelectFormat: null
 	},
 
 	_create: function() {
@@ -244,11 +244,11 @@
 	// this exists as a separate method so that the developer 
 	// can easily override it.
 	_setButtonValue: function(value) {
-      if (this.options.onSelectFormat) {
-          this.buttonlabel.html(this.options.onSelectFormat(this.element, value));
-      } else {
-	    this.buttonlabel.html(value);
-      }
+	  if (this.options.onSelectFormat) {
+		  this.buttonlabel.html(this.options.onSelectFormat(this.element, value));
+	  } else {
+		this.buttonlabel.html(value);
+	  }
 	},
 
 	// binds events
@@ -741,8 +741,8 @@
 		case 'format':
 		  this.options.format = value;
 		  break;
-        case 'onSelectFormat':
-          this.options.onSelectFormat = value;
+		case 'onSelectFormat':
+		  this.options.onSelectFormat = value;
 	  }
 
 	  $.Widget.prototype._setOption.apply(this, arguments);

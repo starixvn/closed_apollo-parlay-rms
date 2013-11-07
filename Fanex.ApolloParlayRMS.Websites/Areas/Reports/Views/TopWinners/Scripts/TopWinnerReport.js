@@ -84,7 +84,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
         initSingleDropDownList($this.DOMInstance.ddlSportTypes, 86);
         initMultiDropDownList($this.DOMInstance.ddlCombo);
         initSingleDropDownList($this.DOMInstance.ddlDateRanges, 148);
-        
+
         $this.DOMInstance.dpkDateFrom.datepicker({
             defaultDate: "+1w",
             changeMonth: true,
@@ -226,8 +226,8 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                 toDate = nowDate;
                 break;
             case dateRanges.SpecificDate:
-                fromDate = moment($this.DOMInstance.dpkDateFrom.val());
-                toDate = moment($this.DOMInstance.dpkDateTo.val());
+                fromDate = moment($this.DOMInstance.dpkDateFrom.val(), ParlayRMS.commonConstants.MomentDateFormat);
+                toDate = moment($this.DOMInstance.dpkDateTo.val(), ParlayRMS.commonConstants.MomentDateFormat);
                 break;
         }
 
@@ -239,6 +239,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
         var footerData = [];
 
         $this.DOMInstance.divResult.addClass('display-none');
+        $this.DOMInstance.divResult.html('');
 
         if (result && result.Data) {
             var records = result.Data.ChildItems;
@@ -379,7 +380,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
             showFooter: true,
             showNumberColumn: true,
             bodyRows: bodyData,
-            footerRows: footerData,        
+            footerRows: footerData,
             fullHeight: false,
             gridHeight: 600
         };
