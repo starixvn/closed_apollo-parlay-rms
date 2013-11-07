@@ -34,14 +34,5 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
                 };
             }
         }
-
-        /// <summary>
-        /// Handles Exception.
-        /// </summary>
-        /// <param name="ex">Occurred Exception.</param>
-        public void HandleException(Exception ex)
-        {
-            LoggingHandler.Log(ex);
-        }
     }
 }

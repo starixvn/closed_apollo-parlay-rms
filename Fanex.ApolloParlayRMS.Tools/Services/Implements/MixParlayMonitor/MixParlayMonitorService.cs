@@ -43,18 +43,10 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
         /// <returns>List of BetItem objects represent the bet list of tickets satisfied the passed query conditions.</returns>
         public IEnumerable<ParlayBetItem> GeMixParlayData(GetMonitorParlayBetListCriteria criteria)
         {
-            IEnumerable<ParlayBetItem> betList = null;
-            try
-            {
-                betList = this._mixParlayMonitorRepository.GetMonitorParlayBetListData(criteria);
+            IEnumerable<ParlayBetItem> betList = this._mixParlayMonitorRepository.GetMonitorParlayBetListData(criteria);
 
-                // Use for testing purpose.
-                betList = CreateTestData(criteria);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+            // Use for testing purpose.
+            betList = CreateTestData(criteria);
 
             return betList;
         }

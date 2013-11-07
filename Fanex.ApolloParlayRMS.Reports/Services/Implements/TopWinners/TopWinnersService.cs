@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -53,32 +52,26 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
         public TopWinner GetTopWinners(GetTopWinnersCriteria criteria)
         {
             TopWinner result = null;
-            try
+
+            if (!criteria.IsLoadNew)
             {
-                if (!criteria.IsLoadNew)
-                {
-                    result = SessionManager.Get<TopWinner>(ReportConstants.TopWinnersSessionKey);
-                }
-                
-                if (result == null)
-                {
-                    BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
-                    criteria.BalanceUpDay = balanceUp.BalanceUpDay;
-                    criteria.MoveBetsDay = balanceUp.MoveBetsDay;
-
-                    List<TopWinner> records = this._topWinnersRepository.GetTopWinners(criteria).ToList();
-                    result = new TopWinner();
-                    records.ForEach(obj =>
-                    {
-                        result.Add(obj);
-                    });
-
-                    SessionManager.Set<TopWinner>(ReportConstants.TopWinnersSessionKey, result);
-                }
+                result = SessionManager.Get<TopWinner>(ReportConstants.TopWinnersSessionKey);
             }
-            catch (Exception ex)
+
+            if (result == null)
             {
-                HandleException(ex);
+                BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
+                criteria.BalanceUpDay = balanceUp.BalanceUpDay;
+                criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+
+                List<TopWinner> records = this._topWinnersRepository.GetTopWinners(criteria).ToList();
+                result = new TopWinner();
+                records.ForEach(obj =>
+                {
+                    result.Add(obj);
+                });
+
+                SessionManager.Set<TopWinner>(ReportConstants.TopWinnersSessionKey, result);
             }
 
             return result;
@@ -96,57 +89,50 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
             List<TopWinnerDetails> records = new List<TopWinnerDetails>();
             TopWinnerDetails result = new TopWinnerDetails();
 
-            try
+            if (balanceUp.BalanceUpDay.CompareTo(criteria.FromDate) <= 0)
             {
-                if (balanceUp.BalanceUpDay.CompareTo(criteria.FromDate) <= 0)
-                {
-                    records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(criteria));
-                }
-                else if (balanceUp.BalanceUpDay.CompareTo(criteria.ToDate) > 0)
-                {
-                    var tempCriteria = new GetTopWinnersDetailsOldCriteria
-                    {
-                        CustId = criteria.CustId,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        SportType = criteria.SportType,
-                        Selection = criteria.Selection
-                    };
-                    records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempCriteria));
-                }
-                else
-                {
-                    var tempOldCriteria = new GetTopWinnersDetailsOldCriteria
-                    {
-                        CustId = criteria.CustId,
-                        FromDate = criteria.FromDate,
-                        ToDate = balanceUp.BalanceUpDay.AddDays(-1),
-                        SportType = criteria.SportType,
-                        Selection = criteria.Selection
-                    };
-                    records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempOldCriteria));
-
-                    var tempCriteria = new GetTopWinnerDetailsCriteria
-                    {
-                        CustId = criteria.CustId,
-                        FromDate = balanceUp.BalanceUpDay,
-                        ToDate = criteria.ToDate,
-                        MoveBetsDay = balanceUp.MoveBetsDay,
-                        SportType = criteria.SportType,
-                        Selection = criteria.Selection
-                    };
-                    records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempCriteria));
-                }
-
-                records.ForEach(obj =>
-                {
-                    result.Add(obj);
-                });
+                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(criteria));
             }
-            catch (Exception ex)
+            else if (balanceUp.BalanceUpDay.CompareTo(criteria.ToDate) > 0)
             {
-                HandleException(ex);
+                var tempCriteria = new GetTopWinnersDetailsOldCriteria
+                {
+                    CustId = criteria.CustId,
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    SportType = criteria.SportType,
+                    Selection = criteria.Selection
+                };
+                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempCriteria));
             }
+            else
+            {
+                var tempOldCriteria = new GetTopWinnersDetailsOldCriteria
+                {
+                    CustId = criteria.CustId,
+                    FromDate = criteria.FromDate,
+                    ToDate = balanceUp.BalanceUpDay.AddDays(-1),
+                    SportType = criteria.SportType,
+                    Selection = criteria.Selection
+                };
+                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempOldCriteria));
+
+                var tempCriteria = new GetTopWinnerDetailsCriteria
+                {
+                    CustId = criteria.CustId,
+                    FromDate = balanceUp.BalanceUpDay,
+                    ToDate = criteria.ToDate,
+                    MoveBetsDay = balanceUp.MoveBetsDay,
+                    SportType = criteria.SportType,
+                    Selection = criteria.Selection
+                };
+                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempCriteria));
+            }
+
+            records.ForEach(obj =>
+            {
+                result.Add(obj);
+            });
 
             return result;
         }
@@ -159,14 +145,8 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
         public IEnumerable<TopWinnerBetDetails> GetTopWinnerBetDetails(GetTopWinnerBetDetailsCriteria criteria)
         {
             IEnumerable<TopWinnerBetDetails> result = null;
-            try
-            {
-                result = this._topWinnersRepository.GetTopWinnerBetDetails(criteria);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            result = this._topWinnersRepository.GetTopWinnerBetDetails(criteria);
 
             return result;
         }
@@ -179,41 +159,39 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public void ExportTopWinners(GetTopWinnersCriteria criteria, string templatePath)
         {
-            try
+            TopWinner topWinners = GetTopWinners(criteria);
+            string fileName = string.Format(
+                                         ReportsLang.TopWinnersFileName,
+                                         criteria.LimitedRow,
+                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+            string reportTitle = criteria.ToString();
+            var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.TopWinners);
+            int counter = 0;
+
+            // Copy title.
+            writer.CopyRows(0, 2);
+            writer.WriteRow(2, new { reportTitle });
+            writer.CopyRows(3, 2);
+
+            // Prepare content
+            var records = topWinners.ChildItems.Select(obj => new
             {
-                TopWinner topWinners = GetTopWinners(criteria);
-                string fileName = string.Format(
-                                             ReportsLang.TopWinnersFileName,
-                                             criteria.LimitedRow,
-                                             criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
-                                             criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
-                string reportTitle = criteria.ToString();
-                var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.TopWinners);
-                int counter = 0;
+                No = ++counter,
+                UserName = obj.UserName,
+                Currency = obj.Currency,
+                Stake = obj.Stake,
+                WinLoss = obj.WinLoss,
+                CompanyWinLoss = obj.CompanyWinLoss,
+                BasedStake = obj.StakeBaseRM,
+                BasedWinLoss = obj.WinLossBaseRM,
+                BasedCompanyWinLoss = obj.CompanyWinLossBaseRM,
+                TotalBets = obj.BetCount,
+                AvgOdds = obj.AvgOdds
+            });
 
-                // Copy title.
-                writer.CopyRows(0, 2);
-                writer.WriteRow(2, new { reportTitle });
-                writer.CopyRows(3, 2);
-
-                // Prepare content
-                var records = topWinners.ChildItems.Select(obj => new
-                {
-                    No = ++counter,
-                    UserName = obj.UserName,
-                    Currency = obj.Currency,
-                    Stake = obj.Stake,
-                    WinLoss = obj.WinLoss,
-                    CompanyWinLoss = obj.CompanyWinLoss,
-                    BasedStake = obj.StakeBaseRM,
-                    BasedWinLoss = obj.WinLossBaseRM,
-                    BasedCompanyWinLoss = obj.CompanyWinLossBaseRM,
-                    TotalBets = obj.BetCount,
-                    AvgOdds = obj.AvgOdds
-                });
-
-                // Total row
-                var total = new object[]
+            // Total row
+            var total = new object[]
                 {
                     Lang.Total,
                     string.Empty,
@@ -228,15 +206,10 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
                     "-"
                 };
 
-                writer.WriteRows(5, records);
-                writer.WriteRow(6, total);
-                writer.SyncColumnsWidth(11);
-                writer.Render();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+            writer.WriteRows(5, records);
+            writer.WriteRow(6, total);
+            writer.SyncColumnsWidth(11);
+            writer.Render();
         }
     }
 }

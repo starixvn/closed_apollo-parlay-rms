@@ -22,7 +22,6 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
     using Fanex.ApolloParlayRMS.MemberManagement.Repositories.Interfaces;
     using Fanex.ApolloParlayRMS.MemberManagement.Services.Interfaces;
     using Fanex.Common.Helper;
-    using Fanex.NAP.Core.Criteria.Misc;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -51,22 +50,16 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         public IEnumerable<Customer> GetCustomers(GetCustomersCriteria criteria)
         {
             IEnumerable<Customer> records = null;
-            try
-            {
-                if (!criteria.IsLoadNew)
-                {
-                    records = SessionManager.Get<IEnumerable<Customer>>(MemberManagementSessionKey);
-                }
 
-                if (records == null)
-                {
-                    records = this._memberManagementRepository.Fetch(criteria);
-                    SessionManager.Set<IEnumerable<Customer>>(MemberManagementSessionKey, records);
-                }
-            }
-            catch (Exception ex)
+            if (!criteria.IsLoadNew)
             {
-                HandleException(ex);
+                records = SessionManager.Get<IEnumerable<Customer>>(MemberManagementSessionKey);
+            }
+
+            if (records == null)
+            {
+                records = this._memberManagementRepository.Fetch(criteria);
+                SessionManager.Set<IEnumerable<Customer>>(MemberManagementSessionKey, records);
             }
 
             return records;
@@ -79,23 +72,10 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         /// <returns>CommandResult indicates whether the new customer is inserted successfully or not.</returns>
         public ICommandResult InsertCustomer(InsertCustomerCriteria criteria)
         {
-            Check.Argument.IsNotNull(criteria, "criteria");
-            try
-            {
-                criteria.CurrentUserId = this.ServiceContext.UserId;
-                criteria.Ip = this.ServiceContext.Ip;
+            criteria.CurrentUserId = this.ServiceContext.UserId;
+            criteria.Ip = this.ServiceContext.Ip;
 
-                if (criteria.IsValid())
-                {
-                    return this._memberManagementRepository.Insert(criteria);
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return this.InternalError;
+            return this._memberManagementRepository.Insert(criteria);
         }
 
         /// <summary>
@@ -105,23 +85,10 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         /// <returns>CommandResult indicates whether the level of customer is updated successfully or not.</returns>
         public ICommandResult UpdateCustomerLevel(UpdateCustomerCriteria criteria)
         {
-            Check.Argument.IsNotNull(criteria, "criteria");
-            try
-            {
-                criteria.CurrentUserId = this.ServiceContext.UserId;
-                criteria.Ip = this.ServiceContext.Ip;
+            criteria.CurrentUserId = this.ServiceContext.UserId;
+            criteria.Ip = this.ServiceContext.Ip;
 
-                if (criteria.IsValid())
-                {
-                    return this._memberManagementRepository.Update(criteria);
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return this.InternalError;
+            return this._memberManagementRepository.Update(criteria);
         }
 
         /// <summary>
@@ -131,21 +98,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         /// <returns>Boolean value indicates whether the customer is existing or not.</returns>
         public bool CheckCustomer(CheckCustomerCriteria criteria)
         {
-            bool isExisting = false;
-            Check.Argument.IsNotNull(criteria, "criteria");
-            try
-            {
-                if (criteria.IsValid())
-                {
-                    isExisting = this._memberManagementRepository.CheckCustomer(criteria);
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return isExisting;
+            return this._memberManagementRepository.CheckCustomer(criteria);
         }
 
         /// <summary>
@@ -155,50 +108,32 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         /// <returns>CommandResult indicates whether the level of customer is updated successfully or not.</returns>
         public ICommandResult ChangeCustomerLevel(ChangeCustomerLevelCriteria criteria)
         {
-            Check.Argument.IsNotNull(criteria, "criteria");
-            try
+            CheckCustomerCriteria checkCustomerCriteria = new CheckCustomerCriteria
             {
-                CheckCustomerCriteria checkCustomerCriteria = new CheckCustomerCriteria
+                CustId = criteria.CustId,
+                IsExists = false
+            };
+
+            if (this.CheckCustomer(checkCustomerCriteria))
+            {
+                UpdateCustomerCriteria updateCustomerCriteria = new UpdateCustomerCriteria
                 {
                     CustId = criteria.CustId,
-                    IsExists = false
+                    Level = criteria.Level
                 };
 
-                if (this.CheckCustomer(checkCustomerCriteria))
-                {
-                    UpdateCustomerCriteria updateCustomerCriteria = new UpdateCustomerCriteria
-                    {
-                        CustId = criteria.CustId,
-                        Level = criteria.Level,
-                        CurrentUserId = this.ServiceContext.UserId,
-                        Ip = this.ServiceContext.Ip
-                    };
-
-                    if (updateCustomerCriteria.IsValid())
-                    {
-                        return this.UpdateCustomerLevel(updateCustomerCriteria);
-                    }
-                }
-                else
-                {
-                    InsertCustomerCriteria insertCustomerCriteria = new InsertCustomerCriteria
-                    {
-                        UserName = criteria.UserName,
-                        Level = criteria.Level
-                    };
-
-                    if (insertCustomerCriteria.IsValid())
-                    {
-                        return this.InsertCustomer(insertCustomerCriteria);
-                    }
-                }
+                return this.UpdateCustomerLevel(updateCustomerCriteria);
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
-            }
+                InsertCustomerCriteria insertCustomerCriteria = new InsertCustomerCriteria
+                {
+                    UserName = criteria.UserName,
+                    Level = criteria.Level
+                };
 
-            return this.InternalError;
+                return this.InsertCustomer(insertCustomerCriteria);
+            }
         }
 
         /// <summary>
@@ -208,32 +143,25 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         /// <param name="templatePath">The template's path.</param>
         public void ExportCustomerList(GetCustomersCriteria criteria, string templatePath)
         {
-            try
+            string fileName = string.Format("{0}.xls", Lang.SpecialCustomersFileName);
+            var customerList = this.GetCustomers(criteria);
+            var writer = new ExcelTemplateWriter(templatePath, fileName, Lang.SpecialCustomers);
+            int counter = 0;
+
+            // Copy title and header.
+            writer.CopyRows(0, 4);
+
+            // Prepare content
+            var records = customerList.Select(obj => new
             {
-                string fileName = string.Format("{0}.xls", Lang.SpecialCustomersFileName);
-                var customerList = this.GetCustomers(criteria);
-                var writer = new ExcelTemplateWriter(templatePath, fileName, Lang.SpecialCustomers);
-                int counter = 0;
+                No = ++counter,
+                UserName = obj.UserName,
+                Level = (obj.Level == 0) ? Lang.None : string.Format("{0} {1}", Lang.Level, obj.Level)
+            });
 
-                // Copy title and header.
-                writer.CopyRows(0, 4);
-
-                // Prepare content
-                var records = customerList.Select(obj => new
-                {
-                    No = ++counter,
-                    UserName = obj.UserName,
-                    Level = (obj.Level == 0) ? Lang.None : string.Format("{0} {1}", Lang.Level, obj.Level)
-                });
-
-                writer.WriteRows(4, records);
-                writer.SyncColumnsWidth(3);
-                writer.Render();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+            writer.WriteRows(4, records);
+            writer.SyncColumnsWidth(3);
+            writer.Render();
         }
     }
 }

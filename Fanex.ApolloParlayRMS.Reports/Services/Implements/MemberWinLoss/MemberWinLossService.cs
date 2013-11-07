@@ -55,52 +55,46 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
         public MemberWinLossItem GetMemberWinLossData(GetMemberWinLossCriteria criteria)
         {
             MemberWinLossItem result = null;
-            try
+
+            if (!criteria.IsLoadNew)
             {
-                if (!criteria.IsLoadNew)
-                {
-                    result = SessionManager.Get<MemberWinLossItem>(ReportConstants.WinLossSessionKey);
-                }
-
-                if (result == null)
-                {
-                    var balanceUp = BalanceUpService.GetBalanceUp();
-                    var user = CustomerService.GetCustomerInfo(new GetCustomerByUserNameCriteria
-                    {
-                        UserName = criteria.UserName
-                    });
-
-                    criteria.IsMember = user.RoleId == (int)CommonEnums.RoleId.Member;
-                    criteria.CustId = user.CustId;
-                    criteria.BalanceUpDay = balanceUp.BalanceUpDay;
-                    criteria.MoveBetsDay = balanceUp.MoveBetsDay;
-
-                    List<MemberWinLossItem> rawData = this._memberWinLossRepository.GetMemberWinLossData(criteria).ToList();
-                    if ((rawData != null) && (rawData.Count > 0))
-                    {
-                        if (criteria.IsMember)
-                        {
-                            result = new MemberWinLossItem();
-                            rawData.ToList().ForEach(obj =>
-                            {
-                                obj.OurPTNetWinLoss = obj.OurPTWon + obj.OurPTLose;
-                                obj.Month = ReFormatMonthStr(obj.Month.Trim());
-                                result.Add(obj);
-                                result.ChildItems.Add(obj);
-                            });
-                        }
-                        else
-                        {
-                            result = GroupAgentDataByMonth(rawData);
-                        }
-
-                        SessionManager.Set<MemberWinLossItem>(ReportConstants.WinLossSessionKey, result);
-                    }
-                }
+                result = SessionManager.Get<MemberWinLossItem>(ReportConstants.WinLossSessionKey);
             }
-            catch (Exception ex)
+
+            if (result == null)
             {
-                HandleException(ex);
+                var balanceUp = BalanceUpService.GetBalanceUp();
+                var user = CustomerService.GetCustomerInfo(new GetCustomerByUserNameCriteria
+                {
+                    UserName = criteria.UserName
+                });
+
+                criteria.IsMember = user.RoleId == (int)CommonEnums.RoleId.Member;
+                criteria.CustId = user.CustId;
+                criteria.BalanceUpDay = balanceUp.BalanceUpDay;
+                criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+
+                List<MemberWinLossItem> rawData = this._memberWinLossRepository.GetMemberWinLossData(criteria).ToList();
+                if ((rawData != null) && (rawData.Count > 0))
+                {
+                    if (criteria.IsMember)
+                    {
+                        result = new MemberWinLossItem();
+                        rawData.ToList().ForEach(obj =>
+                        {
+                            obj.OurPTNetWinLoss = obj.OurPTWon + obj.OurPTLose;
+                            obj.Month = ReFormatMonthStr(obj.Month.Trim());
+                            result.Add(obj);
+                            result.ChildItems.Add(obj);
+                        });
+                    }
+                    else
+                    {
+                        result = GroupAgentDataByMonth(rawData);
+                    }
+
+                    SessionManager.Set<MemberWinLossItem>(ReportConstants.WinLossSessionKey, result);
+                }
             }
 
             return result;
@@ -114,41 +108,34 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// <param name="memberTemplatePath">The path of member win loss template.</param>
         public void ExportMemberWinLoss(GetMemberWinLossCriteria criteria, string agentTemplatePath, string memberTemplatePath)
         {
-            try
+            MemberWinLossItem winLoss = GetMemberWinLossData(criteria);
+            string fileName = string.Format(
+                                         ReportsLang.MemberWinLossFileName,
+                                         criteria.UserName,
+                                         criteria.FromDate.ToMonthDayYearFormat().Replace("-", string.Empty),
+                                         criteria.ToDate.ToMonthDayYearFormat().Replace("-", string.Empty));
+            string reportTitle = criteria.ToString();
+            string templatePath = criteria.IsMember ? memberTemplatePath : agentTemplatePath;
+            var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.MemberWinLossSheetName);
+
+            // Copy title.
+            writer.CopyRows(0, 2);
+            writer.WriteRow(2, new { reportTitle });
+            writer.CopyRows(3, 2);
+
+            if ((winLoss != null) && (winLoss.ChildItems.Count > 0))
             {
-                MemberWinLossItem winLoss = GetMemberWinLossData(criteria);
-                string fileName = string.Format(
-                                             ReportsLang.MemberWinLossFileName,
-                                             criteria.UserName,
-                                             criteria.FromDate.ToMonthDayYearFormat().Replace("-", string.Empty),
-                                             criteria.ToDate.ToMonthDayYearFormat().Replace("-", string.Empty));
-                string reportTitle = criteria.ToString();
-                string templatePath = criteria.IsMember ? memberTemplatePath : agentTemplatePath;
-                var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.MemberWinLossSheetName);
-
-                // Copy title.
-                writer.CopyRows(0, 2);
-                writer.WriteRow(2, new { reportTitle });
-                writer.CopyRows(3, 2);
-
-                if ((winLoss != null) && (winLoss.ChildItems.Count > 0))
+                if (criteria.IsMember)
                 {
-                    if (criteria.IsMember)
-                    {
-                        RenderMemberWinLossExcel(winLoss, writer);
-                    }
-                    else
-                    {
-                        RenderAgentWinLossExcel(winLoss, writer);
-                    }
+                    RenderMemberWinLossExcel(winLoss, writer);
                 }
-                
-                writer.Render();
+                else
+                {
+                    RenderAgentWinLossExcel(winLoss, writer);
+                }
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            writer.Render();
         }
 
         /// <summary>

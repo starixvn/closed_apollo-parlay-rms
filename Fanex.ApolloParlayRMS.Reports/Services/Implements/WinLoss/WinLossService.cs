@@ -53,31 +53,25 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
         public WinLossItem GetWinLossData(GetWinLossCriteria criteria)
         {
             WinLossItem result = null;
-            try
+
+            if (!criteria.IsLoadNew)
             {
-                if (!criteria.IsLoadNew)
-                {
-                    result = SessionManager.Get<WinLossItem>(ReportConstants.WinLossSessionKey);
-                }
-
-                if (result == null)
-                {
-                    BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
-                    criteria.BalanceUpDay = balanceUp.BalanceUpDay;
-                    criteria.MoveBetsDay = balanceUp.MoveBetsDay;
-
-                    List<WinLossItem> rawData = this._winLossRepository.GetWinLossData(criteria).ToList();
-
-                    if ((rawData != null) && (rawData.Count > 0))
-                    {
-                        result = GroupData(rawData);
-                        SessionManager.Set<WinLossItem>(ReportConstants.WinLossSessionKey, result);
-                    }
-                }
+                result = SessionManager.Get<WinLossItem>(ReportConstants.WinLossSessionKey);
             }
-            catch (Exception ex)
+
+            if (result == null)
             {
-                HandleException(ex);
+                BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
+                criteria.BalanceUpDay = balanceUp.BalanceUpDay;
+                criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+
+                List<WinLossItem> rawData = this._winLossRepository.GetWinLossData(criteria).ToList();
+
+                if ((rawData != null) && (rawData.Count > 0))
+                {
+                    result = GroupData(rawData);
+                    SessionManager.Set<WinLossItem>(ReportConstants.WinLossSessionKey, result);
+                }
             }
 
             return result;
@@ -91,45 +85,43 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public void ExportWinLoss(GetWinLossCriteria criteria, string templatePath)
         {
-            try
+            WinLossItem winLoss = GetWinLossData(criteria);
+            string fileName = string.Format(
+                                         ReportsLang.WinLossFileName,
+                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+            string reportTitle = criteria.ToString();
+            var writer = new ExcelTemplateWriter(templatePath, fileName, Lang.WinLoss);
+
+            // Copy title.
+            writer.CopyRows(0, 2);
+            writer.WriteRow(2, new { reportTitle });
+            writer.CopyRows(3, 2);
+
+            // Write content
+            foreach (var dateData in winLoss.ChildItems)
             {
-                WinLossItem winLoss = GetWinLossData(criteria);
-                string fileName = string.Format(
-                                             ReportsLang.WinLossFileName,
-                                             criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
-                                             criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
-                string reportTitle = criteria.ToString();
-                var writer = new ExcelTemplateWriter(templatePath, fileName, Lang.WinLoss);
-
-                // Copy title.
-                writer.CopyRows(0, 2);
-                writer.WriteRow(2, new { reportTitle });
-                writer.CopyRows(3, 2);
-
-                // Write content
-                foreach (var dateData in winLoss.ChildItems)
+                // For combos
+                int numOfItems = dateData.ChildItems.Count();
+                var combos = dateData.ChildItems.Select(obj => new
                 {
-                    // For combos
-                    int numOfItems = dateData.ChildItems.Count();
-                    var combos = dateData.ChildItems.Select(obj => new
-                    {
-                        Date = obj.WinLossDate,
-                        Combo = (obj.Combo == (int)CommonConstants.SixUp) ? Lang.SixUp : obj.Combo.ToString(),
-                        TicketWon = obj.TicketWon,
-                        TicketLose = obj.TicketLose,
-                        StakeWon = obj.StakeWon,
-                        StakeLose = obj.StakeLose,
-                        MemberWon = obj.MemberWon,
-                        MemberLose = obj.MemberLose,
-                        OurPTWon = obj.OurPTWon,
-                        OurPTLose = obj.OurPTLose,
-                        OurPTNetWinLoss = obj.OurPTNetWinLoss
-                    });
-                    writer.WriteRows(5, combos);
-                    writer.WriteCellRange(writer.RowId - numOfItems, numOfItems, 0, 1, winLoss.ChildItems[0].WinLossDate);
+                    Date = obj.WinLossDate,
+                    Combo = (obj.Combo == (int)CommonConstants.SixUp) ? Lang.SixUp : obj.Combo.ToString(),
+                    TicketWon = obj.TicketWon,
+                    TicketLose = obj.TicketLose,
+                    StakeWon = obj.StakeWon,
+                    StakeLose = obj.StakeLose,
+                    MemberWon = obj.MemberWon,
+                    MemberLose = obj.MemberLose,
+                    OurPTWon = obj.OurPTWon,
+                    OurPTLose = obj.OurPTLose,
+                    OurPTNetWinLoss = obj.OurPTNetWinLoss
+                });
+                writer.WriteRows(5, combos);
+                writer.WriteCellRange(writer.RowId - numOfItems, numOfItems, 0, 1, winLoss.ChildItems[0].WinLossDate);
 
-                    // For WinLossDate summary
-                    var subtotal = new object[]
+                // For WinLossDate summary
+                var subtotal = new object[]
                     {
                         Lang.Subtotal,
                         string.Empty,
@@ -143,11 +135,11 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
                         dateData.OurPTLose,
                         dateData.OurPTNetWinLoss
                     };
-                    writer.WriteRow(6, subtotal);
-                }
+                writer.WriteRow(6, subtotal);
+            }
 
-                // Total row
-                var total = new object[]
+            // Total row
+            var total = new object[]
                 {
                     Lang.Total,
                     string.Empty,
@@ -161,15 +153,10 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
                     winLoss.OurPTLose,
                     winLoss.OurPTNetWinLoss
                 };
-                
-                writer.WriteRow(7, total);
-                writer.SyncColumnsWidth(11);
-                writer.Render();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            writer.WriteRow(7, total);
+            writer.SyncColumnsWidth(11);
+            writer.Render();
         }
 
         /// <summary>

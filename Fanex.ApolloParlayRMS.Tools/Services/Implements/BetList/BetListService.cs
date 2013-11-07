@@ -43,21 +43,11 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList
         /// <returns>List of Ticket objects.</returns>
         public IEnumerable<ITicket> CreateChoices(long refNo)
         {
-            IEnumerable<BetItem> data = null;
-
-            try
+            var criteria = new GetTransDetailsCriteria
             {
-                var criteria = new GetTransDetailsCriteria
-                {
-                    RefNo = refNo
-                };
-
-                data = this._repository.Fetch<BetItem>(criteria);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+                RefNo = refNo
+            };
+            IEnumerable<BetItem> data = this._repository.Fetch<BetItem>(criteria);
 
             return Map(refNo, data);
         }

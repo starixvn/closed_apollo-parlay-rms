@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
 {
-    using System;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.Services.Implements;
     using Fanex.ApolloParlayRMS.Tools.Criteria.TotalOutstanding;
@@ -46,28 +45,21 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
         public AgentTotalOutstandingList GetTotalOutstandingOfAgent(GetTotalOutstandingOfAgentCriteria criteria)
         {
             var agentTotalOutstanding = new AgentTotalOutstandingList();
-            try
-            {
-                var records = this._totalOutstandingRepository.GetTotalOutstandingOfAgent(criteria).ToList();
-                var total = new AgentTotalOutstanding();
+            var total = new AgentTotalOutstanding();
+            var records = this._totalOutstandingRepository.GetTotalOutstandingOfAgent(criteria).ToList();
 
-                records.ForEach(obj =>
-                {
-                    total.StakePT += obj.StakePT;
-                    total.MaxPayoutPT += obj.MaxPayoutPT;
-                    total.BetCount += obj.BetCount;
-                });
-
-                agentTotalOutstanding = new AgentTotalOutstandingList
-                {
-                    Records = records,
-                    Total = total
-                };
-            }
-            catch (Exception ex)
+            records.ForEach(obj =>
             {
-                HandleException(ex);
-            }
+                total.StakePT += obj.StakePT;
+                total.MaxPayoutPT += obj.MaxPayoutPT;
+                total.BetCount += obj.BetCount;
+            });
+
+            agentTotalOutstanding = new AgentTotalOutstandingList
+            {
+                Records = records,
+                Total = total
+            };
 
             return agentTotalOutstanding;
         }
@@ -83,27 +75,20 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
         public MemberTotalOutstandingList GetTotalOutstandingOfMember(GetTotalOutstandingOfMemCriteria criteria)
         {
             var memberTotalOutstanding = new MemberTotalOutstandingList();
-            try
-            {
-                var records = this._totalOutstandingRepository.GetTotalOutstandingOfMember(criteria).ToList();
-                var total = new MemberTotalOutstanding();
+            var total = new MemberTotalOutstanding();
+            var records = this._totalOutstandingRepository.GetTotalOutstandingOfMember(criteria).ToList();
 
-                records.ForEach(obj =>
-                {
-                    total.StakePT += obj.StakePT;
-                    total.MaxPayoutPT += obj.MaxPayoutPT;
-                });
-
-                memberTotalOutstanding = new MemberTotalOutstandingList
-                {
-                    Records = records,
-                    Total = total
-                };
-            }
-            catch (Exception ex)
+            records.ForEach(obj =>
             {
-                HandleException(ex);
-            }
+                total.StakePT += obj.StakePT;
+                total.MaxPayoutPT += obj.MaxPayoutPT;
+            });
+
+            memberTotalOutstanding = new MemberTotalOutstandingList
+            {
+                Records = records,
+                Total = total
+            };
 
             return memberTotalOutstanding;
         }

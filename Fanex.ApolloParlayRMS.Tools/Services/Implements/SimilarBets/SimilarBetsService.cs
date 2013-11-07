@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.SimilarBets
 {
-    using System;
     using Fanex.ApolloParlayRMS.Core.Services.Implements;
     using Fanex.ApolloParlayRMS.Tools.Criteria.SimilarBets;
     using Fanex.ApolloParlayRMS.Tools.Models.SimilarBets;
@@ -44,17 +43,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.SimilarBets
         /// </returns>
         public SimilarBetList GetSimilarBetList(GetSimilarBetListCriteria criteria)
         {
-            SimilarBetList data = new SimilarBetList();
-            try
-            {
-                data = this._similarBetsRepository.GetSimilarBetList(criteria);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return data;
+            return this._similarBetsRepository.GetSimilarBetList(criteria);
         }
     }
 }

@@ -111,7 +111,6 @@
     <Compile Include="Services\Implements\BalanceUpService.cs" />
     <Compile Include="Services\Implements\CacheRef.cs" />
     <Compile Include="Services\Implements\CustomerService.cs" />
-    <Compile Include="Services\Implements\LoggingHandler.cs" />
     <Compile Include="Services\Implements\BaseService.cs" />
     <Compile Include="Services\Implements\MenuService.cs" />
     <Compile Include="Web\ApolloParlayRMSFunctionKeys.cs" />

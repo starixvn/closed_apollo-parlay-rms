@@ -15,6 +15,8 @@ namespace Fanex.ApolloParlayRMS.Websites
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using System.Web.Script.Serialization;
+    using Fanex.ApolloParlayRMS.Core.Resources;
     using Fanex.Data.Configuration;
     using Fanex.Logging;
 
@@ -45,6 +47,12 @@ namespace Fanex.ApolloParlayRMS.Websites
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
+            var jsonSerialiser = new JavaScriptSerializer();
+            var error = jsonSerialiser.Serialize(new
+            {
+                Code = 500,
+                Message = Messages.InternalError
+            });
 
             if (!Request.IsLocal)
             {
@@ -59,7 +67,11 @@ namespace Fanex.ApolloParlayRMS.Websites
                                             ex.StackTrace);
 
                 LogService.Error(message);
-            }
+            }            
+
+            Response.Output.Write(error);
+            Response.Output.Close();
+            Server.ClearError();
         }
     }
 }
