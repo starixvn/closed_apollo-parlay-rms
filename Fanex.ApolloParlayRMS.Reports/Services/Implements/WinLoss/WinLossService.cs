@@ -31,7 +31,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
     /// <summary>
     /// Win loss service.
     /// </summary>
-    public class WinLossService : BasedService, IWinLossService
+    public class WinLossService : BaseService, IWinLossService
     {
         private readonly IWinLossRepository _winLossRepository;
 

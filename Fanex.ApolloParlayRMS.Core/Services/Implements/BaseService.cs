@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BasedService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BaseService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -19,7 +19,7 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
     /// <summary>
     /// Service Base.
     /// </summary>
-    public class BasedService
+    public class BaseService
     {
         public IServiceContext ServiceContext { get; set; }
 
@@ -42,23 +42,6 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
         public void HandleException(Exception ex)
         {
             LoggingHandler.Log(ex);
-        }
-
-        /// <summary>
-        /// Gets the criteria which are used to identify the user and the machine that update the data to the database.
-        /// </summary>
-        /// <returns>LogExecSPCriteria object.</returns>
-        public LogExecSpCriteria GetLogExecSpCriteria()
-        {
-            Check.Argument.IsNotNull(this.ServiceContext, "ServiceContext");
-
-            return new LogExecSpCriteria
-            {
-                CurrentUserId = this.ServiceContext.UserId,
-                CurrentSiteId = this.ServiceContext.SiteId,
-                LogDate = DateTime.Now,
-                LoginIp = this.ServiceContext.Ip
-            };
         }
     }
 }

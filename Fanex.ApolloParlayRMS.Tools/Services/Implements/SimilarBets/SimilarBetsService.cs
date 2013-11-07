@@ -20,7 +20,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.SimilarBets
     /// <summary>
     /// Similar bets service.
     /// </summary>
-    public class SimilarBetsService : BasedService, ISimilarBetsService
+    public class SimilarBetsService : BaseService, ISimilarBetsService
     {
         private readonly ISimilarBetsRepository _similarBetsRepository;
 

@@ -28,7 +28,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
     /// <summary>
     /// Member Management Repository.
     /// </summary>
-    public class MemberManagementService : BasedService, IMemberManagementService
+    public class MemberManagementService : BaseService, IMemberManagementService
     {
         private static readonly string MemberManagementSessionKey = "Fanex.ApolloParlayRMS. MemberManagement. MemberManagement";
         private readonly IMemberManagementRepository _memberManagementRepository;
@@ -158,7 +158,6 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
             Check.Argument.IsNotNull(criteria, "criteria");
             try
             {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
                 CheckCustomerCriteria checkCustomerCriteria = new CheckCustomerCriteria
                 {
                     CustId = criteria.CustId,
@@ -170,10 +169,12 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
                     UpdateCustomerCriteria updateCustomerCriteria = new UpdateCustomerCriteria
                     {
                         CustId = criteria.CustId,
-                        Level = criteria.Level
+                        Level = criteria.Level,
+                        CurrentUserId = this.ServiceContext.UserId,
+                        Ip = this.ServiceContext.Ip
                     };
 
-                    if (updateCustomerCriteria.IsValid() && logCriteria.IsValid())
+                    if (updateCustomerCriteria.IsValid())
                     {
                         return this.UpdateCustomerLevel(updateCustomerCriteria);
                     }
@@ -186,7 +187,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
                         Level = criteria.Level
                     };
 
-                    if (insertCustomerCriteria.IsValid() && logCriteria.IsValid())
+                    if (insertCustomerCriteria.IsValid())
                     {
                         return this.InsertCustomer(insertCustomerCriteria);
                     }

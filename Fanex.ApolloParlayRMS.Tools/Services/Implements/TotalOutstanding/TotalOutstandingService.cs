@@ -21,7 +21,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
     /// <summary>
     /// Total outstanding service.
     /// </summary>
-    public class TotalOutstandingService : BasedService, ITotalOutstandingService
+    public class TotalOutstandingService : BaseService, ITotalOutstandingService
     {
         private readonly ITotalOutstandingRepository _totalOutstandingRepository;
 

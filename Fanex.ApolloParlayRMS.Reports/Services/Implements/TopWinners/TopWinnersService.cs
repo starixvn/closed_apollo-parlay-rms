@@ -31,7 +31,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
     /// <summary>
     /// Top Winners service.
     /// </summary>
-    public class TopWinnersService : BasedService, ITopWinnersService
+    public class TopWinnersService : BaseService, ITopWinnersService
     {
         private readonly ITopWinnersRepository _topWinnersRepository;
 

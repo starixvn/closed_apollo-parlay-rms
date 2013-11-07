@@ -22,7 +22,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
     /// <summary>
     /// Mix parlay monitor service.
     /// </summary>
-    public class MixParlayMonitorService : BasedService, IMixParlayMonitorService
+    public class MixParlayMonitorService : BaseService, IMixParlayMonitorService
     {
         private readonly IMixParlayMonitorRepository _mixParlayMonitorRepository;
 

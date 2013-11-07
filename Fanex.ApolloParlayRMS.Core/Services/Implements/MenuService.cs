@@ -19,7 +19,7 @@ namespace Fanex.ApolloParlayRMS.Core.Services.Implements
     /// <summary>
     /// Menu Service.
     /// </summary>
-    public class MenuService : BasedService
+    public class MenuService : BaseService
     {
         public const char UrlSeparator = '/';
 

@@ -1,7 +1,5 @@
 ﻿@using System.Web.Script.Serialization
 @using Fanex.ApolloParlayRMS.Core.Constants
-@using Fanex.ApolloParlayRMS.Core.Extensions
-@using Fanex.ApolloParlayRMS.Core.Web
 @{
 	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,7 +34,6 @@
 				<div class="edit-field">
 					@Html.DropDownList("ddlSportTypes", (IEnumerable<SelectListItem>)ViewBag.SportTypes, new { @class = "multiselect-width" })
 				</div>
-				@*@Html.RadioButtonList("rbgSportTypes", (List<SelectListItem>)ViewBag.SportTypes, "<div class='edit-field width-auto'>{0}</div><div class='lbl-field width-auto' style='margin-right: 15px;'>{1}</div>")*@
 			</div>
 			<div class="filter-cell">
 				<div class="lbl-field width-100">

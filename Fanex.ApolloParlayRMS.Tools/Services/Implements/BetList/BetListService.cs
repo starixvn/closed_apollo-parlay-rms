@@ -22,7 +22,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList
     /// <summary>
     /// Bet list service.
     /// </summary>
-    public class BetListService : BasedService, IBetListService
+    public class BetListService : BaseService, IBetListService
     {
         private readonly IDynamicRepository _repository;
 

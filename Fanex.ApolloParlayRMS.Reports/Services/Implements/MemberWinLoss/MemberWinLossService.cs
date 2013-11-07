@@ -31,7 +31,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
     /// <summary>
     /// Member win loss service.
     /// </summary>
-    public class MemberWinLossService : BasedService, IMemberWinLossService
+    public class MemberWinLossService : BaseService, IMemberWinLossService
     {
         private readonly IMemberWinLossRepository _memberWinLossRepository;
 
