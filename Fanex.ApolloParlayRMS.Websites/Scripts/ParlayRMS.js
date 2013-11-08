@@ -46,7 +46,7 @@ var ParlayRMS = function ($) {
 			} else if (xhr.status == 404) {
 				ParlayRMS.headlineMsgBox.showErr('Resources not found!', { sticky: true });
 			} else {
-				ParlayRMS.headlineMsgBox.showErr('An unexpected error has occurred!', { sticky: true });
+				ParlayRMS.headlineMsgBox.showErr('Sorry, an error occurred while processing your request, please notify the administrators.', { sticky: true });
 			}
 		},
 		showInfoMessage: function (message) {

@@ -218,7 +218,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                       { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
                       { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.NetWinLoss, Width: 107, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
+                      { HeaderText: labels.NetWinLoss, Width: 107, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' }],
             showTitle: true,
             showFooter: true,
             gridExpandHeight: 220,
