@@ -18,6 +18,10 @@ namespace Fanex.ApolloParlayRMS.Core.Criteria
     {
         public string UserName { get; set; }
 
+        public int CustId { get; set; }
+
+        public int RoleId { get; set; }
+
         /// <summary>
         /// Get Setting Key.
         /// </summary>

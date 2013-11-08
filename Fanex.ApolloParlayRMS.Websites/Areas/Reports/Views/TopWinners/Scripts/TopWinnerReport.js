@@ -351,7 +351,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                           { Name: 'ColBaseWinningAmount', Value: data.WinLossBaseRM },
                           { Name: 'ColBaseCompanyLoseAmount', Value: data.CompanyWinLossBaseRM },
                           { Name: 'ColTotalCombo', Value: data.Combo },
-                          { Name: 'ColOdds', Value: '-', CellAlign: 'center'}]
+                          { Name: 'ColOdds', Value: '-', CellAlign: 'right'}]
             };
             footerData.push(row);
         }

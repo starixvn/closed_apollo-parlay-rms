@@ -484,10 +484,10 @@
     <Content Include="Areas\Reports\Views\WinLoss\Index.cshtml" />
     <Content Include="Areas\MemberManagement\ExcelTemplates\SpecialMembers.xls" />
     <Content Include="Areas\Reports\Views\TopWinners\BetDetails.cshtml" />
-    <None Include="Areas\Reports\ExcelTemplates\AgentWinLoss.xls" />
-    <None Include="Areas\Reports\ExcelTemplates\MemberWinLoss.xls" />
-    <None Include="Areas\Reports\ExcelTemplates\TopWinners.xls" />
-    <None Include="Areas\Reports\ExcelTemplates\WinLoss.xls" />
+    <Content Include="Areas\Reports\ExcelTemplates\AgentWinLoss.xls" />
+    <Content Include="Areas\Reports\ExcelTemplates\MemberWinLoss.xls" />
+    <Content Include="Areas\Reports\ExcelTemplates\TopWinners.xls" />
+    <Content Include="Areas\Reports\ExcelTemplates\WinLoss.xls" />
     <Content Include="Areas\Reports\Views\MemberWinLoss\Index.cshtml" />
     <Content Include="Areas\Tools\Web.config" />
     <Content Include="Areas\Tools\Views\MixParlayMonitor\Index.cshtml" />

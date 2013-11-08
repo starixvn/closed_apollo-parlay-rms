@@ -30,7 +30,7 @@
 			<Mapping DataField="winlost_baseRM" ObjectProperty="WinLossBaseRM" />
 			<Mapping DataField="company_winlost_baseRM" ObjectProperty="CompanyWinLossBaseRM" />
 		</Setting>
-		<Setting Key="RMS_Rpt_Parlay_TopWinners_Details_old" SpName="RMS_Rpt_Parlay_TopWinners_Details_old" DbName="SVRARC.ArchiveDB.aplweb" Plain="0">
+		<Setting Key="RMS_Rpt_Parlay_TopWinners_Details_old" SpName="RMS_Rpt_Parlay_TopWinners_Details_old" DbName="SVRARC.ArchiveDB.bodbRMSNet" Plain="0">
 			<Mapping DataField="winlost" ObjectProperty="WinLoss" />
 			<Mapping DataField="company_winlost" ObjectProperty="CompanyWinLoss" />
 			<Mapping DataField="stake_baseRM" ObjectProperty="StakeBaseRM" />

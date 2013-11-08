@@ -69,9 +69,17 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
         /// <returns>Whether a customer is existing or not.</returns>
         public bool CheckCustomer(ICriteria criteria)
         {
-            DbResult result = DbHelper.ExecuteDbResult(criteria.GetSettingKey(), criteria.GetSpParams());
+            bool isExist = false;
 
-            return Convert.ToBoolean(result.Outputs["isexists"]);
+            using (IObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var param = criteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+                isExist = (bool)param["isexists"];
+            }
+
+            return isExist;
         }
     }
 }

@@ -28,11 +28,17 @@ namespace Fanex.ApolloParlayRMS.Core.Repositories
         public CustomerInfo GetCustomerInfo(GetCustomerByUserNameCriteria criteria)
         {
             CustomerInfo custInfo = new CustomerInfo();
-            DbResult result = DbHelper.ExecuteDbResult(criteria.GetSettingKey(), criteria.GetSpParams());
 
-            custInfo.UserName = criteria.UserName;
-            custInfo.CustId = Convert.ToInt64(result.Outputs["custid"]);
-            custInfo.RoleId = Convert.ToInt32(result.Outputs["roleid"]);
+            using (IObjectDb db = new ObjectDb(criteria.GetSettingKey())) 
+            {
+                var param = criteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+
+                custInfo.UserName = criteria.UserName;
+                custInfo.CustId = (int)param["custid"];
+                custInfo.RoleId = (int)param["roleid"];
+            }
 
             return custInfo;
         }

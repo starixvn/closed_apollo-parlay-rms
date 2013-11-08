@@ -91,6 +91,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
 
             if (balanceUp.BalanceUpDay.CompareTo(criteria.FromDate) <= 0)
             {
+                criteria.MoveBetsDay = balanceUp.MoveBetsDay;
                 records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(criteria));
             }
             else if (balanceUp.BalanceUpDay.CompareTo(criteria.ToDate) > 0)

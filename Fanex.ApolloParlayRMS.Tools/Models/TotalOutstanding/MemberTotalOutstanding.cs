@@ -31,6 +31,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Models.TotalOutstanding
 
         public decimal MaxPayoutPT { get; set; }
 
-        public string Combo { get; set; }
+        public int Combo { get; set; }
     }
 }
