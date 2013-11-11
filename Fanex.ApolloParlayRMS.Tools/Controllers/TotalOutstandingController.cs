@@ -9,6 +9,7 @@
 
 namespace Fanex.ApolloParlayRMS.Tools.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.ApolloParlayRMS.Core.Constants;
@@ -60,7 +61,13 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         public ActionResult Index(string userName = null, string combos = null, string sportTypes = null)
         {
             var comboList = FilterForm.Combos;
-            var sportTypeList = FilterForm.SportTypes.GetRange(1, 3);
+            var sportTypeList = new List<SelectListItem>();
+
+            FilterForm.SportTypes.GetRange(1, 3).ForEach(obj => sportTypeList.Add(new SelectListItem
+            {
+                Text = obj.Text,
+                Value = obj.Value
+            }));
 
             if (!string.IsNullOrEmpty(combos))
             {

@@ -53,7 +53,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
     };
     var initFields = function () {
         initMultiDropDownList($this.DOMInstance.ddlCombo, 106, 132);
-        initMultiDropDownList($this.DOMInstance.ddlSportTypes, 106, 132);
+        initMultiDropDownList($this.DOMInstance.ddlSportTypes, 65, 132);
 
         $this.DOMInstance.txtUserName.bind('blur', function (event) {
             var trimValue = $.trim($(this).val());

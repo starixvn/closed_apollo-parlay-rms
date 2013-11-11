@@ -72,11 +72,11 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
         });
     };
     var initFields = function () {
-        initSingleDropDownList($this.DOMInstance.ddlSelectTop, 90, 132);
+        initSingleDropDownList($this.DOMInstance.ddlSelectTop, 85, 132);
         initMultiDropDownList($this.DOMInstance.ddlCombo, 106, 132);
-        initMultiDropDownList($this.DOMInstance.ddlSportTypes, 106, 132);
+        initMultiDropDownList($this.DOMInstance.ddlSportTypes, 64, 132);
         initMultiDropDownList($this.DOMInstance.ddlLevel, 106, 132);
-        initSingleDropDownList($this.DOMInstance.ddlRefreshTime, 70, 60);
+        initSingleDropDownList($this.DOMInstance.ddlRefreshTime, 65, 60);
         $this.DOMInstance.ddlRefreshTime.multiselect('option', 'classes', 'width-80');
     };
     var bindEvenHandlers = function () {

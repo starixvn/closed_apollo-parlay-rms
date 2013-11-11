@@ -63,7 +63,7 @@ Fanex.ApolloParlayRMS.Reports.WinLossReport = function () {
         var maxDateObj = new Date(maxDate);
         var currentDate = $.datepicker.formatDate(ParlayRMS.commonConstants.DateFormat, maxDateObj);
 
-        initSingleDropDownList($this.DOMInstance.ddlBetType, 30);
+        initSingleDropDownList($this.DOMInstance.ddlBetType, 22);
         initMultiDropDownList($this.DOMInstance.ddlCombo);
         initSingleDropDownList($this.DOMInstance.ddlSportTypes, 85);
 
