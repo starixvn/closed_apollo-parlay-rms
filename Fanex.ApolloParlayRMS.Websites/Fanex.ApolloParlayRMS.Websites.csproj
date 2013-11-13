@@ -522,7 +522,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="Content\themes\level-updater\layout.less" />
     <Content Include="Content\themes\level-updater\levels.less" />
   </ItemGroup>
