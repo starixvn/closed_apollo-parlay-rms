@@ -45,13 +45,13 @@
 	display: none;
 	padding: 10px;
 }
-
+/*
 .chrome .msgbox {
 	box-shadow: 0 0 10px 3px #999;
 	font-weight: normal;
 	padding: 0;    
 }
-
+*/
 .msgbox.err {
 	background-color: #FFD4D4;
 	border-color: #F00;
@@ -66,7 +66,7 @@
 	background-color: #E6F1C9;
 	border-color: #CFE493;
 }
-
+/*
 .chrome .msgbox.err, .chrome .msgbox.warn, .chrome .msgbox.info, .chrome .msgbox.alert, .chrome .msgbox.confirm, .chrome .msgbox.prompt {
 	border-color: #BCC1D0;
 }
@@ -90,16 +90,16 @@
 .chrome .msgbox.prompt {
 	background: url(images/question.png) no-repeat 10px 15px #FFF;
 }
-
+*/
 .msgbox-content {
 	padding-right: 30px;
 }
-
+/*
 .chrome .msgbox-content {
 	padding: 20px 60px 0 90px;
 	min-height: 64px;
 }
-
+*/
 .msgbox .msgbox-close {
 	background: url(images/btn-close.png) no-repeat -2px -41px;
 	border: #333 solid 2px;

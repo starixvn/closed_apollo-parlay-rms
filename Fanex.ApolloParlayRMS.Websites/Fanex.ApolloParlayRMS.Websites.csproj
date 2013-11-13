@@ -440,8 +440,6 @@
     <Content Include="Scripts\lib\msgbox\images\question.png" />
     <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.css" />
     <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.js" />
-    <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.min.css" />
-    <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.min.js" />
     <Content Include="Scripts\lib\Multiselect\jquery.multiselect.css" />
     <Content Include="Scripts\lib\Multiselect\jquery.multiselect.js" />
     <Content Include="Scripts\lib\Namespace.js" />
