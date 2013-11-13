@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners
 {
-    using System;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

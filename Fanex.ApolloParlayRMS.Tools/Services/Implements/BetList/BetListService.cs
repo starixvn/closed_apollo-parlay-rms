@@ -9,10 +9,9 @@
 
 namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Tools.Criteria.BetList;
     using Fanex.ApolloParlayRMS.Tools.Models.BetList;
     using Fanex.ApolloParlayRMS.Tools.Services.Interfaces.BetList;

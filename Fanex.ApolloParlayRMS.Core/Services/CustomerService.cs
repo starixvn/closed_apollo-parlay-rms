@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2013.10.17">Created</change>
 // </history>
 
-namespace Fanex.ApolloParlayRMS.Core.Services.Implements
+namespace Fanex.ApolloParlayRMS.Core.Services
 {
     using Fanex.ApolloParlayRMS.Core.Criteria;
     using Fanex.ApolloParlayRMS.Core.Models;

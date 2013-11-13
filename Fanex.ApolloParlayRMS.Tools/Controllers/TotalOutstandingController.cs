@@ -16,7 +16,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
     using Fanex.ApolloParlayRMS.Core.Controllers;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Resources;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.ApolloParlayRMS.Tools.Criteria.TotalOutstanding;
     using Fanex.ApolloParlayRMS.Tools.Services.Implements.BetList;

@@ -12,7 +12,7 @@ namespace Fanex.ApolloParlayRMS.Core.Controllers
     using System;
     using System.Text;
     using System.Web.Mvc;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;

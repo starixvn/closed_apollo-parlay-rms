@@ -12,7 +12,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
     using System;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.Configurations;
-    using Fanex.ApolloParlayRMS.Core.Constants;
     using Fanex.ApolloParlayRMS.Core.Extensions;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Resources;

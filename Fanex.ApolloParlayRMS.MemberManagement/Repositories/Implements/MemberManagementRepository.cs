@@ -9,21 +9,19 @@
 
 namespace Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements
 {
-    using System;
     using System.Collections;
     using Fanex.ApolloParlayRMS.Core.Repositories;
     using Fanex.ApolloParlayRMS.MemberManagement.Criteria;
     using Fanex.ApolloParlayRMS.MemberManagement.Models;
     using Fanex.ApolloParlayRMS.MemberManagement.Repositories.Interfaces;
     using Fanex.Data;
-    using Fanex.Data.DNAide;
     using Fanex.NAP.Core.Criteria.Misc;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Member Management Repository.
     /// </summary>
-    public class MemberManagementRepository : BasedRepository<Customer>, IMemberManagementRepository
+    public class MemberManagementRepository : BaseRepository<Customer>, IMemberManagementRepository
     {
         /// <summary>
         /// Insert a new customer to the database.

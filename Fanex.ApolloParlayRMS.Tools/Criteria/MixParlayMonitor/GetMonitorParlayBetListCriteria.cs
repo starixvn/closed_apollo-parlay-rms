@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Tools.Criteria.MixParlayMonitor
 {
-    using System;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

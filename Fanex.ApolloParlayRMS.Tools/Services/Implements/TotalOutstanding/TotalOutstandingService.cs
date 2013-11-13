@@ -10,7 +10,7 @@
 namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
 {
     using System.Linq;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Tools.Criteria.TotalOutstanding;
     using Fanex.ApolloParlayRMS.Tools.Models.TotalOutstanding;
     using Fanex.ApolloParlayRMS.Tools.Repositories.Implements.TotalOutstanding;

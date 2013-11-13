@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Websites.Areas.UserLogin.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.NAP.Core.Service.Impl;

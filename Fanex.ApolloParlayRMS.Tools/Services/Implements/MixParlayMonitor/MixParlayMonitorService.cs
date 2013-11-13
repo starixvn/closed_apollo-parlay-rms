@@ -12,7 +12,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Tools.Criteria.MixParlayMonitor;
     using Fanex.ApolloParlayRMS.Tools.Models.MixParlayMonitor;
     using Fanex.ApolloParlayRMS.Tools.Repositories.Implements.MixParlayMonitor;

@@ -9,19 +9,17 @@
 
 namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.ApolloParlayRMS.Core.ExcelUtility;
     using Fanex.ApolloParlayRMS.Core.Resources;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.ApolloParlayRMS.MemberManagement.Criteria;
     using Fanex.ApolloParlayRMS.MemberManagement.Models;
     using Fanex.ApolloParlayRMS.MemberManagement.Repositories.Implements;
     using Fanex.ApolloParlayRMS.MemberManagement.Repositories.Interfaces;
     using Fanex.ApolloParlayRMS.MemberManagement.Services.Interfaces;
-    using Fanex.Common.Helper;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

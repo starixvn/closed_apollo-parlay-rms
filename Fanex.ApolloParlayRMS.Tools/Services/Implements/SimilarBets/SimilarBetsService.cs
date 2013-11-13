@@ -9,7 +9,7 @@
 
 namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.SimilarBets
 {
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Tools.Criteria.SimilarBets;
     using Fanex.ApolloParlayRMS.Tools.Models.SimilarBets;
     using Fanex.ApolloParlayRMS.Tools.Repositories.Implements.SimilarBets;

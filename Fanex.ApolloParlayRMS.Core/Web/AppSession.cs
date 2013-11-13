@@ -11,7 +11,6 @@ namespace Fanex.ApolloParlayRMS.Core.Web
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.ApolloParlayRMS.Core.Constants;
     using Fanex.NAP.Core.Model;
 

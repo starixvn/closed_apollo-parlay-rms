@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Reports.Repositories.Implements.MemberWinLoss
 {
-    using System;
     using System.Collections.Generic;
     using Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss;
     using Fanex.ApolloParlayRMS.Reports.Models.MemberWinLoss;

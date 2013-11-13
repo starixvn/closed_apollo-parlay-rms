@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BasedRepository.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BaseRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace Fanex.ApolloParlayRMS.Core.Repositories
     /// Based Repository.
     /// </summary>
     /// <typeparam name="T">Expected type.</typeparam>
-    public class BasedRepository<T> : ReadonlyRepository<T>
+    public class BaseRepository<T> : ReadonlyRepository<T>
     {
         /// <summary>
         /// Gets the command result.

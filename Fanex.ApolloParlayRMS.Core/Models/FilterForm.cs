@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Core.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Fanex.ApolloParlayRMS.Core.Constants;

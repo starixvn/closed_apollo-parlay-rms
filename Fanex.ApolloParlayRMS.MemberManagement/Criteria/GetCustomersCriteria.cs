@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
 {
-    using System;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

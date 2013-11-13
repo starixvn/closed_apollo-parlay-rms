@@ -10,7 +10,7 @@
 namespace Fanex.ApolloParlayRMS.Tools.Models.TotalOutstanding
 {
     using System;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 
     /// <summary>
     /// List of total outstanding items of member.

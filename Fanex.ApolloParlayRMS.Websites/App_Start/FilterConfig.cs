@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloParlayRMS.Websites
 {
-    using System.Web;
     using System.Web.Mvc;
 
     /// <summary>

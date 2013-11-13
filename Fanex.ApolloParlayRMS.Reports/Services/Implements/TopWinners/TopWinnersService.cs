@@ -17,7 +17,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
     using Fanex.ApolloParlayRMS.Core.Extensions;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.ApolloParlayRMS.Core.Resources;
-    using Fanex.ApolloParlayRMS.Core.Services.Implements;
+    using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Core.Web;
     using Fanex.ApolloParlayRMS.Reports.Constants;
     using Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners;

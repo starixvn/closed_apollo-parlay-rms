@@ -9,11 +9,9 @@
 
 namespace Fanex.ApolloParlayRMS.Core.Repositories
 {
-    using System;
     using Fanex.ApolloParlayRMS.Core.Criteria;
     using Fanex.ApolloParlayRMS.Core.Models;
     using Fanex.Data;
-    using Fanex.Data.DNAide;
 
     /// <summary>
     /// Customer information repository.
