@@ -445,7 +445,7 @@ div.link {
 
     th {
         border-bottom: solid 1px #d0d0d0;
-		background-color: #e3e4e6;
+        background-color: #e3e4e6;
         background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#f9f9f9),color-stop(100%,#e3e4e6));
         background-image: -webkit-linear-gradient(top,#f9f9f9,#e3e4e6);
         background-image: -moz-linear-gradient(top,#f9f9f9,#e3e4e6);
@@ -981,7 +981,7 @@ div.link {
         }
 
         .btn-mixParlay {
-			margin-left: 65px;
+            margin-left: 65px;
         }
     }
 
@@ -1304,13 +1304,49 @@ div.link {
 }
 
 /* IE */
+.eq-ie8, .eq-ie7 {
+    .header {
+        padding: 2px 0;
+
+        .logo a {
+            border: 1px solid #ccc;
+            padding: 4px 18px;
+            top: 2px;
+        }
+
+        nav .menu {
+            li > a {
+                padding: 4px 14px;
+            }
+        }
+    }
+}
+
 .eq-ie8 {
+    .header {
+        .logo a { font-size: 1.6em }
+
+        nav .menu li {
+            a	{ font-size: 1.1em }
+            ul {
+                top: 43px;
+                li a {
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+
     .filter-form .filter-cell .btn-mixParlay{
         margin-left: 55px;
     }
 }
 
 .eq-ie7 {
+    .header nav .menu li ul {
+        top: 49px;
+    }
+
     .width-100 {
         width: 90px !important;
     }
