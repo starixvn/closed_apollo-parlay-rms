@@ -30,7 +30,6 @@ var ParlayRMS = function ($) {
 		},
 		// Handles common error when making ajax request
 		handleAjaxError: function (xhr, status, err) {
-			ParlayRMS.infoMsgBox.close(true);
 			if (xhr.status == 403) {
 				ParlayRMS.headlineMsgBox.showErr('Unauthorized request rejected!', { sticky: true });
 			} else if (xhr.status == 404) {
@@ -40,7 +39,6 @@ var ParlayRMS = function ($) {
 			}
 		},
 		showInfoMessage: function (message) {
-			ParlayRMS.headlineMsgBox.close(true);
 			ParlayRMS.infoMsgBox.showInfo(message, { duration: 3000 });
 		},
 		modal: function (title, html) {

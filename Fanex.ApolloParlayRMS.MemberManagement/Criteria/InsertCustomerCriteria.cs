@@ -21,7 +21,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
         public int CustId { get; set; }
 
         [Required]
-        [Display(Name="User Name")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
