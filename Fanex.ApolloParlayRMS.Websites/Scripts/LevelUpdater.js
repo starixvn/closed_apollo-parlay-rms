@@ -48,7 +48,7 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
         if (sourceMessages) {
             messages = sourceMessages;
         } else {
-            messages.ChangeLevelConfirmation = 'Do you want to change the level of {0} to {1}';
+            messages.ChangeLevelConfirmation = 'Do you want to change the level of {0} to {1}?';
             messages.ChangeLevelConfirmation = 'Change level successfully!';
         }
     };
@@ -58,7 +58,7 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
     };
     $this.CreateAddNewField = function (obj) {
         var objId = obj.attr('id');
-        obj.html(createLevelUpdater(objId, false, false, '10', true).html());
+        obj.html(createLevelUpdater(objId, false, true, '1', true).html());
     };
     $this.CreateUpdateField = function (id, defaultValue, isEnable, userName) {
         updateField = createLevelUpdater(id, false, true, defaultValue, isEnable);

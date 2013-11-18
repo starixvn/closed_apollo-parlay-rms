@@ -97,7 +97,7 @@ namespace Fanex.ApolloParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to change the level of {0} to {1}.
+        ///   Looks up a localized string similar to Do you want to change the level of {0} to {1}?.
         /// </summary>
         public static string ChangeLevelConfirmationMessage {
             get {

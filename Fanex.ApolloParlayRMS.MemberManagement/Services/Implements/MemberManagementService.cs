@@ -141,7 +141,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
         /// <param name="templatePath">The template's path.</param>
         public void ExportCustomerList(GetCustomersCriteria criteria, string templatePath)
         {
-            string fileName = string.Format("{0}.xls", Lang.SpecialCustomersFileName);
+            string fileName = Lang.SpecialCustomersFileName;
             var customerList = this.GetCustomers(criteria);
             var writer = new ExcelTemplateWriter(templatePath, fileName, Lang.SpecialCustomers);
             int counter = 0;

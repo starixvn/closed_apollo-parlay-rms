@@ -127,7 +127,7 @@
     <value>Your Profile has been changed successfully !</value>
   </data>
   <data name="ChangeLevelConfirmationMessage" xml:space="preserve">
-    <value>Do you want to change the level of {0} to {1}</value>
+    <value>Do you want to change the level of {0} to {1}?</value>
   </data>
   <data name="ChangeLevelSuccessfullyMessage" xml:space="preserve">
     <value>Change level successfully!</value>

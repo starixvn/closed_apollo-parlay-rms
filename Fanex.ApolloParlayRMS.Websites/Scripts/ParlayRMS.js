@@ -8,12 +8,6 @@ var ParlayRMS = function ($) {
 		dialogPopup: null,
 		headlineMsgBox: null,
 		loadingBox: null,
-		alertCallback: null,
-		confirmCallback: null,
-		msieVersion: null,
-		agentIsOldIe: null,
-		agentIsApple: null,
-		agentIsMobile: null,
 
 		commonConstants: {
 			DateFormat: 'mm-dd-yy',
@@ -27,11 +21,6 @@ var ParlayRMS = function ($) {
 			ParlayRMS.ClientUrl = $('#ClientURL').val();
 			ParlayRMS.RootUrl = $('#RootURL').val();
 			ParlayRMS.dialogPopup = $('<div id="dialog-popup"></div>').appendTo('body');
-
-			ParlayRMS.msieVersion = ParlayRMS.getIeVersion();
-			ParlayRMS.agentIsOldIe = ParlayRMS.msieVersion != -1 && ParlayRMS.msieVersion < 9.0;
-			ParlayRMS.agentIsApple = ParlayRMS.agentIs('apple') != null;
-			ParlayRMS.agentIsMobile = ParlayRMS.agentIs('mobile') != null;
 		},
 		resolveClientUrl: function (relativeUrl) {
 			return ParlayRMS.ClientUrl + relativeUrl;
@@ -41,6 +30,7 @@ var ParlayRMS = function ($) {
 		},
 		// Handles common error when making ajax request
 		handleAjaxError: function (xhr, status, err) {
+			ParlayRMS.infoMsgBox.close(true);
 			if (xhr.status == 403) {
 				ParlayRMS.headlineMsgBox.showErr('Unauthorized request rejected!', { sticky: true });
 			} else if (xhr.status == 404) {
@@ -50,53 +40,8 @@ var ParlayRMS = function ($) {
 			}
 		},
 		showInfoMessage: function (message) {
+			ParlayRMS.headlineMsgBox.close(true);
 			ParlayRMS.infoMsgBox.showInfo(message, { duration: 3000 });
-		},
-		getIeVersion: function () {
-			var version = -1; // Return value assumes failure.
-
-			if (window.navigator.userAgent.indexOf("MSIE") > 0) {
-				var usrAgent = navigator.userAgent;
-				var reg = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-
-				if (reg.exec(usrAgent) != null) version = parseFloat(RegExp.$1);
-			}
-
-			return version;
-		},
-		agentIs: function (name) {
-			switch (name.toLowerCase()) {
-				case 'ipad':
-					return navigator.userAgent.match(/iPad/i);
-				case 'iphone':
-					return navigator.userAgent.match(/iPhone/i);
-				case 'ipod':
-					return navigator.userAgent.match(/iPod/i);
-				case 'apple':
-					return navigator.userAgent.match(/iPad/i) ||
-						navigator.userAgent.match(/iPhone/i) ||
-						navigator.userAgent.match(/iPod/i);
-				case 'mobile':
-					return
-					// Apple
-					navigator.userAgent.match(/iPad/i) ||
-						navigator.userAgent.match(/iPhone/i) ||
-						navigator.userAgent.match(/iPod/i) ||
-					// RIM
-						navigator.userAgent.match(/BlackBerry/i) ||
-						navigator.userAgent.match(/PlayBook/i)
-					// Windows Phone
-					navigator.userAgent.match(/Windows Phone/i);
-					// Android
-					navigator.userAgent.match(/Android/i);
-					// General
-					navigator.userAgent.match(/Touch/i);
-				default: return null;
-			}
-		},
-		alert: function (title, msg, callback) {
-		},
-		confirm: function (title, msg, callback) {
 		},
 		modal: function (title, html) {
 			ParlayRMS.dialogPopup.html(html).dialog({
@@ -166,22 +111,6 @@ var ParlayRMS = function ($) {
 		},
 		htmlDecode: function (value) {
 			return $('<div/>').html(value).text();
-		},
-		showSuccessMsg: function (msg, url, msec) {
-			var msgWrp = $('.validation-summary-valid');
-
-			msgWrp.addClass('success')
-				.find('li:first').html(ParlayRMS.htmlDecode(msg)).show();
-
-			ParlayRMS.showSuccessMsgCountDown(url, msec / 1000);
-		},
-		showSuccessMsgCountDown: function (url, msec) {
-			if (msec-- > 0) {
-				setTimeout('ParlayRMS.showSuccessMsgCountDown("' + url + '", ' + msec + ')', 1000);
-				$('.validation-summary-valid .msec').html(msec);
-			} else {
-				window.location.replace(NAP.resolveClientUrl(url));
-			}
 		},
 
 		encodeURI: function (str) {

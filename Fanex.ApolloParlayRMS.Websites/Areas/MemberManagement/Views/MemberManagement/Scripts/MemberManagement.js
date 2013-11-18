@@ -58,6 +58,9 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         });
 
         $this.DOMInstance.btnShowAll.live('click', function () {
+            $this.DOMInstance.ddlLevel.val('null');
+            $this.DOMInstance.ddlLevel.multiselect('refresh');
+            $this.DOMInstance.txtUserName.val('');
             $this.GetData(null, null);
         });
     };
@@ -113,7 +116,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
                       { HeaderText: labels.Level, Width: 150, Name: 'ColLevel', HeaderAlign: 'center', CellAlign: 'center'}],
             showTitle: true,
             showFooter: true,
-            gridExpandHeight: 300,
+            gridExpandHeight: 250,
             titleInfo: {
                 showExcelButton: true,
                 exportExcelFunction: $this.ExportReport
