@@ -25,10 +25,10 @@
 		<div class="filter-row">
 			<div class="filter-cell">
 				<div class="lbl-field width-auto">
-					@Html.Label(Lang.UserName)
+					@Html.Label(Lang.Username)
 				</div>
 				<div class="edit-field">
-					<input type="text" name="UserName" id="txtUserName" />
+					<input type="text" name="Username" id="txtUsername" />
 				</div>
 			</div>
 			<div class="filter-cell">
@@ -68,10 +68,10 @@
 				</div>
 				<div class="form-row required">
 					<div class="lbl-field">
-						@Html.LabelFor(c => c.UserName, Lang.UserName)
+						@Html.LabelFor(c => c.Username, Lang.Username)
 					</div>
 					<div class="edit-field">
-						@Html.TextBoxFor(c => c.UserName)
+						@Html.TextBoxFor(c => c.Username)
 					</div>
 				</div>
 				<div class="form-row">
@@ -96,7 +96,7 @@
 	<script type="text/javascript">
 		var labels = {
 			No: '@Lang.No',
-			UserName: '@Lang.UserName',
+			Username: '@Lang.Username',
 			Level: '@Lang.Level',
 			AddSpecialMember: '@Lang.AddSpecialMember'
 		};

@@ -18,7 +18,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
     var params = {};
     var cacheDOM = function () {
         $this.DOMInstance.lnkAddNew = $('#lnkAddNew');
-        $this.DOMInstance.txtUserName = $('#txtUserName');
+        $this.DOMInstance.txtUsername = $('#txtUsername');
         $this.DOMInstance.ddlLevel = $('#ddlLevel');
         $this.DOMInstance.btnSearch = $('#btnSearch');
         $this.DOMInstance.btnShowAll = $('#btnShowAll');
@@ -26,7 +26,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         $this.DOMInstance.divAddMemberForm = $('#divAddMemberForm');
 
         // Add new member form's instance
-        $this.DOMInstance.divAddMemberFormMembers.UserName = $('#UserName');
+        $this.DOMInstance.divAddMemberFormMembers.Username = $('#Username');
         $this.DOMInstance.divAddMemberFormMembers.Level = $('#Level');
         $this.DOMInstance.divAddMemberFormMembers.Submit = $('#Submit');
     };
@@ -46,23 +46,23 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
             });
         });
 
-        $this.DOMInstance.txtUserName.bind('keyup', function (event) {
+        $this.DOMInstance.txtUsername.bind('keyup', function (event) {
             if (event.keyCode == 13) {
                 $this.DOMInstance.btnSearch.click();
             }
         });
 
         $this.DOMInstance.btnSearch.live('click', function () {
-            var userName = $this.DOMInstance.txtUserName.val();
+            var username = $this.DOMInstance.txtUsername.val();
             var level = $this.DOMInstance.ddlLevel.val();
 
-            $this.GetData(userName, level);
+            $this.GetData(username, level);
         });
 
         $this.DOMInstance.btnShowAll.live('click', function () {
             $this.DOMInstance.ddlLevel.val('null');
             $this.DOMInstance.ddlLevel.multiselect('refresh');
-            $this.DOMInstance.txtUserName.val('');
+            $this.DOMInstance.txtUsername.val('');
             $this.GetData(null, null);
         });
     };
@@ -104,8 +104,8 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
-                              { Name: 'ColUserName', Value: info.UserName },
-                              { Name: 'ColLevel', Value: levelUpdater.CreateUpdateField(info.CustId, info.Level, hasEditRight, info.UserName)}]
+                              { Name: 'ColUsername', Value: info.Username },
+                              { Name: 'ColLevel', Value: levelUpdater.CreateUpdateField(info.CustId, info.Level, hasEditRight, info.Username)}]
                 };
                 bodyData.push(row);
             });
@@ -114,7 +114,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         var gridOptions =
         {
             columns: [{ HeaderText: labels.No, Width: 100, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.UserName, Width: 270, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: labels.Username, Width: 270, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Level, Width: 150, Name: 'ColLevel', HeaderAlign: 'center', CellAlign: 'center'}],
             showTitle: true,
             showFooter: true,
@@ -143,7 +143,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
 
     $this.DOMInstance = {
         lnkAddNew: null,
-        txtUserName: null,
+        txtUsername: null,
         ddlLevel: null,
         btnSearch: null,
         btnShowAll: null,
@@ -151,7 +151,7 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         divAddMemberForm: null,
         divAddMemberFormMembers: {
             Form: null,
-            UserName: null,
+            Username: null,
             Level: null,
             Submit: null
         }
@@ -173,9 +173,9 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         $this.SetLang(labels, messages);
         $this.GetData(null, null);
     };
-    $this.GetData = function (userName, level) {
+    $this.GetData = function (username, level) {
         var data = {
-            UserName: userName,
+            Username: username,
             Level: level,
             IsLoadNew: true
         };
@@ -202,10 +202,10 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
         });
     };
     $this.AddMember = function () {
-        var userName = $this.DOMInstance.divAddMemberFormMembers.UserName.val();
+        var username = $this.DOMInstance.divAddMemberFormMembers.Username.val();
         var level = $this.DOMInstance.divAddMemberFormMembers.Level.val();
         var data = {
-            UserName: userName,
+            Username: username,
             Level: level
         };
 

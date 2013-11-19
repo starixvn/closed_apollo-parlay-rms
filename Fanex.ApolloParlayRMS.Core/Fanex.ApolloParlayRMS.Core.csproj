@@ -81,7 +81,7 @@
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\CommonEnums.cs" />
     <Compile Include="Criteria\BalanceUpCriteria.cs" />
-    <Compile Include="Criteria\GetCustomerByUserNameCriteria.cs" />
+    <Compile Include="Criteria\GetCustomerByUsernameCriteria.cs" />
     <Compile Include="ExcelUtility\ExcelTemplateWriter.cs" />
     <Compile Include="ExcelUtility\NPOIExtensions\HSSFCellExtensions.cs" />
     <Compile Include="ExcelUtility\NPOIExtensions\HSSFCellRangeAddressExtensions.cs" />
@@ -121,6 +121,7 @@
     <EmbeddedResource Include="Resources\Lang.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

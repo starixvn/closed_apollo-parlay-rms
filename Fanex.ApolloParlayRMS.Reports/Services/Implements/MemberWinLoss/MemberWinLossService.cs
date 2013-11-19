@@ -64,9 +64,9 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
             if (result == null)
             {
                 var balanceUp = BalanceUpService.GetBalanceUp();
-                var user = CustomerService.GetCustomerInfo(new GetCustomerByUserNameCriteria
+                var user = CustomerService.GetCustomerInfo(new GetCustomerByUsernameCriteria
                 {
-                    UserName = criteria.UserName
+                    Username = criteria.Username
                 });
 
                 criteria.IsMember = user.RoleId == (int)CommonEnums.RoleId.Member;
@@ -111,7 +111,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
             MemberWinLossItem winLoss = GetMemberWinLossData(criteria);
             string fileName = string.Format(
                                          ReportsLang.MemberWinLossFileName,
-                                         criteria.UserName,
+                                         criteria.Username,
                                          criteria.FromDate.ToMonthDayYearFormat().Replace("-", string.Empty),
                                          criteria.ToDate.ToMonthDayYearFormat().Replace("-", string.Empty));
             string reportTitle = criteria.ToString();
@@ -175,7 +175,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
                     var row = new object[]
                     {
                         item.Month,
-                        item.UserName,
+                        item.Username,
                         item.TicketWon,
                         item.TicketLose,
                         item.StakeWon,

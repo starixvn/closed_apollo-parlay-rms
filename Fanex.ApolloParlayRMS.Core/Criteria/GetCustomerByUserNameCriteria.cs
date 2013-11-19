@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetCustomerByUserNameCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetCustomerByUsernameCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -14,9 +14,9 @@ namespace Fanex.ApolloParlayRMS.Core.Criteria
     /// <summary>
     /// Get customer by user name.
     /// </summary>
-    public class GetCustomerByUserNameCriteria : CriteriaBase
+    public class GetCustomerByUsernameCriteria : CriteriaBase
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public int CustId { get; set; }
 

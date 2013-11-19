@@ -52,13 +52,13 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <summary>
         /// Redirects to Index view.
         /// </summary>
-        /// <param name="userName">The user name of the member.</param>
+        /// <param name="username">The user name of the member.</param>
         /// <param name="combos">The selected combos which the ticket will be filtered on.</param>
         /// <param name="sportTypes">The sport types of needed tickets.</param>
         /// <returns>Index view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
-        public ActionResult Index(string userName = null, string combos = null, string sportTypes = null)
+        public ActionResult Index(string username = null, string combos = null, string sportTypes = null)
         {
             var comboList = FilterForm.Combos;
             var sportTypeList = new List<SelectListItem>();
@@ -88,7 +88,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
             }
 
             ViewBag.HasSimilarBetRight = this.HasRight(ApolloParlayRMSFunctionKeys.SimilarBets, Constant.Policy.Read);
-            ViewBag.UserName = userName ?? string.Empty;
+            ViewBag.Username = username ?? string.Empty;
             ViewBag.Combos = comboList;
             ViewBag.SportTypes = sportTypeList;
 
@@ -98,15 +98,15 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <summary>
         /// Gets the total outstanding.
         /// </summary>
-        /// <param name="userName">The user name of the customer.</param>
+        /// <param name="username">The user name of the customer.</param>
         /// <param name="combos">The combos of tickets which will be filtered on.</param>
         /// <param name="sportTypes">The sport types which will be filtered on.</param>
         /// <returns>JSON object contains the total outstanding data of the customer.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
-        public JsonResult GetTotalOutstanding(string userName, string combos, string sportTypes)
+        public JsonResult GetTotalOutstanding(string username, string combos, string sportTypes)
         {
-            var customerInfo = CustomerService.GetCustomerInfo(userName);
+            var customerInfo = CustomerService.GetCustomerInfo(username);
 
             if (customerInfo.RoleId == (int)CommonEnums.RoleId.Member)
             {
@@ -149,11 +149,11 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// </summary>
         /// <param name="betId">The bet identifier.</param>
         /// <param name="refNo">The reference number.</param>
-        /// <param name="userName">The user name of a member.</param>
+        /// <param name="username">The user name of a member.</param>
         /// <returns>JSON object represents the bet list of the passed reference number.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
-        public JsonResult GetBetDetails(long betId, long refNo, string userName)
+        public JsonResult GetBetDetails(long betId, long refNo, string username)
         {
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
@@ -179,7 +179,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
             return Json(new 
             {
                 BetList = builder.GetBetList(),
-                Title = string.Format("{0} - {1} - {2}", Lang.TicketDetails, userName, betId)
+                Title = string.Format("{0} - {1} - {2}", Lang.TicketDetails, username, betId)
             });
         }
     }

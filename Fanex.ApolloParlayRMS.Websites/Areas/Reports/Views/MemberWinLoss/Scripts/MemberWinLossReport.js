@@ -15,7 +15,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
     var params = {};
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#filter-bar');
-        $this.DOMInstance.txtUserName = $('#txtUserName');
+        $this.DOMInstance.txtUsername = $('#txtUsername');
         $this.DOMInstance.ddlBetType = $('#ddlBetType');
         $this.DOMInstance.ddlSportTypes = $('#ddlSportTypes');
         $this.DOMInstance.ddlCombo = $('#ddlCombo');
@@ -64,14 +64,14 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
         var maxDateObj = new Date(maxDate);
         var currentDate = $.datepicker.formatDate(ParlayRMS.commonConstants.DateFormat, maxDateObj);
 
-        $this.DOMInstance.txtUserName.bind('blur', function () {
-            var userName = $.trim($this.DOMInstance.txtUserName.val());
-            $this.DOMInstance.txtUserName.val(userName);
+        $this.DOMInstance.txtUsername.bind('blur', function () {
+            var username = $.trim($this.DOMInstance.txtUsername.val());
+            $this.DOMInstance.txtUsername.val(username);
         });
 
-        $this.DOMInstance.txtUserName.bind('keyup', function (event) {
+        $this.DOMInstance.txtUsername.bind('keyup', function (event) {
             if (event.keyCode == 13) {
-                $this.DOMInstance.txtUserName.blur();
+                $this.DOMInstance.txtUsername.blur();
                 $this.DOMInstance.btnSearch.click();
             }
         });
@@ -123,11 +123,11 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
 
         $this.DOMInstance.btnSearch.live('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
-            if (Validator.validateRequired($this.DOMInstance.txtUserName)
+            if (Validator.validateRequired($this.DOMInstance.txtUsername)
                 && Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
                 && Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
 
-                var userName = $this.DOMInstance.txtUserName.val();
+                var username = $this.DOMInstance.txtUsername.val();
                 var betType = $this.DOMInstance.ddlBetType.val();
                 var sportTypes = $this.DOMInstance.ddlSportTypes.val(); //$('input[name=rbgSportTypes]:checked', '#sportTypes').val();
                 var dateFrom = $this.DOMInstance.dpkDateFrom.val();
@@ -136,7 +136,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                     return this.value;
                 }).get().join(',');
                 
-                $this.GetData(userName, betType, sportTypes, combos, dateFrom, dateTo);
+                $this.GetData(username, betType, sportTypes, combos, dateFrom, dateTo);
             }
         });
     };
@@ -171,7 +171,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
                     row.Columns.unshift({ Name: 'ColMonth', Value: labels.Subtotal, MergeColNumber: 2, CellAlign: 'right' });
                     row.CssClass = "subTotal";
                 } else {
-                    row.Columns.unshift({ Name: 'ColUserName', Value: info.UserName });
+                    row.Columns.unshift({ Name: 'ColUsername', Value: info.Username });
                     if (info.NumOfSubrows > 0) {
                         row.Columns.unshift({ Name: 'ColMonth', Value: info.Month, MergeRowNumber: info.NumOfSubrows });
                     }
@@ -202,14 +202,14 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
             customizeHeader: true,
             groupHeaderRows: [{
                 Columns: [{ HeaderText: labels.Month, Name: "ColMonth", MergeRowNumber: 2 },
-                          { HeaderText: labels.UserName, Name: "ColUserName", MergeRowNumber: 2 },
+                          { HeaderText: labels.Username, Name: "ColUsername", MergeRowNumber: 2 },
                           { HeaderText: labels.Ticket, Name: "ColTicketWon", MergeColNumber: 2 },
                           { HeaderText: labels.StakeAfterPT, Name: "ColStakeWon", MergeColNumber: 2 },
                           { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
                           { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
             }],
             columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
-                      { HeaderText: labels.UserName, Width: 150, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'center' },
+                      { HeaderText: labels.Username, Width: 150, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
@@ -327,7 +327,7 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
     // Public methods
     $this.DOMInstance = {
         divFilterForm: null,
-        txtUserName: null,
+        txtUsername: null,
         ddlBetType: null,
         ddlSportTypes: null,
         ddlCombo: null,
@@ -348,9 +348,9 @@ Fanex.ApolloParlayRMS.Reports.MemberWinLossReport = function () {
 
         $this.SetLang(labels);
     };
-    $this.GetData = function (userName, betType, sportTypes, combos, dateFrom, dateTo) {
+    $this.GetData = function (username, betType, sportTypes, combos, dateFrom, dateTo) {
         var data = {
-            UserName: userName,
+            Username: username,
             BetType: betType,
             SportType: sportTypes,
             Selection: combos,

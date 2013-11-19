@@ -25,7 +25,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Models.TopWinners
 
         public int CustId { get; set; }
 
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public string Currency { get; set; }
 

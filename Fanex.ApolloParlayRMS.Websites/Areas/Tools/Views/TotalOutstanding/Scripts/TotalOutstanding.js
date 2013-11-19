@@ -15,13 +15,13 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
         GetBetDetails: ParlayRMS.resolveRootUrl('Tools/TotalOutstanding/GetBetDetails')
     };
     var params = {
-        userName: null,
+        username: null,
         combos: null,
         sportTypes: null
     };
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#filter-bar');
-        $this.DOMInstance.txtUserName = $('#txtUserName');
+        $this.DOMInstance.txtUsername = $('#txtUsername');
         $this.DOMInstance.ddlSportTypes = $('#ddlSportTypes');
         $this.DOMInstance.ddlCombo = $('#ddlCombo');
         $this.DOMInstance.btnSearch = $('#btnSearch');
@@ -55,14 +55,14 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
         initMultiDropDownList($this.DOMInstance.ddlCombo, 106, 132);
         initMultiDropDownList($this.DOMInstance.ddlSportTypes, 65, 132);
 
-        $this.DOMInstance.txtUserName.bind('blur', function (event) {
+        $this.DOMInstance.txtUsername.bind('blur', function (event) {
             var trimValue = $.trim($(this).val());
             $(this).val(trimValue);
         });
 
-        $this.DOMInstance.txtUserName.bind('keyup', function (event) {
+        $this.DOMInstance.txtUsername.bind('keyup', function (event) {
             if (event.keyCode == 13) {
-                $this.DOMInstance.txtUserName.blur();
+                $this.DOMInstance.txtUsername.blur();
                 $this.DOMInstance.btnSearch.click();
             }
         });
@@ -71,9 +71,9 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
                 && Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes)
-                && Validator.validateRequired($this.DOMInstance.txtUserName)) {
+                && Validator.validateRequired($this.DOMInstance.txtUsername)) {
 
-                var userName = $this.DOMInstance.txtUserName.val();
+                var username = $this.DOMInstance.txtUsername.val();
                 var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
                     return this.value;
                 }).get().join(',');
@@ -81,11 +81,11 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
                     return this.value;
                 }).get().join(',');
 
-                $this.GetData(userName, sportTypes, combos);
+                $this.GetData(username, sportTypes, combos);
             }
         });
 
-        if ($this.DOMInstance.txtUserName.val() != '') {
+        if ($this.DOMInstance.txtUsername.val() != '') {
             $this.DOMInstance.btnSearch.click();
         }
     };
@@ -95,7 +95,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
 
-                $this.GetBetList(params.userName, transId, refNo);
+                $this.GetBetList(params.username, transId, refNo);
             });
         });
 
@@ -111,8 +111,8 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
     var handleAgentGridEvents = function () {
         $('.user-name', $this.DOMInstance.divResult).each(function () {
             $(this).bind('click', function () {
-                var userName = $(this).text();
-                var url = urls.TotalOutstanding + '?userName={0}&combos={1}&sportTypes={2}'.format(userName, params.combos, params.sportTypes);
+                var username = $(this).text();
+                var url = urls.TotalOutstanding + '?username={0}&combos={1}&sportTypes={2}'.format(username, params.combos, params.sportTypes);
 
                 ParlayRMS.openNewTab(url);
             });
@@ -188,7 +188,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
-                              { Name: 'ColUserName', Value: "<div class='link user-name'>{0}</div>".format(info.UserName) },
+                              { Name: 'ColUsername', Value: "<div class='link user-name'>{0}</div>".format(info.Username) },
                               { Name: 'ColStakeAfterPT', Value: info.StakePT },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
                               { Name: 'ColTotalBets', Value: info.BetCount}]
@@ -210,7 +210,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
         var gridOptions =
         {
             columns: [{ HeaderText: labels.No, Width: 60, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.UserName, Width: 180, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: labels.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.MaxPayoutAfterPT, Width: 150, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.TotalBets, Width: 100, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat}],
@@ -227,7 +227,7 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
 
     $this.DOMInstance = {
         divFilterForm: null,
-        txtUserName: null,
+        txtUsername: null,
         ddlCombo: null,
         ddlSportTypes: null,
         btnSearch: null,
@@ -244,9 +244,9 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
 
         $this.SetLang(labels);
     };
-    $this.GetData = function (userName, sportTypes, combos) {
+    $this.GetData = function (username, sportTypes, combos) {
         var data = {
-            userName: userName,
+            username: username,
             sportTypes: sportTypes,
             combos: combos
         };
@@ -276,11 +276,11 @@ Fanex.ApolloParlayRMS.Tools.TotalOutstanding = function () {
             }
         });
     };
-    $this.GetBetList = function (userName, transId, refNo) {
+    $this.GetBetList = function (username, transId, refNo) {
         var data = {
             betId: transId,
             refNo: refNo,
-            userName: userName
+            username: username
         };
 
         $.ajax({

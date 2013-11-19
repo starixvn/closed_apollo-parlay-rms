@@ -17,10 +17,10 @@
 		<div class="filter-row">	
 			<div class="filter-cell">
 				<div class="lbl-field width-auto">
-					@Html.Label("txtUserName", Lang.UserName)
+					@Html.Label("txtUsername", Lang.Username)
 				</div>
 				<div class="edit-field">
-					@Html.TextBox("txtUserName", (string)ViewBag.UserName, new { @class = "multiselect-width" })
+					@Html.TextBox("txtUsername", (string)ViewBag.Username, new { @class = "multiselect-width" })
 				</div>
 			</div>
 			<div class="filter-cell">
@@ -63,7 +63,7 @@
 			TotalCombo: '@Lang.TotalCombo',
 			TotalBets: '@Lang.TotalBets',
 			BetDetails: '@Lang.BetDetails',
-			UserName: '@Lang.UserName',
+			Username: '@Lang.Username',
 			Total: '@Lang.Total',
 			View: '@Lang.View'
 		};

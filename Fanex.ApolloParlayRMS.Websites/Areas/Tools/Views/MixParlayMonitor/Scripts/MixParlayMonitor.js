@@ -178,26 +178,26 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
     var createRow = function (order, item) {
         var cells = [];
         var betIdStyle = '';
-        var userNameStyle = '';
+        var usernameStyle = '';
 
         if (hasSimilarBetRight) {
             betIdStyle = 'link similar-bets';
         }
 
         if (hasTotalOutstandingRight) {
-            userNameStyle = 'link total-outstanding';
+            usernameStyle = 'link total-outstanding';
         }
 
         cells.push('<tr>');
         cells.push('<td class="align-center">{0}</td>'.format(order));
         cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
         cells.push('<td class="align-right"><div class="{0}">{1}</div></td>'.format(betIdStyle, item.TransId));
-        cells.push('<td class="align-left userName"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(userNameStyle, item.Level, item.UserName));
+        cells.push('<td class="align-left username"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(usernameStyle, item.Level, item.Username));
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Odds).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Stake).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.MaxPayout).format(ParlayRMS.commonConstants.DecimalFormat)))
         cells.push('<td class="align-center">{0}</td>'.format(numeral(item.Combo).format(ParlayRMS.commonConstants.NumberFormat)))
-        cells.push('<td class="align-center"><div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div></td>'.format(item.UserName, item.TransId, item.RefNo, labels.View));
+        cells.push('<td class="align-center"><div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div></td>'.format(item.Username, item.TransId, item.RefNo, labels.View));
         cells.push('</tr>')
 
         return cells.join('');
@@ -258,9 +258,9 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
             $(this).bind('click', function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
-                var userName = $(this).attr('data-user-name');
+                var username = $(this).attr('data-user-name');
 
-                $this.GetBetList(userName, transId, refNo);
+                $this.GetBetList(username, transId, refNo);
             });
         });
 
@@ -275,8 +275,8 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
 
         $('.total-outstanding', $this.DOMInstance.divResult).each(function () {
             $(this).bind('click', function () {
-                var userName = $(this).text();
-                var url = urls.TotalOutstanding + '?userName={0}'.format(userName);
+                var username = $(this).text();
+                var url = urls.TotalOutstanding + '?username={0}'.format(username);
 
                 ParlayRMS.openNewTab(url);
             });
@@ -403,11 +403,11 @@ Fanex.ApolloParlayRMS.Tools.MixParlayMonitor = function () {
             }
         });
     };
-    $this.GetBetList = function (userName, transId, refNo) {
+    $this.GetBetList = function (username, transId, refNo) {
         var data = {
             betId: transId,
             refNo: refNo,
-            userName: userName
+            username: username
         };
 
         $.ajax({

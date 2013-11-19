@@ -50,7 +50,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Repositories.Implements.SimilarBets
                                 TransDate = Convert.ToDateTime(info["transdate"]),
                                 TransId = Convert.ToInt64(info["transid"]),
                                 RefNo = Convert.ToInt64(info["refno"]),
-                                UserName = Convert.ToString(info["username"]),
+                                Username = Convert.ToString(info["username"]),
                                 Odds = Convert.ToDecimal(info["odds"]),
                                 Stake = Convert.ToDecimal(info["stake"]),
                                 MaxPayout = Convert.ToDecimal(info["max_payout"]),
@@ -61,7 +61,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Repositories.Implements.SimilarBets
                                 {
                                     TransId = Convert.ToInt64(row["transid"]),
                                     RefNo = Convert.ToInt64(row["refno"]),
-                                    UserName = Convert.ToString(row["username"]),
+                                    Username = Convert.ToString(row["username"]),
                                     Level = Convert.ToInt32(row["level"]),
                                     MaxPayout = Convert.ToDecimal(row["max_payout"]),
                                     SimilarCombo = Convert.ToInt32(row["similar_combo"])

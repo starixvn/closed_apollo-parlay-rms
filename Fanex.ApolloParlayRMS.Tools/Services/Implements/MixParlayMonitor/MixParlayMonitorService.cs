@@ -77,7 +77,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
                     {
                         Combo = combo,
                         Level = level,
-                        UserName = "test",
+                        Username = "test",
                         Stake = stake,
                         Odds = odds,
                         MaxPayout = stake * odds,

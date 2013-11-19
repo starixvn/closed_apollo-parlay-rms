@@ -60,27 +60,27 @@ Fanex.ApolloParlayRMS.LevelUpdater = function () {
         var objId = obj.attr('id');
         obj.html(createLevelUpdater(objId, false, true, '1', true).html());
     };
-    $this.CreateUpdateField = function (id, defaultValue, isEnable, userName) {
+    $this.CreateUpdateField = function (id, defaultValue, isEnable, username) {
         updateField = createLevelUpdater(id, false, true, defaultValue, isEnable);
         updateField.attr('onchange', "levelUpdater.ChangeLevel('{0}')".format(id));
         updateField.attr('data-type', 'levelUpdater');
-        updateField.attr('data-username', userName);
+        updateField.attr('data-username', username);
         updateField.attr('data-current-value', defaultValue);
 
         return $('<div>').append(updateField).html();
     };
     $this.ChangeLevel = function (id) {
         var dropDown = $('#' + id);
-        var userName = dropDown.attr('data-username');
+        var username = dropDown.attr('data-username');
         var level = dropDown.val();
-        var msg = messages.ChangeLevelConfirmation.format(userName, level);
+        var msg = messages.ChangeLevelConfirmation.format(username, level);
 
         dropDown.val(dropDown.attr('data-current-value'));
         dropDown.multiselect('refresh'); // Refresh multiselect control
         ParlayRMS.headlineMsgBox.confirm(msg, function () {
             var data = {
                 CustId: id,
-                UserName: userName,
+                Username: username,
                 Level: level
             };
 

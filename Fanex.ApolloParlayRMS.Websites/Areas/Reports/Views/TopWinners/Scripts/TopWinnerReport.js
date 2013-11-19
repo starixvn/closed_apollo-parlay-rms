@@ -162,9 +162,9 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
         });
         $("div.grid-link-cell").each(function () {
             var custId = $(this).attr('data-cust-id');
-            var userName = $(this).attr('data-username');
+            var username = $(this).attr('data-username');
             $(this).on('click', function () {
-                $this.GetTopWinnerDetails(custId, userName);
+                $this.GetTopWinnerDetails(custId, username);
             });
         });
     };
@@ -250,7 +250,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
-                              { Name: 'ColUserName', Value: levelUpdater.CreateUpdateField(info.CustId, info.Level, hasEditRight, info.UserName, "width-200") },
+                              { Name: 'ColUsername', Value: levelUpdater.CreateUpdateField(info.CustId, info.Level, hasEditRight, info.Username, "width-200") },
                               { Name: 'ColCurrency', Value: info.Currency },
                               { Name: 'ColOriStake', Value: info.Stake },
                               { Name: 'ColOriWinningAmount', Value: info.WinLoss },
@@ -258,7 +258,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                               { Name: 'ColBaseStake', Value: info.StakeBaseRM },
                               { Name: 'ColBaseWinningAmount', Value: info.WinLossBaseRM },
                               { Name: 'ColBaseCompanyLoseAmount', Value: info.CompanyWinLossBaseRM },
-                              { Name: 'ColTotalBets', Value: "<div class='grid-link-cell link' data-cust-id='{0}' data-username='{1}'>{2}</div>".format(info.CustId, info.UserName, info.BetCount) },
+                              { Name: 'ColTotalBets', Value: "<div class='grid-link-cell link' data-cust-id='{0}' data-username='{1}'>{2}</div>".format(info.CustId, info.Username, info.BetCount) },
                               { Name: 'ColAverageWinOdds', Value: info.AvgOdds}]
                 };
                 bodyData.push(row);
@@ -281,7 +281,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
             customizeHeader: true,
             groupHeaderRows: [{
                 Columns: [{ HeaderText: labels.No, Name: "ColNo", MergeRowNumber: 2 },
-                          { HeaderText: labels.UserName, Name: "ColUserName", MergeRowNumber: 2 },
+                          { HeaderText: labels.Username, Name: "ColUsername", MergeRowNumber: 2 },
                           { HeaderText: labels.Currency, Name: "ColCurrency", MergeRowNumber: 2 },
                           { HeaderText: labels.OriginalCurrency, Name: "ColOriStake", MergeColNumber: 3 },
                           { HeaderText: labels.BaseCurrency, Name: "ColBaseStake", MergeColNumber: 3 },
@@ -289,7 +289,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                           { HeaderText: labels.AverageWinOdds, Name: "ColAverageWinOdds", MergeRowNumber: 2}]
             }],
             columns: [{ HeaderText: labels.No, Width: 45, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.UserName, Width: 205, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: labels.Username, Width: 205, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Currency, Width: 60, Name: 'ColCurrency', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Stake, Width: 120, Name: 'ColOriStake', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.WinningAmount, Width: 120, Name: 'ColOriWinningAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
@@ -315,7 +315,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
         $this.DOMInstance.divResult.removeClass('display-none').fanexGrid(gridOptions);
         handleGridEvents();
     };
-    var renderDetailData = function (data, userName) {
+    var renderDetailData = function (data, username) {
         var bodyData = [];
         var footerData = [];
 
@@ -328,7 +328,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
-                              { Name: 'ColBetId', Value: "<div class='grid-link-cell link' data-username='{0}' data-trans-id='{1}'>{2}</div>".format(userName, info.RefNo, info.TransId) },
+                              { Name: 'ColBetId', Value: "<div class='grid-link-cell link' data-username='{0}' data-trans-id='{1}'>{2}</div>".format(username, info.RefNo, info.TransId) },
                               { Name: 'ColOriStake', Value: info.Stake },
                               { Name: 'ColOriWinningAmount', Value: info.WinLoss },
                               { Name: 'ColOriCompanyLoseAmount', Value: info.CompanyWinLoss },
@@ -389,10 +389,10 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
 
         $("#dialog-popup .freegrid .grid-link-cell").each(function () {
             var refNo = $(this).attr('data-trans-id');
-            var userName = $(this).attr('data-username');
+            var username = $(this).attr('data-username');
             var betId = $(this).text();
             $(this).on('click', function () {
-                ParlayRMS.openWindow(ParlayRMS.resolveRootUrl('Reports/TopWinners/BetDetails?RefNo={0}&BetId={1}&UserName={2}'.format(refNo, betId, userName)));
+                ParlayRMS.openWindow(ParlayRMS.resolveRootUrl('Reports/TopWinners/BetDetails?RefNo={0}&BetId={1}&Username={2}'.format(refNo, betId, username)));
             });
         });
     };
@@ -458,7 +458,7 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
     };
 
     // For top winner's details popup
-    $this.GetTopWinnerDetails = function (custId, userName) {
+    $this.GetTopWinnerDetails = function (custId, username) {
         var data = params;
         data.CustId = custId;
 
@@ -472,12 +472,12 @@ Fanex.ApolloParlayRMS.Reports.TopWinnersReport = function () {
                 ParlayRMS.loadingBox.show();
             },
             success: function (records) {
-                var title = labels.BetListOf.format(userName);
+                var title = labels.BetListOf.format(username);
                 ParlayRMS.popup(title, $this.DOMInstance.divTopWinnerDetailsContainer.html());
                 // Hardcode for the popup size.
                 $('#dialog-popup').dialog('option', 'width', 1150);
                 $('#dialog-popup').dialog('option', 'position', ['center', 160]);
-                renderDetailData(records, userName);
+                renderDetailData(records, username);
             },
             error: function (xhr, status, err) {
                 ParlayRMS.handleAjaxError(xhr, status, err);

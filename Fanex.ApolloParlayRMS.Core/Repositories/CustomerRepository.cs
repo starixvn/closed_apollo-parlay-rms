@@ -23,7 +23,7 @@ namespace Fanex.ApolloParlayRMS.Core.Repositories
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Customer information.</returns>
-        public CustomerInfo GetCustomerInfo(GetCustomerByUserNameCriteria criteria)
+        public CustomerInfo GetCustomerInfo(GetCustomerByUsernameCriteria criteria)
         {
             CustomerInfo custInfo = new CustomerInfo();
 
@@ -33,7 +33,7 @@ namespace Fanex.ApolloParlayRMS.Core.Repositories
 
                 db.ExecuteNonQuery(param);
 
-                custInfo.UserName = criteria.UserName;
+                custInfo.Username = criteria.Username;
                 custInfo.CustId = (int)param["custid"];
                 custInfo.RoleId = (int)param["roleid"];
             }

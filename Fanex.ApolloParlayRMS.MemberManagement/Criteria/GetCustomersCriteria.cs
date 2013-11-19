@@ -16,7 +16,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Criteria
     /// </summary>
     public class GetCustomersCriteria : CriteriaBase
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public int? Level { get; set; }
 

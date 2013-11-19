@@ -41,7 +41,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
         public long CustId { get; set; }
 
         [SpParam(Ignored = true)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsMember { get; set; }
@@ -79,7 +79,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss
 
             string title = string.Format(
                                       ReportsLang.MemberWinLossTitle,
-                                      this.UserName.ToUpperInvariant(),
+                                      this.Username.ToUpperInvariant(),
                                       this.FromDate.ToMonthDayYearFormat(),
                                       this.ToDate.ToMonthDayYearFormat(),
                                       FilterForm.GetBetType(this.BetType),

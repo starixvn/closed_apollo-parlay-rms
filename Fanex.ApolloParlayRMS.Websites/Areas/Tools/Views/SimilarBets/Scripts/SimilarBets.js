@@ -52,9 +52,9 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             $(this).bind('click', function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
-                var userName = $(this).attr('data-user-name');
+                var username = $(this).attr('data-user-name');
 
-                $this.GetBetList(userName, transId, refNo, refNo);
+                $this.GetBetList(username, transId, refNo, refNo);
             });
         });
 
@@ -69,9 +69,9 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             $(this).bind('click', function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
-                var userName = $(this).attr('data-user-name');
+                var username = $(this).attr('data-user-name');
 
-                $this.GetBetList(userName, transId, refNo, originalRefNo);
+                $this.GetBetList(username, transId, refNo, originalRefNo);
             });
         });
     };
@@ -80,17 +80,17 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
 
         $this.DOMInstance.divResult.addClass('display-none');
 
-        if (result && result.UserName) {
+        if (result && result.Username) {
             var row =
             {
                 Columns: [{ Name: 'ColTransTime', Value: result.TransDate },
                           { Name: 'ColBetId', Value: result.TransId },
-                          { Name: 'ColUserName', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(result.Level, result.UserName) },
+                          { Name: 'ColUsername', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(result.Level, result.Username) },
                           { Name: 'ColOdds', Value: result.Odds },
                           { Name: 'ColStakeAfterPT', Value: result.Stake },
                           { Name: 'ColMaxPayoutAfterPT', Value: result.MaxPayout },
                           { Name: 'ColTotalCombo', Value: result.Combo },
-                          { Name: 'ColBetDetails', Value: "<div class='link view-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(result.UserName, result.TransId, result.RefNo, labels.View) },
+                          { Name: 'ColBetDetails', Value: "<div class='link view-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(result.Username, result.TransId, result.RefNo, labels.View) },
                           { Name: 'ColSimilarBets', Value: result.NumOfBets > 0 ? "<div class='link bet-list'>{0}</div>".format(result.NumOfBets) : result.NumOfBets}]
             };
             bodyData.push(row);
@@ -100,7 +100,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
         {
             columns: [{ HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat },
                       { HeaderText: labels.BetId, Width: 100, Name: 'ColBetId', HeaderAlign: 'center', CellAlign: 'right' },
-                      { HeaderText: labels.UserName, Width: 150, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: labels.Username, Width: 150, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.MaxPayoutAfterPT, Width: 120, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
@@ -129,10 +129,10 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
                               { Name: 'ColBetId', Value: info.TransId },
-                              { Name: 'ColUserName', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(info.Level, info.UserName) },
+                              { Name: 'ColUsername', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(info.Level, info.Username) },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
                               { Name: 'ColSimilarComboFound', Value: info.SimilarCombo },
-                              { Name: 'ColBetDetails', Value: "<div class='link bet-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(info.UserName, info.TransId, info.RefNo, labels.View)}]
+                              { Name: 'ColBetDetails', Value: "<div class='link bet-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(info.Username, info.TransId, info.RefNo, labels.View)}]
                 };
                 bodyData.push(row);
             });
@@ -142,7 +142,7 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
         {
             columns: [{ HeaderText: labels.No, Width: 60, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.BetId, Width: 100, Name: 'ColBetId', HeaderAlign: 'center', CellAlign: 'right' },
-                      { HeaderText: labels.UserName, Width: 180, Name: 'ColUserName', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: labels.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.MaxPayoutAfterPT, Width: 150, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.SimilarComboFound, Width: 150, Name: 'ColSimilarComboFound', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.BetDetails, Width: 80, Name: 'ColBetDetails', HeaderAlign: 'center', CellAlign: 'center'}],
@@ -211,12 +211,12 @@ Fanex.ApolloParlayRMS.Tools.SimilarBets = function () {
             }
         });
     };
-    $this.GetBetList = function (userName, transId, refNo, originalRefNo) {
+    $this.GetBetList = function (username, transId, refNo, originalRefNo) {
         var data = {
             transId: transId,
             refNo: refNo,
             originalRefNo: originalRefNo,
-            userName: userName
+            username: username
         };
 
         $.ajax({

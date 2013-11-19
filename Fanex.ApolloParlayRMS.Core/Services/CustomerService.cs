@@ -30,7 +30,7 @@ namespace Fanex.ApolloParlayRMS.Core.Services
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>CustomerInfo contains customer user name and customer ID.</returns>
-        public static CustomerInfo GetCustomerInfo(GetCustomerByUserNameCriteria criteria)
+        public static CustomerInfo GetCustomerInfo(GetCustomerByUsernameCriteria criteria)
         {
             return CustomerRepositoryInst.GetCustomerInfo(criteria);
         }
@@ -38,13 +38,13 @@ namespace Fanex.ApolloParlayRMS.Core.Services
         /// <summary>
         /// Gets the customer information.
         /// </summary>
-        /// <param name="userName">The user name of the member.</param>
+        /// <param name="username">The user name of the member.</param>
         /// <returns>The information of the customer.</returns>
-        public static CustomerInfo GetCustomerInfo(string userName)
+        public static CustomerInfo GetCustomerInfo(string username)
         {
-            var criteria = new GetCustomerByUserNameCriteria
+            var criteria = new GetCustomerByUsernameCriteria
             {
-                UserName = userName
+                Username = username
             };
 
             return CustomerRepositoryInst.GetCustomerInfo(criteria);

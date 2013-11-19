@@ -35,7 +35,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Models.SimilarBets
 
         public long TransId { get; set; }
 
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public IEnumerable<SimilarBetItem> Details { get; set; }
     }

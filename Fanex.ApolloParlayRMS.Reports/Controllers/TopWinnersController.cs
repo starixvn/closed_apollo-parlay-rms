@@ -119,7 +119,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Controllers
         public ViewResult BetDetails(GetTopWinnerBetDetailsCriteria criteria)
         {
             ViewBag.BetId = criteria.BetId;
-            ViewBag.Username = criteria.UserName;
+            ViewBag.Username = criteria.Username;
 
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();

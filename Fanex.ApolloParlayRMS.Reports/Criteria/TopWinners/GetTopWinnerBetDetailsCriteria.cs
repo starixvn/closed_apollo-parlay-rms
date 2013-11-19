@@ -22,7 +22,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners
         public long BetId { get; set; }
 
         [SpParam(Ignored = true)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// Get Setting Key.

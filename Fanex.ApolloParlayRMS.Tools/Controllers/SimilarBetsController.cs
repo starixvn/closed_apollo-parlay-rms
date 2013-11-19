@@ -82,11 +82,11 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
         /// <param name="transId">The bet identifier.</param>
         /// <param name="refNo">The reference number.</param>
         /// <param name="originalRefNo">The original reference number.</param>
-        /// <param name="userName">The user name of a member.</param>
+        /// <param name="username">The user name of a member.</param>
         /// <returns>JSON object represents the bet list of the passed reference number.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.SimilarBets, Policy = Constant.Policy.Read)]
-        public JsonResult GetBetDetails(long transId, long refNo, long originalRefNo, string userName)
+        public JsonResult GetBetDetails(long transId, long refNo, long originalRefNo, string username)
         {
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
@@ -127,7 +127,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Controllers
             return Json(new
             {
                 TicketDetail = builder.GetBetList(),
-                Title = string.Format("{0} - {1} - {2}", Lang.TicketDetails, userName, transId)
+                Title = string.Format("{0} - {1} - {2}", Lang.TicketDetails, username, transId)
             });
         }
 

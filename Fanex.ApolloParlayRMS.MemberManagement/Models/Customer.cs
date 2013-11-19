@@ -21,6 +21,6 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Models
 
         public byte Level { get; set; }
 
-        public string UserName { get; set; }
+        public string Username { get; set; }
     }
 }

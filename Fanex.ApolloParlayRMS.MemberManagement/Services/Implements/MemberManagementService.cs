@@ -126,7 +126,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
             {
                 InsertCustomerCriteria insertCustomerCriteria = new InsertCustomerCriteria
                 {
-                    UserName = criteria.UserName,
+                    Username = criteria.Username,
                     Level = criteria.Level
                 };
 
@@ -153,7 +153,7 @@ namespace Fanex.ApolloParlayRMS.MemberManagement.Services.Implements
             var records = customerList.Select(obj => new
             {
                 No = ++counter,
-                UserName = obj.UserName,
+                Username = obj.Username,
                 Level = (obj.Level == 0) ? Lang.None : string.Format("{0} {1}", Lang.Level, obj.Level)
             });
 

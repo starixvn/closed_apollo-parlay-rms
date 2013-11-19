@@ -179,7 +179,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
             var records = topWinners.ChildItems.Select(obj => new
             {
                 No = ++counter,
-                UserName = obj.UserName,
+                Username = obj.Username,
                 Currency = obj.Currency,
                 Stake = obj.Stake,
                 WinLoss = obj.WinLoss,
