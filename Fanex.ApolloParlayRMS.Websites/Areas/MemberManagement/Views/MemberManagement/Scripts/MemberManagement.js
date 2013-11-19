@@ -39,8 +39,10 @@ Fanex.ApolloParlayRMS.MemberManagement.MemberManagement = function () {
 
             $this.DOMInstance.divAddMemberFormMembers.Form.unbind('submit').submit(function (event) {
                 event.preventDefault();
-                $this.AddMember();
-                $this.DOMInstance.btnSearch.click();
+                if ($(this).valid()) {
+                    $this.AddMember();
+                    $this.DOMInstance.btnSearch.click();
+                }
             });
         });
 
