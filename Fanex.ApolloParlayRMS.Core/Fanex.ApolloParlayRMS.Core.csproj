@@ -113,7 +113,11 @@
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\MenuService.cs" />
-    <Compile Include="Web\ApolloParlayRMSFunctionKeys.cs" />
+    <Compile Include="Web\ApolloParlayRMSFunctionKeys.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApolloParlayRMSFunctionKeys.tt</DependentUpon>
+    </Compile>
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\CacheManager.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -128,7 +132,15 @@
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web\ApolloParlayRMSFunctionKeys.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ApolloParlayRMSFunctionKeys.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
