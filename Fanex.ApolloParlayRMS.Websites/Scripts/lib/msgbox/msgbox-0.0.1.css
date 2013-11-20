@@ -120,7 +120,7 @@
 	background-position: -2px -58px;
 	background-color: #333;
 }
-
+/*
 .chrome .msgbox .msgbox-close {
 	background-position: 0 0;
 	width: 16px;
@@ -134,20 +134,20 @@
 	background-position: 0 -20px;
 	background-color: transparent;
 }
-
+*/
 .msgbox .msgbox-btn-wrap {
 	margin-top: 10px;
 	padding-top: 10px;
 	border-top: #333 solid 1px;
 	text-align: right;
 }
-
+/*
 .chrome .msgbox .msgbox-btn-wrap {
 	background-color: #eee;
 	border-top: 1px solid rgba(188, 193, 208, .5);
 	padding: 20px;
 }
-
+*/
 .msgbox .msgbox-btn {
 	background-color: #333;
 	color: #FFF;
@@ -159,7 +159,7 @@
 	padding: 2px 6px;
 	cursor: default;
 }
-
+/*
 .chrome .msgbox .msgbox-btn {
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -171,12 +171,12 @@
 	padding: 3px 12px 3px 12px;
 	color: #444;
 }
-
+*/
 .msgbox .msgbox-btn:focus, .msgbox .msgbox-btn:hover {
 	background-color: #222;
 	outline: none;
 }
-
+/*
 .chrome .msgbox .msgbox-btn:focus, .chrome .msgbox .msgbox-btn:hover {
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
@@ -187,14 +187,14 @@
 	color: #222;
 	outline: none;
 }
-
+*/
 .msgbox .msgbox-btn:active {
 	box-shadow: 0 0 0 1px #FFF inset;
 	-moz-box-shadow: 0 0 0 1px #FFF inset;
 	-webkit-box-shadow: 0 0 0 1px #FFF inset;
 	outline: none;
 }
-
+/*
 .chrome .msgbox .msgbox-btn:active {
 	box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
@@ -204,7 +204,7 @@
 	color: #333;
 	outline: none;
 }
-
+*/
 .msgbox .msgbox-input-wrap {
 	margin-top: 10px;
 	text-align: center;
@@ -223,8 +223,9 @@
 .ie8 .msgbox .msgbox-txt {
 	width: 40%;
 }
-
+/*
 .chrome .msgbox .msgbox-txt {
 	border-color: #AAA;
 	padding: 3px;
 }
+*/
