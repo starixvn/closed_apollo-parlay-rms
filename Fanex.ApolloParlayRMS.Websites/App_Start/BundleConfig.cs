@@ -45,11 +45,9 @@ namespace Fanex.ApolloParlayRMS.Websites
                 "~/Scripts/lib/msgbox/msgbox-0.0.1.css",
                 "~/Scripts/lib/Fanex.Grid/Fanex.Grid.css",
                 "~/Scripts/lib/Fanex.Grid/Fanex.Pagination.css",
-                "~/Scripts/lib/Multiselect/jquery.multiselect.css");
-
-            bundles.AddAndInclude(
-                "~/Themes/Layout",
-                "~/Content/themes/layout/layout.less");
+                "~/Scripts/lib/Multiselect/jquery.multiselect.css",
+                "~/Content/themes/layout/style.less",
+                "~/Content/themes/layout/custom-style.less");
 
             bundles.Add(new ScriptBundle("~/Scripts/jQuery").Include(
                 "~/Scripts/lib/jQuery/jquery-1.8.2.js"));
@@ -91,7 +89,7 @@ namespace Fanex.ApolloParlayRMS.Websites
                 "~/Scripts/LevelUpdater.js"));
             bundles.AddAndInclude(
                 "~/Themes/MemberManagement",
-                "~/Content/themes/level-updater/layout.less");
+                "~/Content/themes/level-updater/levels.less");
         }
 
         /// <summary>
