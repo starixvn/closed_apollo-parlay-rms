@@ -23,8 +23,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
     using Fanex.ApolloParlayRMS.Reports.Constants;
     using Fanex.ApolloParlayRMS.Reports.Criteria.WinLoss;
     using Fanex.ApolloParlayRMS.Reports.Models.WinLoss;
-    using Fanex.ApolloParlayRMS.Reports.Repositories.Implements.WinLoss;
-    using Fanex.ApolloParlayRMS.Reports.Repositories.Interfaces.WinLoss;
     using Fanex.ApolloParlayRMS.Reports.Resources;
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.WinLoss;
 
@@ -33,18 +31,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
     /// </summary>
     public class WinLossService : BaseService, IWinLossService
     {
-        private readonly IWinLossRepository _winLossRepository;
-
-        public WinLossService() :
-            this(null)
-        {
-        }
-
-        public WinLossService(IWinLossRepository winLossRepository)
-        {
-            this._winLossRepository = winLossRepository ?? new WinLossRepository();
-        }
-
         /// <summary>
         /// Gets the win loss data.
         /// </summary>
@@ -65,7 +51,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.WinLoss
                 criteria.BalanceUpDay = balanceUp.BalanceUpDay;
                 criteria.MoveBetsDay = balanceUp.MoveBetsDay;
 
-                List<WinLossItem> rawData = this._winLossRepository.GetWinLossData(criteria).ToList();
+                List<WinLossItem> rawData = this.GetData<WinLossItem>(criteria).ToList();
 
                 if ((rawData != null) && (rawData.Count > 0))
                 {

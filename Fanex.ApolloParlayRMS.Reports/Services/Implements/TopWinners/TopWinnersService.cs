@@ -22,8 +22,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
     using Fanex.ApolloParlayRMS.Reports.Constants;
     using Fanex.ApolloParlayRMS.Reports.Criteria.TopWinners;
     using Fanex.ApolloParlayRMS.Reports.Models.TopWinners;
-    using Fanex.ApolloParlayRMS.Reports.Repositories.Implements.TopWinners;
-    using Fanex.ApolloParlayRMS.Reports.Repositories.Interfaces.TopWinners;
     using Fanex.ApolloParlayRMS.Reports.Resources;
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.TopWinners;
 
@@ -32,18 +30,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
     /// </summary>
     public class TopWinnersService : BaseService, ITopWinnersService
     {
-        private readonly ITopWinnersRepository _topWinnersRepository;
-
-        public TopWinnersService() :
-            this(null)
-        {
-        }
-
-        public TopWinnersService(ITopWinnersRepository topWinnersRepository)
-        {
-            this._topWinnersRepository = topWinnersRepository ?? new TopWinnersRepository();
-        }
-
         /// <summary>
         /// Gets the top winner list.
         /// </summary>
@@ -64,7 +50,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
                 criteria.BalanceUpDay = balanceUp.BalanceUpDay;
                 criteria.MoveBetsDay = balanceUp.MoveBetsDay;
 
-                List<TopWinner> records = this._topWinnersRepository.GetTopWinners(criteria).ToList();
+                List<TopWinner> records = this.GetData<TopWinner>(criteria).ToList();
                 result = new TopWinner();
                 records.ForEach(obj =>
                 {
@@ -92,7 +78,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
             if (balanceUp.BalanceUpDay.CompareTo(criteria.FromDate) <= 0)
             {
                 criteria.MoveBetsDay = balanceUp.MoveBetsDay;
-                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(criteria));
+                records.AddRange(this.GetData<TopWinnerDetails>(criteria));
             }
             else if (balanceUp.BalanceUpDay.CompareTo(criteria.ToDate) > 0)
             {
@@ -104,7 +90,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
                     SportType = criteria.SportType,
                     Selection = criteria.Selection
                 };
-                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempCriteria));
+                records.AddRange(this.GetData<TopWinnerDetails>(tempCriteria));
             }
             else
             {
@@ -116,7 +102,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
                     SportType = criteria.SportType,
                     Selection = criteria.Selection
                 };
-                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempOldCriteria));
+                records.AddRange(this.GetData<TopWinnerDetails>(tempOldCriteria));
 
                 var tempCriteria = new GetTopWinnerDetailsCriteria
                 {
@@ -127,7 +113,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
                     SportType = criteria.SportType,
                     Selection = criteria.Selection
                 };
-                records.AddRange(this._topWinnersRepository.GetTopWinnerDetails(tempCriteria));
+                records.AddRange(this.GetData<TopWinnerDetails>(tempCriteria));
             }
 
             records.ForEach(obj =>
@@ -147,7 +133,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.TopWinners
         {
             IEnumerable<TopWinnerBetDetails> result = null;
 
-            result = this._topWinnersRepository.GetTopWinnerBetDetails(criteria);
+            result = this.GetData<TopWinnerBetDetails>(criteria);
 
             return result;
         }

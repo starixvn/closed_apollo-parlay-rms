@@ -93,11 +93,6 @@
     <Compile Include="Models\WinLoss\WinLossItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportsAreaRegistration.cs" />
-    <Compile Include="Repositories\Implements\MemberWinLoss\MemberWinLossRepository.cs" />
-    <Compile Include="Repositories\Implements\TopWinners\TopWinnersRepository.cs" />
-    <Compile Include="Repositories\Implements\WinLoss\WinLossRepository.cs" />
-    <Compile Include="Repositories\Interfaces\TopWinners\ITopWinnersRepository.cs" />
-    <Compile Include="Repositories\Interfaces\WinLoss\IWinLossRepository.cs" />
     <Compile Include="Resources\ReportsLang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,7 +101,6 @@
     <Compile Include="Services\Implements\MemberWinLoss\MemberWinLossService.cs" />
     <Compile Include="Services\Implements\TopWinners\TopWinnersService.cs" />
     <Compile Include="Services\Implements\WinLoss\WinLossService.cs" />
-    <Compile Include="Repositories\Interfaces\MemberWinLoss\IMemberWinLossRepository.cs" />
     <Compile Include="Services\Interfaces\MemberWinLoss\IMemberWinLossService.cs" />
     <Compile Include="Services\Interfaces\TopWinners\ITopWinnersService.cs" />
     <Compile Include="Services\Interfaces\WinLoss\IWinLossService.cs" />

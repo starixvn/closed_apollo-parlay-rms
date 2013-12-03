@@ -23,8 +23,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
     using Fanex.ApolloParlayRMS.Reports.Constants;
     using Fanex.ApolloParlayRMS.Reports.Criteria.MemberWinLoss;
     using Fanex.ApolloParlayRMS.Reports.Models.MemberWinLoss;
-    using Fanex.ApolloParlayRMS.Reports.Repositories.Implements.MemberWinLoss;
-    using Fanex.ApolloParlayRMS.Reports.Repositories.Interfaces.MemberWinLoss;
     using Fanex.ApolloParlayRMS.Reports.Resources;
     using Fanex.ApolloParlayRMS.Reports.Services.Interfaces.MemberWinLoss;
 
@@ -33,18 +31,6 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
     /// </summary>
     public class MemberWinLossService : BaseService, IMemberWinLossService
     {
-        private readonly IMemberWinLossRepository _memberWinLossRepository;
-
-        public MemberWinLossService() :
-            this(null)
-        {
-        }
-
-        public MemberWinLossService(IMemberWinLossRepository memberWinLossRepository)
-        {
-            this._memberWinLossRepository = memberWinLossRepository ?? new MemberWinLossRepository();
-        }
-
         /// <summary>
         /// Gets the member win loss data.
         /// </summary>
@@ -74,7 +60,7 @@ namespace Fanex.ApolloParlayRMS.Reports.Services.Implements.MemberWinLoss
                 criteria.BalanceUpDay = balanceUp.BalanceUpDay;
                 criteria.MoveBetsDay = balanceUp.MoveBetsDay;
 
-                List<MemberWinLossItem> rawData = this._memberWinLossRepository.GetMemberWinLossData(criteria).ToList();
+                List<MemberWinLossItem> rawData = this.GetData<MemberWinLossItem>(criteria).ToList();
                 if ((rawData != null) && (rawData.Count > 0))
                 {
                     if (criteria.IsMember)

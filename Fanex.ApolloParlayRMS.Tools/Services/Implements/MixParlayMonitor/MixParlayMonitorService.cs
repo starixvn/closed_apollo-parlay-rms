@@ -15,8 +15,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
     using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Tools.Criteria.MixParlayMonitor;
     using Fanex.ApolloParlayRMS.Tools.Models.MixParlayMonitor;
-    using Fanex.ApolloParlayRMS.Tools.Repositories.Implements.MixParlayMonitor;
-    using Fanex.ApolloParlayRMS.Tools.Repositories.Interfaces.MixParlayMonitor;
     using Fanex.ApolloParlayRMS.Tools.Services.Interfaces.MixParlayMonitor;
 
     /// <summary>
@@ -24,18 +22,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
     /// </summary>
     public class MixParlayMonitorService : BaseService, IMixParlayMonitorService
     {
-        private readonly IMixParlayMonitorRepository _mixParlayMonitorRepository;
-
-        public MixParlayMonitorService() :
-            this(null)
-        {
-        }
-
-        public MixParlayMonitorService(IMixParlayMonitorRepository mixParlayMonitorRepository)
-        {
-            this._mixParlayMonitorRepository = mixParlayMonitorRepository ?? new MixParlayMonitorRepository();
-        }
-
         /// <summary>
         /// Gets list of bets of the unsettled parlay tickets.
         /// </summary>
@@ -43,7 +29,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.MixParlayMonitor
         /// <returns>List of BetItem objects represent the bet list of tickets satisfied the passed query conditions.</returns>
         public IEnumerable<ParlayBetItem> GeMixParlayData(GetMonitorParlayBetListCriteria criteria)
         {
-            IEnumerable<ParlayBetItem> betList = this._mixParlayMonitorRepository.GetMonitorParlayBetListData(criteria);
+            IEnumerable<ParlayBetItem> betList = this.GetData<ParlayBetItem>(criteria);
 
             // Use for testing purpose.
             betList = CreateTestData(criteria);

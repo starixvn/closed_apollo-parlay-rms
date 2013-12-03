@@ -13,8 +13,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
     using Fanex.ApolloParlayRMS.Core.Services;
     using Fanex.ApolloParlayRMS.Tools.Criteria.TotalOutstanding;
     using Fanex.ApolloParlayRMS.Tools.Models.TotalOutstanding;
-    using Fanex.ApolloParlayRMS.Tools.Repositories.Implements.TotalOutstanding;
-    using Fanex.ApolloParlayRMS.Tools.Repositories.Interfaces.TotalOutstanding;
     using Fanex.ApolloParlayRMS.Tools.Services.Interfaces.TotalOutstanding;
 
     /// <summary>
@@ -22,18 +20,6 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
     /// </summary>
     public class TotalOutstandingService : BaseService, ITotalOutstandingService
     {
-        private readonly ITotalOutstandingRepository _totalOutstandingRepository;
-
-        public TotalOutstandingService() :
-            this(null)
-        {
-        }
-
-        public TotalOutstandingService(ITotalOutstandingRepository totalOutstandingRepository)
-        {
-            this._totalOutstandingRepository = totalOutstandingRepository ?? new TotalOutstandingRepository();
-        }
-
         /// <summary>
         /// Gets total outstanding of agent.
         /// </summary>
@@ -46,7 +32,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
         {
             var agentTotalOutstanding = new AgentTotalOutstandingList();
             var total = new AgentTotalOutstanding();
-            var records = this._totalOutstandingRepository.GetTotalOutstandingOfAgent(criteria).ToList();
+            var records = this.GetData<AgentTotalOutstanding>(criteria).ToList();
 
             records.ForEach(obj =>
             {
@@ -76,7 +62,7 @@ namespace Fanex.ApolloParlayRMS.Tools.Services.Implements.TotalOutstanding
         {
             var memberTotalOutstanding = new MemberTotalOutstandingList();
             var total = new MemberTotalOutstanding();
-            var records = this._totalOutstandingRepository.GetTotalOutstandingOfMember(criteria).ToList();
+            var records = this.GetData<MemberTotalOutstanding>(criteria).ToList();
 
             records.ForEach(obj =>
             {
