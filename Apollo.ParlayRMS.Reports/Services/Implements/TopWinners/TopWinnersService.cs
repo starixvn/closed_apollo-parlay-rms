@@ -1,0 +1,202 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="TopWinnersService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Jason.Ly" date="2013.10.09">Created</change>
+// </history>
+
+namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using Apollo.ParlayRMS.Core.ExcelUtility;
+    using Apollo.ParlayRMS.Core.Extensions;
+    using Apollo.ParlayRMS.Core.Models;
+    using Apollo.ParlayRMS.Core.Resources;
+    using Apollo.ParlayRMS.Core.Services;
+    using Apollo.ParlayRMS.Core.Web;
+    using Apollo.ParlayRMS.Reports.Constants;
+    using Apollo.ParlayRMS.Reports.Criteria.TopWinners;
+    using Apollo.ParlayRMS.Reports.Models.TopWinners;
+    using Apollo.ParlayRMS.Reports.Resources;
+    using Apollo.ParlayRMS.Reports.Services.Interfaces.TopWinners;
+
+    /// <summary>
+    /// Top Winners service.
+    /// </summary>
+    public class TopWinnersService : BaseService, ITopWinnersService
+    {
+        /// <summary>
+        /// Gets the top winner list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>TopWinner object contains the top winner list and total data of all top winners.</returns>
+        public TopWinner GetTopWinners(GetTopWinnersCriteria criteria)
+        {
+            TopWinner result = null;
+
+            if (!criteria.IsLoadNew)
+            {
+                result = SessionManager.Get<TopWinner>(ReportConstants.TopWinnersSessionKey);
+            }
+
+            if (result == null)
+            {
+                BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
+                criteria.BalanceUpDay = balanceUp.BalanceUpDay;
+                criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+
+                List<TopWinner> records = this.GetData<TopWinner>(criteria).ToList();
+                result = new TopWinner();
+                records.ForEach(obj =>
+                {
+                    result.Add(obj);
+                });
+
+                SessionManager.Set<TopWinner>(ReportConstants.TopWinnersSessionKey, result);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a top winner's details.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>TopWinnerDetails object represents the detailed data of a top winner.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
+        public TopWinnerDetails GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria)
+        {
+            BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
+            List<TopWinnerDetails> records = new List<TopWinnerDetails>();
+            TopWinnerDetails result = new TopWinnerDetails();
+
+            if (balanceUp.BalanceUpDay.CompareTo(criteria.FromDate) <= 0)
+            {
+                criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+                records.AddRange(this.GetData<TopWinnerDetails>(criteria));
+            }
+            else if (balanceUp.BalanceUpDay.CompareTo(criteria.ToDate) > 0)
+            {
+                var tempCriteria = new GetTopWinnersDetailsOldCriteria
+                {
+                    CustId = criteria.CustId,
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    SportType = criteria.SportType,
+                    Selection = criteria.Selection
+                };
+                records.AddRange(this.GetData<TopWinnerDetails>(tempCriteria));
+            }
+            else
+            {
+                var tempOldCriteria = new GetTopWinnersDetailsOldCriteria
+                {
+                    CustId = criteria.CustId,
+                    FromDate = criteria.FromDate,
+                    ToDate = balanceUp.BalanceUpDay.AddDays(-1),
+                    SportType = criteria.SportType,
+                    Selection = criteria.Selection
+                };
+                records.AddRange(this.GetData<TopWinnerDetails>(tempOldCriteria));
+
+                var tempCriteria = new GetTopWinnerDetailsCriteria
+                {
+                    CustId = criteria.CustId,
+                    FromDate = balanceUp.BalanceUpDay,
+                    ToDate = criteria.ToDate,
+                    MoveBetsDay = balanceUp.MoveBetsDay,
+                    SportType = criteria.SportType,
+                    Selection = criteria.Selection
+                };
+                records.AddRange(this.GetData<TopWinnerDetails>(tempCriteria));
+            }
+
+            records.ForEach(obj =>
+            {
+                result.Add(obj);
+            });
+
+            return result;
+        }
+        
+        /// <summary>
+        /// Gets the top winner bet details.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>TopWinner object contains the top winner list and total data of all top winners.</returns>
+        public IEnumerable<TopWinnerBetDetails> GetTopWinnerBetDetails(GetTopWinnerBetDetailsCriteria criteria)
+        {
+            IEnumerable<TopWinnerBetDetails> result = null;
+
+            result = this.GetData<TopWinnerBetDetails>(criteria);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Exports the top winners report to Excel file.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="templatePath">The template's path.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
+        public void ExportTopWinners(GetTopWinnersCriteria criteria, string templatePath)
+        {
+            TopWinner topWinners = GetTopWinners(criteria);
+            string fileName = string.Format(
+                                         ReportsLang.TopWinnersFileName,
+                                         criteria.LimitedRow,
+                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+            string reportTitle = criteria.ToString();
+            var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.TopWinners);
+            int counter = 0;
+
+            // Copy title.
+            writer.CopyRows(0, 2);
+            writer.WriteRow(2, new { reportTitle });
+            writer.CopyRows(3, 2);
+
+            // Prepare content
+            var records = topWinners.ChildItems.Select(obj => new
+            {
+                No = ++counter,
+                Username = obj.Username,
+                Currency = obj.Currency,
+                Stake = obj.Stake,
+                WinLoss = obj.WinLoss,
+                CompanyWinLoss = obj.CompanyWinLoss,
+                BasedStake = obj.StakeBaseRM,
+                BasedWinLoss = obj.WinLossBaseRM,
+                BasedCompanyWinLoss = obj.CompanyWinLossBaseRM,
+                TotalBets = obj.BetCount,
+                AvgOdds = obj.AvgOdds
+            });
+
+            // Total row
+            var total = new object[]
+                {
+                    Lang.Total,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    topWinners.StakeBaseRM,
+                    topWinners.WinLossBaseRM,
+                    topWinners.CompanyWinLossBaseRM,
+                    topWinners.BetCount,
+                    "-"
+                };
+
+            writer.WriteRows(5, records);
+            writer.WriteRow(6, total);
+            writer.SyncColumnsWidth(11);
+            writer.Render();
+        }
+    }
+}
