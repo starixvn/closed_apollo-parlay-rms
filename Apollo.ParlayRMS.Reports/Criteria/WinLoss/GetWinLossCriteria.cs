@@ -70,8 +70,8 @@ namespace Apollo.ParlayRMS.Reports.Criteria.WinLoss
 
             string title = string.Format(
                                       ReportsLang.WinLossReportTitle,
-                                      this.FromDate.ToMonthDayYearFormat(),
-                                      this.ToDate.ToMonthDayYearFormat(),
+                                      this.FromDate.ToShortFormatedDate(),
+                                      this.ToDate.ToShortFormatedDate(),
                                       FilterForm.GetBetType(this.BetType),
                                       combosTitle,
                                       FilterForm.GetSportType(this.SportType));

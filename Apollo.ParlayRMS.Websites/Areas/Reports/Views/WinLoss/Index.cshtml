@@ -6,7 +6,7 @@
 @section Headline {
 	<h1>
 		<span class="title">
-			<span class="first">@Lang.Reports /</span>
+			@*<span class="first">@Lang.Reports /</span>*@
 			@ViewBag.Title
 		</span>
 	</h1>
@@ -24,7 +24,7 @@
 			</div>	
 			<div class="filter-cell">
 				<div class="lbl-field width-80">
-					@Html.Label("ddlSportTypes", Lang.SportTypes)
+					@Html.Label("ddlSportTypes", Lang.SportType)
 				</div>
 				<div class="edit-field">
 					@Html.DropDownList("ddlSportTypes", (IEnumerable<SelectListItem>)ViewBag.SportTypes, new { @class = "multiselect-width" })

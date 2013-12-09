@@ -98,8 +98,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
             string fileName = string.Format(
                                          ReportsLang.MemberWinLossFileName,
                                          criteria.Username,
-                                         criteria.FromDate.ToMonthDayYearFormat().Replace("-", string.Empty),
-                                         criteria.ToDate.ToMonthDayYearFormat().Replace("-", string.Empty));
+                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
             string reportTitle = criteria.ToString();
             string templatePath = criteria.IsMember ? memberTemplatePath : agentTemplatePath;
             var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.MemberWinLossSheetName);

@@ -1,73 +1,74 @@
 ﻿@{
-	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-	@Styles.Render("~/Themes/BetList")
+    @Styles.Render("~/Themes/BetList")
 }
 @section Headline {
-	<h1>
-		<span class="title"><span class="first">@Lang.Tools /</span>
-			@ViewBag.Title
-		</span>
-	</h1>
+    <h1>
+        <span class="title">
+            @*<span class="first">@Lang.Tools /</span>*@
+            @ViewBag.Title
+        </span>
+    </h1>
 }
 <section id="filter-bar">
-	<div class="filter-form">
-		<div class="filter-row">	
-			<div class="filter-cell">
-				<div class="lbl-field width-auto">
-					@Html.Label("txtUsername", Lang.Username)
-				</div>
-				<div class="edit-field">
-					@Html.TextBox("txtUsername", (string)ViewBag.Username, new { @class = "multiselect-width" })
-				</div>
-			</div>
-			<div class="filter-cell">
-				<div class="lbl-field width-50">
-					@Html.Label("ddlCombo", Lang.Combo)
-				</div>
-				<div class="edit-field">
-					@Html.DropDownList("ddlCombo", (IEnumerable<SelectListItem>)ViewBag.Combos, new { @class = "multiselect-width", multiple = "multiple" })
-				</div>
-			</div>
-			<div class="filter-cell">
-				<div class="lbl-field width-80">
-					@Html.Label("ddlSportTypes", Lang.SportTypes)
-				</div>
-				<div class="edit-field">
-					@Html.DropDownList("ddlSportTypes", (IEnumerable<SelectListItem>)ViewBag.SportTypes, new { @class = "multiselect-width", multiple = "multiple" })
-				</div>
-			</div>	
-			<div class="filter-cell">
-				<div class="submit">
-					<input type="button" class="btn-submit float-right" id="btnSearch" value="@Lang.Submit" />
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="filter-form">
+        <div class="filter-row">	
+            <div class="filter-cell">
+                <div class="lbl-field width-auto">
+                    @Html.Label("txtUsername", Lang.Username)
+                </div>
+                <div class="edit-field">
+                    @Html.TextBox("txtUsername", (string)ViewBag.Username, new { @class = "multiselect-width" })
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field width-50">
+                    @Html.Label("ddlCombo", Lang.Combo)
+                </div>
+                <div class="edit-field">
+                    @Html.DropDownList("ddlCombo", (IEnumerable<SelectListItem>)ViewBag.Combos, new { @class = "multiselect-width", multiple = "multiple" })
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field width-80">
+                    @Html.Label("ddlSportTypes", Lang.SportType)
+                </div>
+                <div class="edit-field">
+                    @Html.DropDownList("ddlSportTypes", (IEnumerable<SelectListItem>)ViewBag.SportTypes, new { @class = "multiselect-width", multiple = "multiple" })
+                </div>
+            </div>	
+            <div class="filter-cell">
+                <div class="submit">
+                    <input type="button" class="btn-submit float-right" id="btnSearch" value="@Lang.Submit" />
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <div>
-	<div id="divResult" class="freegrid display-none">
-	</div>
+    <div id="divResult" class="freegrid display-none">
+    </div>
 </div>
 @section Foot {
-	<script type="text/javascript">
-		var labels = {
-			No: '@Lang.No',
-			TransTime: '@Lang.TransTime',
-			BetId: '@Lang.BetId',
-			Odds: '@Lang.Odds',
-			StakeAfterPT: '@Lang.StakeAfterPT',
-			MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
-			TotalCombo: '@Lang.TotalCombo',
-			TotalBets: '@Lang.TotalBets',
-			BetDetails: '@Lang.BetDetails',
-			Username: '@Lang.Username',
-			Total: '@Lang.Total',
-			View: '@Lang.View'
-		};
-		var hasSimilarBetRight = '@ViewBag.HasSimilarBetRight' == 'True';
-	</script>
-	@Scripts.Render("~/Scripts/Tools/TotalOutstanding")
+    <script type="text/javascript">
+        var labels = {
+            No: '@Lang.No',
+            TransTime: '@Lang.TransTime',
+            BetId: '@Lang.BetId',
+            Odds: '@Lang.Odds',
+            StakeAfterPT: '@Lang.StakeAfterPT',
+            MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
+            TotalCombo: '@Lang.TotalCombo',
+            TotalBets: '@Lang.TotalBets',
+            BetDetails: '@Lang.BetDetails',
+            Username: '@Lang.Username',
+            Total: '@Lang.Total',
+            View: '@Lang.View'
+        };
+        var hasSimilarBetRight = '@ViewBag.HasSimilarBetRight' == 'True';
+    </script>
+    @Scripts.Render("~/Scripts/Tools/TotalOutstanding")
 }

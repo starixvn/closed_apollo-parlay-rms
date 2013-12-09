@@ -209,10 +209,10 @@ namespace Apollo.ParlayRMS.Core.Models
                     return Lang.SoccerOnly;
 
                 case (byte)CommonEnums.SportsType.CombinedSports:
-                    return Lang.OtherSports;
+                    return Lang.CombinedSports;
 
                 case (byte)CommonEnums.SportsType.OtherSports:
-                    return Lang.CombinedSports;
+                    return Lang.OtherSports;
             }
 
             return Lang.Unknow;

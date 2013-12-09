@@ -88,7 +88,7 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Sports.
+        ///   Looks up a localized string similar to All sports.
         /// </summary>
         public static string AllSports {
             get {
@@ -124,7 +124,7 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bet Id.
+        ///   Looks up a localized string similar to Bet ID.
         /// </summary>
         public static string BetId {
             get {
@@ -160,7 +160,7 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Combined Sports.
+        ///   Looks up a localized string similar to Combined sports.
         /// </summary>
         public static string CombinedSports {
             get {
@@ -183,6 +183,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         public static string CompanyLoseAmount {
             get {
                 return ResourceManager.GetString("CompanyLoseAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Win Loss.
+        /// </summary>
+        public static string CompanyWinLoss {
+            get {
+                return ResourceManager.GetString("CompanyWinLoss", resourceCulture);
             }
         }
         
@@ -214,6 +223,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Win Loss.
+        /// </summary>
+        public static string CustomerWinLoss {
+            get {
+                return ResourceManager.GetString("CustomerWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Date {
@@ -223,11 +241,11 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date ranges.
+        ///   Looks up a localized string similar to Date range.
         /// </summary>
-        public static string DateRanges {
+        public static string DateRange {
             get {
-                return ResourceManager.GetString("DateRanges", resourceCulture);
+                return ResourceManager.GetString("DateRange", resourceCulture);
             }
         }
         
@@ -376,7 +394,7 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other Sports.
+        ///   Looks up a localized string similar to Other sports.
         /// </summary>
         public static string OtherSports {
             get {
@@ -385,7 +403,7 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OurPT.
+        ///   Looks up a localized string similar to Our PT.
         /// </summary>
         public static string OurPT {
             get {
@@ -538,7 +556,7 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Soccer Only.
+        ///   Looks up a localized string similar to Soccer only.
         /// </summary>
         public static string SoccerOnly {
             get {
@@ -574,11 +592,11 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sport types.
+        ///   Looks up a localized string similar to Sport type.
         /// </summary>
-        public static string SportTypes {
+        public static string SportType {
             get {
-                return ResourceManager.GetString("SportTypes", resourceCulture);
+                return ResourceManager.GetString("SportType", resourceCulture);
             }
         }
         

@@ -89,8 +89,8 @@ namespace Apollo.ParlayRMS.Reports.Criteria.TopWinners
             string title = string.Format(
                                       ReportsLang.TopWinnersReportTitle,
                                       this.LimitedRow,
-                                      this.FromDate.ToMonthDayYearFormat(),
-                                      this.ToDate.ToMonthDayYearFormat(),
+                                      this.FromDate.ToShortFormatedDate(),
+                                      this.ToDate.ToShortFormatedDate(),
                                       combosTitle,
                                       FilterForm.GetSportType(this.SportType));
             return title;

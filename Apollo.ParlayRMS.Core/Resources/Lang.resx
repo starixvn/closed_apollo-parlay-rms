@@ -127,7 +127,7 @@
     <value>All Levels</value>
   </data>
   <data name="AllSports" xml:space="preserve">
-    <value>All Sports</value>
+    <value>All sports</value>
   </data>
   <data name="AverageWinnOdds" xml:space="preserve">
     <value>Average Win Odds</value>
@@ -136,7 +136,7 @@
     <value>Base Currency</value>
   </data>
   <data name="BetId" xml:space="preserve">
-    <value>Bet Id</value>
+    <value>Bet ID</value>
   </data>
   <data name="BetType" xml:space="preserve">
     <value>Bet type</value>
@@ -145,7 +145,7 @@
     <value>Cancel</value>
   </data>
   <data name="CombinedSports" xml:space="preserve">
-    <value>Combined Sports</value>
+    <value>Combined sports</value>
   </data>
   <data name="Combo" xml:space="preserve">
     <value>Combo</value>
@@ -162,8 +162,8 @@
   <data name="CurrentWeek" xml:space="preserve">
     <value>Current week</value>
   </data>
-  <data name="DateRanges" xml:space="preserve">
-    <value>Date ranges</value>
+  <data name="DateRange" xml:space="preserve">
+    <value>Date range</value>
   </data>
   <data name="From" xml:space="preserve">
     <value>From</value>
@@ -193,7 +193,7 @@
     <value>Original Currency</value>
   </data>
   <data name="OtherSports" xml:space="preserve">
-    <value>Other Sports</value>
+    <value>Other sports</value>
   </data>
   <data name="ParlayRMS" xml:space="preserve">
     <value>Parlay RMS</value>
@@ -223,7 +223,7 @@
     <value>6 UP</value>
   </data>
   <data name="SoccerOnly" xml:space="preserve">
-    <value>Soccer Only</value>
+    <value>Soccer only</value>
   </data>
   <data name="SpecialCustomers" xml:space="preserve">
     <value>Special Customers</value>
@@ -234,8 +234,8 @@
   <data name="SpecificDate" xml:space="preserve">
     <value>Specific date</value>
   </data>
-  <data name="SportTypes" xml:space="preserve">
-    <value>Sport types</value>
+  <data name="SportType" xml:space="preserve">
+    <value>Sport type</value>
   </data>
   <data name="Stake" xml:space="preserve">
     <value>Stake</value>
@@ -292,7 +292,7 @@
     <value>Net Win Loss</value>
   </data>
   <data name="OurPT" xml:space="preserve">
-    <value>OurPT</value>
+    <value>Our PT</value>
   </data>
   <data name="StakeAfterPT" xml:space="preserve">
     <value>Stake After PT</value>
@@ -353,5 +353,11 @@
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There is no data.</value>
+  </data>
+  <data name="CustomerWinLoss" xml:space="preserve">
+    <value>Customer Win Loss</value>
+  </data>
+  <data name="CompanyWinLoss" xml:space="preserve">
+    <value>Company Win Loss</value>
   </data>
 </root>

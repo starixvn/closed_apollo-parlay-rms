@@ -158,7 +158,9 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         var isEnable = hasEditRight ? 'enable' : 'disable';
         $("select[data-type='levelUpdater']").each(function () {
             initLevelUpdater($(this));
-            $(this).multiselect(hasEditRight);
+            $(this).multiselect({
+                minWidth: 190
+            }).multiselect(hasEditRight);
         });
         $("div.grid-link-cell").each(function () {
             var custId = $(this).attr('data-cust-id');
@@ -250,7 +252,7 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
-                              { Name: 'ColUsername', Value: levelUpdater.CreateUpdateField(info.CustId, info.Level, hasEditRight, info.Username, "width-200") },
+                              { Name: 'ColUsername', Value: levelUpdater.CreateUpdateField(info.CustId, info.Level, hasEditRight, info.Username) },
                               { Name: 'ColCurrency', Value: info.Currency },
                               { Name: 'ColOriStake', Value: info.Stake },
                               { Name: 'ColOriWinningAmount', Value: info.WinLoss },
@@ -289,16 +291,16 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
                           { HeaderText: labels.AverageWinOdds, Name: "ColAverageWinOdds", MergeRowNumber: 2}]
             }],
             columns: [{ HeaderText: labels.No, Width: 45, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.Username, Width: 205, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: labels.Username, Width: 190, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Currency, Width: 60, Name: 'ColCurrency', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Stake, Width: 120, Name: 'ColOriStake', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.WinningAmount, Width: 120, Name: 'ColOriWinningAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.CompanyLoseAmount, Width: 120, Name: 'ColOriCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.CompanyLoseAmount, Width: 140, Name: 'ColOriCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.Stake, Width: 120, Name: 'ColBaseStake', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.WinningAmount, Width: 120, Name: 'ColBaseWinningAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.CompanyLoseAmount, Width: 120, Name: 'ColBaseCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.TotalBets, Width: 72, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.AverageWinOdds, Width: 80, Name: 'ColAverageWinOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
+                      { HeaderText: labels.CompanyLoseAmount, Width: 140, Name: 'ColBaseCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.TotalBets, Width: 65, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.AverageWinOdds, Width: 62, Name: 'ColAverageWinOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
             showTitle: true,
             showFooter: true,
             gridExpandHeight: 350,
@@ -330,11 +332,11 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
                               { Name: 'ColBetId', Value: "<div class='grid-link-cell link' data-username='{0}' data-trans-id='{1}'>{2}</div>".format(username, info.RefNo, info.TransId) },
                               { Name: 'ColOriStake', Value: info.Stake },
-                              { Name: 'ColOriWinningAmount', Value: info.WinLoss },
-                              { Name: 'ColOriCompanyLoseAmount', Value: info.CompanyWinLoss },
+                              { Name: 'ColOriCustomerWinLoss', Value: info.WinLoss },
+                              { Name: 'ColOriCompanyWinLoss', Value: info.CompanyWinLoss },
                               { Name: 'ColBaseStake', Value: info.StakeBaseRM },
-                              { Name: 'ColBaseWinningAmount', Value: info.WinLossBaseRM },
-                              { Name: 'ColBaseCompanyLoseAmount', Value: info.CompanyWinLossBaseRM },
+                              { Name: 'ColBaseCustomerWinLoss', Value: info.WinLossBaseRM },
+                              { Name: 'ColBaseCompanyWinLoss', Value: info.CompanyWinLossBaseRM },
                               { Name: 'ColTotalCombo', Value: info.Combo },
                               { Name: 'ColOdds', Value: (info.Odds == 0) ? '-' : info.Odds}]
                 };
@@ -345,12 +347,12 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
             {
                 Columns: [{ Name: 'ColNo', Value: labels.Total, MergeColNumber: 2, CellAlign: 'right' },
                           { Name: 'ColOriStake', Value: data.Stake },
-                          { Name: 'ColOriWinningAmount', Value: data.WinLoss },
-                          { Name: 'ColOriCompanyLoseAmount', Value: data.CompanyWinLoss },
+                          { Name: 'ColOriCustomerWinLoss', Value: data.WinLoss },
+                          { Name: 'ColOriCompanyWinLoss', Value: data.CompanyWinLoss },
                           { Name: 'ColBaseStake', Value: data.StakeBaseRM },
-                          { Name: 'ColBaseWinningAmount', Value: data.WinLossBaseRM },
-                          { Name: 'ColBaseCompanyLoseAmount', Value: data.CompanyWinLossBaseRM },
-                          { Name: 'ColTotalCombo', Value: data.Combo },
+                          { Name: 'ColBaseCustomerWinLoss', Value: data.WinLossBaseRM },
+                          { Name: 'ColBaseCompanyWinLoss', Value: data.CompanyWinLossBaseRM },
+                          { Name: 'ColTotalCombo', Value: '-', CellAlign: 'center' },
                           { Name: 'ColOdds', Value: '-', CellAlign: 'right'}]
             };
             footerData.push(row);
@@ -370,11 +372,11 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
             columns: [{ HeaderText: labels.No, Width: 45, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.BetId, Width: 130, Name: 'ColBetId', HeaderAlign: 'center', CellAlign: 'right' },
                       { HeaderText: labels.Stake, Width: 120, Name: 'ColOriStake', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.WinningAmount, Width: 120, Name: 'ColOriWinningAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.CompanyLoseAmount, Width: 120, Name: 'ColOriCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.CustomerWinLoss, Width: 120, Name: 'ColOriCustomerWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.CompanyWinLoss, Width: 120, Name: 'ColOriCompanyWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.Stake, Width: 120, Name: 'ColBaseStake', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.WinningAmount, Width: 120, Name: 'ColBaseWinningAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.CompanyLoseAmount, Width: 120, Name: 'ColBaseCompanyLoseAmount', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.CustomerWinLoss, Width: 120, Name: 'ColBaseCustomerWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.CompanyWinLoss, Width: 120, Name: 'ColBaseCompanyWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.TotalCombo, Width: 70, Name: 'ColTotalCombo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat}],
             showFooter: true,

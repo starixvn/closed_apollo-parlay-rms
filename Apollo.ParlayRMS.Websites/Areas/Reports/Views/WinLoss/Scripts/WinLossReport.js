@@ -113,7 +113,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
                 && Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
                 var betType = $this.DOMInstance.ddlBetType.val();
-                var sportTypes = $('input[name=rbgSportTypes]:checked', '#sportTypes').val();
+                var sportTypes = $this.DOMInstance.ddlSportTypes.val();
                 var dateFrom = $this.DOMInstance.dpkDateFrom.val();
                 var dateTo = $this.DOMInstance.dpkDateTo.val();
                 var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
