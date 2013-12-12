@@ -10,12 +10,12 @@
 namespace Apollo.ParlayRMS.Tools.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
-    using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Tools.Criteria.MixParlayMonitor;
     using Apollo.ParlayRMS.Tools.Services.Implements.BetList;
     using Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor;
@@ -27,7 +27,6 @@ namespace Apollo.ParlayRMS.Tools.Controllers
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Mix parlay monitor controller.
