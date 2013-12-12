@@ -1,57 +1,60 @@
 ﻿@using Fanex.NAP.Core.Web
 @using Apollo.ParlayRMS.Core.Resources
+@using Apollo.ParlayRMS.Core.Services
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>@ViewBag.Title &mdash; @Lang.ParlayRMS</title>
-	<link rel="shortcut icon" href="~/favicon.ico" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<!--[if lt IE 9]><script src="~/Scripts/lib/html5-libs/html5shiv.min.js" type="text/javascript"></script><![endif]-->
-	@Scripts.Render("~/Scripts/headjs")
-	@Styles.Render("~/Themes/Styles")
-	@Scripts.Render("~/Scripts/jQuery")
-	
-	@if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
-	{
-		<script src="~/Areas/UserLogin/scripts/ReCheckIn.js" type="text/javascript"></script>
-	}
-	@RenderSection("Head", false)
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title &mdash; @Lang.ParlayRMS</title>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--[if lt IE 9]><script src="~/Scripts/lib/html5-libs/html5shiv.min.js" type="text/javascript"></script><![endif]-->
+    @Scripts.Render("~/Scripts/headjs")
+    @Styles.Render("~/Themes/Styles")
+    @Scripts.Render("~/Scripts/jQuery")	
+    @RenderSection("Head", false)
 </head>
 <body>
-	<header class="header">
-		<div class="logo">
-			<a href="~/?ref=logo">@Lang.ParlayRMS</a>
-			@if (ViewBag.ViewFlags != null && !ViewBag.ViewFlags.IsLive)
-			{ <div class="uat"> {@ViewResources.UAT} </div> }
-		</div>
-		@Html.Action("_Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
-		<div class="user-info">
-			<div class="greeting">
-				<h2>Howdy, @HttpContext.Current.User.Identity.Name
-					<i class="icon-chevron-down"></i>
-				</h2>
-				<ul>
-					<li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "User", new { Area = "UserControl" }, new { })</li>
-					<li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "User", new { Area = "UserControl" }, new { })</li>
-					<li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
-				</ul>
-			</div>
-		</div>
-	</header>
+    <header class="header">
+        <div class="logo">
+            <a href="~/?ref=logo">@Lang.ParlayRMS</a>
+            @if (ViewBag.ViewFlags != null && !ViewBag.ViewFlags.IsLive)
+            { <div class="uat"> {@ViewResources.UAT} </div> }
+        </div>
+        @Html.Action("_Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
+        <div class="user-info">
+            <div class="greeting">
+                <h2>Howdy, @HttpContext.Current.User.Identity.Name
+                    <i class="icon-chevron-down"></i>
+                </h2>
+                <ul>
+                    <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "User", new { Area = "UserControl" }, new { })</li>
+                    <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "User", new { Area = "UserControl" }, new { })</li>
+                    <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-	<section id="headline">
-		@RenderSection("Headline", false)
-	</section>
-	<section id="body">
-		<div class="content">
-			@RenderBody()
-		</div>
-	</section>    
-	
-	@Html.Hidden("ClientURL", Url.Content("~/ParlayRMS/"))
-	@Html.Hidden("RootURL", Url.Content("~/"))
-	@Scripts.Render("~/Scripts/CommonJS")
-	@RenderSection("Foot", false)
+    <section id="headline">
+        @RenderSection("Headline", false)
+    </section>
+    <section id="body">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </section>    
+    
+    @Html.Hidden("ClientURL", Url.Content("~/ParlayRMS/"))
+    @Html.Hidden("RootURL", Url.Content("~/"))
+    @Html.Hidden("ServerTimezone", BalanceUpService.GetUtcOffset())
+    @Scripts.Render("~/Scripts/CommonJS")
+
+    @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
+    {
+        @Scripts.Render("~/Scripts/ReCheckin")
+    }
+    
+    @RenderSection("Foot", false)
 </body>
 </html>

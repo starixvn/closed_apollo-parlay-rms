@@ -79,7 +79,7 @@ namespace Apollo.ParlayRMS.Reports.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Member/Agent Win Loss of {0} - from {1} to {2} - Bet type [{3}] - Combo [{4}] - Sport types [{5}].
+        ///   Looks up a localized string similar to Member/Agent Win Loss of {0} - from {1} to {2} - Bet type [{3}] - Combo [{4}] - Sport type [{5}].
         /// </summary>
         internal static string MemberWinLossTitle {
             get {
@@ -106,7 +106,7 @@ namespace Apollo.ParlayRMS.Reports.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top {0} winners - from {1} to {2} - Combo [{3}] - Sport types [{4}].
+        ///   Looks up a localized string similar to Top {0} winners - from {1} to {2} - Combo [{3}] - Sport type [{4}].
         /// </summary>
         internal static string TopWinnersReportTitle {
             get {
@@ -124,7 +124,7 @@ namespace Apollo.ParlayRMS.Reports.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Win Loss - from {0} to {1} - Bet type [{2}] - Combo [{3}] - Sport types [{4}].
+        ///   Looks up a localized string similar to Win Loss - from {0} to {1} - Bet type [{2}] - Combo [{3}] - Sport type [{4}].
         /// </summary>
         internal static string WinLossReportTitle {
             get {

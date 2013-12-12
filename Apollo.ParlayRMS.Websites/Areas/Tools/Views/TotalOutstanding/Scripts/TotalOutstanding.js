@@ -157,7 +157,7 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
         var gridOptions =
         {
             columns: [{ HeaderText: labels.No, Width: 60, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat },
+                      { HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat, Timezone: ParlayRMS.ServerTimezone },
                       { HeaderText: labels.BetId, Width: 100, Name: 'ColBetId', HeaderAlign: 'center', CellAlign: 'right' },
                       { HeaderText: labels.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
                       { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },

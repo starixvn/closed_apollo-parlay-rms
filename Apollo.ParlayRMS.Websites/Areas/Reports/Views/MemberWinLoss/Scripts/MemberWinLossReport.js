@@ -208,7 +208,7 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
                           { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
                           { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
             }],
-            columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
+            columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat, Timezone: ParlayRMS.ServerTimezone },
                       { HeaderText: labels.Username, Width: 150, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
@@ -298,7 +298,7 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
                           { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
                           { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
             }],
-            columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
+            columns: [{ HeaderText: labels.Month, Width: 100, Name: 'ColMonth', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat, Timezone: ParlayRMS.ServerTimezone },
                       { HeaderText: labels.Won, Width: 80, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 80, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },

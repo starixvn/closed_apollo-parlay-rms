@@ -98,7 +98,7 @@ Apollo.ParlayRMS.Tools.SimilarBets = function () {
         
         var gridOptions =
         {
-            columns: [{ HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat },
+            columns: [{ HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat, Timezone: ParlayRMS.ServerTimezone },
                       { HeaderText: labels.BetId, Width: 100, Name: 'ColBetId', HeaderAlign: 'center', CellAlign: 'right' },
                       { HeaderText: labels.Username, Width: 150, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: labels.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },

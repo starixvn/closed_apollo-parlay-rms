@@ -37,7 +37,7 @@ namespace Apollo.ParlayRMS.Core.Services
                 return new CommandResult
                 {
                     Code = 500,
-                    Message = Messages.InternalError
+                    Message = Messages.InternalErrorMessage
                 };
             }
         }

@@ -205,7 +205,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
                           { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
                           { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
             }],
-            columns: [{ HeaderText: labels.Date, Width: 120, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat },
+            columns: [{ HeaderText: labels.Date, Width: 120, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat, Timezone: ParlayRMS.ServerTimezone },
                       { HeaderText: labels.Combo, Width: 82, Name: 'ColCombo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.Won, Width: 110, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
                       { HeaderText: labels.Lose, Width: 110, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },

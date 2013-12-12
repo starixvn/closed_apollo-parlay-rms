@@ -1,39 +1,4 @@
-﻿//function ReCheckin() {
-//    var KickedOut = 3;
-//    var strOnUserId = $("#hdfOnUserId").val();
-
-//    $.ajax({
-//        url: location.protocol + '//' + location.host + "/UserLogin/Login/ReCheckLogin",
-//        type: "POST",       
-//        dataType: "json",
-//        success: function (result) {
-////            console.log(result);
-//            if (result == "1") {
-////                console.log(result + "OK");
-//                window.location.href = location.protocol + '//' + location.host + "/UserLogin/Login/LogOut";
-//            }
-//        },
-//        error: function (request, status, error) {
-//            console.log(error);
-//        }
-//    });
-//}
-
-//function closeBrowser() {
-//    var index = window;
-//    while (index != index.parent) // Jump out
-//    {
-//        index = index.parent;
-//    }
-
-//    index.close();
-//}
-
-//$(document).ready(function () {
-//    setInterval("ReCheckin()", 10000);
-//});
-
-var Recheckin = function ($) {
+﻿var Recheckin = function ($) {
 
     return {
         time: null,
@@ -43,7 +8,7 @@ var Recheckin = function ($) {
 
         init: function () {
             Recheckin.time = 5000;
-            Recheckin.root = location.protocol + '//' + location.host + $('#NapHubRoot').val();
+            Recheckin.root = location.protocol + '//' + location.host + $('#RootURL').val();
             Recheckin.kickedOutMsg = 'You have logged in from another session or your login session has expired!';
         },
 

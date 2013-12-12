@@ -70,6 +70,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are not authorized to access this link..
+        /// </summary>
+        public static string AccessDeniedMessage {
+            get {
+                return ResourceManager.GetString("AccessDeniedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new customer successfully!.
         /// </summary>
         public static string AddNewCustomerSuccessfullyMessage {
@@ -151,11 +160,20 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sorry, an error occurred while processing your request, please notify the administrators..
+        ///   Looks up a localized string similar to Internal error!.
         /// </summary>
         public static string InternalError {
             get {
                 return ResourceManager.GetString("InternalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, an error occurred while processing your request, please notify the administrators..
+        /// </summary>
+        public static string InternalErrorMessage {
+            get {
+                return ResourceManager.GetString("InternalErrorMessage", resourceCulture);
             }
         }
         
@@ -210,6 +228,24 @@ namespace Apollo.ParlayRMS.Core.Resources {
         public static string NoInformationAvailable {
             get {
                 return ResourceManager.GetString("NoInformationAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not found!.
+        /// </summary>
+        public static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The resource cannot be found..
+        /// </summary>
+        public static string NotFoundMessage {
+            get {
+                return ResourceManager.GetString("NotFoundMessage", resourceCulture);
             }
         }
         

@@ -32,7 +32,7 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor
             IEnumerable<ParlayBetItem> betList = this.GetData<ParlayBetItem>(criteria);
 
             // Use for testing purpose.
-            betList = CreateTestData(criteria);
+            ////betList = CreateTestData(criteria);
 
             return betList;
         }

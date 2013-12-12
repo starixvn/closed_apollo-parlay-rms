@@ -27,6 +27,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Mix parlay monitor controller.
@@ -55,9 +56,20 @@ namespace Apollo.ParlayRMS.Tools.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MixParlayMonitor, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
+            SelectListItem[] tempLevels = new SelectListItem[10];
+            List<SelectListItem> levels = new List<SelectListItem>();
+
+            FilterForm.LevelList.CopyTo(tempLevels);
+            levels.Add(new SelectListItem
+            {
+                Text = Lang.None,
+                Value = "0"
+            });
+            levels.AddRange(tempLevels.Reverse());
+
             ViewBag.SportTypes = FilterForm.SportTypes.GetRange(1, 3);
             ViewBag.Combos = FilterForm.Combos;
-            ViewBag.Levels = FilterForm.LevelList;
+            ViewBag.Levels = levels;
             ViewBag.SelectTop = FilterForm.SelectTops;
             ViewBag.RefreshTimes = FilterForm.RefreshTimes.GetRange(1, 3);
 

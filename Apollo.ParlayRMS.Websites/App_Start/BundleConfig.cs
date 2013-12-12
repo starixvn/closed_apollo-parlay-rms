@@ -55,6 +55,10 @@ namespace Apollo.ParlayRMS.Websites
             bundles.Add(new ScriptBundle("~/Scripts/headjs").Include(
                 "~/Scripts/lib/html5-libs/head.js"));
 
+            bundles.Add(
+                new ScriptBundle("~/Scripts/ReCheckin").Include(
+                    "~/Areas/UserLogin/scripts/ReCheckIn.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/CommonJS").Include(
                 "~/Scripts/lib/jQuery/jquery.easing.1.3.js",
                 "~/Scripts/lib/jQuery/jquery-ui-1.8.24.js",

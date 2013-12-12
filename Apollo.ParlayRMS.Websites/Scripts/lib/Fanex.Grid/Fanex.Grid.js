@@ -791,6 +791,10 @@
             if (me.columnsHastable[currentCol.Name].FormatDateTime && isValid(currentValue) && currentValue !== '') {
                 var momentObject = moment(currentValue);
                 if (momentObject.isValid()) {
+                    if (me.columnsHastable[currentCol.Name].Timezone) {
+                        momentObject = momentObject.zone(me.columnsHastable[currentCol.Name].Timezone);
+                    }
+                    
                     currentValue = momentObject.format(me.columnsHastable[currentCol.Name].FormatDateTime);
                 }
             }

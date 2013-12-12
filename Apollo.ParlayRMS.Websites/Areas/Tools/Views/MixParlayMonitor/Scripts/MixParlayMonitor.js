@@ -190,7 +190,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
 
         cells.push('<tr>');
         cells.push('<td class="align-center">{0}</td>'.format(order));
-        cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
+        cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).zone(ParlayRMS.ServerTimezone).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
         cells.push('<td class="align-right"><div class="{0}">{1}</div></td>'.format(betIdStyle, item.TransId));
         cells.push('<td class="align-left username"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(usernameStyle, item.Level, item.Username));
         cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Odds).format(ParlayRMS.commonConstants.DecimalFormat)))

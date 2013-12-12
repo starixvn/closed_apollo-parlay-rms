@@ -145,7 +145,7 @@
     <value>Format Date cannot be null</value>
   </data>
   <data name="InternalError" xml:space="preserve">
-    <value>Sorry, an error occurred while processing your request, please notify the administrators.</value>
+    <value>Internal error!</value>
   </data>
   <data name="InvalidDateFieldError" xml:space="preserve">
     <value>Invalid date value</value>
@@ -185,5 +185,17 @@
   </data>
   <data name="AccessDenied" xml:space="preserve">
     <value>Access denied!</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>You are not authorized to access this link.</value>
+  </data>
+  <data name="InternalErrorMessage" xml:space="preserve">
+    <value>Sorry, an error occurred while processing your request, please notify the administrators.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not found!</value>
+  </data>
+  <data name="NotFoundMessage" xml:space="preserve">
+    <value>The resource cannot be found.</value>
   </data>
 </root>

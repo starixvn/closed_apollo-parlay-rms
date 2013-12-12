@@ -59,6 +59,7 @@ namespace Apollo.ParlayRMS.Core.Controllers
             ViewFlags = new ViewFlags
             {
                 IsLive = this.Environment.Equals(Constant.LIVE),
+                IsReCheckin = NapSettings.Settings.EnableReCheckIn,
                 HasEditRight = false
             };
 

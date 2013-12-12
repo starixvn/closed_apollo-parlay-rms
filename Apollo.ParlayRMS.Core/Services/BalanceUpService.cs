@@ -23,6 +23,7 @@ namespace Apollo.ParlayRMS.Core.Services
         #region Static fields
 
         public const string CachedBalanceUp = "Apollo.ParlayRMS.Core.BalanceUpService.BalanceUp";
+        public const string CacheUtcOffset = "Apollo.ParlayRMS.Core.BalanceUpService.UtcOffset";
         public const string BetTran14SPSuffix = "_14";
         public const string WareHouseSPSuffix = "_WH";
         private static readonly IDynamicRepository BalanceUpRepository;
@@ -78,6 +79,24 @@ namespace Apollo.ParlayRMS.Core.Services
             {
                 return WareHouseSPSuffix;
             }
+        }
+        
+        /// <summary>
+        /// Gets the UTC offset of the server.
+        /// </summary>
+        /// <returns>UTC offset string indicates the time zone of the server.</returns>
+        public static string GetUtcOffset()
+        {
+            var offsetString = CacheManager.Get<string>(CacheUtcOffset);
+            if (string.IsNullOrEmpty(offsetString))
+            {
+                var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
+
+                offsetString = string.Format("{0}{1}", offset.Hours > 0 ? "+" : string.Empty, offset);
+                CacheManager.Set<string>(CacheUtcOffset, offsetString);
+            }
+
+            return offsetString;
         }
 
         #endregion Static methods
