@@ -2,10 +2,11 @@
     //var dateFormat = 'MM-DD-YYYY';
     var errorMessages = {};
 
+    var rootUrl = $('#RootURL').val();
     var getErrorMessages = function () {
         $.ajax({
             type: "POST",
-            url: '/Home/GetValidationErrorMessages', // ParlayRMS.resolveRootUrl('Home/GetValidationErrorMessages'),
+            url: rootUrl + 'Home/GetValidationErrorMessages', // ParlayRMS.resolveRootUrl('Home/GetValidationErrorMessages'),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             beforeSend: function () {
