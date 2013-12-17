@@ -9,11 +9,11 @@
 
 namespace Apollo.ParlayRMS.Tools.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Resources;
-    using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Tools.Criteria.SimilarBets;
     using Apollo.ParlayRMS.Tools.Services.Implements.BetList;
     using Apollo.ParlayRMS.Tools.Services.Implements.SimilarBets;
@@ -98,8 +98,13 @@ namespace Apollo.ParlayRMS.Tools.Controllers
             string borderTag = string.Empty;
             bool isDifferent;
 
+            var originalTickets = new List<ITicket>();
             var tickets = this._betListService.CreateChoices(refNo);
-            var originalTickets = this._betListService.CreateChoices(originalRefNo);
+
+            if (refNo != originalRefNo)
+            {
+                originalTickets = this._betListService.CreateChoices(originalRefNo).ToList();
+            }
 
             foreach (var ticket in tickets)
             {
