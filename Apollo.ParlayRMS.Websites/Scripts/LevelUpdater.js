@@ -86,7 +86,7 @@ Apollo.ParlayRMS.LevelUpdater = function () {
 
             $.ajax({
                 type: "POST",
-                url: ParlayRMS.resolveRootUrl('MemberManagement/MemberManagement/ChangeCustomerLevel'),
+                url: ParlayRMS.resolveRootUrl('Management/MemberManagement/ChangeCustomerLevel'),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(data),

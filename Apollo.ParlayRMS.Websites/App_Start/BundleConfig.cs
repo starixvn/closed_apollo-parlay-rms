@@ -89,7 +89,7 @@ namespace Apollo.ParlayRMS.Websites
         private static void RegisterMemberManagementBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/MemberManagement").Include(
-                "~/Areas/MemberManagement/Views/MemberManagement/Scripts/MemberManagement.js",
+                "~/Areas/Management/Views/MemberManagement/Scripts/MemberManagement.js",
                 "~/Scripts/LevelUpdater.js"));
             bundles.AddAndInclude(
                 "~/Themes/MemberManagement",

@@ -228,7 +228,7 @@
     <Content Include="Scripts\lib\html5-libs\head.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\LevelUpdater.js" />
-    <Content Include="Areas\MemberManagement\Views\MemberManagement\Scripts\MemberManagement.js" />
+    <Content Include="Areas\Management\Views\MemberManagement\Scripts\MemberManagement.js" />
     <Content Include="Areas\Reports\Views\TopWinners\Scripts\TopWinnerReport.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
@@ -493,17 +493,17 @@
     <Content Include="Web.ConnectionString.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\MemberManagement\Web.config" />
+    <Content Include="Areas\Management\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\UserControl\Views\User\UserProfile.cshtml" />
     <Content Include="Areas\UserControl\Views\Web.config" />
-    <Content Include="Areas\MemberManagement\Views\MemberManagement\Index.cshtml" />
+    <Content Include="Areas\Management\Views\MemberManagement\Index.cshtml" />
     <Content Include="Areas\Reports\Web.config" />
     <Content Include="Areas\Reports\Views\TopWinners\Index.cshtml" />
     <Content Include="Areas\Reports\Views\WinLoss\Index.cshtml" />
-    <Content Include="Areas\MemberManagement\ExcelTemplates\SpecialMembers.xls" />
+    <Content Include="Areas\Management\ExcelTemplates\SpecialMembers.xls" />
     <Content Include="Areas\Reports\Views\TopWinners\BetDetails.cshtml" />
     <Content Include="Areas\Reports\ExcelTemplates\AgentWinLoss.xls" />
     <Content Include="Areas\Reports\ExcelTemplates\MemberWinLoss.xls" />
@@ -552,9 +552,9 @@
       <Project>{8CE2CFD3-1573-4C86-A9E3-2F3E6270290C}</Project>
       <Name>Apollo.ParlayRMS.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Apollo.ParlayRMS.MemberManagement\Apollo.ParlayRMS.MemberManagement.csproj">
+    <ProjectReference Include="..\Apollo.ParlayRMS.Management\Apollo.ParlayRMS.Management.csproj">
       <Project>{4489F827-B0E3-452C-A00B-390EFEA3E071}</Project>
-      <Name>Apollo.ParlayRMS.MemberManagement</Name>
+      <Name>Apollo.ParlayRMS.Management</Name>
     </ProjectReference>
     <ProjectReference Include="..\Apollo.ParlayRMS.Reports\Apollo.ParlayRMS.Reports.csproj">
       <Project>{6CDCA14D-15B5-4711-BED1-AD00B01454F7}</Project>
