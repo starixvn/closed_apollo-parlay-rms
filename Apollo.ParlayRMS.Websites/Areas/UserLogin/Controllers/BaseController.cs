@@ -30,8 +30,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
 
         private ViewFlags _viewFlags;
 
-        private string _loginUrl = string.Empty;
-
         public BaseController()
         {
             CurrentContext = new CurrentContext();
@@ -40,8 +38,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
             {
                 IsReCheckin = NapSettings.Settings.EnableReCheckIn
             };
-
-            this._loginUrl = ConfigurationManager.AppSettings["LoginURL"];
         }
 
         public bool IsSiteLogin
@@ -62,14 +58,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
             set
             {
                 ViewBag.ViewFlags = _viewFlags = value;
-            }
-        }
-
-        protected string LoginURL
-        {
-            get
-            {
-                return _loginUrl;
             }
         }
     }

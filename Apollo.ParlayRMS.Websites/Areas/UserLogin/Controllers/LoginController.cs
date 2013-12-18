@@ -302,14 +302,7 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
         {
             DoSignOut();
 
-            if (!this.IsSiteLogin)
-            {
-                return Redirect(this.LoginURL);
-            }
-            else
-            {
-                return Redirect(FormsAuthentication.LoginUrl);
-            }
+            return Redirect(FormsAuthentication.LoginUrl);
         }
 
         /// <summary>
