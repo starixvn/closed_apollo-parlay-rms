@@ -52,6 +52,7 @@ namespace Apollo.ParlayRMS.Websites.Controllers
         /// Gets the validation error messages.
         /// </summary>
         /// <returns>JSON object contains all validation error messages.</returns>
+        [HttpPost]
         public JsonResult GetValidationErrorMessages()
         {
             dynamic errorMessages = new
