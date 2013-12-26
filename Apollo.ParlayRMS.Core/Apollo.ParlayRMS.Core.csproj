@@ -55,9 +55,8 @@
     <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\NPOI.dll</HintPath>
+    <Reference Include="NPOI">
+      <HintPath>..\_Dependencies\Others\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef">
       <HintPath>..\_Dependencies\RemotingRef\RemotingRef.dll</HintPath>

@@ -40,7 +40,7 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Apollo.UMService">
-      <HintPath>..\_Dependencies\UM\Apollo.UMService.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\Apollo.UMService.dll</HintPath>
     </Reference>
     <Reference Include="BundleTransformer.Core">
       <HintPath>..\packages\BundleTransformer.Core.1.8.11\lib\net40\BundleTransformer.Core.dll</HintPath>
@@ -49,7 +49,7 @@
       <HintPath>..\packages\BundleTransformer.Less.1.8.11\lib\net40\BundleTransformer.Less.dll</HintPath>
     </Reference>
     <Reference Include="dotless.Core">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\dotless.Core.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\dotless.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Common">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
@@ -89,7 +89,7 @@
       <HintPath>..\packages\MsieJavaScriptEngine.1.1.3\lib\net40\MsieJavaScriptEngine.dll</HintPath>
     </Reference>
     <Reference Include="MvcPager">
-      <HintPath>..\_Dependencies\MvcPager.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -163,8 +163,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="TplCore, Version=1.0.4694.29951, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\TplCore.dll</HintPath>
+    <Reference Include="TplCore">
+      <HintPath>..\_Dependencies\Others\TplCore.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>

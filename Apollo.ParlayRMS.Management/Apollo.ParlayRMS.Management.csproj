@@ -69,7 +69,7 @@
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\_Dependencies\NPOI.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

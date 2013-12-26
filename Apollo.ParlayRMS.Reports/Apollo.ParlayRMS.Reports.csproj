@@ -58,7 +58,7 @@
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\_Dependencies\NPOI.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\RemotingRef\RemotingRef.dll</HintPath>
