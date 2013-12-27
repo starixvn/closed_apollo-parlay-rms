@@ -23,7 +23,7 @@ namespace Apollo.ParlayRMS.Tools.Models.BetList
         public int HomeId { get; set; }
 
         public int AwayId { get; set; }
-        
+
         public decimal Hdp1 { get; set; }
 
         public decimal Hdp2 { get; set; }
@@ -47,7 +47,7 @@ namespace Apollo.ParlayRMS.Tools.Models.BetList
         public int SportType { get; set; }
 
         public bool IsNeutral { get; set; }
-        
+
         public int MatchId { get; set; }
 
         public string MatchCode { get; set; }

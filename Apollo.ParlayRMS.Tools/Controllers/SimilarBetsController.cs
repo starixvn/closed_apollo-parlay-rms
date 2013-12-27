@@ -15,6 +15,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Tools.Criteria.SimilarBets;
+    using Apollo.ParlayRMS.Tools.Models.SimilarBets;
     using Apollo.ParlayRMS.Tools.Services.Implements.BetList;
     using Apollo.ParlayRMS.Tools.Services.Implements.SimilarBets;
     using Apollo.ParlayRMS.Tools.Services.Interfaces.BetList;
@@ -68,7 +69,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.SimilarBets, Policy = Constant.Policy.Read)]
         public JsonResult GetSimilarBets(long transId)
         {
-            var data = this._similarBetsService.GetSimilarBetList(new GetSimilarBetListCriteria
+            SimilarBetList data = this._similarBetsService.GetSimilarBetList(new GetSimilarBetListCriteria
             {
                 TransId = transId
             });

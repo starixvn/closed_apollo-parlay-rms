@@ -17,6 +17,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Tools.Criteria.MixParlayMonitor;
+    using Apollo.ParlayRMS.Tools.Models.MixParlayMonitor;
     using Apollo.ParlayRMS.Tools.Services.Implements.BetList;
     using Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor;
     using Apollo.ParlayRMS.Tools.Services.Interfaces.BetList;
@@ -88,8 +89,8 @@ namespace Apollo.ParlayRMS.Tools.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MixParlayMonitor, Policy = Constant.Policy.Read)]
         public JsonResult GetMixParlayData(GetMonitorParlayBetListCriteria criteria)
         {
-            var records = this._mixParlayMonitorService.GeMixParlayData(criteria);
-            var maxTransId = criteria.Max_TransId;
+            IEnumerable<ParlayBetItem> records = this._mixParlayMonitorService.GeMixParlayData(criteria);
+            long maxTransId = criteria.Max_TransId;
 
             if ((records != null) && (records.Count() > 0))
             {

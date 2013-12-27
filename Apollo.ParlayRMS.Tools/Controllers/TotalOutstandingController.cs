@@ -17,7 +17,6 @@ namespace Apollo.ParlayRMS.Tools.Controllers
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Core.Services;
-    using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Tools.Criteria.TotalOutstanding;
     using Apollo.ParlayRMS.Tools.Services.Implements.BetList;
     using Apollo.ParlayRMS.Tools.Services.Implements.TotalOutstanding;
@@ -106,7 +105,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TotalOutstanding, Policy = Constant.Policy.Read)]
         public JsonResult GetTotalOutstanding(string username, string combos, string sportTypes)
         {
-            var customerInfo = CustomerService.GetCustomerInfo(username);
+            CustomerInfo customerInfo = CustomerService.GetCustomerInfo(username);
 
             if (customerInfo.RoleId == (int)CommonEnums.RoleId.Member)
             {
@@ -158,11 +157,11 @@ namespace Apollo.ParlayRMS.Tools.Controllers
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
             ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
-            
+
             string openTags = "<div id='{0}'><div class='ticketDetail'>";
             string closeTags = "</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>{1}";
             string borderTag = string.Empty;
-            
+
             var tickets = this._betListService.CreateChoices(refNo);
             foreach (var ticket in tickets)
             {
@@ -176,7 +175,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
                             false);
             }
 
-            return Json(new 
+            return Json(new
             {
                 BetList = builder.GetBetList(),
                 Title = string.Format("{0} - {1} - {2}", Lang.TicketDetails, username, betId)

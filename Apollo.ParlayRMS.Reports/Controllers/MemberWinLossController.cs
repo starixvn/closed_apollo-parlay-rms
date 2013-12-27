@@ -12,8 +12,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
     using System.Web.Mvc;
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Models;
-    using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Reports.Criteria.MemberWinLoss;
+    using Apollo.ParlayRMS.Reports.Models.MemberWinLoss;
     using Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss;
     using Apollo.ParlayRMS.Reports.Services.Interfaces.MemberWinLoss;
     using Fanex.NAP.Core.Business;
@@ -24,6 +24,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
     /// </summary>
     public class MemberWinLossController : BaseController
     {
+        private const string MemberWinLossTemplateFilePath = @"~\Areas\Reports\ExcelTemplates\MemberWinLoss.xls";
+        private const string AgentWinLossTemplateFilePath = @"~\Areas\Reports\ExcelTemplates\AgentWinLoss.xls";
         private readonly IMemberWinLossService _memberWinLossService;
 
         public MemberWinLossController() :
@@ -61,8 +63,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MemberWinLossReport, Policy = Constant.Policy.Read)]
         public JsonResult GetMemberWinLoss(GetMemberWinLossCriteria criteria)
         {
-            var data = this._memberWinLossService.GetMemberWinLossData(criteria);
-            var title = criteria.ToString();
+            MemberWinLossItem data = this._memberWinLossService.GetMemberWinLossData(criteria);
+            string title = criteria.ToString();
 
             return Json(new
             {
@@ -80,11 +82,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MemberWinLossReport, Policy = Constant.Policy.Read)]
         public ActionResult ExportMemberWinLoss(GetMemberWinLossCriteria criteria)
         {
-            string agentTemplateUrl = @"~\Areas\Reports\ExcelTemplates\AgentWinLoss.xls";
-            string memberTemplateUrl = @"~\Areas\Reports\ExcelTemplates\MemberWinLoss.xls";
-
-            agentTemplateUrl = System.Web.HttpContext.Current.Server.MapPath(agentTemplateUrl);
-            memberTemplateUrl = System.Web.HttpContext.Current.Server.MapPath(memberTemplateUrl);
+            string agentTemplateUrl = System.Web.HttpContext.Current.Server.MapPath(AgentWinLossTemplateFilePath);
+            string memberTemplateUrl = System.Web.HttpContext.Current.Server.MapPath(MemberWinLossTemplateFilePath);
             this._memberWinLossService.ExportMemberWinLoss(criteria, agentTemplateUrl, memberTemplateUrl);
             return new EmptyResult();
         }

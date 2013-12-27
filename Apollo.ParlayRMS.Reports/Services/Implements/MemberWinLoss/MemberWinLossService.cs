@@ -17,6 +17,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
     using Apollo.ParlayRMS.Core.Criteria;
     using Apollo.ParlayRMS.Core.ExcelUtility;
     using Apollo.ParlayRMS.Core.Extensions;
+    using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Core.Web;
@@ -36,7 +37,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Queried and grouped member win loss data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Cannot seperate the method into more details.")]
         public MemberWinLossItem GetMemberWinLossData(GetMemberWinLossCriteria criteria)
         {
@@ -49,8 +50,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
 
             if (result == null)
             {
-                var balanceUp = BalanceUpService.GetBalanceUp();
-                var user = CustomerService.GetCustomerInfo(new GetCustomerByUsernameCriteria
+                BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
+                CustomerInfo user = CustomerService.GetCustomerInfo(new GetCustomerByUsernameCriteria
                 {
                     Username = criteria.Username
                 });

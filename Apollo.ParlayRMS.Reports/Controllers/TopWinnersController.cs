@@ -14,7 +14,6 @@ namespace Apollo.ParlayRMS.Reports.Controllers
     using System.Web.Mvc;
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Models;
-    using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Reports.Criteria.TopWinners;
     using Apollo.ParlayRMS.Reports.Models.TopWinners;
     using Apollo.ParlayRMS.Reports.Services.Implements.TopWinners;
@@ -31,6 +30,7 @@ namespace Apollo.ParlayRMS.Reports.Controllers
     /// </summary>
     public class TopWinnersController : BaseController
     {
+        private const string TopWinnerTemplateFilePath = @"~\Areas\Reports\ExcelTemplates\TopWinners.xls";
         private readonly ITopWinnersService _topWinnersService;
 
         public TopWinnersController() :
@@ -71,8 +71,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TopWinnersReport, Policy = Constant.Policy.Read)]
         public JsonResult GetTopWinners(GetTopWinnersCriteria criteria)
         {
-            var data = this._topWinnersService.GetTopWinners(criteria);
-            var title = criteria.ToString();
+            TopWinnerList data = this._topWinnersService.GetTopWinners(criteria);
+            string title = criteria.ToString();
 
             return Json(new
             {
@@ -89,8 +89,7 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TopWinnersReport, Policy = Constant.Policy.Read)]
         public ActionResult ExportTopWinners(GetTopWinnersCriteria criteria)
         {
-            string templateUrl = @"~\Areas\Reports\ExcelTemplates\TopWinners.xls";
-            templateUrl = System.Web.HttpContext.Current.Server.MapPath(templateUrl);
+            string templateUrl = System.Web.HttpContext.Current.Server.MapPath(TopWinnerTemplateFilePath);
             this._topWinnersService.ExportTopWinners(criteria, templateUrl);
             return new EmptyResult();
         }
@@ -104,7 +103,7 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.TopWinnersReport, Policy = Constant.Policy.Read)]
         public JsonResult GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria)
         {
-            var data = this._topWinnersService.GetTopWinnerDetails(criteria);
+            TopWinnerDetailList data = this._topWinnersService.GetTopWinnerDetails(criteria);
 
             return Json(data);
         }
@@ -124,13 +123,13 @@ namespace Apollo.ParlayRMS.Reports.Controllers
             BetListHTMLFactory factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
             ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
-            var data = this._topWinnersService.GetTopWinnerBetDetails(criteria);
-            var tickets = Map(criteria.RefNo, data);
+            IEnumerable<TopWinnerBetDetails> data = this._topWinnersService.GetTopWinnerBetDetails(criteria);
+            IEnumerable<ITicket> tickets = Map(criteria.RefNo, data);
 
             string openTags = "<div id='{0}'><div class='ticketDetail'>";
             string closeTags = "</div><div class='ticketStatus'><div class='divStatus'>[{0}]</div></div></div>{1}";
             string borderTag = string.Empty;
-            
+
             foreach (var ticket in tickets)
             {
                 borderTag = (tickets.Last() == ticket) ? string.Empty : "<div class='line'></div>";

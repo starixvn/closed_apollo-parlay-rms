@@ -244,7 +244,7 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         $this.DOMInstance.divResult.html('');
 
         if (result && result.Data) {
-            var records = result.Data.ChildItems;
+            var records = result.Data.TopWinners;
             var row = null;
             var info = null;
 
@@ -269,10 +269,10 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
             row =
             {
                 Columns: [{ Name: 'ColNo', Value: labels.Total, MergeColNumber: 6, CellAlign: 'right' },
-                          { Name: 'ColBaseStake', Value: result.Data.StakeBaseRM },
-                          { Name: 'ColBaseWinningAmount', Value: result.Data.WinLossBaseRM },
-                          { Name: 'ColBaseCompanyLoseAmount', Value: result.Data.CompanyWinLossBaseRM },
-                          { Name: 'ColTotalBets', Value: result.Data.BetCount },
+                          { Name: 'ColBaseStake', Value: result.Data.Total.StakeBaseRM },
+                          { Name: 'ColBaseWinningAmount', Value: result.Data.Total.WinLossBaseRM },
+                          { Name: 'ColBaseCompanyLoseAmount', Value: result.Data.Total.CompanyWinLossBaseRM },
+                          { Name: 'ColTotalBets', Value: result.Data.Total.BetCount },
                           { Name: 'ColAverageWinOdds', Value: '-', CellAlign: 'center'}]
             };
             footerData.push(row);
@@ -321,8 +321,8 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         var bodyData = [];
         var footerData = [];
 
-        if (data && data.ChildItems.length > 0) {
-            var records = data.ChildItems;
+        if (data && data.TopWinnerDetailItems.length > 0) {
+            var records = data.TopWinnerDetailItems;
             var row = null;
             var info = null;
 
@@ -346,12 +346,12 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
             row =
             {
                 Columns: [{ Name: 'ColNo', Value: labels.Total, MergeColNumber: 2, CellAlign: 'right' },
-                          { Name: 'ColOriStake', Value: data.Stake },
-                          { Name: 'ColOriCustomerWinLoss', Value: data.WinLoss },
-                          { Name: 'ColOriCompanyWinLoss', Value: data.CompanyWinLoss },
-                          { Name: 'ColBaseStake', Value: data.StakeBaseRM },
-                          { Name: 'ColBaseCustomerWinLoss', Value: data.WinLossBaseRM },
-                          { Name: 'ColBaseCompanyWinLoss', Value: data.CompanyWinLossBaseRM },
+                          { Name: 'ColOriStake', Value: data.Total.Stake },
+                          { Name: 'ColOriCustomerWinLoss', Value: data.Total.WinLoss },
+                          { Name: 'ColOriCompanyWinLoss', Value: data.Total.CompanyWinLoss },
+                          { Name: 'ColBaseStake', Value: data.Total.StakeBaseRM },
+                          { Name: 'ColBaseCustomerWinLoss', Value: data.Total.WinLossBaseRM },
+                          { Name: 'ColBaseCompanyWinLoss', Value: data.Total.CompanyWinLossBaseRM },
                           { Name: 'ColTotalCombo', Value: '-', CellAlign: 'center' },
                           { Name: 'ColOdds', Value: '-', CellAlign: 'right'}]
             };

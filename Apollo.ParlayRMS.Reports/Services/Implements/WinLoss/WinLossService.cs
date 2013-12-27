@@ -47,11 +47,12 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
 
             if (result == null)
             {
+                List<WinLossItem> rawData = null;
                 BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
+
                 criteria.BalanceUpDay = balanceUp.BalanceUpDay;
                 criteria.MoveBetsDay = balanceUp.MoveBetsDay;
-
-                List<WinLossItem> rawData = this.GetData<WinLossItem>(criteria).ToList();
+                rawData = this.GetData<WinLossItem>(criteria).ToList();
 
                 if ((rawData != null) && (rawData.Count > 0))
                 {
@@ -164,7 +165,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
                     {
                         result.Add(currentDateData);
                     }
-                    
+
                     currentDateData = new WinLossItem();
                     currentDateData.WinLossDate = obj.WinLossDate;
                     currentDate = obj.WinLossDate;

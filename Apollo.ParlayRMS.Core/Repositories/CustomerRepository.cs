@@ -27,7 +27,7 @@ namespace Apollo.ParlayRMS.Core.Repositories
         {
             CustomerInfo custInfo = new CustomerInfo();
 
-            using (IObjectDb db = new ObjectDb(criteria.GetSettingKey())) 
+            using (IObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 var param = criteria.GetSpParams();
 

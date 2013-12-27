@@ -80,7 +80,7 @@ namespace Apollo.ParlayRMS.Core.Services
                 return WareHouseSPSuffix;
             }
         }
-        
+
         /// <summary>
         /// Gets the UTC offset of the server.
         /// </summary>

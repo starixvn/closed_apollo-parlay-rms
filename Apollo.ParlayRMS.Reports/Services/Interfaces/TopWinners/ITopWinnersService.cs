@@ -20,14 +20,14 @@ namespace Apollo.ParlayRMS.Reports.Services.Interfaces.TopWinners
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>TopWinnerList object contains the top winner list and total data of all top winners.</returns>
-        TopWinner GetTopWinners(GetTopWinnersCriteria criteria);
+        TopWinnerList GetTopWinners(GetTopWinnersCriteria criteria);
 
         /// <summary>
         /// Gets a top winner's details.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>TopWinnerDetails object represents the detailed data of a top winner.</returns>
-        TopWinnerDetails GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria);
+        TopWinnerDetailList GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria);
 
         /// <summary>
         /// Exports the top winners report to Excel file.

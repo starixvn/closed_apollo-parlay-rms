@@ -106,7 +106,7 @@ namespace Apollo.ParlayRMS.Management.Services.Implements
         /// <returns>CommandResult indicates whether the level of customer is updated successfully or not.</returns>
         public ICommandResult ChangeCustomerLevel(ChangeCustomerLevelCriteria criteria)
         {
-            CheckCustomerCriteria checkCustomerCriteria = new CheckCustomerCriteria
+            var checkCustomerCriteria = new CheckCustomerCriteria
             {
                 CustId = criteria.CustId,
                 IsExists = false
@@ -114,7 +114,7 @@ namespace Apollo.ParlayRMS.Management.Services.Implements
 
             if (this.CheckCustomer(checkCustomerCriteria))
             {
-                UpdateCustomerCriteria updateCustomerCriteria = new UpdateCustomerCriteria
+                var updateCustomerCriteria = new UpdateCustomerCriteria
                 {
                     CustId = criteria.CustId,
                     Level = criteria.Level
@@ -124,7 +124,7 @@ namespace Apollo.ParlayRMS.Management.Services.Implements
             }
             else
             {
-                InsertCustomerCriteria insertCustomerCriteria = new InsertCustomerCriteria
+                var insertCustomerCriteria = new InsertCustomerCriteria
                 {
                     Username = criteria.Username,
                     Level = criteria.Level

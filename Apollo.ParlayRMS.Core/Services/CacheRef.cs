@@ -120,18 +120,23 @@ namespace Apollo.ParlayRMS.Core.Services
                 case "110":
                     name = "Trixie";
                     break;
+
                 case "1110":
                     name = "Yankee";
                     break;
+
                 case "11110":
                     name = "Canadian";
                     break;
+
                 case "111110":
                     name = "Heinz";
                     break;
+
                 case "1111110":
                     name = "Super Heinz";
                     break;
+
                 case "11111110":
                     name = "Goliath";
                     break;

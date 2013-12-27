@@ -39,7 +39,7 @@ namespace Apollo.ParlayRMS.Reports.Criteria.TopWinners
 
         [SpParam(Ignored = true)]
         public bool IsLoadNew { get; set; }
-        
+
         /// <summary>
         /// Gets the minimum date that the supports to query data for Top Winners report.
         /// </summary>

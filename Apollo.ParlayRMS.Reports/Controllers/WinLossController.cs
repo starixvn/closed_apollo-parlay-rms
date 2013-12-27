@@ -12,8 +12,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
     using System.Web.Mvc;
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Models;
-    using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Reports.Criteria.WinLoss;
+    using Apollo.ParlayRMS.Reports.Models.WinLoss;
     using Apollo.ParlayRMS.Reports.Services.Implements.WinLoss;
     using Apollo.ParlayRMS.Reports.Services.Interfaces.WinLoss;
     using Fanex.NAP.Core.Business;
@@ -24,6 +24,7 @@ namespace Apollo.ParlayRMS.Reports.Controllers
     /// </summary>
     public class WinLossController : BaseController
     {
+        private const string WinLossTemplateFilePath = @"~\Areas\Reports\ExcelTemplates\WinLoss.xls";
         private readonly IWinLossService _winLossService;
 
         public WinLossController() :
@@ -61,8 +62,8 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.WinLossReport, Policy = Constant.Policy.Read)]
         public JsonResult GetWinLoss(GetWinLossCriteria criteria)
         {
-            var data = this._winLossService.GetWinLossData(criteria);
-            var title = criteria.ToString();
+            WinLossItem data = this._winLossService.GetWinLossData(criteria);
+            string title = criteria.ToString();
 
             return Json(new
             {
@@ -79,8 +80,7 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.WinLossReport, Policy = Constant.Policy.Read)]
         public ActionResult ExportWinLoss(GetWinLossCriteria criteria)
         {
-            string templateUrl = @"~\Areas\Reports\ExcelTemplates\WinLoss.xls";
-            templateUrl = System.Web.HttpContext.Current.Server.MapPath(templateUrl);
+            string templateUrl = System.Web.HttpContext.Current.Server.MapPath(WinLossTemplateFilePath);
             this._winLossService.ExportWinLoss(criteria, templateUrl);
             return new EmptyResult();
         }

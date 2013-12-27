@@ -35,29 +35,30 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>TopWinner object contains the top winner list and total data of all top winners.</returns>
-        public TopWinner GetTopWinners(GetTopWinnersCriteria criteria)
+        public TopWinnerList GetTopWinners(GetTopWinnersCriteria criteria)
         {
-            TopWinner result = null;
+            TopWinnerList result = null;
 
             if (!criteria.IsLoadNew)
             {
-                result = SessionManager.Get<TopWinner>(ReportConstants.TopWinnersSessionKey);
+                result = SessionManager.Get<TopWinnerList>(ReportConstants.TopWinnersSessionKey);
             }
 
             if (result == null)
             {
+                List<TopWinner> records = null;
                 BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
                 criteria.BalanceUpDay = balanceUp.BalanceUpDay;
                 criteria.MoveBetsDay = balanceUp.MoveBetsDay;
 
-                List<TopWinner> records = this.GetData<TopWinner>(criteria).ToList();
-                result = new TopWinner();
+                records = this.GetData<TopWinner>(criteria).ToList();
+                result = new TopWinnerList();
                 records.ForEach(obj =>
                 {
                     result.Add(obj);
                 });
 
-                SessionManager.Set<TopWinner>(ReportConstants.TopWinnersSessionKey, result);
+                SessionManager.Set<TopWinnerList>(ReportConstants.TopWinnersSessionKey, result);
             }
 
             return result;
@@ -69,11 +70,11 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>TopWinnerDetails object represents the detailed data of a top winner.</returns>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
-        public TopWinnerDetails GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria)
+        public TopWinnerDetailList GetTopWinnerDetails(GetTopWinnerDetailsCriteria criteria)
         {
             BalanceUp balanceUp = BalanceUpService.GetBalanceUp();
-            List<TopWinnerDetails> records = new List<TopWinnerDetails>();
-            TopWinnerDetails result = new TopWinnerDetails();
+            var records = new List<TopWinnerDetails>();
+            var result = new TopWinnerDetailList();
 
             if (balanceUp.BalanceUpDay.CompareTo(criteria.FromDate) <= 0)
             {
@@ -123,7 +124,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
 
             return result;
         }
-        
+
         /// <summary>
         /// Gets the top winner bet details.
         /// </summary>
@@ -146,7 +147,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public void ExportTopWinners(GetTopWinnersCriteria criteria, string templatePath)
         {
-            TopWinner topWinners = GetTopWinners(criteria);
+            TopWinnerList topWinners = GetTopWinners(criteria);
             string fileName = string.Format(
                                          ReportsLang.TopWinnersFileName,
                                          criteria.LimitedRow,
@@ -162,7 +163,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
             writer.CopyRows(3, 2);
 
             // Prepare content
-            var records = topWinners.ChildItems.Select(obj => new
+            var records = topWinners.TopWinners.Select(obj => new
             {
                 No = ++counter,
                 Username = obj.Username,
@@ -186,10 +187,10 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
                     string.Empty,
                     string.Empty,
                     string.Empty,
-                    topWinners.StakeBaseRM,
-                    topWinners.WinLossBaseRM,
-                    topWinners.CompanyWinLossBaseRM,
-                    topWinners.BetCount,
+                    topWinners.Total.StakeBaseRM,
+                    topWinners.Total.WinLossBaseRM,
+                    topWinners.Total.CompanyWinLossBaseRM,
+                    topWinners.Total.BetCount,
                     "-"
                 };
 

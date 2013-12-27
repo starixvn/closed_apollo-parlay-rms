@@ -10,7 +10,6 @@
 namespace Apollo.ParlayRMS.Reports.Models.TopWinners
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Top winner's detail model.
@@ -18,11 +17,6 @@ namespace Apollo.ParlayRMS.Reports.Models.TopWinners
     [Serializable]
     public class TopWinnerDetails
     {
-        public TopWinnerDetails()
-        {
-            this.ChildItems = new List<TopWinnerDetails>();
-        }
-
         public long TransId { get; set; }
 
         public long RefNo { get; set; }
@@ -44,22 +38,5 @@ namespace Apollo.ParlayRMS.Reports.Models.TopWinners
         public byte Combo { get; set; }
 
         public decimal Odds { get; set; }
-
-        public List<TopWinnerDetails> ChildItems { get; set; }
-
-        /// <summary>
-        /// Adds the specified object's data to current object.
-        /// </summary>
-        /// <param name="obj">The object which its data will be added to the current object.</param>
-        public void Add(TopWinnerDetails obj)
-        {
-            this.Stake += obj.Stake;
-            this.WinLoss += obj.WinLoss;
-            this.CompanyWinLoss += obj.CompanyWinLoss;
-            this.StakeBaseRM += obj.StakeBaseRM;
-            this.WinLossBaseRM += obj.WinLossBaseRM;
-            this.CompanyWinLossBaseRM += obj.CompanyWinLossBaseRM;
-            this.ChildItems.Add(obj);
-        }
     }
 }

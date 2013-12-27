@@ -52,7 +52,7 @@ namespace Apollo.ParlayRMS.Core.ExcelUtility
             this._sheet = template.CreateSheet(this._sheetName);
         }
 
-        #endregion  Constructors
+        #endregion Constructors
 
         #region Properties
 

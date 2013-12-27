@@ -14,6 +14,7 @@ namespace Apollo.ParlayRMS.Management.Controllers
     using Apollo.ParlayRMS.Core.Controllers;
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Management.Criteria;
+    using Apollo.ParlayRMS.Management.Models;
     using Apollo.ParlayRMS.Management.Services.Implements;
     using Apollo.ParlayRMS.Management.Services.Interfaces;
     using Fanex.NAP.Core.Business;
@@ -24,6 +25,7 @@ namespace Apollo.ParlayRMS.Management.Controllers
     /// </summary>
     public class MemberManagementController : BaseController
     {
+        private const string SpecialMemberTemplateFilePath = @"~\Areas\Management\ExcelTemplates\SpecialMembers.xls";
         private readonly IMemberManagementService _memberManagementService;
 
         public MemberManagementController() :
@@ -59,7 +61,7 @@ namespace Apollo.ParlayRMS.Management.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MemberManagement, Policy = Constant.Policy.Read)]
         public JsonResult GetSpecialCustomers(GetCustomersCriteria criteria)
         {
-            var specialMembers = this._memberManagementService.GetCustomers(criteria);
+            IEnumerable<Customer> specialMembers = this._memberManagementService.GetCustomers(criteria);
             return Json(specialMembers);
         }
 
@@ -108,8 +110,7 @@ namespace Apollo.ParlayRMS.Management.Controllers
         /// <returns>Excel file contains customer list.</returns>
         public ActionResult ExportCustomerList(GetCustomersCriteria criteria)
         {
-            string templateUrl = @"~\Areas\Management\ExcelTemplates\SpecialMembers.xls";
-            templateUrl = System.Web.HttpContext.Current.Server.MapPath(templateUrl);
+            string templateUrl = System.Web.HttpContext.Current.Server.MapPath(SpecialMemberTemplateFilePath);
             this._memberManagementService.ExportCustomerList(criteria, templateUrl);
             return new EmptyResult();
         }
