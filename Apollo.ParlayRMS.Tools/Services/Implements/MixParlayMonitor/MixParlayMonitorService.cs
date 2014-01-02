@@ -12,6 +12,7 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Tools.Criteria.MixParlayMonitor;
     using Apollo.ParlayRMS.Tools.Models.MixParlayMonitor;
@@ -32,7 +33,10 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor
             IEnumerable<ParlayBetItem> betList = this.GetData<ParlayBetItem>(criteria);
 
             // Use for testing purpose.
-            ////betList = CreateTestData(criteria);
+            if (!betList.Any())
+            {
+                betList = betList.Union(CreateTestData(criteria));
+            }
 
             return betList;
         }
@@ -63,7 +67,7 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor
                     {
                         Combo = combo,
                         Level = level,
-                        Username = "test",
+                        Username = "test" + i,
                         Stake = stake,
                         Odds = odds,
                         MaxPayout = stake * odds,

@@ -70,6 +70,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         $this.DOMInstance.dpkDateFrom.datepicker({
             defaultDate: "+1w",
             changeMonth: true,
+            changeYear: true,
             numberOfMonths: 1,
             dateFormat: ParlayRMS.commonConstants.DateFormat,
             minDate: minDateObj,
@@ -89,6 +90,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         $this.DOMInstance.dpkDateTo.datepicker({
             defaultDate: "+1w",
             changeMonth: true,
+            changeYear: true,
             numberOfMonths: 1,
             dateFormat: ParlayRMS.commonConstants.DateFormat,
             minDate: minDateObj,
