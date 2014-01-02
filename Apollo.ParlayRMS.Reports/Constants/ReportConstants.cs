@@ -16,5 +16,6 @@ namespace Apollo.ParlayRMS.Reports.Constants
     {
         public static readonly string TopWinnersSessionKey = "Apollo.ParlayRMS.Reports.TopWinners";
         public static readonly string WinLossSessionKey = "Apollo.ParlayRMS.Reports.WinLoss";
+        public static readonly string AgentMemberWinLossSessionKey = "Apollo.ParlayRMS.Reports.AgentMemberWinLoss";
     }
 }

@@ -360,4 +360,16 @@
   <data name="CompanyWinLoss" xml:space="preserve">
     <value>Company Win Loss</value>
   </data>
+  <data name="AgentMemberWinLoss" xml:space="preserve">
+    <value>Agent/Member Win Loss</value>
+  </data>
+  <data name="MixParlayMonitor" xml:space="preserve">
+    <value>Mix Parlay Monitor</value>
+  </data>
+  <data name="TopWinners" xml:space="preserve">
+    <value>Top Winners</value>
+  </data>
+  <data name="TotalOutstanding" xml:space="preserve">
+    <value>Total Outstanding</value>
+  </data>
 </root>

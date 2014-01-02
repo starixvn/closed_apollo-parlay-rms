@@ -41,8 +41,6 @@ namespace Apollo.ParlayRMS.Core.Controllers
 
         private bool _issiteLogin = NapSettings.Settings.IsNapHub;
 
-        private MenuService _menuService;
-
         private IUserService _userService;
 
         public BaseController()
@@ -63,7 +61,6 @@ namespace Apollo.ParlayRMS.Core.Controllers
                 HasEditRight = false
             };
 
-            this._menuService = new MenuService();
             this._userService = new UserService { ServiceContext = ServiceContext };
         }
 
@@ -133,22 +130,6 @@ namespace Apollo.ParlayRMS.Core.Controllers
         {
             AppSession.CurrentActionName = filterContext.ActionDescriptor.ActionName;
             base.OnActionExecuting(filterContext);
-        }
-
-        /// <summary>
-        /// Executed before each request, if Downtime then go to Downtime page
-        /// Or not Authenticate will go to Login Page.
-        /// </summary>
-        /// <param name="filterContext">Filter context.</param>
-        protected override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            // Get current working on menu for getting display name,... on webpage
-            if (filterContext.Result is ViewResult && string.Equals(AppSession.CurrentActionName, "Index", StringComparison.OrdinalIgnoreCase))
-            {
-                var menuPath = MenuService.GetMenuPathFromRequestFilePath(filterContext.HttpContext.Request.FilePath, Request.ApplicationPath);
-                string controllerName = (string)filterContext.RouteData.Values["controller"];
-                AppSession.CurrentWorkingOnMenu = this._menuService.GetMenuByURL(menuPath);
-            }
         }
     }
 }

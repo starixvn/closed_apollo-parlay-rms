@@ -2,111 +2,111 @@
 @using Apollo.ParlayRMS.Core.Web
 @model Apollo.ParlayRMS.Management.Criteria.InsertCustomerCriteria
 @{
-	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
-	Layout = "~/Views/Shared/_Layout.cshtml";
-	bool hasEditRight = (bool)ViewBag.HasEditRight;
+    ViewBag.Title = Lang.MemberManagement;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool hasEditRight = (bool)ViewBag.HasEditRight;
 }
 @section Head {
-	@Styles.Render("~/Themes/MemberManagement")
+    @Styles.Render("~/Themes/MemberManagement")
 }
 @section Headline {
-	<h1>
-		<span class="title">
-			@ViewBag.Title
-		</span>
-		@if (hasEditRight)
-		{
-			<a class="lnk" id="lnkAddNew">+ @Lang.AddSpecialMember</a>
-		}
-	</h1>
+    <h1>
+        <span class="title">
+            @ViewBag.Title
+        </span>
+        @if (hasEditRight)
+        {
+            <a class="lnk" id="lnkAddNew">+ @Lang.AddSpecialMember</a>
+        }
+    </h1>
 }
 <section id="filter-bar">
-	<div class="filter-form">
-		<div class="filter-row">
-			<div class="filter-cell">
-				<div class="lbl-field width-auto">
-					@Html.Label(Lang.Username)
-				</div>
-				<div class="edit-field">
-					<input type="text" name="Username" id="txtUsername" />
-				</div>
-			</div>
-			<div class="filter-cell">
-				<div class="lbl-field col_1">
-					@Html.Label(Lang.Level)
-				</div>
-				<div class="edit-field">
-					@Html.DropDownList("ddlLevel", (List<SelectListItem>)ViewBag.LevelList, new { style = "width: 132px;" })
-				</div>
-			</div>
-			<div class="filter-cell">
-				<div class="submit">
-					<input type="button" class="btn-submit" id="btnSearch" value="@Lang.Search" />
-				</div>
-			</div>
-			<div class="filter-cell">
-				<div class="submit">
-					<input type="button" class="btn-submit" id="btnShowAll" value="@Lang.ShowAll" />
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field width-auto">
+                    @Html.Label(Lang.Username)
+                </div>
+                <div class="edit-field">
+                    <input type="text" name="Username" id="txtUsername" />
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_1">
+                    @Html.Label(Lang.Level)
+                </div>
+                <div class="edit-field">
+                    @Html.DropDownList("ddlLevel", (List<SelectListItem>)ViewBag.LevelList, new { style = "width: 132px;" })
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit">
+                    <input type="button" class="btn-submit" id="btnSearch" value="@Lang.Search" />
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit">
+                    <input type="button" class="btn-submit" id="btnShowAll" value="@Lang.ShowAll" />
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <div>
-	<div id="divResult" class="freegrid display-none"></div>
+    <div id="divResult" class="freegrid display-none"></div>
 </div>
 <div style="display: none;">
-	<div id="divAddMemberForm">
-		@using (Html.BeginForm("AddSpecialCustomer", "MemberManagement"))
-		{
-			<div class="form form-popup">
-				<div class="form-row summary">
-					<div class="lbl-field"></div>
-					<div class="edit-field">
-						@Html.ValidationSummary()
-					</div>
-				</div>
-				<div class="form-row required">
-					<div class="lbl-field">
-						@Html.LabelFor(c => c.Username, Lang.Username)
-					</div>
-					<div class="edit-field">
-						@Html.TextBoxFor(c => c.Username)
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="lbl-field">
-						@Html.LabelFor(c => c.Level)
-					</div>
-					<div class="edit-field">
-						@Html.DropDownListFor(c => c.Level, (List<SelectListItem>)ViewBag.LevelList)
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="lbl-field"></div>
-					<div class="edit-field">
-						<input type="submit" class="btn-submit" id="Submit" value="@Lang.Submit" />
-					</div>
-				</div>
-			</div>
-		}
-	</div>
+    <div id="divAddMemberForm">
+        @using (Html.BeginForm("AddSpecialCustomer", "MemberManagement"))
+        {
+            <div class="form form-popup">
+                <div class="form-row summary">
+                    <div class="lbl-field"></div>
+                    <div class="edit-field">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+                <div class="form-row required">
+                    <div class="lbl-field">
+                        @Html.LabelFor(c => c.Username, Lang.Username)
+                    </div>
+                    <div class="edit-field">
+                        @Html.TextBoxFor(c => c.Username)
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="lbl-field">
+                        @Html.LabelFor(c => c.Level)
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(c => c.Level, (List<SelectListItem>)ViewBag.LevelList)
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="lbl-field"></div>
+                    <div class="edit-field">
+                        <input type="submit" class="btn-submit" id="Submit" value="@Lang.Submit" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 @section Foot {
-	<script type="text/javascript">
-		var labels = {
-			No: '@Lang.No',
-			Username: '@Lang.Username',
-			Level: '@Lang.Level',
-			AddSpecialMember: '@Lang.AddSpecialMember'
-		};
-		var messages = {
-			AddNewCustomerSuccessfully: '@Messages.AddNewCustomerSuccessfullyMessage',
-			ChangeLevelConfirmation: '@Messages.ChangeLevelConfirmationMessage',
-			ChangeLevelSuccessfully: '@Messages.ChangeLevelSuccessfullyMessage'
-		};
-		var levels = @Html.Raw((new JavaScriptSerializer()).Serialize(ViewBag.Levels))
-		var hasEditRight = '@hasEditRight' == 'True';
-	</script>
-	@Scripts.Render("~/Scripts/MemberManagement")
+    <script type="text/javascript">
+        var labels = {
+            No: '@Lang.No',
+            Username: '@Lang.Username',
+            Level: '@Lang.Level',
+            AddSpecialMember: '@Lang.AddSpecialMember'
+        };
+        var messages = {
+            AddNewCustomerSuccessfully: '@Messages.AddNewCustomerSuccessfullyMessage',
+            ChangeLevelConfirmation: '@Messages.ChangeLevelConfirmationMessage',
+            ChangeLevelSuccessfully: '@Messages.ChangeLevelSuccessfullyMessage'
+        };
+        var levels = @Html.Raw((new JavaScriptSerializer()).Serialize(ViewBag.Levels))
+        var hasEditRight = '@hasEditRight' == 'True';
+    </script>
+    @Scripts.Render("~/Scripts/MemberManagement")
 }

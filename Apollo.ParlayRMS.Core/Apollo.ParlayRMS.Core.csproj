@@ -110,7 +110,6 @@
     <Compile Include="Services\CacheRef.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\MenuService.cs" />
     <Compile Include="Web\ApolloParlayRMSFunctionKeys.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

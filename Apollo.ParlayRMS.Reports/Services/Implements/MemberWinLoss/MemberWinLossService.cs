@@ -45,7 +45,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
 
             if (!criteria.IsLoadNew)
             {
-                result = SessionManager.Get<MemberWinLossItem>(ReportConstants.WinLossSessionKey);
+                result = SessionManager.Get<MemberWinLossItem>(ReportConstants.AgentMemberWinLossSessionKey);
             }
 
             if (result == null)
@@ -80,7 +80,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
                         result = GroupAgentDataByMonth(rawData);
                     }
 
-                    SessionManager.Set<MemberWinLossItem>(ReportConstants.WinLossSessionKey, result);
+                    SessionManager.Set<MemberWinLossItem>(ReportConstants.AgentMemberWinLossSessionKey, result);
                 }
             }
 

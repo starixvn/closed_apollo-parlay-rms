@@ -70,6 +70,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agent/Member Win Loss.
+        /// </summary>
+        public static string AgentMemberWinLoss {
+            get {
+                return ResourceManager.GetString("AgentMemberWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string All {
@@ -327,6 +336,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         public static string MixParlay {
             get {
                 return ResourceManager.GetString("MixParlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mix Parlay Monitor.
+        /// </summary>
+        public static string MixParlayMonitor {
+            get {
+                return ResourceManager.GetString("MixParlayMonitor", resourceCulture);
             }
         }
         
@@ -682,6 +700,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Top Winners.
+        /// </summary>
+        public static string TopWinners {
+            get {
+                return ResourceManager.GetString("TopWinners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string Total {
@@ -705,6 +732,15 @@ namespace Apollo.ParlayRMS.Core.Resources {
         public static string TotalCombo {
             get {
                 return ResourceManager.GetString("TotalCombo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Outstanding.
+        /// </summary>
+        public static string TotalOutstanding {
+            get {
+                return ResourceManager.GetString("TotalOutstanding", resourceCulture);
             }
         }
         

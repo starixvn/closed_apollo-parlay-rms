@@ -27,12 +27,7 @@ namespace Apollo.ParlayRMS.Core.Constants
         public const string CurrentUserMenu = "Apollo.ParlayRMS.Core.Contants.AppSession.CurrentUserMenu";
         public const string CurrentUserRoleAcess = "Apollo.ParlayRMS.Core.Contants.AppSession.CurrentUserRoleAccess";
         public const string CurrentWorkingOnMenu = "Apollo.ParlayRMS.Core.Contants.AppSession.CurrentWorkingOnMenu";
-        public const string IsTackedMenu = "Apollo.ParlayRMS.Core.Contants.AppSession.IsTrackedMenu";
         public const string CurrentActionName = "Apollo.ParlayRMS.Core.Contants.AppSession.CurrentActionName";
-        public const string IntNumberFormat = "";
-        public const string TwoDecimalDigitFormat = ".00";
-        public const string TwoDecimalDigitPercentFormat = ".00%";
-        public const string SpParamsSeperator = ",";
         public const string ViewIPVN = "ViewIPVN";
 
         public const int SixUp = 6;

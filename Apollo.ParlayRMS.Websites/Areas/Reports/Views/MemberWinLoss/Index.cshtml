@@ -1,14 +1,9 @@
 ﻿@{
-	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+	ViewBag.Title = Lang.AgentMemberWinLoss;
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Headline {
-	<h1>
-		<span class="title">
-			@*<span class="first">@Lang.Reports /</span>*@
-			@ViewBag.Title
-		</span>
-	</h1>
+	<h1><span class="title">@ViewBag.Title</span></h1>
 }
 <section id="filter-bar">
 	<div class="filter-form">
