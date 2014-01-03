@@ -10,7 +10,6 @@
 namespace Apollo.ParlayRMS.Reports.Models.MemberWinLoss
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Win Loss model.
@@ -18,11 +17,6 @@ namespace Apollo.ParlayRMS.Reports.Models.MemberWinLoss
     [Serializable]
     public class MemberWinLossItem
     {
-        public MemberWinLossItem()
-        {
-            this.ChildItems = new List<MemberWinLossItem>();
-        }
-
         public string Month { get; set; }
 
         public string Username { get; set; }
@@ -48,8 +42,6 @@ namespace Apollo.ParlayRMS.Reports.Models.MemberWinLoss
         public bool IsSutotalRow { get; set; }
 
         public int NumOfSubrows { get; set; }
-
-        public List<MemberWinLossItem> ChildItems { get; set; }
 
         /// <summary>
         /// Adds the specified object's data to the current object.

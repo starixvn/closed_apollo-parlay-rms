@@ -63,7 +63,7 @@ namespace Apollo.ParlayRMS.Reports.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MemberWinLossReport, Policy = Constant.Policy.Read)]
         public JsonResult GetMemberWinLoss(GetMemberWinLossCriteria criteria)
         {
-            MemberWinLossItem data = this._memberWinLossService.GetMemberWinLossData(criteria);
+            MemberWinLossList data = this._memberWinLossService.GetMemberWinLossData(criteria);
             string title = criteria.ToString();
 
             return Json(new

@@ -186,15 +186,15 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
             row =
             {
                 Columns: [{ Name: 'ColMonth', Value: labels.Total, MergeColNumber: 2, CellAlign: 'right' },
-                          { Name: 'ColTicketWon', Value: result.Data.TicketWon },
-                          { Name: 'ColTicketLose', Value: result.Data.TicketLose },
-                          { Name: 'ColStakeWon', Value: result.Data.StakeWon },
-                          { Name: 'ColStakeLose', Value: result.Data.StakeLose },
-                          { Name: 'ColWinLossWon', Value: result.Data.MemberWon },
-                          { Name: 'ColWinLossLose', Value: result.Data.MemberLose },
-                          { Name: 'ColOurPTWon', Value: result.Data.OurPTWon },
-                          { Name: 'ColOurPTLose', Value: result.Data.OurPTLose },
-                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.OurPTNetWinLoss}]
+                          { Name: 'ColTicketWon', Value: result.Data.Total.TicketWon },
+                          { Name: 'ColTicketLose', Value: result.Data.Total.TicketLose },
+                          { Name: 'ColStakeWon', Value: result.Data.Total.StakeWon },
+                          { Name: 'ColStakeLose', Value: result.Data.Total.StakeLose },
+                          { Name: 'ColWinLossWon', Value: result.Data.Total.MemberWon },
+                          { Name: 'ColWinLossLose', Value: result.Data.Total.MemberLose },
+                          { Name: 'ColOurPTWon', Value: result.Data.Total.OurPTWon },
+                          { Name: 'ColOurPTLose', Value: result.Data.Total.OurPTLose },
+                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.Total.OurPTNetWinLoss}]
             };
             footerData.push(row);
         }
@@ -277,15 +277,15 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
             row =
             {
                 Columns: [{ Name: 'ColMonth', Value: labels.Total, CellAlign: 'right' },
-                          { Name: 'ColTicketWon', Value: result.Data.TicketWon },
-                          { Name: 'ColTicketLose', Value: result.Data.TicketLose },
-                          { Name: 'ColStakeWon', Value: result.Data.StakeWon },
-                          { Name: 'ColStakeLose', Value: result.Data.StakeLose },
-                          { Name: 'ColWinLossWon', Value: result.Data.MemberWon },
-                          { Name: 'ColWinLossLose', Value: result.Data.MemberLose },
-                          { Name: 'ColOurPTWon', Value: result.Data.OurPTWon },
-                          { Name: 'ColOurPTLose', Value: result.Data.OurPTLose },
-                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.OurPTNetWinLoss}]
+                          { Name: 'ColTicketWon', Value: result.Data.Total.TicketWon },
+                          { Name: 'ColTicketLose', Value: result.Data.Total.TicketLose },
+                          { Name: 'ColStakeWon', Value: result.Data.Total.StakeWon },
+                          { Name: 'ColStakeLose', Value: result.Data.Total.StakeLose },
+                          { Name: 'ColWinLossWon', Value: result.Data.Total.MemberWon },
+                          { Name: 'ColWinLossLose', Value: result.Data.Total.MemberLose },
+                          { Name: 'ColOurPTWon', Value: result.Data.Total.OurPTWon },
+                          { Name: 'ColOurPTLose', Value: result.Data.Total.OurPTLose },
+                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.Total.OurPTNetWinLoss}]
             };
             footerData.push(row);
         }

@@ -10,7 +10,6 @@
 namespace Apollo.ParlayRMS.Reports.Models.WinLoss
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Win Loss model.
@@ -18,11 +17,6 @@ namespace Apollo.ParlayRMS.Reports.Models.WinLoss
     [Serializable]
     public class WinLossItem
     {
-        public WinLossItem()
-        {
-            this.ChildItems = new List<WinLossItem>();
-        }
-
         public DateTime WinLossDate { get; set; }
 
         public int Combo { get; set; }
@@ -44,28 +38,5 @@ namespace Apollo.ParlayRMS.Reports.Models.WinLoss
         public decimal OurPTLose { get; set; }
 
         public decimal OurPTNetWinLoss { get; set; }
-
-        public List<WinLossItem> ChildItems { get; set; }
-
-        /// <summary>
-        /// Adds the specified object's data to the current object.
-        /// </summary>
-        /// <param name="obj">The object that needs to be added to the current object.</param>
-        public void Add(WinLossItem obj)
-        {
-            if (obj != null)
-            {
-                this.TicketWon += obj.TicketWon;
-                this.TicketLose += obj.TicketLose;
-                this.StakeWon += obj.StakeWon;
-                this.StakeLose += obj.StakeLose;
-                this.MemberWon += obj.MemberWon;
-                this.MemberLose += obj.MemberLose;
-                this.OurPTWon += obj.OurPTWon;
-                this.OurPTLose += obj.OurPTLose;
-                this.OurPTNetWinLoss += obj.OurPTNetWinLoss;
-                this.ChildItems.Add(obj);
-            }
-        }
     }
 }

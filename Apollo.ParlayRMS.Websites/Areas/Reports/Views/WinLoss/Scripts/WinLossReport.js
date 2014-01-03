@@ -164,15 +164,15 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColDate', Value: labels.Subtotal, MergeColNumber: 2, CellAlign: 'right' },
-                              { Name: 'ColTicketWon', Value: dateData.TicketWon },
-                              { Name: 'ColTicketLose', Value: dateData.TicketLose },
-                              { Name: 'ColStakeWon', Value: dateData.StakeWon },
-                              { Name: 'ColStakeLose', Value: dateData.StakeLose },
-                              { Name: 'ColWinLossWon', Value: dateData.MemberWon },
-                              { Name: 'ColWinLossLose', Value: dateData.MemberLose },
-                              { Name: 'ColOurPTWon', Value: dateData.OurPTWon },
-                              { Name: 'ColOurPTLose', Value: dateData.OurPTLose },
-                              { Name: 'ColOurPTNetWinLoss', Value: dateData.OurPTNetWinLoss}],
+                              { Name: 'ColTicketWon', Value: dateData.Total.TicketWon },
+                              { Name: 'ColTicketLose', Value: dateData.Total.TicketLose },
+                              { Name: 'ColStakeWon', Value: dateData.Total.StakeWon },
+                              { Name: 'ColStakeLose', Value: dateData.Total.StakeLose },
+                              { Name: 'ColWinLossWon', Value: dateData.Total.MemberWon },
+                              { Name: 'ColWinLossLose', Value: dateData.Total.MemberLose },
+                              { Name: 'ColOurPTWon', Value: dateData.Total.OurPTWon },
+                              { Name: 'ColOurPTLose', Value: dateData.Total.OurPTLose },
+                              { Name: 'ColOurPTNetWinLoss', Value: dateData.Total.OurPTNetWinLoss}],
                     CssClass: "subTotal"
                 };
 
@@ -183,15 +183,15 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
             row =
             {
                 Columns: [{ Name: 'ColDate', Value: labels.Total, CellAlign: 'right', MergeColNumber: 2 },
-                          { Name: 'ColTicketWon', Value: result.Data.TicketWon },
-                          { Name: 'ColTicketLose', Value: result.Data.TicketLose },
-                          { Name: 'ColStakeWon', Value: result.Data.StakeWon },
-                          { Name: 'ColStakeLose', Value: result.Data.StakeLose },
-                          { Name: 'ColWinLossWon', Value: result.Data.MemberWon },
-                          { Name: 'ColWinLossLose', Value: result.Data.MemberLose },
-                          { Name: 'ColOurPTWon', Value: result.Data.OurPTWon },
-                          { Name: 'ColOurPTLose', Value: result.Data.OurPTLose },
-                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.OurPTNetWinLoss}]
+                          { Name: 'ColTicketWon', Value: result.Data.Total.TicketWon },
+                          { Name: 'ColTicketLose', Value: result.Data.Total.TicketLose },
+                          { Name: 'ColStakeWon', Value: result.Data.Total.StakeWon },
+                          { Name: 'ColStakeLose', Value: result.Data.Total.StakeLose },
+                          { Name: 'ColWinLossWon', Value: result.Data.Total.MemberWon },
+                          { Name: 'ColWinLossLose', Value: result.Data.Total.MemberLose },
+                          { Name: 'ColOurPTWon', Value: result.Data.Total.OurPTWon },
+                          { Name: 'ColOurPTLose', Value: result.Data.Total.OurPTLose },
+                          { Name: 'ColOurPTNetWinLoss', Value: result.Data.Total.OurPTNetWinLoss}]
             };
             footerData.push(row);
         }

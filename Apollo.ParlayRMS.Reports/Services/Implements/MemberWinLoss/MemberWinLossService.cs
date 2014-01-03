@@ -37,15 +37,13 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Queried and grouped member win loss data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Cannot seperate the method into more details.")]
-        public MemberWinLossItem GetMemberWinLossData(GetMemberWinLossCriteria criteria)
+        public MemberWinLossList GetMemberWinLossData(GetMemberWinLossCriteria criteria)
         {
-            MemberWinLossItem result = null;
+            MemberWinLossList result = null;
 
             if (!criteria.IsLoadNew)
             {
-                result = SessionManager.Get<MemberWinLossItem>(ReportConstants.AgentMemberWinLossSessionKey);
+                result = SessionManager.Get<MemberWinLossList>(ReportConstants.AgentMemberWinLossSessionKey);
             }
 
             if (result == null)
@@ -66,12 +64,12 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
                 {
                     if (criteria.IsMember)
                     {
-                        result = new MemberWinLossItem();
+                        result = new MemberWinLossList();
                         rawData.ToList().ForEach(obj =>
                         {
                             obj.OurPTNetWinLoss = obj.OurPTWon + obj.OurPTLose;
                             obj.Month = ReFormatMonthStr(obj.Month.Trim());
-                            result.Add(obj);
+                            result.Total.Add(obj);
                             result.ChildItems.Add(obj);
                         });
                     }
@@ -80,7 +78,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
                         result = GroupAgentDataByMonth(rawData);
                     }
 
-                    SessionManager.Set<MemberWinLossItem>(ReportConstants.AgentMemberWinLossSessionKey, result);
+                    SessionManager.Set<MemberWinLossList>(ReportConstants.AgentMemberWinLossSessionKey, result);
                 }
             }
 
@@ -95,7 +93,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// <param name="memberTemplatePath">The path of member win loss template.</param>
         public void ExportMemberWinLoss(GetMemberWinLossCriteria criteria, string agentTemplatePath, string memberTemplatePath)
         {
-            MemberWinLossItem winLoss = GetMemberWinLossData(criteria);
+            MemberWinLossList winLoss = GetMemberWinLossData(criteria);
             string fileName = string.Format(
                                          ReportsLang.MemberWinLossFileName,
                                          criteria.Username,
@@ -131,7 +129,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// <param name="data">The raw data of agent win loss report.</param>
         /// <param name="writer">The writer that is used to write Excel content.</param>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
-        private void RenderAgentWinLossExcel(MemberWinLossItem data, ExcelTemplateWriter writer)
+        private void RenderAgentWinLossExcel(MemberWinLossList data, ExcelTemplateWriter writer)
         {
             // Write content
             foreach (var item in data.ChildItems)
@@ -182,15 +180,15 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
             {
                 Lang.Total,
                 string.Empty,
-                data.TicketWon,
-                data.TicketLose,
-                data.StakeWon,
-                data.StakeLose,
-                data.MemberWon,
-                data.MemberLose,
-                data.OurPTWon,
-                data.OurPTLose,
-                data.OurPTNetWinLoss
+                data.Total.TicketWon,
+                data.Total.TicketLose,
+                data.Total.StakeWon,
+                data.Total.StakeLose,
+                data.Total.MemberWon,
+                data.Total.MemberLose,
+                data.Total.OurPTWon,
+                data.Total.OurPTLose,
+                data.Total.OurPTNetWinLoss
             };
 
             writer.WriteRow(7, total);
@@ -202,7 +200,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// </summary>
         /// <param name="data">The raw data of member win loss report.</param>
         /// <param name="writer">The writer that is used to write Excel content.</param>
-        private void RenderMemberWinLossExcel(MemberWinLossItem data, ExcelTemplateWriter writer)
+        private void RenderMemberWinLossExcel(MemberWinLossList data, ExcelTemplateWriter writer)
         {
             // Write content
             var records = data.ChildItems.Select(item => new
@@ -224,15 +222,15 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
             var total = new object[]
             {
                 Lang.Total,
-                data.TicketWon,
-                data.TicketLose,
-                data.StakeWon,
-                data.StakeLose,
-                data.MemberWon,
-                data.MemberLose,
-                data.OurPTWon,
-                data.OurPTLose,
-                data.OurPTNetWinLoss
+                data.Total.TicketWon,
+                data.Total.TicketLose,
+                data.Total.StakeWon,
+                data.Total.StakeLose,
+                data.Total.MemberWon,
+                data.Total.MemberLose,
+                data.Total.OurPTWon,
+                data.Total.OurPTLose,
+                data.Total.OurPTNetWinLoss
             };
             writer.WriteRow(6, total);
             writer.SyncColumnsWidth(10);
@@ -243,10 +241,10 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
         /// </summary>
         /// <param name="rawData">Raw data queried from DB.</param>
         /// <returns>Data for agent win loss report that are grouped by month.</returns>
-        private MemberWinLossItem GroupAgentDataByMonth(List<MemberWinLossItem> rawData)
+        private MemberWinLossList GroupAgentDataByMonth(List<MemberWinLossItem> rawData)
         {
-            MemberWinLossItem records = new MemberWinLossItem();
-            MemberWinLossItem subtotal = new MemberWinLossItem();
+            var result = new MemberWinLossList();
+            var subtotal = new MemberWinLossItem();
             int firstRecordIndex = 0;
             int numOfRecords = rawData.Count;
 
@@ -261,10 +259,10 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
                     {
                         if (!string.IsNullOrEmpty(subtotal.Month))
                         {
-                            records.ChildItems[firstRecordIndex].NumOfSubrows = subtotal.NumOfSubrows;
-                            records.ChildItems.Add(subtotal);
-                            records.Add(subtotal);
-                            firstRecordIndex = records.ChildItems.Count;
+                            result.ChildItems[firstRecordIndex].NumOfSubrows = subtotal.NumOfSubrows;
+                            result.ChildItems.Add(subtotal);
+                            result.Total.Add(subtotal);
+                            firstRecordIndex = result.ChildItems.Count;
                         }
 
                         subtotal = new MemberWinLossItem
@@ -275,18 +273,18 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
                     }
 
                     subtotal.Add(currentRecord);
-                    records.ChildItems.Add(currentRecord);
+                    result.ChildItems.Add(currentRecord);
                 });
 
                 if (!string.IsNullOrEmpty(subtotal.Month))
                 {
-                    records.ChildItems[firstRecordIndex].NumOfSubrows = subtotal.NumOfSubrows;
-                    records.ChildItems.Add(subtotal);
-                    records.Add(subtotal);
+                    result.ChildItems[firstRecordIndex].NumOfSubrows = subtotal.NumOfSubrows;
+                    result.ChildItems.Add(subtotal);
+                    result.Total.Add(subtotal);
                 }
             }
 
-            return records;
+            return result;
         }
 
         /// <summary>

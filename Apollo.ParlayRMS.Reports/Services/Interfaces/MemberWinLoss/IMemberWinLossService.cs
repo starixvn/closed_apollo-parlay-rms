@@ -19,7 +19,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Interfaces.MemberWinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Queried and grouped member win loss data.</returns>
-        MemberWinLossItem GetMemberWinLossData(GetMemberWinLossCriteria criteria);
+        MemberWinLossList GetMemberWinLossData(GetMemberWinLossCriteria criteria);
 
         /// <summary>
         /// Exports the win loss report to Excel file.

@@ -36,13 +36,13 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Queried and grouped win loss data.</returns>
-        public WinLossItem GetWinLossData(GetWinLossCriteria criteria)
+        public DailyWinLossList GetWinLossData(GetWinLossCriteria criteria)
         {
-            WinLossItem result = null;
+            DailyWinLossList result = null;
 
             if (!criteria.IsLoadNew)
             {
-                result = SessionManager.Get<WinLossItem>(ReportConstants.WinLossSessionKey);
+                result = SessionManager.Get<DailyWinLossList>(ReportConstants.WinLossSessionKey);
             }
 
             if (result == null)
@@ -57,7 +57,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
                 if ((rawData != null) && (rawData.Count > 0))
                 {
                     result = GroupData(rawData);
-                    SessionManager.Set<WinLossItem>(ReportConstants.WinLossSessionKey, result);
+                    SessionManager.Set<DailyWinLossList>(ReportConstants.WinLossSessionKey, result);
                 }
             }
 
@@ -72,7 +72,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public void ExportWinLoss(GetWinLossCriteria criteria, string templatePath)
         {
-            WinLossItem winLoss = GetWinLossData(criteria);
+            DailyWinLossList winLoss = GetWinLossData(criteria);
             string fileName = string.Format(
                                          ReportsLang.WinLossFileName,
                                          criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
@@ -105,22 +105,22 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
                     OurPTNetWinLoss = obj.OurPTNetWinLoss
                 });
                 writer.WriteRows(5, combos);
-                writer.WriteCellRange(writer.RowId - numOfItems, numOfItems, 0, 1, winLoss.ChildItems[0].WinLossDate);
+                writer.WriteCellRange(writer.RowId - numOfItems, numOfItems, 0, 1, winLoss.ChildItems[0].Total.WinLossDate);
 
                 // For WinLossDate summary
                 var subtotal = new object[]
                     {
                         Lang.Subtotal,
                         string.Empty,
-                        dateData.TicketWon,
-                        dateData.TicketLose,
-                        dateData.StakeWon,
-                        dateData.StakeLose,
-                        dateData.MemberWon,
-                        dateData.MemberLose,
-                        dateData.OurPTWon,
-                        dateData.OurPTLose,
-                        dateData.OurPTNetWinLoss
+                        dateData.Total.TicketWon,
+                        dateData.Total.TicketLose,
+                        dateData.Total.StakeWon,
+                        dateData.Total.StakeLose,
+                        dateData.Total.MemberWon,
+                        dateData.Total.MemberLose,
+                        dateData.Total.OurPTWon,
+                        dateData.Total.OurPTLose,
+                        dateData.Total.OurPTNetWinLoss
                     };
                 writer.WriteRow(6, subtotal);
             }
@@ -130,15 +130,15 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
                 {
                     Lang.Total,
                     string.Empty,
-                    winLoss.TicketWon,
-                    winLoss.TicketLose,
-                    winLoss.StakeWon,
-                    winLoss.StakeLose,
-                    winLoss.MemberWon,
-                    winLoss.MemberLose,
-                    winLoss.OurPTWon,
-                    winLoss.OurPTLose,
-                    winLoss.OurPTNetWinLoss
+                    winLoss.Total.TicketWon,
+                    winLoss.Total.TicketLose,
+                    winLoss.Total.StakeWon,
+                    winLoss.Total.StakeLose,
+                    winLoss.Total.MemberWon,
+                    winLoss.Total.MemberLose,
+                    winLoss.Total.OurPTWon,
+                    winLoss.Total.OurPTLose,
+                    winLoss.Total.OurPTNetWinLoss
                 };
 
             writer.WriteRow(7, total);
@@ -151,11 +151,11 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
         /// </summary>
         /// <param name="rawData">The raw data that needs to be grouped.</param>
         /// <returns>WinLossItem object represents the grouped data.</returns>
-        private WinLossItem GroupData(IEnumerable<WinLossItem> rawData)
+        private DailyWinLossList GroupData(IEnumerable<WinLossItem> rawData)
         {
-            DateTime currentDate = new DateTime(1970, 1, 1);
-            WinLossItem currentDateData = null;
-            WinLossItem result = new WinLossItem();
+            var currentDate = new DateTime(1970, 1, 1);
+            var result = new DailyWinLossList();
+            DailyWinLossItem currentDateData = null;
 
             rawData.ToList().ForEach(obj =>
             {
@@ -166,8 +166,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
                         result.Add(currentDateData);
                     }
 
-                    currentDateData = new WinLossItem();
-                    currentDateData.WinLossDate = obj.WinLossDate;
+                    currentDateData = new DailyWinLossItem();
+                    currentDateData.Total.WinLossDate = obj.WinLossDate;
                     currentDate = obj.WinLossDate;
                 }
 

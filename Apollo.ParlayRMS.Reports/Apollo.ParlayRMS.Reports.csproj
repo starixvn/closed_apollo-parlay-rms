@@ -87,11 +87,14 @@
     <Compile Include="Criteria\TopWinners\GetTopWinnersDetailsOldCriteria.cs" />
     <Compile Include="Criteria\WinLoss\GetWinLossCriteria.cs" />
     <Compile Include="Models\MemberWinLoss\MemberWinLossItem.cs" />
+    <Compile Include="Models\MemberWinLoss\MemberWinLossList.cs" />
     <Compile Include="Models\TopWinners\TopWinnerBetDetails.cs" />
     <Compile Include="Models\TopWinners\TopWinnerDetailList.cs" />
     <Compile Include="Models\TopWinners\TopWinnerDetails.cs" />
     <Compile Include="Models\TopWinners\TopWinner.cs" />
     <Compile Include="Models\TopWinners\TopWinnerList.cs" />
+    <Compile Include="Models\WinLoss\DailyWinLossItem.cs" />
+    <Compile Include="Models\WinLoss\DailyWinLossList.cs" />
     <Compile Include="Models\WinLoss\WinLossItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportsAreaRegistration.cs" />

@@ -19,7 +19,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Interfaces.WinLoss
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Queried and grouped win loss data.</returns>
-        WinLossItem GetWinLossData(GetWinLossCriteria criteria);
+        DailyWinLossList GetWinLossData(GetWinLossCriteria criteria);
 
         /// <summary>
         /// Exports the win loss report to Excel file.
