@@ -206,10 +206,13 @@
     z-index: 4;
 }
 
-.freegrid .y-scrollbar-fix-width
-{
-    width: 17.5px !important;
-}
+.freegrid .y-scrollbar-fix-width {
+        width: 17.1px !important;
+    }
+
+.freegrid .x-scrollbar-fix-height {
+        height: 17.1px !important;
+    }
 
 .freegrid .x-scrollbar
 {

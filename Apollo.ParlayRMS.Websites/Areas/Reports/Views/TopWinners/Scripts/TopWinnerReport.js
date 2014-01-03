@@ -22,7 +22,7 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         $this.DOMInstance.ddlDateRanges = $('#ddlDateRanges');
         $this.DOMInstance.dpkDateFrom = $('#dpkDateFrom');
         $this.DOMInstance.dpkDateTo = $('#dpkDateTo');
-        $this.DOMInstance.btnSearch = $('#btnSearch');
+        $this.DOMInstance.btnSubmit = $('#btnSubmit');
         $this.DOMInstance.divFilterForm = $('#filter-bar');
         $this.DOMInstance.divResult = $('#divResult');
         $this.DOMInstance.divTopWinnerDetails = $('#divTopWinnerDetails');
@@ -140,7 +140,7 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         $this.DOMInstance.ddlDateRanges.live('change', changeDateRange);
         $this.DOMInstance.ddlDateRanges.change();
 
-        $this.DOMInstance.btnSearch.bind('click', function () {
+        $this.DOMInstance.btnSubmit.bind('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
                 && Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
@@ -408,7 +408,7 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         ddlDateRanges: null,
         dpkDateFrom: null,
         dpkDateTo: null,
-        btnSearch: null,
+        btnSubmit: null,
         divFilterForm: null,
         divResult: null,
         divTopWinnerDetails: null,

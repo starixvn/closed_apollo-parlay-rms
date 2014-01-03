@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿/* File Created: January 2, 2014 */
+$(document).ready(function () {
     var mixParlayMonitor = new Apollo.ParlayRMS.Tools.MixParlayMonitor();
 
     mixParlayMonitor.InitPage();
@@ -21,6 +22,11 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         Max_TransId: null,
         LimitRowCount: null
     };
+    var sortOptions = {};
+    var dataStorage = [];
+    var betIdStyle = '';
+    var usernameStyle = '';
+
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#filter-bar');
         $this.DOMInstance.ddlSelectTop = $('#ddlSelectTop');
@@ -34,9 +40,6 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         $this.DOMInstance.chkPause = $('#chkPause');
         $this.DOMInstance.btnSearch = $('#btnSearch');
         $this.DOMInstance.divResult = $('#divResult');
-        $this.DOMInstance.tblHeader = $('#tblHeader');
-        $this.DOMInstance.tblResult = $('#tblResult');
-        $this.DOMInstance.tblContent = $('#tblResult tbody');
     };
     var initSingleDropDownList = function (obj, height, width) {
         obj.multiselect({
@@ -78,6 +81,14 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         initMultiDropDownList($this.DOMInstance.ddlLevel, 106, 132);
         initSingleDropDownList($this.DOMInstance.ddlRefreshTime, 65, 60);
         $this.DOMInstance.ddlRefreshTime.multiselect('option', 'classes', 'width-80');
+
+        if (hasSimilarBetRight) {
+            betIdStyle = 'link similar-bets';
+        }
+
+        if (hasTotalOutstandingRight) {
+            usernameStyle = 'link total-outstanding';
+        }
     };
     var bindEvenHandlers = function () {
         $this.DOMInstance.txtMaxPayout.bind('keyup', function (event) {
@@ -125,13 +136,12 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
             }
         });
 
-        $this.DOMInstance.btnSearch.live('click', function () {
+        $this.DOMInstance.btnSearch.bind('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
                 && Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes)
                 && Validator.validateMultiselectRequired($this.DOMInstance.ddlLevel)
                 && Validator.validatePositiveInt($this.DOMInstance.txtMaxPayout)) {
-
                 var maxPayout = $this.DOMInstance.txtMaxPayout.val().replace(/,/g, '');
                 var limitRowCount = $this.DOMInstance.ddlSelectTop.val();
                 var combo = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
@@ -150,111 +160,190 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                 params.Selection = combo;
                 params.SportType = sportType;
                 params.Level = level;
-                params.MaxPayout = parseInt(maxPayout);
-                params.LimitRowCount = limitRowCount;
+                params.MaxPayout = parseFloat(maxPayout);
+                params.LimitRowCount = parseInt(limitRowCount);
 
-                $this.DOMInstance.tblContent.html('');
                 $this.DOMInstance.divRefreshNow.removeAttr('disabled');
-                resetSorting();
+                dataStorage = [];
+                sortOptions = {
+                    sortColumnName: 'ColTransTime',
+                    sortDirection: 'asc'
+                };
                 timer.start();
             }
         });
 
-        tableSorter.bind($this.DOMInstance.tblHeader, $this.DOMInstance.tblResult, function () {
-            $this.DOMInstance.tblContent.children('tr').each(function (i, obj) {
-                $(obj).children('td:first').text(i + 1);
-            });
-        });
-
         setupSoundManager();
     };
-    var resetSorting = function () {
-        $this.DOMInstance.tblHeader.find('.sortable').each(function () {
-            $(this).removeClass('sortUp').removeClass('sortDown');
-            this.sortDirection = null;
-        });
-    };
 
-    var createRow = function (order, item) {
-        var cells = [];
-        var betIdStyle = '';
-        var usernameStyle = '';
-
-        if (hasSimilarBetRight) {
-            betIdStyle = 'link similar-bets';
-        }
-
-        if (hasTotalOutstandingRight) {
-            usernameStyle = 'link total-outstanding';
-        }
-
-        cells.push('<tr>');
-        cells.push('<td class="align-center">{0}</td>'.format(order));
-        cells.push('<td class="align-center">{0}</td>'.format(moment(item.TransDate).zone(ParlayRMS.ServerTimezone).format(ParlayRMS.commonConstants.MomentDateTimeFormat)));
-        cells.push('<td class="align-right"><div class="{0}">{1}</div></td>'.format(betIdStyle, item.TransId));
-        cells.push('<td class="align-left username"><div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div></td>'.format(usernameStyle, item.Level, item.Username));
-        cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Odds).format(ParlayRMS.commonConstants.DecimalFormat)))
-        cells.push('<td class="align-right">{0}</td>'.format(numeral(item.Stake).format(ParlayRMS.commonConstants.DecimalFormat)))
-        cells.push('<td class="align-right">{0}</td>'.format(numeral(item.MaxPayout).format(ParlayRMS.commonConstants.DecimalFormat)))
-        cells.push('<td class="align-center">{0}</td>'.format(numeral(item.Combo).format(ParlayRMS.commonConstants.NumberFormat)))
-        cells.push('<td class="align-center"><div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div></td>'.format(item.Username, item.TransId, item.RefNo, labels.View));
-        cells.push('</tr>')
-
-        return cells.join('');
-    };
-    var expandTable = function (records) {
-        $this.DOMInstance.tblContent.children('tr.highlight').removeClass('highlight');
-
-        if (records && records.length > 0) {
-            var rows = $this.DOMInstance.tblContent.children('tr');
-
-            raiseAlert();
-            if (rows.length > 0) {
-                var currentRow;
-
-                $this.DOMInstance.tblContent.children('tr.noInfo').remove();
-                tableSorter.sortColumn($this.DOMInstance.tblResult, 1, "asc", 'date');
-
-                $.each(records, function (i, item) {
-                    currentRow = $(createRow(i + 1, item)).addClass('highlight'); // Highlight row
-                    rows = $this.DOMInstance.tblContent.children('tr');
-
-                    if (params.LimitRowCount == rows.length) {
-                        rows.last().remove();
+    // Render and expand the table with new data.
+    var createGridOptions = function () {
+        var gridOptions = {
+            columns: [
+                {
+                    HeaderText: tableHeaders.No,
+                    Width: 100,
+                    Name: 'ColNo',
+                    HeaderAlign: 'center',
+                    CellAlign: 'center'
+                },
+                {
+                    HeaderText: tableHeaders.TransTime,
+                    Width: 170,
+                    Name: 'ColTransTime',
+                    HeaderAlign: 'center',
+                    CellAlign: 'center',
+                    FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat,
+                    Timezone: ParlayRMS.ServerTimezone,
+                    Sort: true,
+                    SortDirection: 'ColTransTime' === sortOptions.sortColumnName ? sortOptions.sortDirection : ''
+                },
+                {
+                    HeaderText: tableHeaders.BetId,
+                    Width: 130,
+                    Name: 'ColBetId',
+                    HeaderAlign: 'center',
+                    CellAlign: 'right',
+                    CustomCellRender: function (cell) {
+                        return '<div class="{0}">{1}</div>'.format(betIdStyle, cell.Value.TransId);
                     }
-
-                    $this.DOMInstance.tblContent.prepend(currentRow);
-
-                    // Re-order by current ordered column.                    
-                    var orderCol = tableSorter.currentOrderCol;
-                    if (orderCol) {
-                        var type = $(orderCol).attr("data-col-type");
-                        var sortDirection = $(orderCol).find('span:first').get(0).sortDirection;
-
-                        tableSorter.sortColumn($this.DOMInstance.tblResult, $(orderCol).index(), sortDirection, type);
+                },
+                {
+                    HeaderText: tableHeaders.Username,
+                    Width: 170,
+                    Name: 'ColUsername',
+                    HeaderAlign: 'center',
+                    CellAlign: 'left',
+                    Sort: true,
+                    SortDirection: 'ColUsername' === sortOptions.sortColumnName ? sortOptions.sortDirection : '',
+                    CustomCellRender: function (cell) {
+                        return '<div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div>'.format(usernameStyle, cell.Value.Level, cell.Value.Username);
+                    },
+                    CustomSortFunction: function (value1, value2, sortDirection) {
+                        if (sortDirection === 'desc') {
+                            return value1.Username >= value2.Username;
+                        } else {
+                            return value1.Username < value2.Username;
+                        }
                     }
+                },
+                {
+                    HeaderText: tableHeaders.Odds,
+                    Width: 82,
+                    Name: 'ColOdds',
+                    HeaderAlign: 'center',
+                    CellAlign: 'right',
+                    FormatNumber: ParlayRMS.commonConstants.DecimalFormat
+                },
+                {
+                    HeaderText: tableHeaders.StakeAfterPT,
+                    Width: 160,
+                    Name: 'ColStakeAfterPT',
+                    HeaderAlign: 'center',
+                    CellAlign: 'right',
+                    FormatNumber: ParlayRMS.commonConstants.DecimalFormat
+                },
+                {
+                    HeaderText: tableHeaders.MaxPayoutAfterPT,
+                    Width: 180,
+                    Name: 'ColMaxPayoutAfterPT',
+                    HeaderAlign: 'center',
+                    CellAlign: 'right',
+                    FormatNumber: ParlayRMS.commonConstants.DecimalFormat,
+                    Sort: true,
+                    SortDirection: 'ColMaxPayoutAfterPT' === sortOptions.sortColumnName ? sortOptions.sortDirection : ''
+                },
+                {
+                    HeaderText: tableHeaders.TotalCombo,
+                    Width: 100,
+                    Name: 'ColTotalCombo',
+                    HeaderAlign: 'center',
+                    CellAlign: 'center',
+                    FormatNumber: ParlayRMS.commonConstants.NumberFormat
+                },
+                {
+                    HeaderText: tableHeaders.BetDetails,
+                    Width: 100,
+                    Name: 'ColBetDetails',
+                    HeaderAlign: 'center',
+                    CellAlign: 'center',
+                    CustomCellRender: function (cell) {
+                        return '<div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div>'.format(cell.Value.Username, cell.Value.TransId, cell.Value.RefNo, labels.View);
+                    }
+                }],
+            gridExpandHeight: 270,
+            showDistinctRow: false,
+            showNumberColumn: true,
+            showHighlightRow: false,
+            sortOption: {
+                afterGridSorted: function (rows, sortColumnName, sortDirection) {
+                    sortOptions.sortColumnName = sortColumnName;
+                    sortOptions.sortDirection = sortDirection;
 
-                    $this.DOMInstance.tblContent.children('tr').each(function (i, obj) {
-                        $(obj).children('td:first').text(i + 1);
-                    });
-                });
-            } else {
-                var body = [];
-                $.each(records, function (i, item) {
-                    body.push(createRow(i + 1, item));
-                });
-                $this.DOMInstance.tblContent.html(body.join(''));
+                    return rows;
+                }
+            }
+        };
+
+        return gridOptions;
+    };
+    var renderTable = function (data) {
+        var bodyData = [];
+        var gridOptions = createGridOptions();
+
+        $this.DOMInstance.divResult.addClass('display-none');
+
+        if ((data && data.length > 0) || (dataStorage && dataStorage.length > 0)) {
+            var row = null;
+            var info = null;
+            var numberOfRemovedItems = 0;
+            var hasNewRows = data.length > 0 && dataStorage.length > 0;
+
+            if (dataStorage.length + data.length > params.LimitRowCount) {
+                numberOfRemovedItems = dataStorage.length + data.length - params.LimitRowCount
             }
 
-            handleGridEvents();
-        } else if ((params.Max_TransId == 0) && ($('tr.noInfo:first-child', $this.DOMInstance.tblContent).length == 0)) {
-            $this.DOMInstance.tblContent.append('<tr class="noInfo"><td colspan="8">{0}</td></tr>'.format(labels.NoData));
+            if (numberOfRemovedItems > 0) {
+                dataStorage.splice(bodyData.length - numberOfRemovedItems, numberOfRemovedItems);
+            }
+
+            // Push new data to data storage.
+            if (data && data.length > 0) {
+                dataStorage = data.concat(dataStorage);
+                raiseAlert();
+            }
+
+            // Push new rows.
+            $.each(dataStorage, function (index, info) {
+                row =
+                {
+                    Columns: [{ Name: 'ColNo', Value: index + 1 },
+                              { Name: 'ColTransTime', Value: info.TransDate },
+                              { Name: 'ColBetId', Value: info },
+                              { Name: 'ColUsername', Value: info },
+                              { Name: 'ColOdds', Value: info.Odds },
+                              { Name: 'ColStakeAfterPT', Value: info.Stake },
+                              { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayout },
+                              { Name: 'ColTotalCombo', Value: info.Combo },
+                              { Name: 'ColBetDetails', Value: info}]
+                };
+
+                if (hasNewRows && index < data.length) {
+                    row.CssClass = 'highlight';
+                }
+
+                bodyData.push(row);
+            });
+            gridOptions.bodyRows = bodyData;
         }
 
-        $this.DOMInstance.divResult.removeClass('display-none');
+        $this.DOMInstance.divResult.removeClass('display-none').fanexGrid(gridOptions);
+        handleGridEvents();
     };
+
+    // Handle events occur on grid.
     var handleGridEvents = function () {
-        $('.view-details', $this.DOMInstance.tblContent).each(function () {
+        $('div.view-details', $this.DOMInstance.tblContent).each(function () {
             $(this).bind('click', function () {
                 var transId = $(this).attr('data-trans-id');
                 var refNo = $(this).attr('data-ref-no');
@@ -264,7 +353,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
             });
         });
 
-        $('.similar-bets', $this.DOMInstance.divResult).each(function () {
+        $('div.similar-bets', $this.DOMInstance.divResult).each(function () {
             $(this).bind('click', function () {
                 var transId = $(this).text();
                 var url = urls.SimilarBets + '?betId={0}'.format(transId);
@@ -273,7 +362,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
             });
         });
 
-        $('.total-outstanding', $this.DOMInstance.divResult).each(function () {
+        $('div.total-outstanding', $this.DOMInstance.divResult).each(function () {
             $(this).bind('click', function () {
                 var username = $(this).text();
                 var url = urls.TotalOutstanding + '?username={0}'.format(username);
@@ -283,6 +372,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         });
     };
 
+    // Raise sound alert when new tickets come.
     var setupSoundManager = function () {
         soundManager.setup({
             url: ParlayRMS.resolveRootUrl('Scripts/lib/SoundManager2/swf/'),
@@ -306,6 +396,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         }
     };
 
+    // Count down timer.
     var timer = function () {
         var ticker = null;
         var refreshTime = null;
@@ -371,10 +462,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         divTimer: null,
         chkPause: null,
         btnSearch: null,
-        divResult: null,
-        tblHeader: null,
-        tblResult: null,
-        tblContent: null
+        divResult: null
     };
     $this.InitPage = function () {
         cacheDOM();
@@ -392,7 +480,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                 ParlayRMS.loadingBox.show();
             },
             success: function (result) {
-                expandTable(result.Records);
+                renderTable(result.Records);
                 params.Max_TransId = result.MaxTransId;
             },
             error: function (xhr, status, err) {

@@ -87,7 +87,6 @@
     <Compile Include="ExcelUtility\NPOIExtensions\HSSFSheetExtensions.cs" />
     <Compile Include="ExcelUtility\NPOIExtensions\HSSFWorkbookExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\BalanceUp.cs" />

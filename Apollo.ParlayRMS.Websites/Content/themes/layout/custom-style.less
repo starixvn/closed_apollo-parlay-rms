@@ -1,284 +1,296 @@
 @import "mixins.less";
 
 #filter-bar {
-	background-color: #F4F4F4;
-	border: 1px solid #C8C8C8;
-	margin: 15px 0 10px 0;
-	min-width: 600px;
-	padding: 10px;
-	width: 98%;
-	.border-radius(2px);
-	.box-shadow(1px 2px 5px #DDD);
+    background-color: #F4F4F4;
+    border: 1px solid #C8C8C8;
+    margin: 15px 0 10px 0;
+    min-width: 600px;
+    padding: 10px;
+    width: 98%;
+    .border-radius(2px);
+    .box-shadow(1px 2px 5px #DDD);
 
-	&.filter-mixParlay {
-		width: 98.2%;
-	}
+    &.filter-mixParlay {
+        width: 98.2%;
+    }
 }
 
 .grid-title {
-	background: #CBDDF3;
-	background: #CBDDF3 -moz-linear-gradient(center top , #DAE7F6, #CDDEF3 45%, #ABC7EC 46%, #ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
-	background: #CBDDF3 -webkit-linear-gradient(center top , #DAE7F6, #CDDEF3 45%, #ABC7EC 46%, #ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
-	color: #04408C;
-	font-weight: bold;
-	min-height: 15px;
-	position: relative;
-	border-color: #D0D0D0;
-	border-bottom: 0;
-	margin-bottom: 0;
-	.box-shadow(0 1px 0 0 #F4F8FD inset);
+    background: #CBDDF3;
+    background: #CBDDF3 -moz-linear-gradient(center top , #DAE7F6, #CDDEF3 45%, #ABC7EC 46%, #ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
+    background: #CBDDF3 -webkit-linear-gradient(center top , #DAE7F6, #CDDEF3 45%, #ABC7EC 46%, #ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
+    color: #04408C;
+    font-weight: bold;
+    min-height: 15px;
+    position: relative;
+    border-color: #D0D0D0;
+    border-bottom: 0;
+    margin-bottom: 0;
+    .box-shadow(0 1px 0 0 #F4F8FD inset);
 
-	.grid-title-label {
-		color: #446993;
-	}
-}
-
-.freegrid div.divSorter.asc {
-	background-position: 0 -32px !important;
-}
-
-div.divSorter.desc {
-	background-position: 0 -53px !important;
+    .grid-title-label {
+        color: #446993;
+    }
 }
 
 .freegrid {
-	border-color: #D0D0D0;
+    border-color: #D0D0D0;
 
-	.free-top-left table thead th, .col_header table thead th {
-		font-weight: normal;
-		//background: #C5C5C5 -moz-linear-gradient(center top , #F9F9F9, #E3E4E6);
-		border-bottom: 1px solid #D0D0D0;
-		text-align: center;
-		color: #333;
-		#gradient .vertical (#E3E4E6, #F9F9F9);
-	}
+    .free-top-left table thead th, .col_header table thead th {
+        font-weight: normal;
+        //background: #C5C5C5 -moz-linear-gradient(center top , #F9F9F9, #E3E4E6);
+        border-bottom: 1px solid #D0D0D0;
+        text-align: center;
+        color: #333;
+        #gradient .vertical (#E3E4E6, #F9F9F9);
+    }
 
-	tr.subTotal td {
-		background-color: #FFFCD7;
-		border-bottom: 1px solid #ccc;
-		font-weight: bold;
-	}
+    div.divSorter {
+        background-image: url("img/sort-icon-new3.png") !important;
+        background-position: 0 -18px;
+        background-repeat: no-repeat !important;
+    }
 
-	.row_footer table thead th, .col_footer table thead th {
-		background: #CBDDF3 !important;
-		border-bottom: 0;
-	}
-	
-	td, .grid-fixed-table td {
-		border-right-color: #D0D0D0;
-		color: #333;
-		white-space: nowrap;
-	}
+    div.divSorter.asc {
+        background-position: 0 -32px !important;
+    }
 
-	.freegrid-even td {
-		background-color: #fafafa;
-	}
+    div.divSorter.desc {
+        background-position: 0 -53px !important;
+    }
 
-	.grid-pager {
-		//#gradient .vertical (#D1E1F4, #DFE9F5);
-		background: #b0ccf3;
-		border-color: #99BCE8;
-	}
+    tr.subTotal td {
+        background-color: #FFFCD7;
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+    }
 
-	.no-data-not-frozen {
-		font-weight: normal;
-	}
+    .row_footer table thead th, .col_footer table thead th {
+        background: #CBDDF3 !important;
+        border-bottom: 0;
+    }
+    
+    td, .grid-fixed-table td {
+        border-right-color: #D0D0D0;
+        color: #333;
+        white-space: nowrap;
+    }
+
+    .freegrid-even td {
+        background-color: #fafafa;
+    }
+
+    tr.highlight {
+        td {
+            background-color: #F2EFE3;
+        }
+    }
+
+    .grid-pager {
+        //#gradient .vertical (#D1E1F4, #DFE9F5);
+        background: #b0ccf3;
+        border-color: #99BCE8;
+    }
+
+    .no-data-not-frozen {
+        font-weight: normal;
+    }
 }
 
 #pagination {
-	color: #333;
-	div.itemperpage {
-		color: #333;
-		font-weight: normal;
-	}
+    color: #333;
+    div.itemperpage {
+        color: #333;
+        font-weight: normal;
+    }
 
-	a:hover, .current,
-	.current.prev, .current.next {
-		background-color: #679CFB;
-	}
+    a:hover, .current,
+    .current.prev, .current.next {
+        background-color: #679CFB;
+    }
 
-	a, span {
-		line-height: 12px;
-	}
+    a, span {
+        line-height: 12px;
+    }
 
-	div.detailtext, a, span, a:hover, span:hover  {
-		font-size: 0.9em;
-	}
+    div.detailtext, a, span, a:hover, span:hover  {
+        font-size: 0.9em;
+    }
 }
 
 #itemperpage {
-	height: 18px;
+    height: 18px;
 }
 
 .ui-datepicker-trigger {
-	position: absolute;
-	top: 3px;
-	right: 5px;
-	cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    cursor: pointer;
 }
 
 /* Dropdown Check List */
 
 .ui-multiselect-menu {
-	padding: 0;
-	border-top: 0;
+    padding: 0;
+    border-top: 0;
 }
 
 .ui-multiselect {
-	height: 23px;
-	position: relative;
-	color: #333335;
-	background: #fff url(img/text-bg.gif) repeat-x top center;
-	padding: 0 0 2px 4px;
-	font-size: 11px;
-	.border-radius(0);
+    height: 23px;
+    position: relative;
+    color: #333335;
+    background: #fff url(img/text-bg.gif) repeat-x top center;
+    padding: 0 0 2px 4px;
+    font-size: 11px;
+    .border-radius(0);
 }
 
 .ui-corner-all {
-	.border-radius(0);
+    .border-radius(0);
 }
 
 .ui-widget-content {
-	border-color: #CDCDCD;
+    border-color: #CDCDCD;
 }
 
 .ui-widget-content .ui-state-hover {
-	background: #e3ecf3;
-	border: 0;
-	.border-radius(0);
+    background: #e3ecf3;
+    border: 0;
+    .border-radius(0);
 }
 
 .ui-icon-triangle-1-s {
-	border-left: 1px solid #ccc;
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 22px;
-	width: 19px;
-	background-position: -64px -13px;
+    border-left: 1px solid #ccc;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 22px;
+    width: 19px;
+    background-position: -64px -13px;
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active, .ui-state-hover {
-	border-color: #ccc;
+    border-color: #ccc;
 }
 
 .ui-widget-header {
-	background: #EFEFEF;
-	border-width: 0 0 1px 0;
-	border-bottom-color: #CCC;	
-	color: #222;
-	font-weight: normal;
-	padding: 2px 0 0px 4px;
-	.border-radius(0);
+    background: #EFEFEF;
+    border-width: 0 0 1px 0;
+    border-bottom-color: #CCC;	
+    color: #222;
+    font-weight: normal;
+    padding: 2px 0 0px 4px;
+    .border-radius(0);
 
-	a {
-		font-size: 10px;
-		line-height: 18px;
-	}
+    a {
+        font-size: 10px;
+        line-height: 18px;
+    }
 }
 .ui-multiselect-checkboxes {
-	background: #ebe9ea;
+    background: #ebe9ea;
 }
 .ui-multiselect-checkboxes li {
-	padding-right: 0;
-	margin-bottom: 1px;
-	float: left;
-	min-width: 100%;
-	background: #fff;
-	
-	label {
-		padding: 0 2px;
-		border: 0;
-		margin: 0;
-		line-height: 20px;
-		white-space: nowrap;
+    padding-right: 0;
+    margin-bottom: 1px;
+    float: left;
+    min-width: 100%;
+    background: #fff;
+    
+    label {
+        padding: 0 2px;
+        border: 0;
+        margin: 0;
+        line-height: 20px;
+        white-space: nowrap;
 
-		input[type='checkbox'] {
-			margin-top: -2px
-		}
-	}
+        input[type='checkbox'] {
+            margin-top: -2px
+        }
+    }
 }
 
 .ui-multiselect-checkboxes label input {
-	top: -3px;
-	margin-right: 3px;
+    top: -3px;
+    margin-right: 3px;
 }
 
 .ui-multiselect-single .ui-multiselect-checkboxes label { 
-	padding: 0 0 0 4px !important;
-	border-width: 1px 0 0;
-	border-top: 0;
+    padding: 0 0 0 4px !important;
+    border-width: 1px 0 0;
+    border-top: 0;
 }
 
 .multiselect-width {
-	width: 135px !important;
+    width: 135px !important;
 }
 
 .freegrid .ui-state-disabled {
-	opacity: 0.6;
+    opacity: 0.6;
 }
 
 .detail-grid {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 /* Tooltip */
 
 .tipsy {
-	opacity: 1 !important;
-	.tipsy-arrow-n {
-		border-bottom-color: #AA0000;
-	}
+    opacity: 1 !important;
+    .tipsy-arrow-n {
+        border-bottom-color: #AA0000;
+    }
 
-	.tipsy-inner {
-		background: #FFAAAA;
-		border: 1px solid #AA0000;
-		color: #333;
-	}
+    .tipsy-inner {
+        background: #FFAAAA;
+        border: 1px solid #AA0000;
+        color: #333;
+    }
 }
 
 /* Calendar*/
 
 .ui-datepicker {
-	font-size: 12px;
+    font-size: 12px;
 
-	* {
-		vertical-align: middle;
-	}
+    * {
+        vertical-align: middle;
+    }
 
-	.ui-datepicker-prev span, .ui-datepicker-next span {
-		margin-top: -5px;
-	}
-	
-	.ui-datepicker-prev-hover, .ui-datepicker-next-hover {
-		top: 2px;
-		opacity: 0.8;
+    .ui-datepicker-prev span, .ui-datepicker-next span {
+        margin-top: -5px;
+    }
+    
+    .ui-datepicker-prev-hover, .ui-datepicker-next-hover {
+        top: 2px;
+        opacity: 0.8;
 
-		&.ui-state-disabled {
-			opacity: 0.35;
-		}
-	}
+        &.ui-state-disabled {
+            opacity: 0.35;
+        }
+    }
 
-	.ui-datepicker-prev-hover {
-		left: 2px;		
-	}
+    .ui-datepicker-prev-hover {
+        left: 2px;		
+    }
 
-	.ui-datepicker-next-hover {
-		right: 2px;
-	}
+    .ui-datepicker-next-hover {
+        right: 2px;
+    }
 
-	.ui-datepicker-calendar {
-		.ui-state-default, .ui-widget-content .ui-state-default,
-		.ui-widget-header .ui-state-default {
-			border: 1px solid #d3d3d3;
-		}
+    .ui-datepicker-calendar {
+        .ui-state-default, .ui-widget-content .ui-state-default,
+        .ui-widget-header .ui-state-default {
+            border: 1px solid #d3d3d3;
+        }
 
-		.ui-state-hover, .ui-widget-content .ui-state-hover,
-		.ui-widget-header .ui-state-hover, .ui-state-focus,
-		.ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-active {
-			background: #99BCE8;
-			color: #fff;
-			border-color: #6EA3E5;
-		}
-	}
+        .ui-state-hover, .ui-widget-content .ui-state-hover,
+        .ui-widget-header .ui-state-hover, .ui-state-focus,
+        .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-active {
+            background: #99BCE8;
+            color: #fff;
+            border-color: #6EA3E5;
+        }
+    }
 }

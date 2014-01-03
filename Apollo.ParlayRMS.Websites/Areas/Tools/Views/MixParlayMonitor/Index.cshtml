@@ -79,81 +79,8 @@
         </div>
     </div>
 </section>
-<div id="divResult" class="table-container display-none" style="width: 1255px">
-    <div style="width: 1255px">
-        <table class="grid" id="tblHeader">
-            <colgroup>
-                <col width='100px' />
-                <col width='170px' />
-                <col width='120px' />
-                <col width='170px' />
-                <col width='120px' />
-                <col width='160px' />
-                <col width='180px' />
-                <col width='120px' />
-                <col width='97px' />
-                <col width='18px' />
-            </colgroup>
-            <thead>
-                <tr>
-                    <th>
-                        @Lang.No
-                    </th>
-                    <th data-col-type="date" id="colTransTime">
-                        <div class="container-th">
-                            @Lang.TransTime
-                            <span class="sortable"></span>
-                        </div>
-                    </th>
-                    <th>
-                        @Lang.BetId
-                    </th>
-                    <th data-col-type="ignorecase" class="username">
-                        <div class="container-th">
-                            @Lang.Username
-                            <span class="sortable"></span>
-                        </div>
-                    </th>
-                    <th>
-                        @Lang.Odds
-                    </th>
-                    <th>
-                        @Lang.StakeAfterPT
-                    </th>
-                    <th data-col-type="float">
-                        <div class="container-th">
-                            @Lang.MaxPayoutAfterPT
-                            <span class="sortable"></span>
-                        </div>
-                    </th>
-                    <th>
-                        @Lang.TotalCombo
-                    </th>
-                    <th>
-                        @Lang.BetDetails
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="scrollGridContent" style="max-height: 600px; width: 1255px; overflow-y: scroll;">
-        <table class="grid" id="tblResult" style="width: 1237px;">
-            <colgroup>
-                <col width='100px' />
-                <col width='170px' />
-                <col width='120px' />
-                <col width='170px' />
-                <col width='120px' />
-                <col width='160px' />
-                <col width='180px' />
-                <col width='120px' />
-                <col width='97px' />
-            </colgroup>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+<div>
+    <div id="divResult" class="freegrid display-none"></div>
 </div>
 @section Foot {
     <script type="text/javascript">
@@ -161,6 +88,17 @@
             NoData: '@Lang.NoData',
             View: '@Lang.View',
             RefreshNow: '@Lang.RefreshNow'
+        };
+        var tableHeaders = {
+            No: '@Lang.No',
+            TransTime: '@Lang.TransTime',
+            BetId: '@Lang.BetId',
+            Username: '@Lang.Username',
+            Odds: '@Lang.Odds',
+            StakeAfterPT: '@Lang.StakeAfterPT',
+            MaxPayoutAfterPT: '@Lang.MaxPayoutAfterPT',
+            TotalCombo: '@Lang.TotalCombo',
+            BetDetails: '@Lang.BetDetails'
         };
         var hasSimilarBetRight = '@ViewBag.HasSimilarBetRight' == 'True';
         var hasTotalOutstandingRight = '@ViewBag.HasTotalOutstandingRight' == 'True';

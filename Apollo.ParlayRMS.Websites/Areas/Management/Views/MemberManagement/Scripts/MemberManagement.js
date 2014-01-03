@@ -16,6 +16,7 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
         AddNewCustomer: ParlayRMS.resolveRootUrl('Management/MemberManagement/AddSpecialCustomer')
     };
     var params = {};
+    var currentPageSize = ParlayRMS.pageSize;
     var cacheDOM = function () {
         $this.DOMInstance.lnkAddNew = $('#lnkAddNew');
         $this.DOMInstance.txtUsername = $('#txtUsername');
@@ -90,6 +91,10 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
             $(this).multiselect(isEnable);
         });
     };
+    var afterPaged = function (pagerOptions) {
+        initLevelUpdaterFields();
+        currentPageSize = pagerOptions.itemsPerPage;
+    };
     var renderData = function (data) {
         var bodyData = [];
 
@@ -126,12 +131,10 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
             showNumberColumn: true,
             showPager: true,
             pagerOption: {
-                itemsPerPage: 20,
-                maxItemsPerPage: 100,
+                itemsPerPage: currentPageSize,
                 currentPage: 0,
-                startPerPage: 10,
-                pageStep: 10,
-                afterPagedFunction: initLevelUpdaterFields
+                itemsPerPageArray: ParlayRMS.pageRanges,
+                afterPagedFunction: afterPaged
             },
             bodyRowHeight: 24,
             bodyRows: bodyData

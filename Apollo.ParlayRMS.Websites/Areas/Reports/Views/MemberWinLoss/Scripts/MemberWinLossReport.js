@@ -13,6 +13,7 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
         ExportWinLoss: ParlayRMS.resolveRootUrl('Reports/MemberWinLoss/ExportMemberWinLoss')
     };
     var params = {};
+    var currentPageSize = ParlayRMS.pageSize;
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#filter-bar');
         $this.DOMInstance.txtUsername = $('#txtUsername');
@@ -142,7 +143,7 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
             }
         });
     };
-
+    
     // Render report script
     var renderAgentReport = function (result) {
         var bodyData = [];
@@ -231,11 +232,12 @@ Apollo.ParlayRMS.Reports.MemberWinLossReport = function () {
             },
             showPager: true,
             pagerOption: {
-                itemsPerPage: 20,
-                maxItemsPerPage: 100,
+                itemsPerPage: currentPageSize,
                 currentPage: 0,
-                startPerPage: 10,
-                pageStep: 10
+                itemsPerPageArray: ParlayRMS.pageRanges,
+                afterPagedFunction: function (pagerOptions) {
+                    currentPageSize = pagerOptions.itemsPerPage;
+                }
             },
             showDistinctRow: false,
             bodyRows: bodyData,

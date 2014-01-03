@@ -100,6 +100,7 @@ Apollo.ParlayRMS.LevelUpdater = function () {
                         dropDown.val(level);
                         dropDown.multiselect('refresh'); // Refresh multiselect control
                         dropDown.attr('data-current-value', dropDown.val());
+                        $('#btnSearch').click();
                         ParlayRMS.showInfoMessage(messages.ChangeLevelSuccessfully);
                     }
                 },

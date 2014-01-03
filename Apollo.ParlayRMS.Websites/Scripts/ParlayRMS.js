@@ -9,6 +9,8 @@ var ParlayRMS = function ($) {
         dialogPopup: null,
         headlineMsgBox: null,
         loadingBox: null,
+        pageRanges: null,
+        pageSize: null,
 
         commonConstants: {
             DateFormat: 'yy-mm-dd',
@@ -23,6 +25,8 @@ var ParlayRMS = function ($) {
             ParlayRMS.RootUrl = $('#RootURL').val();
             ParlayRMS.ServerTimezone = $('#ServerTimezone').val();
             ParlayRMS.dialogPopup = $('<div id="dialog-popup"></div>').appendTo('body');
+            ParlayRMS.pageRanges = [20, 50, 100, 200, 500];
+            ParlayRMS.pageSize = 50;
         },
         resolveClientUrl: function (relativeUrl) {
             return ParlayRMS.ClientUrl + relativeUrl;
