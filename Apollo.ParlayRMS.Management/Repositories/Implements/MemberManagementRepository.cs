@@ -10,12 +10,13 @@
 namespace Apollo.ParlayRMS.Management.Repositories.Implements
 {
     using System.Collections;
-    using Apollo.ParlayRMS.Core.Repositories;
     using Apollo.ParlayRMS.Management.Criteria;
     using Apollo.ParlayRMS.Management.Models;
     using Apollo.ParlayRMS.Management.Repositories.Interfaces;
     using Fanex.Data;
     using Fanex.NAP.Core.Criteria.Misc;
+    using Fanex.NAP.Core.Repository.Impl;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

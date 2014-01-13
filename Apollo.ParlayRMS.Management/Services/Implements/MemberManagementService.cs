@@ -20,7 +20,7 @@ namespace Apollo.ParlayRMS.Management.Services.Implements
     using Apollo.ParlayRMS.Management.Repositories.Implements;
     using Apollo.ParlayRMS.Management.Repositories.Interfaces;
     using Apollo.ParlayRMS.Management.Services.Interfaces;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Member Management Repository.

@@ -21,7 +21,7 @@ namespace Apollo.ParlayRMS.Websites
     /// <summary>
     /// MVC application.
     /// </summary>
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         /// <summary>
         /// Sets all needed configuration when the application starts.

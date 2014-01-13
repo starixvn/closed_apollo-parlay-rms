@@ -88,31 +88,6 @@ namespace Apollo.ParlayRMS.Core.Extensions
         }
 
         /// <summary>
-        /// Format a DateTime value to month and day, separated by '-'.
-        /// </summary>
-        /// <param name="date">DateTime type that the method needs to be attached to.</param>
-        /// <returns>Formatted string such as '10-Oct'.</returns>
-        public static string ToMonthAndDay(this DateTime? date)
-        {
-            if (date.HasValue)
-            {
-                return date.Value.ToMonthAndDay();
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Format a DateTime value to month and day, separated by '-'.
-        /// </summary>
-        /// <param name="date">DateTime type that the method needs to be attached to.</param>
-        /// <returns>Formatted string such as '10-Oct'.</returns>
-        public static string ToMonthAndDay(this DateTime date)
-        {
-            return date.ToString(CommonConstants.DayMonthFormat);
-        }
-
-        /// <summary>
         /// Format a DateTime value to month and year string.
         /// </summary>
         /// <param name="date">DateTime type that the method needs to be attached to.</param>

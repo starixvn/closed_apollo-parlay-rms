@@ -14,6 +14,7 @@ namespace Apollo.ParlayRMS.Core.Services
     using Apollo.ParlayRMS.Core.Resources;
     using Fanex.Common.Helper;
     using Fanex.NAP.Core.Service.Interface;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
