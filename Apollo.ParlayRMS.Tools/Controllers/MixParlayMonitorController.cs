@@ -115,7 +115,7 @@ namespace Apollo.ParlayRMS.Tools.Controllers
         [NapAuth(FunctionKey = ApolloParlayRMSFunctionKeys.MixParlayMonitor, Policy = Constant.Policy.Read)]
         public JsonResult GetBetDetails(long betId, long refNo, string username)
         {
-            BetListHTMLFactory factory = new BetListHTMLFactory();
+            var factory = new BetListHTMLFactory();
             BetListHTMLBuilder builder = factory.CreateBuilder();
             ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
 

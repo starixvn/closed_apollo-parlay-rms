@@ -48,7 +48,7 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserControl.Controllers
         [HttpGet]
         public ActionResult ChangePassword()
         {
-            return View(new UpdatePasswordCustCriteria { Username = AppSession.CurrentUser.Name });
+            return View(new UpdatePasswordCustCriteria { Username = CurrentSession.Username });
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserControl.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = _userService.GetById(AppSession.CurrentUser.Id);
+                    var user = _userService.GetById(CurrentSession.UserId);
                     string oldPwd = Cryptography.CfsEnCode(criteria.OldUserPwd);
 
                     if (oldPwd.Equals(user.Password))
@@ -112,7 +112,7 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserControl.Controllers
 
             try
             {
-                var user = _userService.GetById(AppSession.CurrentUser.Id);
+                var user = _userService.GetById(CurrentSession.UserId);
 
                 criteria.CustId = user.Id;
                 criteria.Username = user.Username;
@@ -141,8 +141,8 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserControl.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    criteria.CustId = AppSession.CurrentUser.Id;
-                    criteria.Username = AppSession.CurrentUser.Username;
+                    criteria.CustId = CurrentSession.UserId;
+                    criteria.Username = CurrentSession.Username;
                     criteria.FirstName = criteria.FirstName ?? string.Empty;
                     criteria.LastName = criteria.LastName ?? string.Empty;
                     criteria.Email = criteria.Email ?? string.Empty;

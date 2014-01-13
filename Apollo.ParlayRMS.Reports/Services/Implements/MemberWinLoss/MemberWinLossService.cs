@@ -16,7 +16,6 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
     using Apollo.ParlayRMS.Core.Constants;
     using Apollo.ParlayRMS.Core.Criteria;
     using Apollo.ParlayRMS.Core.ExcelUtility;
-    using Apollo.ParlayRMS.Core.Extensions;
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Core.Services;
@@ -26,6 +25,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
     using Apollo.ParlayRMS.Reports.Models.MemberWinLoss;
     using Apollo.ParlayRMS.Reports.Resources;
     using Apollo.ParlayRMS.Reports.Services.Interfaces.MemberWinLoss;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Web;
 
     /// <summary>
     /// Member win loss service.
@@ -97,8 +98,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
             string fileName = string.Format(
                                          ReportsLang.MemberWinLossFileName,
                                          criteria.Username,
-                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
-                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+                                         criteria.FromDate.ToShortFormatedDate().Replace("/", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("/", string.Empty));
             string reportTitle = criteria.ToString();
             string templatePath = criteria.IsMember ? memberTemplatePath : agentTemplatePath;
             var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.MemberWinLossSheetName);

@@ -14,7 +14,6 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Apollo.ParlayRMS.Core.ExcelUtility;
-    using Apollo.ParlayRMS.Core.Extensions;
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Core.Services;
@@ -24,6 +23,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
     using Apollo.ParlayRMS.Reports.Models.TopWinners;
     using Apollo.ParlayRMS.Reports.Resources;
     using Apollo.ParlayRMS.Reports.Services.Interfaces.TopWinners;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Web;
 
     /// <summary>
     /// Top Winners service.
@@ -151,8 +152,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.TopWinners
             string fileName = string.Format(
                                          ReportsLang.TopWinnersFileName,
                                          criteria.LimitedRow,
-                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
-                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+                                         criteria.FromDate.ToShortFormatedDate().Replace("/", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("/", string.Empty));
             string reportTitle = criteria.ToString();
             var writer = new ExcelTemplateWriter(templatePath, fileName, ReportsLang.TopWinners);
             int counter = 0;

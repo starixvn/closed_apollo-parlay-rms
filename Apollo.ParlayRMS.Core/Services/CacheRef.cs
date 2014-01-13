@@ -163,9 +163,7 @@ namespace Apollo.ParlayRMS.Core.Services
         /// <returns>Bet type name.</returns>
         public static string GetBettypeNameSportingSolution(object betypeId, string resourceId)
         {
-            string bettypeName = string.Empty;
-            bettypeName = RefData.GetBetTypeName(Converter.ToString2(betypeId), TWLang("en-US"), string.Empty, resourceId);
-            return bettypeName;
+            return RefData.GetBetTypeName(Converter.ToString2(betypeId), TWLang("en-US"), string.Empty, resourceId);
         }
 
         /// <summary>
@@ -191,7 +189,8 @@ namespace Apollo.ParlayRMS.Core.Services
                                                     ref Dictionary<object, string> currentStorage)
         {
             currentStorage = currentStorage ?? new Dictionary<object, string>();
-            foreach (var idenInfo in idensList)
+
+            foreach (object idenInfo in idensList)
             {
                 if (!currentStorage.ContainsKey(idenInfo))
                 {

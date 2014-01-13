@@ -12,10 +12,10 @@ namespace Apollo.ParlayRMS.Reports.Criteria.MemberWinLoss
     using System;
     using System.Linq;
     using Apollo.ParlayRMS.Core.Configurations;
-    using Apollo.ParlayRMS.Core.Extensions;
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Reports.Resources;
+    using Fanex.NAP.Core.Web;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

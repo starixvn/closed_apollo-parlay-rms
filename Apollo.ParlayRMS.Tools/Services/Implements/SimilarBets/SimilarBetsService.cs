@@ -9,12 +9,12 @@
 
 namespace Apollo.ParlayRMS.Tools.Services.Implements.SimilarBets
 {
-    using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Tools.Criteria.SimilarBets;
     using Apollo.ParlayRMS.Tools.Models.SimilarBets;
     using Apollo.ParlayRMS.Tools.Repositories.Implements.SimilarBets;
     using Apollo.ParlayRMS.Tools.Repositories.Interfaces.SimilarBets;
     using Apollo.ParlayRMS.Tools.Services.Interfaces.SimilarBets;
+    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// Similar bets service.

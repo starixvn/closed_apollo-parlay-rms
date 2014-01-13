@@ -9,11 +9,8 @@
 
 namespace Apollo.ParlayRMS.Core.Controllers
 {
-    using System;
     using System.Text;
     using System.Web.Mvc;
-    using Apollo.ParlayRMS.Core.Services;
-    using Apollo.ParlayRMS.Core.Web;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Service.Impl;
@@ -108,7 +105,7 @@ namespace Apollo.ParlayRMS.Core.Controllers
         /// <returns>JSON objects contains the error code and error message.</returns>
         public JsonResult GetInvalidModelErrors()
         {
-            StringBuilder errorMsg = new StringBuilder();
+            var errorMsg = new StringBuilder();
 
             foreach (ModelState modelState in ViewData.ModelState.Values)
             {
@@ -119,17 +116,6 @@ namespace Apollo.ParlayRMS.Core.Controllers
             }
 
             return this.Json(new { Code = -1, Message = errorMsg.ToString() });
-        }
-
-        /// <summary>
-        /// Executed before each request, if Downtime then go to Downtime page
-        /// Or not Authenticate will go to Login Page.
-        /// </summary>
-        /// <param name="filterContext">Filter context.</param>
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            AppSession.CurrentActionName = filterContext.ActionDescriptor.ActionName;
-            base.OnActionExecuting(filterContext);
         }
     }
 }

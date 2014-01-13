@@ -15,7 +15,6 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
     using System.Linq;
     using Apollo.ParlayRMS.Core.Constants;
     using Apollo.ParlayRMS.Core.ExcelUtility;
-    using Apollo.ParlayRMS.Core.Extensions;
     using Apollo.ParlayRMS.Core.Models;
     using Apollo.ParlayRMS.Core.Resources;
     using Apollo.ParlayRMS.Core.Services;
@@ -25,6 +24,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
     using Apollo.ParlayRMS.Reports.Models.WinLoss;
     using Apollo.ParlayRMS.Reports.Resources;
     using Apollo.ParlayRMS.Reports.Services.Interfaces.WinLoss;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Web;
 
     /// <summary>
     /// Win loss service.
@@ -75,8 +76,8 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
             DailyWinLossList winLoss = GetWinLossData(criteria);
             string fileName = string.Format(
                                          ReportsLang.WinLossFileName,
-                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
-                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+                                         criteria.FromDate.ToShortFormatedDate().Replace("/", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("/", string.Empty));
             string reportTitle = criteria.ToString();
             var writer = new ExcelTemplateWriter(templatePath, fileName, Lang.WinLoss);
 

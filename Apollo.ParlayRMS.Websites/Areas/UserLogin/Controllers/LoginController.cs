@@ -16,7 +16,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-    using Apollo.ParlayRMS.Core.Web;
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
@@ -149,8 +148,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
                                 _currentSession.Username = username;
                                 _currentSession.OnUserId = criteria.OnUserId;
                                 _currentSession.SessionId = Session.SessionID.ToString();
-
-                                AppSession.CurrentUser = user;
 
                                 // current site is not NAP Hub
                                 if (this.SiteId != 0)
@@ -328,13 +325,8 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
         /// <param name="user">Logged in user.</param>
         private void CreateUserMenu(User user)
         {
-            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
-                                                                                    user.Id,
-                                                                                    SiteId,
-                                                                                    Environment,
-                                                                                    true);
-
-            AppSession.CurrentUserMenu = _currentSession.Menu;
+            _currentSession.Menu = 
+                (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(user.Id, SiteId, Environment, true);
         }
 
         /// <summary>

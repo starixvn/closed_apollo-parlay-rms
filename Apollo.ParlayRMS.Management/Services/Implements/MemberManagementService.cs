@@ -13,7 +13,6 @@ namespace Apollo.ParlayRMS.Management.Services.Implements
     using System.Linq;
     using Apollo.ParlayRMS.Core.ExcelUtility;
     using Apollo.ParlayRMS.Core.Resources;
-    using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Core.Web;
     using Apollo.ParlayRMS.Management.Criteria;
     using Apollo.ParlayRMS.Management.Models;
@@ -21,6 +20,7 @@ namespace Apollo.ParlayRMS.Management.Services.Implements
     using Apollo.ParlayRMS.Management.Repositories.Interfaces;
     using Apollo.ParlayRMS.Management.Services.Interfaces;
     using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// Member Management Repository.

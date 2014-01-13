@@ -87,10 +87,11 @@ namespace Apollo.ParlayRMS.Core.Services
         /// <returns>UTC offset string indicates the time zone of the server.</returns>
         public static string GetUtcOffset()
         {
-            var offsetString = CacheManager.Get<string>(CacheUtcOffset);
+            string offsetString = CacheManager.Get<string>(CacheUtcOffset);
+
             if (string.IsNullOrEmpty(offsetString))
             {
-                var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
+                TimeSpan offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
 
                 offsetString = string.Format("{0}{1}", offset.Hours > 0 ? "+" : string.Empty, offset);
                 CacheManager.Set<string>(CacheUtcOffset, offsetString);

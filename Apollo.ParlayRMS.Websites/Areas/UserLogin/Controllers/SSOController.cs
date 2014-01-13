@@ -15,7 +15,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-    using Apollo.ParlayRMS.Core.Web;
     using Fanex.Common;
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
@@ -110,8 +109,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
                     _currentSession.SessionId = Session.SessionID.ToString();
                     _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
 
-                    AppSession.CurrentUser = user;
-
                     if (this.SiteId != 0)
                     {
                         _currentSession.Menu = _menuItemService.GetByUserAndSiteIncludeGroup(
@@ -119,8 +116,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
                                                                                 SiteId,
                                                                                 Environment,
                                                                                 true) as IList<MenuItem>;
-
-                        AppSession.CurrentUserMenu = _currentSession.Menu;
                     }
 
                     CreateAuthInfo(user);
