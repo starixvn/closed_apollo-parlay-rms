@@ -279,6 +279,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                 afterGridSorted: function (rows, sortColumnName, sortDirection) {
                     sortOptions.sortColumnName = sortColumnName;
                     sortOptions.sortDirection = sortDirection;
+                    handleGridEvents();
 
                     return rows;
                 }

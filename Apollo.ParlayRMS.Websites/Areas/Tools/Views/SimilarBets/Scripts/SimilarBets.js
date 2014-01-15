@@ -130,7 +130,7 @@ Apollo.ParlayRMS.Tools.SimilarBets = function () {
                     Columns: [{ Name: 'ColNo', Value: i + 1 },
                               { Name: 'ColBetId', Value: info.TransId },
                               { Name: 'ColUsername', Value: "<div class='pallet-levels'><span class='level{0}'></span>{1}</div>".format(info.Level, info.Username) },
-                              { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
+                              { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayout },
                               { Name: 'ColSimilarComboFound', Value: info.SimilarCombo },
                               { Name: 'ColBetDetails', Value: "<div class='link bet-details' data-user-name='{0}' data-trans-id='{1}' data-ref-no='{2}'>{3}</div>".format(info.Username, info.TransId, info.RefNo, labels.View)}]
                 };
