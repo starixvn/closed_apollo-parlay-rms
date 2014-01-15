@@ -11,6 +11,7 @@ namespace Apollo.ParlayRMS.Management.Repositories.Interfaces
 {
     using Apollo.ParlayRMS.Management.Criteria;
     using Apollo.ParlayRMS.Management.Models;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     public interface IMemberManagementRepository : IReadonlyRepository<Customer>

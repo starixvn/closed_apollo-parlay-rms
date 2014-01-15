@@ -10,10 +10,10 @@
 namespace Apollo.ParlayRMS.Tools.Services.Implements.TotalOutstanding
 {
     using System.Linq;
-    using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Tools.Criteria.TotalOutstanding;
     using Apollo.ParlayRMS.Tools.Models.TotalOutstanding;
     using Apollo.ParlayRMS.Tools.Services.Interfaces.TotalOutstanding;
+    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// Total outstanding service.

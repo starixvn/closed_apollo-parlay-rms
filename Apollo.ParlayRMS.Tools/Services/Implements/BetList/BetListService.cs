@@ -11,11 +11,11 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.BetList
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Tools.Criteria.BetList;
     using Apollo.ParlayRMS.Tools.Models.BetList;
     using Apollo.ParlayRMS.Tools.Services.Interfaces.BetList;
     using Fanex.BetList.Core.Entities;
+    using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

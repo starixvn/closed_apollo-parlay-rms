@@ -12,7 +12,7 @@ namespace Apollo.ParlayRMS.Management.Services.Interfaces
     using System.Collections.Generic;
     using Apollo.ParlayRMS.Management.Criteria;
     using Apollo.ParlayRMS.Management.Models;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     public interface IMemberManagementService
     {

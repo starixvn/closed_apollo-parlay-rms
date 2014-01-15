@@ -16,7 +16,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-    using Apollo.ParlayRMS.Core.Web;
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
@@ -41,7 +40,7 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
         private ISiteService _siteService;
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
-        private IMaintainanceService _maintenanceService;
+        private IMaintenanceService _maintenanceService;
 
         #endregion
 
@@ -58,14 +57,14 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
             ISiteService siteService,
             IMenuItemService menuItemService,
             ICurrentSession currentSession,
-            IMaintainanceService maintenanceService)
+            IMaintenanceService maintenanceService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
             _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
-            _maintenanceService = maintenanceService ?? new MaintainanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService();
         }
 
         #endregion
@@ -149,8 +148,6 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
                                 _currentSession.Username = username;
                                 _currentSession.OnUserId = criteria.OnUserId;
                                 _currentSession.SessionId = Session.SessionID.ToString();
-
-                                AppSession.CurrentUser = user;
 
                                 // current site is not NAP Hub
                                 if (this.SiteId != 0)
@@ -328,13 +325,8 @@ namespace Apollo.ParlayRMS.Websites.Areas.UserLogin.Controllers
         /// <param name="user">Logged in user.</param>
         private void CreateUserMenu(User user)
         {
-            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
-                                                                                    user.Id,
-                                                                                    SiteId,
-                                                                                    Environment,
-                                                                                    true);
-
-            AppSession.CurrentUserMenu = _currentSession.Menu;
+            _currentSession.Menu = 
+                (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(user.Id, SiteId, Environment, true);
         }
 
         /// <summary>

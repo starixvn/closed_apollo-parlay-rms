@@ -13,10 +13,10 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Apollo.ParlayRMS.Core.Services;
     using Apollo.ParlayRMS.Tools.Criteria.MixParlayMonitor;
     using Apollo.ParlayRMS.Tools.Models.MixParlayMonitor;
     using Apollo.ParlayRMS.Tools.Services.Interfaces.MixParlayMonitor;
+    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// Mix parlay monitor service.
