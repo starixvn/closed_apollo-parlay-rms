@@ -13,9 +13,9 @@ var ParlayRMS = function ($) {
         pageSize: null,
 
         commonConstants: {
-            DateFormat: 'yy-mm-dd',
-            MomentDateFormat: 'YYYY-MM-DD',
-            MomentDateTimeFormat: 'YYYY-MM-DD hh:mm:ss A',
+            DateFormat: 'mm/dd/yy',
+            MomentDateFormat: 'MM/DD/YYYY',
+            MomentDateTimeFormat: 'MM/DD/YYYY hh:mm:ss A',
             DecimalFormat: '0,0.00',
             NumberFormat: '0,0'
         },

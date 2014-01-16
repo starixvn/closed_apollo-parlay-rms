@@ -92,7 +92,7 @@
             if (isValid) {
                 var date = $(element).val();
 
-                if (!moment(date, ParlayRMS.commonConstants.MomentDateFormat).isValid()) {
+                if (!moment(date, ParlayRMS.commonConstants.MomentDateFormat, true).isValid()) {
                     //$(element).attr('title', errorMessages.InvalidDateField);
                     showTooltip(element, errorMessages.InvalidDateField);
                     isValid = false;
