@@ -33,10 +33,10 @@ namespace Apollo.ParlayRMS.Tools.Services.Implements.MixParlayMonitor
             IEnumerable<ParlayBetItem> betList = this.GetData<ParlayBetItem>(criteria);
 
             // Use for testing purpose.
-            if (!betList.Any())
-            {
-                betList = betList.Union(CreateTestData(criteria));
-            }
+            ////if (!betList.Any())
+            ////{
+            ////    betList = betList.Union(CreateTestData(criteria));
+            ////}
 
             return betList;
         }
