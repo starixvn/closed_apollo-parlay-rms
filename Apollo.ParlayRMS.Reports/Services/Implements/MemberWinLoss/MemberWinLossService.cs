@@ -299,7 +299,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.MemberWinLoss
             string year = date.Substring(0, separatorIndex);
             string month = date.Substring(separatorIndex + 1, 2);
 
-            return string.Format("{0}-{1}", month, year);
+            return string.Format("{0}/{1}", month, year);
         }
     }
 }

@@ -106,7 +106,7 @@ namespace Apollo.ParlayRMS.Reports.Services.Implements.WinLoss
                     OurPTNetWinLoss = obj.OurPTNetWinLoss
                 });
                 writer.WriteRows(5, combos);
-                writer.WriteCellRange(writer.RowId - numOfItems, numOfItems, 0, 1, winLoss.ChildItems[0].Total.WinLossDate);
+                writer.WriteCellRange(writer.RowId - numOfItems, numOfItems, 0, 1, dateData.Total.WinLossDate);
 
                 // For WinLossDate summary
                 var subtotal = new object[]
