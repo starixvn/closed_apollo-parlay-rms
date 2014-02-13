@@ -1,5 +1,8 @@
 ﻿// Elements sorter
+/* global moment, ParlayRMS */
+
 jQuery.fn.sortElements = (function () {
+    'use strict';
     var sort = [].sort;
 
     return function (comparator, getSortable) {
@@ -29,7 +32,9 @@ jQuery.fn.sortElements = (function () {
 })();
 
 // Table sorter
-var tableSorter = function () {
+var tableSorter = (function () {
+    'use strict';
+
     return {
         currentOrderCol: null,
         bind: function (src, desc, callbackFunc) {
@@ -40,7 +45,7 @@ var tableSorter = function () {
                     var currentCol = $(currentObj).closest('th');
 
                     // Change css class of current sortable header.
-                    if (currentObj.sortDirection == 'asc') {
+                    if (currentObj.sortDirection === 'asc') {
                         currentObj.sortDirection = "desc";
                         $(currentObj).removeClass("sortDown").addClass("sortUp");
                     } else {
@@ -51,7 +56,7 @@ var tableSorter = function () {
                     // Reset other sortable headers
                     src.find('.sortable').each(function () {
                         var col = $(this).closest('th');
-                        if ($(currentCol).index() != $(col).index()) {
+                        if ($(currentCol).index() !== $(col).index()) {
                             $(this).removeClass('sortDown').removeClass('sortUp');
                             this.sortDirection = '';
                         }
@@ -60,7 +65,7 @@ var tableSorter = function () {
                     // Get type of sorting column.
                     var type = $(currentCol).attr('data-col-type');
                     type = type ? type : 'text';
-                    
+
                     tableSorter.currentOrderCol = currentCol;
                     tableSorter.sortColumn(desc, $(currentCol).index(), currentObj.sortDirection, type);
 
@@ -72,27 +77,27 @@ var tableSorter = function () {
             });
         },
         sortColumn: function (table, colIndex, sortDirection, type) {
-            var selector = $(table).find('td').filter(function () {
-                return $(this).index() == colIndex;
+            $(table).find('td').filter(function () {
+                return $(this).index() === colIndex;
             }).sortElements(function (fParam, sParam) {
                 var fValue = $.trim($(fParam).text());
                 var sValue = $.trim($(sParam).text());
 
-                if (type == 'float') {
+                if (type === 'float') {
                     fValue = parseFloat(fValue.replace(/,/g, ''));
                     sValue = parseFloat(sValue.replace(/,/g, ''));
-                } else if (type == 'int') {
+                } else if (type === 'int') {
                     fValue = parseInt(fValue.replace(/,/g, ''));
                     sValue = parseInt(sValue.replace(/,/g, ''));
-                } else if (type == 'date') {
+                } else if (type === 'date') {
                     fValue = (new Date(moment(fValue, ParlayRMS.commonConstants.MomentDateTimeFormat))).getTime();
                     sValue = (new Date(moment(sValue, ParlayRMS.commonConstants.MomentDateTimeFormat))).getTime();
-                } else if (type == 'ignoreCase') {
+                } else if (type === 'ignoreCase') {
                     fValue = fValue.toLowerCase();
                     sValue = sValue.toLowerCase();
                 }
 
-                if (sortDirection == 'asc') {
+                if (sortDirection === 'asc') {
                     return fValue > sValue ? -1 : 1;
                 }
                 else {
@@ -102,5 +107,5 @@ var tableSorter = function () {
                 return this.parentNode;
             });
         }
-    }
-} ();
+    };
+} ());

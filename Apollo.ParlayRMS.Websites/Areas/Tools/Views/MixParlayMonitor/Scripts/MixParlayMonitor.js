@@ -1,12 +1,17 @@
 ﻿/* File Created: January 2, 2014 */
+/* global numeral, Namespace, Apollo, ParlayRMS, Validator, labels, tableHeaders, soundManager, hasSimilarBetRight, hasTotalOutstandingRight */
+/* jshint camelcase: false */
+
 $(document).ready(function () {
+    'use strict';
     var mixParlayMonitor = new Apollo.ParlayRMS.Tools.MixParlayMonitor();
 
     mixParlayMonitor.InitPage();
 });
 
-Namespace.Register("Apollo.ParlayRMS.Tools.MixParlayMonitor");
+Namespace.Register('Apollo.ParlayRMS.Tools.MixParlayMonitor');
 Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
+    'use strict';
     var $this = this;
     var urls = {
         GetMixParlayData: ParlayRMS.resolveRootUrl('Tools/MixParlayMonitor/GetMixParlayData'),
@@ -56,17 +61,17 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
             minWidth: width,
             height: height,
             create: function () {
-                obj.multiselect("checkAll");
+                obj.multiselect('checkAll');
             },
             selectedText: function (numChecked, numTotal, checkedItems) {
-                if (numChecked == 0) {
-                    return "Select options";
+                if (numChecked === 0) {
+                    return 'Select options';
                 }
-                else if (numChecked == 1) {
+                else if (numChecked === 1) {
                     return $(checkedItems).next().text();
                 }
-                else if (numChecked == numTotal) {
-                    return "All";
+                else if (numChecked === numTotal) {
+                    return 'All';
                 }
                 else {
                     return numChecked + ' options';
@@ -97,7 +102,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
 
             rawValue = $.isNumeric(rawValue) ? rawValue : '';
 
-            if (rawValue != '') {
+            if (rawValue !== '') {
                 var value = parseFloat(rawValue);
 
                 if (value > 1000000000000) {
@@ -112,7 +117,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
 
             $(this).val(formatedValue);
 
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.btnSearch.click();
             }
         });
@@ -138,23 +143,23 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
 
         $this.DOMInstance.btnSearch.bind('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
-            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
-                && Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes)
-                && Validator.validateMultiselectRequired($this.DOMInstance.ddlLevel)
-                && Validator.validatePositiveInt($this.DOMInstance.txtMaxPayout)) {
+            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo) &&
+                Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes) &&
+                Validator.validateMultiselectRequired($this.DOMInstance.ddlLevel) &&
+                Validator.validatePositiveInt($this.DOMInstance.txtMaxPayout)) {
                 var maxPayout = $this.DOMInstance.txtMaxPayout.val().replace(/,/g, '');
                 var limitRowCount = $this.DOMInstance.ddlSelectTop.val();
-                var combo = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
+                var combo = $this.DOMInstance.ddlCombo.multiselect('getChecked').map(function () {
                     return this.value;
                 }).get().join(',');
-                var sportType = $this.DOMInstance.ddlSportTypes.multiselect("getChecked").map(function () {
+                var sportType = $this.DOMInstance.ddlSportTypes.multiselect('getChecked').map(function () {
                     return this.value;
                 }).get().join(',');
-                var level = $this.DOMInstance.ddlLevel.multiselect("getChecked").map(function () {
+                var level = $this.DOMInstance.ddlLevel.multiselect('getChecked').map(function () {
                     return this.value;
                 }).get().join(',');
 
-                maxPayout = (maxPayout == '') ? '0' : maxPayout;
+                maxPayout = (maxPayout === '') ? '0' : maxPayout;
                 params.Max_TransId = 0;
 
                 params.Selection = combo;
@@ -178,6 +183,8 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
 
     // Render and expand the table with new data.
     var createGridOptions = function () {
+        var usernameCol = '<div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div>';
+        var betDetailsCol = '<div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div>';
         var gridOptions = {
             columns: [
                 {
@@ -217,7 +224,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                     Sort: true,
                     SortDirection: 'ColUsername' === sortOptions.sortColumnName ? sortOptions.sortDirection : '',
                     CustomCellRender: function (cell) {
-                        return '<div class="pallet-levels {0}"><span class="level{1}"></span>{2}</div>'.format(usernameStyle, cell.Value.Level, cell.Value.Username);
+                        return usernameCol.format(usernameStyle, cell.Value.Level, cell.Value.Username);
                     },
                     CustomSortFunction: function (value1, value2, sortDirection) {
                         if (sortDirection === 'desc') {
@@ -268,7 +275,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                     HeaderAlign: 'center',
                     CellAlign: 'center',
                     CustomCellRender: function (cell) {
-                        return '<div class="link view-details" data-user-name="{0}" data-trans-id="{1}" data-ref-no="{2}">{3}</div>'.format(cell.Value.Username, cell.Value.TransId, cell.Value.RefNo, labels.View);
+                        return betDetailsCol.format(cell.Value.Username, cell.Value.TransId, cell.Value.RefNo, labels.View);
                     }
                 }],
             gridExpandHeight: 270,
@@ -296,12 +303,11 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
 
         if ((data && data.length > 0) || (dataStorage && dataStorage.length > 0)) {
             var row = null;
-            var info = null;
             var numberOfRemovedItems = 0;
             var hasNewRows = data.length > 0 && dataStorage.length > 0;
 
             if (dataStorage.length + data.length > params.LimitRowCount) {
-                numberOfRemovedItems = dataStorage.length + data.length - params.LimitRowCount
+                numberOfRemovedItems = dataStorage.length + data.length - params.LimitRowCount;
             }
 
             if (numberOfRemovedItems > 0) {
@@ -382,7 +388,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
             onready: function () {
                 soundManager.createSound({
                     id: 'alertSound',
-                    url: ParlayRMS.resolveRootUrl("Sounds/alert.mp3")
+                    url: ParlayRMS.resolveRootUrl('Sounds/alert.mp3')
                 });
             },
             ontimeout: function () {
@@ -392,13 +398,13 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
     };
     var raiseAlert = function () {
         if (params.MaxPayout > 0) {
-            console.log(ParlayRMS.resolveRootUrl("Sounds/alert.mp3"));
+            console.log(ParlayRMS.resolveRootUrl('Sounds/alert.mp3'));
             soundManager.play('alertSound');
         }
     };
 
     // Count down timer.
-    var timer = function () {
+    var timer = (function () {
         var ticker = null;
         var refreshTime = null;
         var timeout = null;
@@ -415,7 +421,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                     ticker--;
                     $this.DOMInstance.divRefreshNow.val('{0} [{1}]'.format(labels.RefreshNow, ticker));
 
-                    if (ticker == 0) {
+                    if (ticker === 0) {
                         $this.GetData();
                         ticker = refreshTime;
                     }
@@ -449,7 +455,7 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
                 }
             }
         };
-    } ();
+    } ());
 
     $this.DOMInstance = {
         divFilterForm: null,
@@ -472,10 +478,10 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
     };
     $this.GetData = function () {
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetMixParlayData,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(params),
             beforeSend: function () {
                 ParlayRMS.loadingBox.show();
@@ -500,10 +506,10 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         };
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetBetDetails,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(data),
             beforeSend: function () {
                 ParlayRMS.loadingBox.show();
@@ -519,4 +525,4 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
             }
         });
     };
-}
+};

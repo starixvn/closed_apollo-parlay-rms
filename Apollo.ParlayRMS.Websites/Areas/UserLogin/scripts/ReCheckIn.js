@@ -1,4 +1,5 @@
-﻿var Recheckin = function ($) {
+﻿var Recheckin = (function ($) {
+    'use strict';
 
     return {
         time: null,
@@ -15,38 +16,37 @@
         reCheckin: function () {
 
             $.ajax({
-                url: Recheckin.root + "UserLogin/Login/ReCheckLogin",
-                type: "POST",
-                dataType: "json",
+                url: Recheckin.root + 'UserLogin/Login/ReCheckLogin',
+                type: 'POST',
+                dataType: 'json',
                 success: function (result) {
-                    if (result == "1") {
+                    if (result === '1') {
                         Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
                     }
-                    if (result == "-1") {
-                        window.location.href = Recheckin.root + "UserLogin/Common/Offline";
+                    if (result === '-1') {
+                        window.location.href = Recheckin.root + 'UserLogin/Common/Offline';
                     }
-                },
-                error: function (request, status, error) {
                 }
             });
         },
 
         closeBrowser: function () {
             var index = window;
-            while (index != index.parent) // Jump out
+            while (index !== index.parent) // Jump out
             {
                 index = index.parent;
             }
             index.close();
         }
-    }
+    };
 
-} (jQuery);
+} (jQuery));
 
 
 $(document).ready(function () {
-    Recheckin.init();
+    'use strict';
 
+    Recheckin.init();
     Recheckin.headlineMsgBox = $.msgbox({
         message: '',
         //containerId: 'msg-bar',
@@ -58,9 +58,9 @@ $(document).ready(function () {
         duration: 2000,
         useAnimation: false,
         beforeClose: function () {
-            window.location.href = Recheckin.root + "UserLogin/Login/LogOut";
+            window.location.href = Recheckin.root + 'UserLogin/Login/LogOut';
         }
     });
 
-    setInterval("Recheckin.reCheckin()", Recheckin.time);
+    setInterval(Recheckin.reCheckin, Recheckin.time);
 });

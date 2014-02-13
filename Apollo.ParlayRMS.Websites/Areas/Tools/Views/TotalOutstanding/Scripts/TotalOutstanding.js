@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿/* global Namespace, Apollo, ParlayRMS, Validator, labels, hasSimilarBetRight */
+
+$(document).ready(function () {
+    'use strict';
     var totalOutstanding = new Apollo.ParlayRMS.Tools.TotalOutstanding();
 
     totalOutstanding.InitPage(labels);
@@ -6,6 +9,7 @@
 
 Namespace.Register("Apollo.ParlayRMS.Tools.TotalOutstanding");
 Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
+    'use strict';
     var $this = this;
     var labels = {};
     var urls = {
@@ -36,13 +40,13 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
                 obj.multiselect();
             },
             selectedText: function (numChecked, numTotal, checkedItems) {
-                if (numChecked == 0) {
+                if (numChecked === 0) {
                     return "Select options";
                 }
-                else if (numChecked == 1) {
+                else if (numChecked === 1) {
                     return $(checkedItems).next().text();
                 }
-                else if (numChecked == numTotal) {
+                else if (numChecked === numTotal) {
                     return "All";
                 }
                 else {
@@ -55,13 +59,13 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
         initMultiDropDownList($this.DOMInstance.ddlCombo, 106, 132);
         initMultiDropDownList($this.DOMInstance.ddlSportTypes, 65, 132);
 
-        $this.DOMInstance.txtUsername.bind('blur', function (event) {
+        $this.DOMInstance.txtUsername.bind('blur', function () {
             var trimValue = $.trim($(this).val());
             $(this).val(trimValue);
         });
 
         $this.DOMInstance.txtUsername.bind('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.txtUsername.blur();
                 $this.DOMInstance.btnSearch.click();
             }
@@ -69,9 +73,9 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
 
         $this.DOMInstance.btnSearch.bind('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
-            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
-                && Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes)
-                && Validator.validateRequired($this.DOMInstance.txtUsername)) {
+            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo) &&
+                Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes) &&
+                Validator.validateRequired($this.DOMInstance.txtUsername)) {
 
                 var username = $this.DOMInstance.txtUsername.val();
                 var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
@@ -85,7 +89,7 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
             }
         });
 
-        if ($this.DOMInstance.txtUsername.val() != '') {
+        if ($this.DOMInstance.txtUsername.val() !== '') {
             $this.DOMInstance.btnSearch.click();
         }
     };
@@ -126,7 +130,7 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
 
         if (records && records.length > 0) {
             var row = null;
-            var info = null;
+            var betDetailsCol = '<div class="link view-details" data-trans-id="{0}" data-ref-no="{1}">{2}</div>';
 
             $.each(records, function (i, info) {
                 row =
@@ -138,7 +142,7 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
                               { Name: 'ColStakeAfterPT', Value: info.StakePT },
                               { Name: 'ColMaxPayoutAfterPT', Value: info.MaxPayoutPT },
                               { Name: 'ColTotalCombo', Value: info.Combo },
-                              { Name: 'ColBetDetails', Value: "<div class='link view-details' data-trans-id='{0}' data-ref-no='{1}'>{2}</div>".format(info.TransId, info.RefNo, labels.View)}]
+                              { Name: 'ColBetDetails', Value: betDetailsCol.format(info.TransId, info.RefNo, labels.View)}]
                 };
                 bodyData.push(row);
             });
@@ -157,12 +161,21 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
         var gridOptions =
         {
             columns: [{ HeaderText: labels.No, Width: 60, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat, Timezone: ParlayRMS.ServerTimezone },
+                      { HeaderText: labels.TransTime, Width: 180, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center',
+                          FormatDateTime: ParlayRMS.commonConstants.MomentDateTimeFormat, Timezone: ParlayRMS.ServerTimezone
+                      },
                       { HeaderText: labels.BetId, Width: 100, Name: 'ColBetId', HeaderAlign: 'center', CellAlign: 'right' },
-                      { HeaderText: labels.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.MaxPayoutAfterPT, Width: 150, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.TotalCombo, Width: 100, Name: 'ColTotalCombo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right',
+                          FormatNumber: ParlayRMS.commonConstants.DecimalFormat
+                      },
+                      { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right',
+                          FormatNumber: ParlayRMS.commonConstants.DecimalFormat
+                      },
+                      { HeaderText: labels.MaxPayoutAfterPT, Width: 150, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.TotalCombo, Width: 100, Name: 'ColTotalCombo', HeaderAlign: 'center', CellAlign: 'center',
+                          FormatNumber: ParlayRMS.commonConstants.NumberFormat
+                      },
                       { HeaderText: labels.BetDetails, Width: 100, Name: 'ColBetDetails', HeaderAlign: 'center', CellAlign: 'center'}],
             showFooter: true,
             gridExpandHeight: 220,
@@ -182,7 +195,6 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
 
         if (records && records.length > 0) {
             var row = null;
-            var info = null;
 
             $.each(records, function (i, info) {
                 row =
@@ -211,9 +223,15 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
         {
             columns: [{ HeaderText: labels.No, Width: 60, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: labels.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
-                      { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.MaxPayoutAfterPT, Width: 150, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.TotalBets, Width: 100, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: ParlayRMS.commonConstants.NumberFormat}],
+                      { HeaderText: labels.StakeAfterPT, Width: 120, Name: 'ColStakeAfterPT', HeaderAlign: 'center', CellAlign: 'right',
+                          FormatNumber: ParlayRMS.commonConstants.DecimalFormat
+                      },
+                      { HeaderText: labels.MaxPayoutAfterPT, Width: 150, Name: 'ColMaxPayoutAfterPT', HeaderAlign: 'center', CellAlign: 'right',
+                          FormatNumber: ParlayRMS.commonConstants.DecimalFormat
+                      },
+                      { HeaderText: labels.TotalBets, Width: 100, Name: 'ColTotalBets', HeaderAlign: 'center', CellAlign: 'center',
+                          FormatNumber: ParlayRMS.commonConstants.NumberFormat
+                      }],
             showFooter: true,
             gridExpandHeight: 220,
             showDistinctRow: false,
@@ -303,4 +321,4 @@ Apollo.ParlayRMS.Tools.TotalOutstanding = function () {
             }
         });
     };
-}
+};

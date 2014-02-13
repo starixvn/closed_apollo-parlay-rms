@@ -1,5 +1,8 @@
-﻿var Validator = function ($) {
+﻿/* global moment, ParlayRMS */
+
+var Validator = (function ($) {
     //var dateFormat = 'MM-DD-YYYY';
+    'use strict';
     var errorMessages = {};
 
     var rootUrl = $('#RootURL').val();
@@ -15,7 +18,7 @@
             success: function (data) {
                 errorMessages = data;
             },
-            error: function (xhr, status, err) {
+            error: function () {
                 //ParlayRMS.handleAjaxError(xhr, status, err);
             },
             complete: function () {
@@ -68,7 +71,7 @@
         validateNumber: function (element) {
             var value = $.trim($(element).val().replace(/,/g, ''));
 
-            if ((value != '') && (!$.isNumeric(value))) {
+            if ((value !== '') && (!$.isNumeric(value))) {
                 showTooltip(element, errorMessages.InvalidNumberField);
                 return false;
             } else {
@@ -78,7 +81,7 @@
         validatePositiveInt: function (element) {
             var value = $.trim($(element).val().replace(/,/g, ''));
 
-            if ((value != '') && (!$.isNumeric(value) || parseInt(value) < 0)) {
+            if ((value !== '') && (!$.isNumeric(value) || parseInt(value) < 0)) {
                 //$(element).addClass('field-validation-error');
                 showTooltip(element, errorMessages.PositiveField);
                 return false;
@@ -118,4 +121,4 @@
             return isValid;
         }
     };
-} (jQuery);
+} (jQuery));

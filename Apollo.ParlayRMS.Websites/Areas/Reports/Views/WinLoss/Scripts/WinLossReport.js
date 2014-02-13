@@ -1,11 +1,15 @@
-﻿$(document).ready(function () {
+﻿/* global Namespace, Apollo, ParlayRMS, Validator, labels, minDate, maxDate */
+
+$(document).ready(function () {
+    'use strict';
     var winLossReport = new Apollo.ParlayRMS.Reports.WinLossReport();
 
     winLossReport.InitPage(labels);
 });
 
-Namespace.Register("Apollo.ParlayRMS.Reports.WinLossReport");
+Namespace.Register('Apollo.ParlayRMS.Reports.WinLossReport');
 Apollo.ParlayRMS.Reports.WinLossReport = function () {
+    'use strict';
     var $this = this;
     var labels = {};
     var urls = {
@@ -28,7 +32,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         obj.multiselect({
             multiple: false,
             header: false,
-            noneSelectedText: "Select an Option",
+            noneSelectedText: 'Select an Option',
             selectedList: 1,
             minWidth: 132,
             height: height
@@ -40,17 +44,17 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
             minWidth: 132,
             height: 106,
             create: function () {
-                obj.multiselect("checkAll");
+                obj.multiselect('checkAll');
             },
             selectedText: function (numChecked, numTotal, checkedItems) {
-                if (numChecked == 0) {
-                    return "Select options";
+                if (numChecked === 0) {
+                    return 'Select options';
                 }
-                else if (numChecked == 1) {
+                else if (numChecked === 1) {
                     return $(checkedItems).next().text();
                 }
-                else if (numChecked == numTotal) {
-                    return "All";
+                else if (numChecked === numTotal) {
+                    return 'All';
                 }
                 else {
                     return numChecked + ' options';
@@ -68,40 +72,40 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         initSingleDropDownList($this.DOMInstance.ddlSportTypes, 85);
 
         $this.DOMInstance.dpkDateFrom.datepicker({
-            defaultDate: "+1w",
+            defaultDate: '+1w',
             changeMonth: true,
             changeYear: true,
             numberOfMonths: 1,
             dateFormat: ParlayRMS.commonConstants.DateFormat,
             minDate: minDateObj,
             maxDate: maxDateObj,
-            showOn: "button",
+            showOn: 'button',
             buttonImage: $this.DOMInstance.icoCalendarUrl,
             buttonImageOnly: true,
             buttonText: labels.From,
             onClose: function (selectedDate) {
-                $this.DOMInstance.dpkDateTo.datepicker("option", "minDate", selectedDate);
-                if ($this.DOMInstance.dpkDateTo.val() == '') {
+                $this.DOMInstance.dpkDateTo.datepicker('option', 'minDate', selectedDate);
+                if ($this.DOMInstance.dpkDateTo.val() === '') {
                     $this.DOMInstance.dpkDateTo.val($(this).val());
                 }
             }
         });
 
         $this.DOMInstance.dpkDateTo.datepicker({
-            defaultDate: "+1w",
+            defaultDate: '+1w',
             changeMonth: true,
             changeYear: true,
             numberOfMonths: 1,
             dateFormat: ParlayRMS.commonConstants.DateFormat,
             minDate: minDateObj,
             maxDate: maxDateObj,
-            showOn: "button",
+            showOn: 'button',
             buttonImage: $this.DOMInstance.icoCalendarUrl,
             buttonImageOnly: true,
             buttonText: labels.From,
             onClose: function (selectedDate) {
-                $this.DOMInstance.dpkDateFrom.datepicker("option", "maxDate", selectedDate);
-                if ($this.DOMInstance.dpkDateFrom.val() == '') {
+                $this.DOMInstance.dpkDateFrom.datepicker('option', 'maxDate', selectedDate);
+                if ($this.DOMInstance.dpkDateFrom.val() === '') {
                     $this.DOMInstance.dpkDateFrom.val($(this).val());
                 }
             }
@@ -112,13 +116,13 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
 
         $this.DOMInstance.btnSearch.live('click', function () {
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
-            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo)
-                && Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
+            if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo) &&
+                Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
                 var betType = $this.DOMInstance.ddlBetType.val();
                 var sportTypes = $this.DOMInstance.ddlSportTypes.val();
                 var dateFrom = $this.DOMInstance.dpkDateFrom.val();
                 var dateTo = $this.DOMInstance.dpkDateTo.val();
-                var combos = $this.DOMInstance.ddlCombo.multiselect("getChecked").map(function () {
+                var combos = $this.DOMInstance.ddlCombo.multiselect('getChecked').map(function () {
                     return this.value;
                 }).get().join(',');
 
@@ -135,13 +139,12 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         if (result && result.Data) {
             var records = result.Data.ChildItems;
             var row = null;
-            var info = null;
 
             $.each(records, function (i, dateData) {
                 $.each(dateData.ChildItems, function (j, info) {
                     row =
                     {
-                        Columns: [{ Name: 'ColCombo', Value: info.Combo == '6' ? labels.SixUp : info.Combo },
+                        Columns: [{ Name: 'ColCombo', Value: info.Combo === '6' ? labels.SixUp : info.Combo },
                                   { Name: 'ColTicketWon', Value: info.TicketWon },
                                   { Name: 'ColTicketLose', Value: info.TicketLose },
                                   { Name: 'ColStakeWon', Value: info.StakeWon },
@@ -153,7 +156,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
                                   { Name: 'ColOurPTNetWinLoss', Value: info.OurPTNetWinLoss}]
                     };
 
-                    if (j == 0) {
+                    if (j === 0) {
                         row.Columns.unshift({ Name: 'ColDate', Value: info.WinLossDate, MergeRowNumber: dateData.ChildItems.length });
                     }
 
@@ -173,7 +176,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
                               { Name: 'ColOurPTWon', Value: dateData.Total.OurPTWon },
                               { Name: 'ColOurPTLose', Value: dateData.Total.OurPTLose },
                               { Name: 'ColOurPTNetWinLoss', Value: dateData.Total.OurPTNetWinLoss}],
-                    CssClass: "subTotal"
+                    CssClass: 'subTotal'
                 };
 
                 bodyData.push(row);
@@ -200,24 +203,34 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         {
             customizeHeader: true,
             groupHeaderRows: [{
-                Columns: [{ HeaderText: labels.Date, Name: "ColDate", MergeRowNumber: 2 },
-                          { HeaderText: labels.Combo, Name: "ColCombo", MergeRowNumber: 2 },
-                          { HeaderText: labels.Ticket, Name: "ColTicketWon", MergeColNumber: 2 },
-                          { HeaderText: labels.StakeAfterPT, Name: "ColStakeWon", MergeColNumber: 2 },
-                          { HeaderText: labels.WinLoss, Name: "ColWinLossWon", MergeColNumber: 2 },
-                          { HeaderText: labels.OurPT, Name: "ColOurPTWon", MergeColNumber: 3}]
+                Columns: [{ HeaderText: labels.Date, Name: 'ColDate', MergeRowNumber: 2 },
+                          { HeaderText: labels.Combo, Name: 'ColCombo', MergeRowNumber: 2 },
+                          { HeaderText: labels.Ticket, Name: 'ColTicketWon', MergeColNumber: 2 },
+                          { HeaderText: labels.StakeAfterPT, Name: 'ColStakeWon', MergeColNumber: 2 },
+                          { HeaderText: labels.WinLoss, Name: 'ColWinLossWon', MergeColNumber: 2 },
+                          { HeaderText: labels.OurPT, Name: 'ColOurPTWon', MergeColNumber: 3}]
             }],
-            columns: [{ HeaderText: labels.Date, Width: 120, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat, Timezone: ParlayRMS.ServerTimezone },
+            columns: [{ HeaderText: labels.Date, Width: 120, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center',
+                        FormatDateTime: ParlayRMS.commonConstants.MomentDateFormat, Timezone: ParlayRMS.ServerTimezone },
                       { HeaderText: labels.Combo, Width: 82, Name: 'ColCombo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.NumberFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
-                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
-                      { HeaderText: labels.NetWinLoss, Width: 100, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' }],
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColTicketWon', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColTicketLose', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.NumberFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColStakeWon', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColStakeLose', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColWinLossWon', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColWinLossLose', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.Won, Width: 110, Name: 'ColOurPTWon', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$' },
+                      { HeaderText: labels.Lose, Width: 110, Name: 'ColOurPTLose', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat },
+                      { HeaderText: labels.NetWinLoss, Width: 100, Name: 'ColOurPTNetWinLoss', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: ParlayRMS.commonConstants.DecimalFormat, FormatNegative: '$'}],
             showTitle: true,
             showFooter: true,
             gridExpandHeight: 260,
@@ -267,10 +280,10 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         };
         params = data;
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetWinLoss,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(data),
             beforeSend: function () {
                 ParlayRMS.loadingBox.show();
@@ -290,4 +303,4 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
         params.IsLoadNew = false;
         ParlayRMS.downloadFile(urls.ExportWinLoss, params);
     };
-}
+};

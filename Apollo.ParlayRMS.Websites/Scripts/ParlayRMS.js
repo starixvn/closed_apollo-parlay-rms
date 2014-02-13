@@ -1,6 +1,7 @@
+/* jshint undef: false, unused: false */
 
-var ParlayRMS = function ($) {
-
+var ParlayRMS = (function ($) {
+    'use strict';
     return {
         ClientUrl: null,
         RootUrl: null,
@@ -36,9 +37,9 @@ var ParlayRMS = function ($) {
         },
         // Handles common error when making ajax request
         handleAjaxError: function (xhr, status, err) {
-            if (xhr.status == 403) {
+            if (xhr.status === 403) {
                 ParlayRMS.headlineMsgBox.showErr('Unauthorized request rejected!', { sticky: true });
-            } else if (xhr.status == 404) {
+            } else if (xhr.status === 404) {
                 ParlayRMS.headlineMsgBox.showErr('Resources not found!', { sticky: true });
             } else {
                 ParlayRMS.headlineMsgBox.showErr('Sorry, an error occurred while processing your request, please notify the administrators.', { sticky: true });
@@ -72,10 +73,10 @@ var ParlayRMS = function ($) {
             //url and data options required
             if (url && data) {
                 //data can be string of parameters or array/object
-                data = typeof data == 'string' ? data : $.param(data);
+                data = typeof data === 'string' ? data : $.param(data);
                 var downloadUrl = url + "?" + data;
                 var iframe = $('body iframe');
-                if (iframe.length == 0) {
+                if (iframe.length === 0) {
                     iframe = $('<iframe width="0" height="0" class="display-none"></iframe>');
                     iframe.appendTo('body');
                 }
@@ -123,11 +124,12 @@ var ParlayRMS = function ($) {
         }
     };
 
-} (jQuery);
+} (jQuery));
 
 $(document).ready(function () {
-    ParlayRMS.initCoreValues();
+    'use strict';
 
+    ParlayRMS.initCoreValues();
     ParlayRMS.headlineMsgBox = $.msgbox({
         message: '',
         //containerId: 'msg-bar',
@@ -165,22 +167,28 @@ $(document).ready(function () {
 // -- Utilities -- //
 
 // String Format
+/* jshint freeze: false */
 String.prototype.format = function () {
+    'use strict';
     var args = arguments;
     return this.replace(/{(\d+)}/g, function (match, number) {
-        return typeof args[number] != 'undefined' ? args[number]: match;
+        return typeof args[number] !== 'undefined' ? args[number]: match;
     });
 };
 
 // Array Remove - By John Resig (MIT Licensed)
+/* jshint freeze: false */
 Array.prototype.remove = function (from, to) {
+    'use strict';
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
 };
 
 // Array Remove All elements matched the criteria
+/* jshint freeze: false */
 Array.prototype.removeAll = function (criteria) {
+    'use strict';
     var length = this.length;
 
     for (var i = 0; i < length; i++) {
@@ -196,6 +204,7 @@ Array.prototype.removeAll = function (criteria) {
 // Reset form helper
 (function ($) { 
     //re-set all client validation given a jQuery selected form or child
+    'use strict';
     $.fn.resetValidation = function () {
         var $form = this.closest('form');
  
@@ -222,9 +231,9 @@ Array.prototype.removeAll = function (criteria) {
         $form.removeData('unobtrusiveValidation');
         $.validator.unobtrusive.parse($form);
 
-//		$form.data('validator').settings.errorPlacement = function(error, element) {
-//			//$(element).next().hide();
-//		};
+//      $form.data('validator').settings.errorPlacement = function(error, element) {
+//          $(element).next().hide();
+//      };
  
         return $form;
     };
@@ -236,10 +245,10 @@ Array.prototype.removeAll = function (criteria) {
  
         $form[0].reset();
  
-        if (resetValidation == undefined || resetValidation) {
+        if (resetValidation === undefined || resetValidation) {
             $form.resetValidation();
         }
  
         return $form;
-    }
+    };
 })(jQuery);

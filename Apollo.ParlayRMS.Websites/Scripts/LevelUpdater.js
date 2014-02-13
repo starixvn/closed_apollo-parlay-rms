@@ -1,6 +1,10 @@
 ﻿// This lib must be used with Multislect library.
-Namespace.Register("Apollo.ParlayRMS.LevelUpdater");
+/* global Namespace, Apollo, ParlayRMS */
+/* exported levelUpdater, formatItem, formatSelection */
+
+Namespace.Register('Apollo.ParlayRMS.LevelUpdater');
 Apollo.ParlayRMS.LevelUpdater = function () {
+    'use strict';
     var $this = this;
     var levels = {};
     var messages = {};
@@ -15,7 +19,7 @@ Apollo.ParlayRMS.LevelUpdater = function () {
 
         if (hasAll) {
             option = $('<option />', { text: levels.AllLevel.Text, value: levels.AllLevel.Value });
-            if (defaultValue == 'null') {
+            if (defaultValue === 'null') {
                 option.attr('selected', 'true');
             }
 
@@ -24,7 +28,7 @@ Apollo.ParlayRMS.LevelUpdater = function () {
 
         $.each(levels.Levels, function (i, el) {
             option = $('<option />', { text: el.Text, value: el.Value });
-            if (defaultValue == el.Value) {
+            if (defaultValue === el.Value) {
                 option.attr('selected', 'true');
             }
 
@@ -33,7 +37,7 @@ Apollo.ParlayRMS.LevelUpdater = function () {
 
         if (hasNone) {
             option = $('<option />', { text: levels.None.Text, value: levels.None.Value });
-            if (defaultValue == '0') {
+            if (defaultValue === '0') {
                 option.attr('selected', 'true');
             }
 
@@ -61,8 +65,9 @@ Apollo.ParlayRMS.LevelUpdater = function () {
         obj.html(createLevelUpdater(objId, false, true, '1', true).html());
     };
     $this.CreateUpdateField = function (id, defaultValue, isEnable, username) {
+        defaultValue = defaultValue.toString();
         updateField = createLevelUpdater(id, false, true, defaultValue, isEnable);
-        updateField.attr('onchange', "levelUpdater.ChangeLevel('{0}')".format(id));
+        updateField.attr('onchange', 'levelUpdater.ChangeLevel("{0}")'.format(id));
         updateField.attr('data-type', 'levelUpdater');
         updateField.attr('data-username', username);
         updateField.attr('data-current-value', defaultValue);
@@ -85,16 +90,16 @@ Apollo.ParlayRMS.LevelUpdater = function () {
             };
 
             $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: ParlayRMS.resolveRootUrl('Management/MemberManagement/ChangeCustomerLevel'),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 data: JSON.stringify(data),
                 beforeSend: function () {
                     ParlayRMS.loadingBox.show();
                 },
                 success: function (result) {
-                    if (result.Code != 0) {
+                    if (result.Code !== 0) {
                         ParlayRMS.headlineMsgBox.showErr(result.Message, { sticky: true });
                     } else {
                         dropDown.val(level);
@@ -118,14 +123,16 @@ var levelUpdater = new Apollo.ParlayRMS.LevelUpdater();
 
 // Format level updater's items
 var formatItem = function (obj) {
+    'use strict';
     var itemClass = 'level' + $(obj).val();
     var itemValue = $(obj).text();
 
-    return "<div class='pallet-levels'><span class='{0}'></span>{1}</div>".format(itemClass, itemValue);
+    return '<div class="pallet-levels"><span class="{0}"></span>{1}</div>'.format(itemClass, itemValue);
 };
 var formatSelection = function (obj, value) {
+    'use strict';
     var itemClass = $('span', value).attr('class');
     var itemValue = $(obj).attr('data-username');
 
-    return "<div class='pallet-levels'><span class='{0}'></span>{1}</div>".format(itemClass, itemValue);
+    return '<div class="pallet-levels"><span class="{0}"></span>{1}</div>'.format(itemClass, itemValue);
 };

@@ -1,12 +1,16 @@
-﻿$(document).ready(function () {
+﻿/* global Namespace, Apollo, ParlayRMS, levelUpdater, labels, messages, levels, hasEditRight, formatItem */
+
+$(document).ready(function () {
+    'use strict';
     var memberManagement = new Apollo.ParlayRMS.Management.MemberManagement();
-        
+
     levelUpdater.Init(levels, messages);
     memberManagement.InitPage(labels, messages);
 });
 
-Namespace.Register("Apollo.ParlayRMS.Management.MemberManagement");
+Namespace.Register('Apollo.ParlayRMS.Management.MemberManagement');
 Apollo.ParlayRMS.Management.MemberManagement = function () {
+    'use strict';
     var $this = this;
     var labels = {};
     var messages = {};
@@ -48,7 +52,7 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
         });
 
         $this.DOMInstance.txtUsername.bind('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.btnSearch.click();
             }
         });
@@ -71,7 +75,7 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
         obj.multiselect({
             multiple: false,
             header: false,
-            noneSelectedText: "Select an Option",
+            noneSelectedText: 'Select an Option',
             selectedList: 1,
             minWidth: 132,
             height: 180,
@@ -86,7 +90,7 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
     };
     var initLevelUpdaterFields = function () {
         var isEnable = hasEditRight ? 'enable' : 'disable';
-        $("[data-type='levelUpdater']").each(function () {
+        $('[data-type="levelUpdater"]').each(function () {
             initDropDownList($(this));
             $(this).multiselect(isEnable);
         });
@@ -103,7 +107,6 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
 
         if (data && data.length > 0) {
             var row = null;
-            var info = null;
 
             $.each(data, function (i, info) {
                 row =
@@ -185,10 +188,10 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
 
         params = data;
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetSpecialCustomers,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(data),
             beforeSend: function () {
                 ParlayRMS.loadingBox.show();
@@ -214,16 +217,16 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
 
         $this.DOMInstance.divAddMemberFormMembers.Form.resetValidation();
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.AddNewCustomer,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(data),
             beforeSend: function () {
                 ParlayRMS.loadingBox.show();
             },
             success: function (result) {
-                if (result.Code == 0) {
+                if (result.Code === 0) {
                     ParlayRMS.showInfoMessage(messages.AddNewCustomerSuccessfully);
                     ParlayRMS.closePopup();
                 } else {
@@ -242,4 +245,4 @@ Apollo.ParlayRMS.Management.MemberManagement = function () {
         params.IsLoadNew = false;
         ParlayRMS.downloadFile(urls.ExportCustomerList, params);
     };
-}
+};
