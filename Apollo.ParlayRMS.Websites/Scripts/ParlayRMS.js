@@ -48,6 +48,15 @@ var ParlayRMS = (function ($) {
         showInfoMessage: function (message) {
             ParlayRMS.infoMsgBox.showInfo(message, { duration: 3000 });
         },
+        showErrorMessage: function (message) {
+            ParlayRMS.infoMsgBox.showErr(message, { duration: 3000 });
+        },
+        showWarningMessage: function (message) {
+            ParlayRMS.infoMsgBox.showWarn(message, { duration: 3000 });
+        },
+        closeMessage: function () {
+            ParlayRMS.infoMsgBox.close(true);
+        },
         modal: function (title, html) {
             ParlayRMS.dialogPopup.html(html).dialog({
                 width: 'auto',

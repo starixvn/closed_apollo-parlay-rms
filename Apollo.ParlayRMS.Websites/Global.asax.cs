@@ -10,6 +10,7 @@
 namespace Apollo.ParlayRMS.Websites
 {
     using System;
+    using System.Data.SqlClient;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -47,14 +48,25 @@ namespace Apollo.ParlayRMS.Websites
             if (!Request.IsLocal)
             {
                 string message = string.Format(
-                                            "{0}\r\nSource: {1}\r\nDomain: {2}\r\nForm: {3}\r\nQueryString: {4}\r\nTargetSite: {5}\r\nStackTrace: {6}",
+                                            "{0}\r\nType: {1}\r\nSource: {2}\r\nDomain: {3}\r\nForm Variable: {4}\r\nQueryString: {5}\r\nTargetSite: {6}\r\nStackTrace: {7}",
                                             ex.Message,
+                                            ex.GetType().ToString(),
                                             ex.Source,
                                             HttpContext.Current.Request.Headers["Host"],
                                             Request.Form.ToString(),
                                             Request.QueryString.ToString(),
                                             ex.TargetSite,
                                             ex.StackTrace);
+
+                // Get additional exception data for SqlException.
+                if (ex is SqlException)
+                {
+                    message += string.Format(
+                                          "\r\nProcedure: {0}\r\nLine Number: {1}\r\nServer: {2}",
+                                          (ex as SqlException).Procedure,
+                                          (ex as SqlException).LineNumber,
+                                          (ex as SqlException).Server);
+                }
 
                 LogService.Error(message);
             }

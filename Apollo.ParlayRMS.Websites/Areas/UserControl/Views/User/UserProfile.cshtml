@@ -1,8 +1,7 @@
 ﻿@using Apollo.ParlayRMS.Core.Web
-@using Apollo.ParlayRMS.Core.Web
-@using Fanex.NAP.Core.Web
-@using Fanex.NAP.Core.Criteria.User
 @using Apollo.ParlayRMS.Core.Resources
+@using Fanex.NAP.Core.Criteria.User
+@using Fanex.NAP.Core.Web
 @model UpdateCustCriteria
 @{
     ViewBag.Title = "Profile";
@@ -13,7 +12,7 @@
 @section Headline {
     <div class="usertitle">
         <div>
-            <span>@AppSession.CurrentUser.Username / </span><span class="curr">@ViewBag.Title</span>
+            <span>@Model.Username / </span><span class="curr">@ViewBag.Title</span>
         </div>
     </div>
 }
@@ -74,11 +73,11 @@
      $(function () { 
         if(success == true)
         {
-            AccReport.popUp.show('@Messages.ChangedProfile', null, 1);
+            ParlayRMS.showInfoMessage('@Messages.ChangedProfile');
         }
         else if(message != '')
         {
-            AccReport.popUp.show(message);
+            ParlayRMS.showErrorMessage(message);
         }
 
         $("#btnSave").on("click",function(){
@@ -86,7 +85,7 @@
             if(email != "" 
             && !re.test(email))
             {
-                AccReport.popUp.show('@Messages.InvalidEmail', "Email");
+                ParlayRMS.showErrorMessage('@Messages.InvalidEmail');
                 return false;
             }
         });
