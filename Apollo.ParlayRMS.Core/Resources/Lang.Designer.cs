@@ -610,11 +610,11 @@ namespace Apollo.ParlayRMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sport type.
+        ///   Looks up a localized string similar to Sports type.
         /// </summary>
-        public static string SportType {
+        public static string SportsType {
             get {
-                return ResourceManager.GetString("SportType", resourceCulture);
+                return ResourceManager.GetString("SportsType", resourceCulture);
             }
         }
         

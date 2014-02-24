@@ -234,8 +234,8 @@
   <data name="SpecificDate" xml:space="preserve">
     <value>Specific date</value>
   </data>
-  <data name="SportType" xml:space="preserve">
-    <value>Sport type</value>
+  <data name="SportsType" xml:space="preserve">
+    <value>Sports type</value>
   </data>
   <data name="Stake" xml:space="preserve">
     <value>Stake</value>

@@ -144,7 +144,7 @@ Apollo.ParlayRMS.Reports.WinLossReport = function () {
                 $.each(dateData.ChildItems, function (j, info) {
                     row =
                     {
-                        Columns: [{ Name: 'ColCombo', Value: info.Combo === '6' ? labels.SixUp : info.Combo },
+                        Columns: [{ Name: 'ColCombo', Value: info.Combo === 6 ? labels.SixUp : info.Combo },
                                   { Name: 'ColTicketWon', Value: info.TicketWon },
                                   { Name: 'ColTicketLose', Value: info.TicketLose },
                                   { Name: 'ColStakeWon', Value: info.StakeWon },
