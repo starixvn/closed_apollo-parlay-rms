@@ -146,7 +146,9 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
         $this.DOMInstance.ddlDateRanges.change();
 
         $this.DOMInstance.btnSubmit.bind('click', function () {
+            ParlayRMS.closePopup();
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
+
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo) &&
                 Validator.validateDateRange($this.DOMInstance.dpkDateFrom, $this.DOMInstance.dpkDateTo)) {
                 var selectTop = $this.DOMInstance.ddlSelectTop.val();
@@ -334,6 +336,7 @@ Apollo.ParlayRMS.Reports.TopWinnersReport = function () {
                 exportExcelFunction: $this.ExportReport
             },
             showNumberColumn: true,
+            bodyRowHeight: 24,
             bodyRows: bodyData,
             footerRows: footerData
         };

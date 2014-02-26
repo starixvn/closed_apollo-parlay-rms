@@ -24,7 +24,7 @@ Apollo.ParlayRMS.Tools.SimilarBets = function () {
         $this.DOMInstance.btnSearch = $('#btnSearch');
         $this.DOMInstance.divResult = $('#divResult');
         $this.DOMInstance.divDetails = $('#divDetails');
-        $this.DOMInstance.divDetailContainer = $('.detail-grid');
+        $this.DOMInstance.divDetailContainer = $('#divDetailContainer');
     };
     var initFields = function () {
         $this.DOMInstance.txtBetId.bind('blur', function () {
@@ -40,7 +40,9 @@ Apollo.ParlayRMS.Tools.SimilarBets = function () {
         });
 
         $this.DOMInstance.btnSearch.bind('click', function () {
+            ParlayRMS.closePopup();
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
+
             if (Validator.validateRequired($this.DOMInstance.txtBetId)) {
                 var betId = $this.DOMInstance.txtBetId.val();
                 $this.GetData(betId);
@@ -178,7 +180,7 @@ Apollo.ParlayRMS.Tools.SimilarBets = function () {
         };
 
         $this.DOMInstance.divDetails.removeClass('display-none').fanexGrid(gridOptions);
-        $this.DOMInstance.divDetailContainer.addClass('display-none');
+        $this.DOMInstance.divDetailContainer.hide();
         handleDetailsGridEvents();
     };
     var customizeBetList = function () {

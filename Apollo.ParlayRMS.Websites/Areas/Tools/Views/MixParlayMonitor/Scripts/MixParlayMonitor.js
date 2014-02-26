@@ -142,7 +142,9 @@ Apollo.ParlayRMS.Tools.MixParlayMonitor = function () {
         });
 
         $this.DOMInstance.btnSearch.bind('click', function () {
+            ParlayRMS.closePopup();
             Validator.clearErrorMessages($this.DOMInstance.divFilterForm);
+
             if (Validator.validateMultiselectRequired($this.DOMInstance.ddlCombo) &&
                 Validator.validateMultiselectRequired($this.DOMInstance.ddlSportTypes) &&
                 Validator.validateMultiselectRequired($this.DOMInstance.ddlLevel) &&
