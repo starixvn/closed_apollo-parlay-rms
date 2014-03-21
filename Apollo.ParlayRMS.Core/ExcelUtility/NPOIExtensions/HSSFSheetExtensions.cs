@@ -378,31 +378,31 @@ namespace Apollo.ParlayRMS.Core.ExcelUtility.NPOIExtensions
 
                 switch (sourceCell.CellType)
                 {
-                    case CellType.BOOLEAN:
+                    case CellType.Boolean:
                         {
                             newCell.SetCellValue(sourceCell.BooleanCellValue);
                             break;
                         }
 
-                    case CellType.NUMERIC:
+                    case CellType.Numeric:
                         {
                             newCell.SetCellValue(sourceCell.NumericCellValue);
                             break;
                         }
 
-                    case CellType.STRING:
+                    case CellType.String:
                         {
                             newCell.SetCellValue(sourceCell.StringCellValue);
                             break;
                         }
 
-                    case CellType.ERROR:
+                    case CellType.Error:
                         {
                             newCell.SetCellValue(sourceCell.ErrorCellValue);
                             break;
                         }
 
-                    case CellType.FORMULA:
+                    case CellType.Formula:
                         {
                             newCell.CellFormula = sourceCell.CellFormula;
                             break;
