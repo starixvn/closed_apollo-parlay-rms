@@ -165,12 +165,52 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ApolloParlayRMSSPNames.xml" />
-    <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="App_Data\local\ApolloParlayRMSSPNames.xml" />
+    <Content Include="App_Data\local\NAPFrameworkSpNames.xml" />
+    <Content Include="App_Data\prod\ApolloParlayRMSSPNames.xml" />
+    <Content Include="App_Data\prod\NAPFrameworkSpNames.xml" />
+    <Content Include="App_Data\uat\ApolloParlayRMSSPNames.xml" />
+    <Content Include="App_Data\uat\NAPFrameworkSpNames.xml" />
     <Content Include="Areas\Reports\Views\MemberWinLoss\Scripts\MemberWinLossReport.js" />
     <Content Include="Areas\Reports\Views\WinLoss\Scripts\WinLossReport.js" />
     <Content Include="Areas\UserLogin\themes\img\ParlayRMS.png" />
     <Content Include="Content\themes\layout\img\accessDenied.gif" />
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.local.Debug.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.local.Release.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.prod.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.prod.Debug.config">
+      <DependentUpon>Web.prod.config</DependentUpon>
+    </Content>
+    <Content Include="Web.prod.Release.config">
+      <DependentUpon>Web.prod.config</DependentUpon>
+    </Content>
+    <Content Include="Web.uat.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.uat.Debug.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
+    <Content Include="Web.uat.Release.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionString.local.config">
+      <DependentUpon>Web.ConnectionString.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionString.prod.config">
+      <DependentUpon>Web.ConnectionString.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionString.uat.config">
+      <DependentUpon>Web.ConnectionString.config</DependentUpon>
+    </Content>
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
